@@ -26,3 +26,13 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    #knp_menu
+    app.menu_builder:
+        class: App\Menu\Builder
+        tags:
+            - { name: knp_menu.menu_builder, method: mainMenu, alias: main }
+
+    App\Menu\Builder:
+        tags:
+            - { name: knp_menu.menu_builder, method: mainMenu, alias: main }

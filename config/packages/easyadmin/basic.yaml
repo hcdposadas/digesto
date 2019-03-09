@@ -1,0 +1,18 @@
+easy_admin:
+    #    disabled_actions: ['delete']
+    site_name: '%env(APP_NAME)%'
+    show:
+      max_results: 20
+    list:
+      actions:
+        - { name: 'show', icon: 'eye', label: '' }
+        - { name: 'edit', icon: 'pencil', label: '' }
+    #            - { name: 'delete', icon: 'trash', label: '' }
+
+    design:
+        brand_color: '#17a867'
+#        form_theme: ['horizontal']
+        menu:
+          - { label: 'Usuarios', entity: Usuario }
+        assets:
+          favicon: 'bundles/app/img/favicon.png'
