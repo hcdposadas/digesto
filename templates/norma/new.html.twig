@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nueva Norma{% endblock %}
+
+{% block body %}
+
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Norma</h3>
+                </div>
+                {{ include('norma/_form.html.twig') }}
+            </div>
+        </div>
+    </div>
+
+    <a class="btn btn-default" href="{{ path('norma_index') }}">Volver</a>
+{% endblock %}

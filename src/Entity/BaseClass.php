@@ -19,7 +19,7 @@ abstract class BaseClass
 	/**
 	 * @var bool
 	 *
-	 * @ORM\Column(name="activo", type="boolean")
+	 * @ORM\Column(name="activo", type="boolean", nullable=true)
 	 */
 	protected $activo = true;
 

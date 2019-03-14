@@ -1,0 +1,8 @@
+easy_admin:
+    entities:
+        Descriptor:
+            class: App\Entity\Descriptor
+            form:
+                fields:
+                    - { property: 'nombre' }
+                    - { property: 'activo' }

@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -59,8 +61,8 @@ class CargoPersona extends BaseClass {
 	private $iniciador;
 
 	public function __toString() {
-		return $this->getCargo()->getNombre() .' '.  $this->getPersona();
-	}
+      		return $this->getCargo()->getNombre() .' '.  $this->getPersona();
+      	}
 
 	/**
 	 * Get id
@@ -68,8 +70,8 @@ class CargoPersona extends BaseClass {
 	 * @return integer
 	 */
 	public function getId() {
-		return $this->id;
-	}
+      		return $this->id;
+      	}
 
 	/**
 	 * Set persona
@@ -79,10 +81,10 @@ class CargoPersona extends BaseClass {
 	 * @return CargoPersona
 	 */
 	public function setPersona( \App\Entity\Persona $persona = null ) {
-		$this->persona = $persona;
-
-		return $this;
-	}
+      		$this->persona = $persona;
+      
+      		return $this;
+      	}
 
 	/**
 	 * Get persona
@@ -90,8 +92,8 @@ class CargoPersona extends BaseClass {
 	 * @return \App\Entity\Persona
 	 */
 	public function getPersona() {
-		return $this->persona;
-	}
+      		return $this->persona;
+      	}
 
 	/**
 	 * Set cargo
@@ -101,10 +103,10 @@ class CargoPersona extends BaseClass {
 	 * @return CargoPersona
 	 */
 	public function setCargo( \App\Entity\Cargo $cargo = null ) {
-		$this->cargo = $cargo;
-
-		return $this;
-	}
+      		$this->cargo = $cargo;
+      
+      		return $this;
+      	}
 
 	/**
 	 * Get cargo
@@ -112,8 +114,8 @@ class CargoPersona extends BaseClass {
 	 * @return \App\Entity\Cargo
 	 */
 	public function getCargo() {
-		return $this->cargo;
-	}
+      		return $this->cargo;
+      	}
 
 	/**
 	 * Set fechaCreacion
@@ -123,10 +125,10 @@ class CargoPersona extends BaseClass {
 	 * @return CargoPersona
 	 */
 	public function setFechaCreacion( $fechaCreacion ) {
-		$this->fechaCreacion = $fechaCreacion;
-
-		return $this;
-	}
+      		$this->fechaCreacion = $fechaCreacion;
+      
+      		return $this;
+      	}
 
 	/**
 	 * Set fechaActualizacion
@@ -136,36 +138,36 @@ class CargoPersona extends BaseClass {
 	 * @return CargoPersona
 	 */
 	public function setFechaActualizacion( $fechaActualizacion ) {
-		$this->fechaActualizacion = $fechaActualizacion;
-
-		return $this;
-	}
+      		$this->fechaActualizacion = $fechaActualizacion;
+      
+      		return $this;
+      	}
 
 	/**
 	 * Set creadoPor
 	 *
-	 * @param \UsuariosBundle\Entity\Usuario $creadoPor
+	 * @param Usuario $creadoPor
 	 *
 	 * @return CargoPersona
 	 */
-	public function setCreadoPor( \UsuariosBundle\Entity\Usuario $creadoPor = null ) {
-		$this->creadoPor = $creadoPor;
-
-		return $this;
-	}
+	public function setCreadoPor( Usuario $creadoPor = null ) {
+      		$this->creadoPor = $creadoPor;
+      
+      		return $this;
+      	}
 
 	/**
 	 * Set actualizadoPor
 	 *
-	 * @param \UsuariosBundle\Entity\Usuario $actualizadoPor
+	 * @param Usuario $actualizadoPor
 	 *
 	 * @return CargoPersona
 	 */
-	public function setActualizadoPor( \UsuariosBundle\Entity\Usuario $actualizadoPor = null ) {
-		$this->actualizadoPor = $actualizadoPor;
-
-		return $this;
-	}
+	public function setActualizadoPor( Usuario $actualizadoPor = null ) {
+      		$this->actualizadoPor = $actualizadoPor;
+      
+      		return $this;
+      	}
 
     /**
      * Set areaAdministrativa

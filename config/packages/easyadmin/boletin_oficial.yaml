@@ -1,0 +1,12 @@
+easy_admin:
+    entities:
+        BoletinOficialMunicipal:
+            class: App\Entity\BoletinOficialMunicipal
+            label: 'Boletín Oficial Municipal'
+            form:
+                fields:
+                    - { property: 'numero' }
+                    - { property: 'fechaPublicacion', type_options: { widget: 'single_text', html5: true } }
+                    - { property: 'paginas' }
+                    - { property: 'archivoBoletin', type: 'vich_file'}
+                    - { property: 'activo' }

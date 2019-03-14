@@ -13,6 +13,15 @@ easy_admin:
         brand_color: '#17a867'
 #        form_theme: ['horizontal']
         menu:
+          - { label: 'Administración', route: 'administrador' }
+          - { label: 'Ramas', entity: Rama }
           - { label: 'Usuarios', entity: Usuario }
+          - { label: 'Boletín Oficial Municipal', entity: BoletinOficialMunicipal }
+          - { label: 'Consolidación', entity: Consolidacion }
+          - { label: 'Beneficiarios', entity: Beneficiario }
+          - { label: 'Palabras Claves', entity: PalabraClave }
+          - { label: 'Descriptores', entity: Descriptor }
+          - { label: 'Identificadores', entity: Identificador }
+          - { label: 'Tipo de Identificador', entity: TipoIdentificador }
         assets:
           favicon: 'bundles/app/img/favicon.png'

@@ -134,11 +134,11 @@ class Comision extends BaseClass {
 	/**
 	 * Set creadoPor
 	 *
-	 * @param \UsuariosBundle\Entity\Usuario $creadoPor
+	 * @param Usuario $creadoPor
 	 *
 	 * @return Comision
 	 */
-	public function setCreadoPor( \UsuariosBundle\Entity\Usuario $creadoPor = null ) {
+	public function setCreadoPor( Usuario $creadoPor = null ) {
 		$this->creadoPor = $creadoPor;
 
 		return $this;
@@ -147,11 +147,11 @@ class Comision extends BaseClass {
 	/**
 	 * Set actualizadoPor
 	 *
-	 * @param \UsuariosBundle\Entity\Usuario $actualizadoPor
+	 * @param Usuario $actualizadoPor
 	 *
 	 * @return Comision
 	 */
-	public function setActualizadoPor( \UsuariosBundle\Entity\Usuario $actualizadoPor = null ) {
+	public function setActualizadoPor( Usuario $actualizadoPor = null ) {
 		$this->actualizadoPor = $actualizadoPor;
 
 		return $this;

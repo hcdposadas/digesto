@@ -55,7 +55,7 @@ class Builder {
 			     ->setExtra( 'icon', 'fa fa-folder-open-o' )
 			     ->setAttribute( 'class', 'treeview' );
 
-			if ( $this->authorizationChecker->isGranted( 'ROLE_ADMIN' ) ) {
+			if ( $this->authorizationChecker->isGranted( 'ROLE_DIGESTO' ) ) {
 
 				$menu[ $keyAdministracion ]
 					->addChild(
@@ -64,6 +64,14 @@ class Builder {
 							'route' => 'easyadmin',
 						)
 					);
+				$menu[ $keyAdministracion ]
+					->addChild(
+						'Normas',
+						array(
+							'route' => 'norma_index',
+						)
+					);
+
 
 			}
 

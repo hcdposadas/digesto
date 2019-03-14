@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Norma{% endblock %}
+
+{% block body %}
+    <h1>Norma</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ norma.id }}</td>
+            </tr>
+            <tr>
+                <th>FechaSancion</th>
+                <td>{{ norma.fechaSancion ? norma.fechaSancion|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>TemaGeneral</th>
+                <td>{{ norma.temaGeneral }}</td>
+            </tr>
+            <tr>
+                <th>Numero</th>
+                <td>{{ norma.numero }}</td>
+            </tr>
+            <tr>
+                <th>PaginaBoletin</th>
+                <td>{{ norma.paginaBoletin }}</td>
+            </tr>
+            <tr>
+                <th>Observacion</th>
+                <td>{{ norma.observacion }}</td>
+            </tr>
+            <tr>
+                <th>DecretoPromulgatorio</th>
+                <td>{{ norma.decretoPromulgatorio }}</td>
+            </tr>
+            <tr>
+                <th>FechaPromulgacion</th>
+                <td>{{ norma.fechaPromulgacion ? norma.fechaPromulgacion|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Activo</th>
+                <td>{{ norma.activo ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>FechaCreacion</th>
+                <td>{{ norma.fechaCreacion ? norma.fechaCreacion|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>FechaActualizacion</th>
+                <td>{{ norma.fechaActualizacion ? norma.fechaActualizacion|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('norma_index') }}">back to list</a>
+
+    <a href="{{ path('norma_edit', {'id': norma.id}) }}">edit</a>
+
+    {{ include('norma/_delete_form.html.twig') }}
+{% endblock %}

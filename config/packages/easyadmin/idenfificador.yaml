@@ -1,0 +1,9 @@
+easy_admin:
+    entities:
+        Identificador:
+            class: App\Entity\Identificador
+            form:
+                fields:
+                    - { property: 'nombre' }
+                    - { property: 'tipoIdentificador' }
+                    - { property: 'activo' }

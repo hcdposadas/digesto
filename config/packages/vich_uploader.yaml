@@ -1,0 +1,12 @@
+vich_uploader:
+    db_driver: orm
+    mappings:
+        normas:
+            uri_prefix: '%app.path.normas_documentos%'
+            upload_destination: '%kernel.project_dir%/public%app.path.normas_documentos%'
+        anexos:
+            uri_prefix: '%app.path.anexos_documentos%'
+            upload_destination: '%kernel.project_dir%/public%app.path.anexos_documentos%'
+        boletin_oficial_municipal:
+            uri_prefix: '%app.path.boletin_oficial_municipal_documentos%'
+            upload_destination: '%kernel.project_dir%/public%app.path.boletin_oficial_municipal_documentos%'

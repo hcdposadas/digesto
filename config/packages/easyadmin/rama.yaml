@@ -1,0 +1,9 @@
+easy_admin:
+    entities:
+        Rama:
+            class: App\Entity\Rama
+            form:
+              fields:
+                - { property: 'numeroRomano' }
+                - { property: 'titulo' }
+                - { property: 'activo' }

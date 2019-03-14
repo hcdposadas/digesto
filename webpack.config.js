@@ -1,5 +1,5 @@
 var Encore = require('@symfony/webpack-encore');
-
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 require('dotenv').config()
 
 var publicPath = process.env.APP_PUBLIC_PATH
@@ -31,12 +31,20 @@ Encore
     .addEntry('js/app', './assets/js/vue.js')
     .addEntry('js/login', './assets/js/login.js')
     .addEntry('js/functions', './assets/js/functions.js')
+    .addEntry('js/datatables', './assets/js/datatables.js')
 
     .addStyleEntry('css/main', './assets/css/main.scss')
     .addStyleEntry('css/adminlte', './assets/css/adminlte.scss')
     .addStyleEntry('css/charts', './assets/css/charts.scss')
     .addStyleEntry('css/app', './assets/css/app.scss')
     .addStyleEntry('css/login', './assets/css/login.scss')
+    .addStyleEntry('css/datatables', './assets/css/datatables.scss')
+
+    // imgs
+    .addPlugin(new CopyWebpackPlugin([
+        // copies to {output}/static
+        { from: './assets/images', to: 'images' }
+    ]))
 
     .enableVueLoader()
 

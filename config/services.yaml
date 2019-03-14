@@ -4,7 +4,12 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    locale: 'en'
+    locale: 'es'
+    app_version: '%env(APP_VERSION)%'
+    app_name: '%env(APP_NAME)%'
+    app.path.normas_documentos: /uploads/documentos/normas
+    app.path.anexos_documentos: /uploads/documentos/anexos
+    app.path.boletin_oficial_municipal_documentos: /uploads/documentos/boletin_oficial_municipal
 
 services:
     # default configuration for services in *this* file
@@ -36,3 +41,14 @@ services:
     App\Menu\Builder:
         tags:
             - { name: knp_menu.menu_builder, method: mainMenu, alias: main }
+
+#    fos user
+#    fos_user.user_manager:
+#        class: FOS\UserBundle\Model\UserManagerInterface
+
+    form.type.bootstrapcollection:
+        class: UtilBundle\Form\Type\BootstrapCollectionType
+        arguments:
+            - "@doctrine.orm.entity_manager"
+        tags:
+            - { name: form.type, alias: bootstrapcollection }

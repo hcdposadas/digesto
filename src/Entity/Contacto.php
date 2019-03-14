@@ -160,11 +160,11 @@ class Contacto extends BaseClass
     /**
      * Set creadoPor
      *
-     * @param \UsuariosBundle\Entity\Usuario $creadoPor
+     * @param Usuario $creadoPor
      *
      * @return Contacto
      */
-    public function setCreadoPor(\UsuariosBundle\Entity\Usuario $creadoPor = null)
+    public function setCreadoPor(Usuario $creadoPor = null)
     {
         $this->creadoPor = $creadoPor;
 
@@ -174,11 +174,11 @@ class Contacto extends BaseClass
     /**
      * Set actualizadoPor
      *
-     * @param \UsuariosBundle\Entity\Usuario $actualizadoPor
+     * @param Usuario $actualizadoPor
      *
      * @return Contacto
      */
-    public function setActualizadoPor(\UsuariosBundle\Entity\Usuario $actualizadoPor = null)
+    public function setActualizadoPor(Usuario $actualizadoPor = null)
     {
         $this->actualizadoPor = $actualizadoPor;
 

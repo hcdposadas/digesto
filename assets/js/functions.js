@@ -11,4 +11,14 @@
 // Need jQuery? Install it with "yarn add jquery", then uncomment to require it.
 // const $ = require('jquery');
 
-console.log('Hello Webpack Encore! Edit me in assets/js/app.js');
+// console.log('Hello Webpack Encore! Edit me in assets/js/app.js');
+
+export const bootstrapCollectionBorrarItem = (item) => {
+    window.$(item).parent().parent().remove();
+}
+window.bootstrapCollectionBorrarItem = bootstrapCollectionBorrarItem;
+
+export const inicializarPlugins = (item) => {
+
+}
+window.inicializarPlugins = inicializarPlugins;

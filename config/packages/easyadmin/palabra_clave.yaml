@@ -1,0 +1,8 @@
+easy_admin:
+    entities:
+        PalabraClave:
+            class: App\Entity\PalabraClave
+            form:
+                fields:
+                    - { property: 'nombre' }
+                    - { property: 'activo' }

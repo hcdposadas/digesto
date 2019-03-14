@@ -6,6 +6,7 @@ security:
     role_hierarchy:
         ROLE_ADMIN:       ROLE_USER
         ROLE_SUPER_ADMIN: ROLE_ADMIN
+        ROLE_DIGESTO_ADMIN: [ROLE_SUPER_ADMIN, ROLE_DIGESTO]
 
     providers:
         fos_userbundle:
@@ -35,7 +36,5 @@ security:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
 
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        #        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        #        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/admin/, role: ROLE_ADMIN }
-        - { path: ^/, role: IS_AUTHENTICATED_FULLY }
+        - { path: ^/administrador-admin, role: ROLE_DIGESTO }
+        - { path: ^/administrador, role: ROLE_DIGESTO }

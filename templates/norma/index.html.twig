@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Normas{% endblock %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('css/datatables') }}
+{% endblock stylesheets %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-xs-12 mb-2">
+            <a class="btn btn-primary" href="{{ path('norma_new') }}">Nueva Norma</a>
+        </div>
+
+        <div class="col-xs-12">
+
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Listado de Normas</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+
+
+                    <table id="tabla-norma" class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Número</th>
+                            <th>Tema General</th>
+                            <th>Acciones</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for norma in normas %}
+                            <tr>
+                                <td>{{ norma.id }}</td>
+                                <td>{{ norma.numero }}</td>
+                                <td>{{ norma.temaGeneral }}</td>
+                                <td>
+                                    <a class="btn" href="{{ path('norma_show', {'id': norma.id}) }}"></a>
+                                    <a class="btn" href="{{ path('norma_edit', {'id': norma.id}) }}"></a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="12">No se encontraron registros</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-xs-12">
+            {{ knp_pagination_render(normas) }}
+        </div>
+
+        <div class="col-xs-12">
+            <a class="btn btn-primary" href="{{ path('norma_new') }}">Nueva Norma</a>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block javascripts %}
+{{ encore_entry_script_tags('js/datatables') }}
+    <script>
+        $('#tabla-norma').DataTable({
+            'paging': true,
+            'lengthChange': false,
+            'searching': false,
+            'ordering': true,
+            'info': true,
+            'autoWidth': false
+        })
+    </script>
+{% endblock javascripts %}

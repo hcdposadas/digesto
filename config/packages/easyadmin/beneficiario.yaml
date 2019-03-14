@@ -1,0 +1,8 @@
+easy_admin:
+    entities:
+        Beneficiario:
+            class: App\Entity\Beneficiario
+            form:
+                fields:
+                    - { property: 'nombre' }
+                    - { property: 'apellido' }

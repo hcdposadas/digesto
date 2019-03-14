@@ -19,9 +19,9 @@ class Usuario extends BaseUser {
 
 
 	public function __construct() {
-		parent::__construct();
-		// your own logic
-	}
+   		parent::__construct();
+   		// your own logic
+   	}
 
 	/**
 	 * @var
@@ -31,14 +31,14 @@ class Usuario extends BaseUser {
 	 */
 	private $persona;
 	public function esIniciador() {
-		$return= false;
-		foreach ( $this->getPersona()->getCargoPersona() as $cargoPersona ) {
-			if ($cargoPersona->getIniciador()){
-				$return = true;
-			}
-		}
-		return $return;
-	}
+   		$return= false;
+   		foreach ( $this->getPersona()->getCargoPersona() as $cargoPersona ) {
+   			if ($cargoPersona->getIniciador()){
+   				$return = true;
+   			}
+   		}
+   		return $return;
+   	}
 
 	/**
 	 * Set persona
@@ -48,17 +48,22 @@ class Usuario extends BaseUser {
 	 * @return Usuario
 	 */
 	public function setPersona(\App\Entity\Persona $persona = null)
-	{
-		$this->persona = $persona;
-		return $this;
-	}
+   	{
+   		$this->persona = $persona;
+   		return $this;
+   	}
 	/**
 	 * Get persona
 	 *
 	 * @return \App\Entity\Persona
 	 */
 	public function getPersona()
-	{
-		return $this->persona;
-	}
+   	{
+   		return $this->persona;
+   	}
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
 }

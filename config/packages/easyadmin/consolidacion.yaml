@@ -1,0 +1,9 @@
+easy_admin:
+    entities:
+        Consolidacion:
+            class: App\Entity\Consolidacion
+            form:
+                fields:
+                    - { property: 'titulo' }
+                    - { property: 'anio', label: 'Año' }
+                    - { property: 'fecha', type_options: { widget: 'single_text', html5: true } }
