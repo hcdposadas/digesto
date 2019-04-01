@@ -1,0 +1,123 @@
+{{ form_start(form) }}
+{#    {{ form_widget(form) }}#}
+<div class="row">
+    <div class="col-md-6">
+        <!-- general form elements -->
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">Principal</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+
+            <div class="box-body">
+                {{ form_row(form.presidenteHCD) }}
+                {{ form_row(form.directorDigesto) }}
+            </div>
+
+        </div>
+        <!-- /.box -->
+
+    </div>
+    <div class="col-md-6">
+        <!-- general form elements -->
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">Contacto</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+
+            <div class="box-body">
+                {{ form_row(form.contactoDireccion) }}
+                {{ form_row(form.contactoHorarioAtencion) }}
+                {{ form_row(form.contactoMail) }}
+                {{ form_row(form.contactoTelefono) }}
+                {{ form_row(form.contactoFacebook) }}
+                {{ form_row(form.contactoInstagram) }}
+                {{ form_row(form.contactoTwitter) }}
+            </div>
+
+        </div>
+        <!-- /.box -->
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">{{ form_label(form.prologo) }}</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+
+            <div class="box-body">
+                {{ form_widget(form.prologo) }}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">{{ form_label(form.resenia) }}</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+
+            <div class="box-body">
+                {{ form_widget(form.resenia) }}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">{{ form_label(form.metodologiaTrabajo) }}</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+
+            <div class="box-body">
+                {{ form_widget(form.metodologiaTrabajo) }}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">{{ form_label(form.remuneracion) }}</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+
+            <div class="box-body">
+                {{ form_widget(form.remuneracion) }}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">{{ form_label(form.instructivoInformativo) }}</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+
+            <div class="box-body">
+                {{ form_widget(form.instructivoInformativo) }}
+            </div>
+        </div>
+    </div>
+</div>
+
+<button class="btn btn-primary">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

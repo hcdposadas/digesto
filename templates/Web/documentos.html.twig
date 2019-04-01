@@ -1,0 +1,50 @@
+{% extends '/Web/layout.html.twig' %}
+
+{% block title %}{{ titulo }} -{% endblock title %}
+
+{% block stylesheets %}
+    <style>
+        .well {
+            background-color: #2e7d33;
+            color: #fff;
+        }
+
+        a {
+            text-decoration: none;
+        }
+    </style>
+{% endblock stylesheets %}
+
+{% block content %}
+    <div class="page-header text-center">
+        <h1>{{ titulo }}</h1>
+    </div>
+    <div class="container">
+        <section>
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="well text-center">Códigos</div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <a href="#">CARTA ORGÁNICA MUNICIPAL DE POSADAS <i class="fa fa-download"></i></a>
+                        </div>
+                    </div>
+                    <div class="well text-center">Carta Orgánica</div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <a href="#">CARTA ORGÁNICA MUNICIPAL DE POSADAS <i class="fa fa-download"></i></a>
+                        </div>
+                    </div>
+                    <div class="well text-center">Ordenanza de consolidación</div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <a href="#">CARTA ORGÁNICA MUNICIPAL DE POSADAS <i class="fa fa-download"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock content %}
+
+

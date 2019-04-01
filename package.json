@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "admin-lte": "^2.4.9",
+    "ckeditor": "^4.11.3",
     "dotenv": "^6.2.0",
     "vue": "^2.6.8"
   },

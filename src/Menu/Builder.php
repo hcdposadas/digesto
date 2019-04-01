@@ -55,7 +55,7 @@ class Builder {
 			     ->setExtra( 'icon', 'fa fa-folder-open-o' )
 			     ->setAttribute( 'class', 'treeview' );
 
-			if ( $this->authorizationChecker->isGranted( 'ROLE_DIGESTO' ) ) {
+			if ( $this->authorizationChecker->isGranted( 'ROLE_DIGESTO_ADMIN' ) ) {
 
 				$menu[ $keyAdministracion ]
 					->addChild(
@@ -64,6 +64,18 @@ class Builder {
 							'route' => 'easyadmin',
 						)
 					);
+
+				$menu[ $keyAdministracion ]
+					->addChild(
+						'WEB',
+						array(
+							'route' => 'web_digesto_texto_index',
+						)
+					);
+
+			}
+
+			if ( $this->authorizationChecker->isGranted( 'ROLE_DIGESTO' ) ) {
 				$menu[ $keyAdministracion ]
 					->addChild(
 						'Normas',
@@ -76,7 +88,6 @@ class Builder {
 			}
 
 		}
-
 
 
 		return $menu;

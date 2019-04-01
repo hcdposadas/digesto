@@ -32,6 +32,7 @@ Encore
     .addEntry('js/login', './assets/js/login.js')
     .addEntry('js/functions', './assets/js/functions.js')
     .addEntry('js/datatables', './assets/js/datatables.js')
+    .addEntry('js/web', './assets/js/web.js')
 
     .addStyleEntry('css/main', './assets/css/main.scss')
     .addStyleEntry('css/adminlte', './assets/css/adminlte.scss')
@@ -39,12 +40,21 @@ Encore
     .addStyleEntry('css/app', './assets/css/app.scss')
     .addStyleEntry('css/login', './assets/css/login.scss')
     .addStyleEntry('css/datatables', './assets/css/datatables.scss')
+    .addStyleEntry('css/web', './assets/css/web.scss')
 
     // imgs
     .addPlugin(new CopyWebpackPlugin([
         // copies to {output}/static
         { from: './assets/images', to: 'images' }
     ]))
+
+    .copyFiles([
+        {from: './node_modules/ckeditor/', to: 'ckeditor/[path][name].[ext]', pattern: /\.(js|css)$/, includeSubdirectories: false},
+        {from: './node_modules/ckeditor/adapters', to: 'ckeditor/adapters/[path][name].[ext]'},
+        {from: './node_modules/ckeditor/lang', to: 'ckeditor/lang/[path][name].[ext]'},
+        {from: './node_modules/ckeditor/plugins', to: 'ckeditor/plugins/[path][name].[ext]'},
+        {from: './node_modules/ckeditor/skins', to: 'ckeditor/skins/[path][name].[ext]'}
+    ])
 
     .enableVueLoader()
 

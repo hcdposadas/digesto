@@ -1,0 +1,94 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}WebDigestoTexto{% endblock %}
+
+{% block body %}
+    <h1>WebDigestoTexto</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ web_digesto_texto.id }}</td>
+            </tr>
+            <tr>
+                <th>Prologo</th>
+                <td>{{ web_digesto_texto.prologo }}</td>
+            </tr>
+            <tr>
+                <th>Resenia</th>
+                <td>{{ web_digesto_texto.resenia }}</td>
+            </tr>
+            <tr>
+                <th>MetodologiaTrabajo</th>
+                <td>{{ web_digesto_texto.metodologiaTrabajo }}</td>
+            </tr>
+            <tr>
+                <th>Remuneracion</th>
+                <td>{{ web_digesto_texto.remuneracion }}</td>
+            </tr>
+            <tr>
+                <th>InstructivoInformativo</th>
+                <td>{{ web_digesto_texto.instructivoInformativo }}</td>
+            </tr>
+            <tr>
+                <th>ContactoFacebook</th>
+                <td>{{ web_digesto_texto.contactoFacebook }}</td>
+            </tr>
+            <tr>
+                <th>ContactoInstagram</th>
+                <td>{{ web_digesto_texto.contactoInstagram }}</td>
+            </tr>
+            <tr>
+                <th>ContactoTwitter</th>
+                <td>{{ web_digesto_texto.contactoTwitter }}</td>
+            </tr>
+            <tr>
+                <th>ContactoMail</th>
+                <td>{{ web_digesto_texto.contactoMail }}</td>
+            </tr>
+            <tr>
+                <th>ContactoTelefono</th>
+                <td>{{ web_digesto_texto.contactoTelefono }}</td>
+            </tr>
+            <tr>
+                <th>ContactoDireccion</th>
+                <td>{{ web_digesto_texto.contactoDireccion }}</td>
+            </tr>
+            <tr>
+                <th>ContactoHorarioAtencion</th>
+                <td>{{ web_digesto_texto.contactoHorarioAtencion }}</td>
+            </tr>
+            <tr>
+                <th>PresidenteHCD</th>
+                <td>{{ web_digesto_texto.presidenteHCD }}</td>
+            </tr>
+            <tr>
+                <th>DirectorDigesto</th>
+                <td>{{ web_digesto_texto.directorDigesto }}</td>
+            </tr>
+            <tr>
+                <th>Slug</th>
+                <td>{{ web_digesto_texto.slug }}</td>
+            </tr>
+            <tr>
+                <th>Activo</th>
+                <td>{{ web_digesto_texto.activo ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>FechaCreacion</th>
+                <td>{{ web_digesto_texto.fechaCreacion ? web_digesto_texto.fechaCreacion|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>FechaActualizacion</th>
+                <td>{{ web_digesto_texto.fechaActualizacion ? web_digesto_texto.fechaActualizacion|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('web_digesto_texto_index') }}">back to list</a>
+
+    <a href="{{ path('web_digesto_texto_edit', {'id': web_digesto_texto.id}) }}">edit</a>
+
+    {{ include('web_digesto_texto/_delete_form.html.twig') }}
+{% endblock %}

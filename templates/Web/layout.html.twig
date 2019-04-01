@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}Inicio -{% endblock title %} Digesto Jurídico Municipal Posadas</title>
+
+    <!-- Nav and address bar color -->
+    <meta name="theme-color" content="{{ primary_color }}">
+    <meta name="msapplication-navbutton-color" content="{{ primary_color }}">
+    <meta name="apple-mobile-web-app-status-bar-style" content="{{ primary_color }}">
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i" rel="stylesheet">
+    {{ encore_entry_link_tags('css/web') }}
+
+    <style>
+        .main-footer a {
+            text-decoration: unset;
+        }
+
+        .main-footer, .prologo {
+            background-color: #f5f5f5;
+        }
+    </style>
+
+    {% block stylesheets %}
+    {% endblock stylesheets %}
+
+</head>
+<body cz-shortcut-listen="true">
+<header>
+
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{{ path('public') }}">
+                    <img src="{{ asset('build/images/logotipo-digesto-01.png') }}"
+                         height="50" alt="">
+                </a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                <ul class="nav navbar-nav">
+                    {% if is_granted("ROLE_ADMIN") or is_granted("ROLE_USER") %}
+                        <li><a href="{{ path('administrador') }}">ADMIN</a></li>
+                    {% endif %}
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false">Menú <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{ path('pagina', {'pagina': 'instructivoInformativo'}) }}">Instructivo
+                                    Informativo</a></li>
+                            <li><a href="{{ path('documentos') }}">Documentos</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">B.O.M.</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="{{ path('buscador') }}">Buscar Ordenanzas</a></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+</header>
+
+
+{% block content %}
+{% endblock content %}
+
+
+<footer class="main-footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4">
+                <h2 class="h3 section-title">Atribución</h2>
+                <div>
+                    <img class="img-responsive"
+                         src="{{ asset('build/images/logotipo-digesto-01.png') }}">
+                </div>
+
+                <p class="text-muted small">Los contenidos de Digesto Jurídico Municipal están licenciados bajo <a
+                            href="https://creativecommons.org/licenses/by/2.5/ar/">Creative Commons Reconocimiento
+                        2.5 Argentina License</a></p>
+            </div>
+            <div class="col-sm-4">
+                <h2 class="h3 section-title">Otros Organismos</h2>
+                <p>
+                    <a target="_blank" href="https://hcdposadas.gob.ar/">Honorable Concejo Delibertante de la Ciudad de
+                        Posadas</a>
+                </p>
+                <p>
+                    <a target="_blank" href="http://posadas.gob.ar/">Municipalidad de Posadas</a>
+                </p>
+                <p>
+                    <a target="_blank" href="http://www.infoleg.gob.ar/">Información Legislativa</a>
+                </p>
+                <p>
+                    <a target="_blank" href="http://digestomisiones.gob.ar/">Digesto Jurídico Provincial</a>
+                </p>
+            </div>
+            <div class="col-sm-4">
+                <h2 class="h3 section-title">Contacto</h2>
+                <div>
+                    <!--						<h5>Lorem ipsum dolor sit amet.</h5>-->
+                    <p class="margin-40">
+                        <strong>Dirección:</strong> <a href="https://goo.gl/maps/k4Sj9EMEfuT2" target="_blank">
+                            {{ web.contactoDireccion }}</a><br>
+                        <strong>Teléfonos:</strong> <a
+                                href="tel:+54{{ web.contactoTelefono }}">{{ web.contactoTelefono }}</a>
+                        <br>
+                        <strong>Correo electrónico:</strong> <a
+                                href="mailto:{{ web.contactoMail }}">{{ web.contactoMail }}</a>
+                    </p>
+                    <h5>Redes sociales</h5>
+
+                    <div class="social-share">
+                        <ul class="list-inline">
+                            {% if web.contactoFacebook %}
+                                <li><a target="_blank" href="{{ web.contactoFacebook }}"><i
+                                                class="fa fa-facebook"></i></a></li>
+                            {% endif %}
+                            {% if web.contactoTwitter %}
+                                <li><a target="_blank" href="{{ web.contactoTwitter }}"><i
+                                                class="fa fa-twitter "></i></a></li>
+                            {% endif %}
+                            {% if web.contactoInstagram %}
+                                <li><a target="_blank" href="{{ web.contactoInstagram }}"><i
+                                                class="fa fa-instagram"></i></a></li>
+                            {% endif %}
+                            {#                            {% if web.contactoTwitter %}#}
+                            {#                                <li><a target="_blank"#}
+                            {#                                       href="https://www.youtube.com/channel/UC7Nfr13PyP84jWgU5FS9LGg"><i#}
+                            {#                                                class="fa fa-youtube"></i></a></li>#}
+                            {#                            {% endif %}#}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+</body>
+{{ encore_entry_script_tags('js/web') }}
+</html>

@@ -1,0 +1,28 @@
+{% extends '/Web/layout.html.twig' %}
+
+{% block title %}{{ titulo }} -{% endblock title %}
+
+
+{% block content %}
+    <div class="page-header text-center">
+        <h1>{{ titulo }}</h1>
+    </div>
+    <div class="container">
+
+        <section class="" style="padding-bottom: 140px;">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+{#                    <div class="row text-center">#}
+{#                        <div class="col-sm-12">#}
+{#                            <h2 class="m-b-3">{{ titulo }}</h2>#}
+{#                        </div>#}
+{#                    </div>#}
+
+                    <div>
+                        {{ contenido | raw }}
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock content %}

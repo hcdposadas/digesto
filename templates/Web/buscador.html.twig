@@ -1,0 +1,42 @@
+{% extends '/Web/layout.html.twig' %}
+
+{% block title %}{{ titulo }} -{% endblock title %}
+
+
+{% block content %}
+    <div class="page-header text-center">
+        <h1>{{ titulo }}</h1>
+    </div>
+    <div class="container">
+
+        <section class="" style="padding-bottom: 140px;">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+{#                    <div class="row text-center">#}
+{#                        <div class="col-sm-12">#}
+{#                            <h2 class="m-b-3">{{ titulo }}</h2>#}
+{#                        </div>#}
+{#                    </div>#}
+
+                    <div>
+                        {{ form_start(form) }}
+                        <div class="row">
+                            <div class="col-md-6">{{ form_row(form.rama) }}</div>
+                            <div class="col-md-6">{{ form_row(form.numero) }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">{{ form_row(form.anio) }}</div>
+                            <div class="col-md-6">{{ form_row(form.palabra) }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="text-center">
+                                <button class="btn btn-primary">Buscar</button>
+                            </div>
+                        </div>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock content %}

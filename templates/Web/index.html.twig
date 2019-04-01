@@ -1,3 +1,172 @@
-Hola web
+{% extends '/Web/layout.html.twig' %}
 
-<a href="{{ path('administrador') }}">Login</a>
+
+{% block content %}
+    <main role="main">
+        <section class=" bg-primary">
+
+            <div class="container jumbotron_body">
+                <div class="row">
+                    <div class="col-xs-12 col-md-8 col-md-offset-2 text-center">
+                        <h1>Digesto Jurídico Municipal</h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-md-8 col-md-offset-2 text-center">
+                        <a href="{{ path('buscador') }}" class="btn btn-info btn-lg">Buscar Ordenanzas</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div class="overlay"></div> -->
+        </section>
+
+        <section class="p-b-0">
+            <div class="container">
+                <div class="row text-center">
+                    <div class="col-sm-12">
+                        <h2 class="m-b-3">Autoridades</h2>
+                    </div>
+                </div>
+
+                <div class="row panels-row">
+
+                    <div class="col-md-offset-3 col-md-3 col-xs-12 col-sm-6">
+                        <div class="panel panel-default panel-icon panel-primary">
+                            <div class="panel-heading hidden-xs">
+                                <i class="fa fa-user "></i>
+                            </div>
+                            <div class="panel-body">
+                                <h3><span class="visible-xs-inline"><i class="fa fa-download"></i>&nbsp; </span>
+                                    {{ web.presidenteHcd }}
+                                </h3>
+                                <div class="text-muted">
+                                    <h4>Presidente</h4>
+                                    <p>HCD</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 col-xs-12 col-sm-6">
+                        <div class="panel panel-default panel-icon panel-primary">
+                            <div class="panel-heading hidden-xs">
+                                <i class="fa fa-user-o "></i>
+                            </div>
+                            <div class="panel-body">
+                                <h3><span class="visible-xs-inline"><i class="fa fa-download"></i>&nbsp; </span>
+                                    {{ web.directorDigesto }}
+                                </h3>
+                                <div class="text-muted">
+                                    <h4>Director</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+
+        </section>
+
+        <section class="p-b-0 prologo">
+            <div class="container ">
+
+                <section class="" style="padding-bottom: 140px;">
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2">
+                            <div class="row text-center">
+                                <div class="col-sm-12">
+                                    <h2 class="m-b-3">Prólogo</h2>
+                                </div>
+                            </div>
+
+                            <div>
+                                {{ web.prologo | raw }}
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </section>
+
+        <section class="p-b-1 p-t-3">
+            <div class="container">
+                {#            <div class="container">#}
+                {#                <div class="row text-center">#}
+
+                {#                    <div class="col-sm-4">#}
+                {#                        <i class="fa fa-check  fa-4x text-primary"></i>#}
+                {#                        <h2><a href="{{ path('pagina', {'pagina': 'remuneracion'}) }}">Remuneración</a></h2>#}
+                {#                    </div>#}
+                {#                    <div class="col-sm-4">#}
+                {#                        <i class="fa fa-check  fa-4x text-primary"></i>#}
+                {#                        <h2><a href="{{ path('pagina', {'pagina': 'resenia'}) }}">Reseña</a></h2>#}
+                {#                    </div>#}
+                {#                    <div class="col-sm-4">#}
+                {#                        <i class="fa fa-check  fa-4x text-primary"></i>#}
+                {#                        <h2><a href="{{ path('pagina', {'pagina': 'metodologiaTrabajo'}) }}">Metodología de Trabajo</a>#}
+                {#                        </h2>#}
+                {#                    </div>#}
+
+
+                {#                </div>#}
+                {#            </div>#}
+                <div class="row">
+                    <div class="col-sm-4">
+                        <a class="panel panel-default" href="{{ path('pagina', {'pagina': 'remuneracion'}) }}">
+                            <div class="panel-body">
+                                <div class="media">
+                                    <div class="media-left padding-5">
+                                        <i class="fa fa-check fa-fw fa-3x text-secondary"></i>
+                                    </div>
+                                    <div class="media-body">
+                                        <h3>Remuneración</h3>
+                                        {#                                   <p class="text-muted">Diagnóstico de la Administración Pública Nacional en diciembre de 2015</p>#}
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-sm-4">
+                        <a class="panel panel-default" href="{{ path('pagina', {'pagina': 'resenia'}) }}">
+                            <div class="panel-body">
+                                <div class="media">
+                                    <div class="media-left padding-5">
+                                        <i class="fa fa-check fa-fw fa-3x text-secondary"></i>
+                                    </div>
+                                    <div class="media-body">
+                                        <h3>Reseña</h3>
+                                        {#                                   <p class="text-muted">Diagnóstico de la Administración Pública Nacional en diciembre de 2015</p>#}
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-sm-4">
+                        <a class="panel panel-default" href="{{ path('pagina', {'pagina': 'metodologiaTrabajo'}) }}">
+                            <div class="panel-body">
+                                <div class="media">
+                                    <div class="media-left padding-5">
+                                        <i class="fa fa-check fa-fw fa-3x text-secondary"></i>
+                                    </div>
+                                    <div class="media-body">
+                                        <h3>Metodología de Trabajo</h3>
+                                        {#                                   <p class="text-muted">Diagnóstico de la Administración Pública Nacional en diciembre#}
+                                        {#                                       de 2015</p>#}
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+    </main>
+{% endblock content %}
+
+

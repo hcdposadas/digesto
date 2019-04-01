@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New WebDigestoTexto{% endblock %}
+
+{% block body %}
+    <h1>Create new WebDigestoTexto</h1>
+
+    {{ include('web_digesto_texto/_form.html.twig') }}
+
+    <a href="{{ path('web_digesto_texto_index') }}">back to list</a>
+{% endblock %}

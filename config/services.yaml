@@ -10,6 +10,8 @@ parameters:
     app.path.normas_documentos: /uploads/documentos/normas
     app.path.anexos_documentos: /uploads/documentos/anexos
     app.path.boletin_oficial_municipal_documentos: /uploads/documentos/boletin_oficial_municipal
+    app.path.documentos_web: /uploads/documentos/documentos_web
+    app.path.documentos_anexos_web: /uploads/documentos/documentos_anexos_web
 
 services:
     # default configuration for services in *this* file

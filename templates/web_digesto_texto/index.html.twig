@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}WebDigestoTexto index{% endblock %}
+
+{% block body %}
+    <h1>WebDigestoTexto index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Prologo</th>
+                <th>Resenia</th>
+                <th>MetodologiaTrabajo</th>
+                <th>Remuneracion</th>
+                <th>InstructivoInformativo</th>
+                <th>ContactoFacebook</th>
+                <th>ContactoInstagram</th>
+                <th>ContactoTwitter</th>
+                <th>ContactoMail</th>
+                <th>ContactoTelefono</th>
+                <th>ContactoDireccion</th>
+                <th>ContactoHorarioAtencion</th>
+                <th>PresidenteHCD</th>
+                <th>DirectorDigesto</th>
+                <th>Slug</th>
+                <th>Activo</th>
+                <th>FechaCreacion</th>
+                <th>FechaActualizacion</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for web_digesto_texto in web_digesto_textos %}
+            <tr>
+                <td>{{ web_digesto_texto.id }}</td>
+                <td>{{ web_digesto_texto.prologo }}</td>
+                <td>{{ web_digesto_texto.resenia }}</td>
+                <td>{{ web_digesto_texto.metodologiaTrabajo }}</td>
+                <td>{{ web_digesto_texto.remuneracion }}</td>
+                <td>{{ web_digesto_texto.instructivoInformativo }}</td>
+                <td>{{ web_digesto_texto.contactoFacebook }}</td>
+                <td>{{ web_digesto_texto.contactoInstagram }}</td>
+                <td>{{ web_digesto_texto.contactoTwitter }}</td>
+                <td>{{ web_digesto_texto.contactoMail }}</td>
+                <td>{{ web_digesto_texto.contactoTelefono }}</td>
+                <td>{{ web_digesto_texto.contactoDireccion }}</td>
+                <td>{{ web_digesto_texto.contactoHorarioAtencion }}</td>
+                <td>{{ web_digesto_texto.presidenteHCD }}</td>
+                <td>{{ web_digesto_texto.directorDigesto }}</td>
+                <td>{{ web_digesto_texto.slug }}</td>
+                <td>{{ web_digesto_texto.activo ? 'Yes' : 'No' }}</td>
+                <td>{{ web_digesto_texto.fechaCreacion ? web_digesto_texto.fechaCreacion|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ web_digesto_texto.fechaActualizacion ? web_digesto_texto.fechaActualizacion|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('web_digesto_texto_show', {'id': web_digesto_texto.id}) }}">show</a>
+                    <a href="{{ path('web_digesto_texto_edit', {'id': web_digesto_texto.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="20">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('web_digesto_texto_new') }}">Create new</a>
+{% endblock %}

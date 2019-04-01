@@ -10,3 +10,10 @@ vich_uploader:
         boletin_oficial_municipal:
             uri_prefix: '%app.path.boletin_oficial_municipal_documentos%'
             upload_destination: '%kernel.project_dir%/public%app.path.boletin_oficial_municipal_documentos%'
+        documentos_web:
+            uri_prefix: '%app.path.documentos_web%'
+            upload_destination: '%kernel.project_dir%/public%app.path.documentos_web%'
+        documentos_anexos_web:
+            uri_prefix: '%app.path.documentos_anexos_web%'
+            upload_destination: '%kernel.project_dir%/public%app.path.documentos_anexos_web%'
+

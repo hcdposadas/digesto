@@ -9,3 +9,4 @@ twig:
     globals:
         app_version: '%env(APP_VERSION)%'
         app_name: '%env(APP_NAME)%'
+        primary_color: '%env(APP_PRIMARY_COLOR)%'
