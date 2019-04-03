@@ -3,8 +3,6 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Expediente;
-use Giro;
 
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 

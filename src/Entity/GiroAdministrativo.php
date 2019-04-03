@@ -175,11 +175,11 @@ class GiroAdministrativo extends BaseClass {
     /**
      * Set expediente
      *
-     * @param \Expediente $expediente
+     * @param Expediente $expediente
      *
      * @return GiroAdministrativo
      */
-    public function setExpediente(\Expediente $expediente = null)
+    public function setExpediente(Expediente $expediente = null)
     {
         $this->expediente = $expediente;
 
@@ -189,7 +189,7 @@ class GiroAdministrativo extends BaseClass {
     /**
      * Get expediente
      *
-     * @return \Expediente
+     * @return Expediente
      */
     public function getExpediente()
     {

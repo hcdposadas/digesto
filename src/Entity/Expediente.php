@@ -22,7 +22,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *     errorPath="expediente",
  *     message="Ya existe el expediente en el año y con esta letra"
  * )
- * @ORM\Entity(repositoryClass="App\Repository\ExpedienteRepository")
+ * @ORM\Entity(repositoryClass="App\RepositoryExpedienteRepository")
  */
 class Expediente extends BaseClass {
 	/**

@@ -169,11 +169,11 @@ class AnexoExpediente extends BaseClass {
 	/**
 	 * Set expediente
 	 *
-	 * @param \Expediente $expediente
+	 * @param Expediente $expediente
 	 *
 	 * @return AnexoExpediente
 	 */
-	public function setExpediente( \Expediente $expediente = null ) {
+	public function setExpediente( Expediente $expediente = null ) {
 		$this->expediente = $expediente;
 
 		return $this;
@@ -182,7 +182,7 @@ class AnexoExpediente extends BaseClass {
 	/**
 	 * Get expediente
 	 *
-	 * @return \Expediente
+	 * @return Expediente
 	 */
 	public function getExpediente() {
 		return $this->expediente;

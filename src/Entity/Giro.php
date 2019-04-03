@@ -239,7 +239,7 @@ class Giro extends BaseClass {
     /**
      * Get expediente
      *
-     * @return \Expediente
+     * @return Expediente
      */
     public function getExpediente()
     {
