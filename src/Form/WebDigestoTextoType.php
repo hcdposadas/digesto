@@ -39,7 +39,7 @@ class WebDigestoTextoType extends AbstractType {
 					'label' => 'Metodología de trabajo',
 					'config' => [ 'uiColor' => '#ffffff' ]
 				] )
-			->add( 'remuneracion',
+			->add( 'renumeracion',
 				CKEditorType::class,
 				[
 					'label' => 'Remuneración',

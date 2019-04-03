@@ -34,7 +34,7 @@ class WebDigestoTexto extends BaseClass
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private $remuneracion;
+    private $renumeracion;
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -134,14 +134,14 @@ class WebDigestoTexto extends BaseClass
         return $this;
     }
 
-    public function getRemuneracion(): ?string
+    public function getRenumeracion(): ?string
     {
-        return $this->remuneracion;
+        return $this->renumeracion;
     }
 
-    public function setRemuneracion(?string $remuneracion): self
+    public function setRenumeracion(?string $renumeracion): self
     {
-        $this->remuneracion = $remuneracion;
+        $this->renumeracion = $renumeracion;
 
         return $this;
     }

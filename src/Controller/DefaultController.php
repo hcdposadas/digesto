@@ -89,9 +89,9 @@ class DefaultController extends AbstractController {
 		$contenido = '"' . $pagina . '" contenido no encontrado';
 
 		switch ( $pagina ) {
-			case 'remuneracion':
-				$titulo    = 'Remuneración';
-				$contenido = $web->getRemuneracion();
+			case 'renumeracion':
+				$titulo    = 'Renumeración';
+				$contenido = $web->getRenumeracion();
 				break;
 			case 'resenia':
 				$titulo    = 'Reseña';
