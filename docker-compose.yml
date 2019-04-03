@@ -1,0 +1,12 @@
+version: "2"
+services:
+  hcd_digesto:
+    container_name: hcd_digesto
+    hostname: hcd_digesto
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/var/www/html
+    ports:
+      - "80:80"

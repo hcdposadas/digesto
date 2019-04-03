@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -e
+set -x
+
+# exec /usr/sbin/apache2ctl -D FOREGROUND
+
+exec "$@"
