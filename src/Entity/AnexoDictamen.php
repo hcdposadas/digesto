@@ -176,11 +176,11 @@ class AnexoDictamen extends BaseClass {
     /**
      * Set dictamen
      *
-     * @param \Dictamen $dictamen
+     * @param Dictamen $dictamen
      *
      * @return AnexoDictamen
      */
-    public function setDictamen(\Dictamen $dictamen = null)
+    public function setDictamen(Dictamen $dictamen = null)
     {
         $this->dictamen = $dictamen;
 
@@ -190,7 +190,7 @@ class AnexoDictamen extends BaseClass {
     /**
      * Get dictamen
      *
-     * @return \Dictamen
+     * @return Dictamen
      */
     public function getDictamen()
     {
