@@ -7,13 +7,26 @@ parameters:
 
 doctrine:
     dbal:
-        # configure these for your database server
-        driver: 'pdo_pgsql'
-        host: '%env(DATABASE_HOST)%'
-        port: '%env(DATABASE_PORT)%'
-        dbname: '%env(DATABASE_DBNAME)%'
-        user: '%env(DATABASE_USER)%'
-        password: '%env(DATABASE_PASSWORD)%'
+        default_connection: default
+        connections:
+            default:
+                # configure these for your database server
+                driver: 'pdo_pgsql'
+                host: '%env(DATABASE_HOST)%'
+                port: '%env(DATABASE_PORT)%'
+                dbname: '%env(DATABASE_DBNAME)%'
+                user: '%env(DATABASE_USER)%'
+                password: '%env(DATABASE_PASSWORD)%'
+
+            digesto_viejo:
+                driver: 'pdo_mysql'
+                host: '%env(DATABASE_DIGESTO1_HOST)%'
+                port: '%env(DATABASE_DIGESTO1_PORT)%'
+                dbname: '%env(DATABASE_DIGESTO1_DBNAME)%'
+                user: '%env(DATABASE_DIGESTO1_USER)%'
+                password: '%env(DATABASE_DIGESTO1_PASSWORD)%'
+                server_version:   '5.7'
+                charset: utf8
 
 #        url: '%env(resolve:DATABASE_URL)%'
     orm:

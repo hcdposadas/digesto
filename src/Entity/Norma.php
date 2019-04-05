@@ -21,12 +21,12 @@ class Norma extends BaseClass {
 	private $id;
 
 	/**
-	 * @ORM\Column(type="date")
+	 * @ORM\Column(type="date", nullable=true)
 	 */
 	private $fechaSancion;
 
 	/**
-	 * @ORM\Column(type="string", length=255)
+	 * @ORM\Column(type="string", length=2048)
 	 */
 	private $temaGeneral;
 
@@ -140,7 +140,7 @@ class Norma extends BaseClass {
 		return $this->fechaSancion;
 	}
 
-	public function setFechaSancion( \DateTimeInterface $fechaSancion ): self {
+	public function setFechaSancion( ?\DateTimeInterface $fechaSancion ): self {
 		$this->fechaSancion = $fechaSancion;
 
 		return $this;
