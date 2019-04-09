@@ -18,6 +18,18 @@ class MNorma extends Migrador
     protected $tiposPromulgacion = [];
     protected $ramas = [];
 
+    private $mapRamas = [
+        'Comercio y Promoci?n Industrial' => 'Comercio y Promoción Industrial',
+        'Cultura y Educaci?n' => 'Cultura y Educación',
+        'Deporte, Recreaci?n y Turismo' => 'Deporte, Recreación y Turismo',
+        'MERCOSUR e Integraci?n Regional' => 'MERCOSUR e Integración Regional',
+        'P?blico Municipal' => 'Público Municipal',
+        'Polic?a Municipal' => 'Policía Municipal',
+        'Trabajo, Seguridad Social y R?gimen Previsional' => 'Trabajo, Seguridad Social y Régimen Previsional',
+        'Transporte y Tr?nsito' => 'Transporte y Tránsito',
+        'Vivienda, Planificaci?n Urbana y Obras P?blicas' => 'Vivienda, Planificación Urbana y Obras Públicas',
+    ];
+
     protected function getSQL()
     {
         return 'SELECT * FROM normas';
@@ -52,10 +64,18 @@ class MNorma extends Migrador
         $numero = intval($row['numero']) ? intval($row['numero']) : 0;
         $norma->setNumero($numero);
 
+        $rama = $row['rama'];
+        if (array_key_exists($rama, $this->mapRamas)) {
+            return null;
+            $rama = $this->map[$rama];
+        }
+        $rama = $this->canon($rama);
+        $rama = $this->ramas[$rama];
+
 
         $norma->setObservacion($row['observaciones']);
         $norma->setPaginaBoletin($row['pagina']);
-        $norma->setRama($this->ramas[$this->canon($row['rama'])]);
+        $norma->setRama($rama);
 //        $norma->setRama($this->ramas[strtolower($row['rama'])]); vnc
         $norma->setTemaGeneral($row['tema_general']);
         if ($tb = $this->canon($row['tipo_boletin'])) {
