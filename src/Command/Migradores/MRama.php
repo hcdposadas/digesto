@@ -19,6 +19,7 @@ class MRama extends Migrador
         'Trabajo, Seguridad Social y R?gimen Previsional' => 'Trabajo, Seguridad Social y Régimen Previsional',
         'Transporte y Tr?nsito' => 'Transporte y Tránsito',
         'Vivienda, Planificaci?n Urbana y Obras P?blicas' => 'Vivienda, Planificación Urbana y Obras Públicas',
+        'Genero' => 'Género',
     ];
 
     private $numeros = [
@@ -54,6 +55,13 @@ class MRama extends Migrador
 
         if (!$titulo) {
             return null;
+        }
+        if (strtolower($titulo) === 'vigentes no consolidadas') {
+            return null;
+        }
+
+        if (strtolower($titulo) === 'genero') {
+            $titulo = 'Género';
         }
 
         if (array_key_exists($titulo, $this->map)) {

@@ -68,7 +68,7 @@ class Norma extends BaseClass {
 
 	/**
 	 * @ORM\ManyToOne(targetEntity="App\Entity\Rama")
-	 * @ORM\JoinColumn(nullable=false)
+	 * @ORM\JoinColumn(nullable=true)
 	 */
 	private $rama;
 

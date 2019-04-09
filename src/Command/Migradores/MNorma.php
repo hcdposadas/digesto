@@ -28,6 +28,7 @@ class MNorma extends Migrador
         'Trabajo, Seguridad Social y R?gimen Previsional' => 'Trabajo, Seguridad Social y Régimen Previsional',
         'Transporte y Tr?nsito' => 'Transporte y Tránsito',
         'Vivienda, Planificaci?n Urbana y Obras P?blicas' => 'Vivienda, Planificación Urbana y Obras Públicas',
+        'Genero' => 'Género',
     ];
 
     protected function getSQL()
@@ -65,12 +66,15 @@ class MNorma extends Migrador
         $norma->setNumero($numero);
 
         $rama = $row['rama'];
-        if (array_key_exists($rama, $this->mapRamas)) {
-            return null;
-            $rama = $this->map[$rama];
+        if (strtolower($rama) !== 'vigentes no consolidadas') {
+            if (array_key_exists($rama, $this->mapRamas)) {
+                $rama = $this->mapRamas[$rama];
+            }
+            $rama = $this->canon($rama);
+            $rama = $this->ramas[$rama];
+        } else {
+            $rama = null;
         }
-        $rama = $this->canon($rama);
-        $rama = $this->ramas[$rama];
 
 
         $norma->setObservacion($row['observaciones']);
