@@ -47,4 +47,23 @@ class DescriptorRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function getQbAll() {
+        $qb = $this->createQueryBuilder( 'd' );
+
+        return $qb;
+    }
+
+    public function getByLike( $string ) {
+
+
+        $qb = $this->createQueryBuilder('d');
+        $qb->where('UPPER(d.nombre) LIKE UPPER(:string)');
+        $qb->setParameter( 'string', '%' . $string . '%' );
+
+        $return = $qb->getQuery()->getArrayResult();
+
+        return $return;
+    }
+
 }

@@ -29,8 +29,15 @@ class AnexoNorma extends BaseClass {
 	 */
 	private $fecha;
 
-	/**
-	 * @Vich\UploadableField(mapping="anexos", fileNameProperty="id")
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @var string
+     */
+    private $archivo;
+
+
+    /**
+	 * @Vich\UploadableField(mapping="anexos", fileNameProperty="archivo")
 	 * @var File
 	 */
 	private $archivoAnexo;
@@ -80,6 +87,22 @@ class AnexoNorma extends BaseClass {
 
 		return $this;
 	}
+
+    /**
+     * @return string
+     */
+    public function getArchivo(): ?string
+    {
+        return $this->archivo;
+    }
+
+    /**
+     * @param string $archivo
+     */
+    public function setArchivo(string $archivo): void
+    {
+        $this->archivo = $archivo;
+    }
 
 	public function getNorma(): ?Norma {
 		return $this->norma;

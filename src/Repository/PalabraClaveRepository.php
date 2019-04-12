@@ -47,4 +47,22 @@ class PalabraClaveRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function getQbAll() {
+        $qb = $this->createQueryBuilder( 'pc' );
+
+        return $qb;
+    }
+
+    public function getByLike( $string ) {
+
+
+        $qb = $this->createQueryBuilder('pc');
+        $qb->where('UPPER(pc.nombre) LIKE UPPER(:string)');
+        $qb->setParameter( 'string', '%' . $string . '%' );
+
+        $return = $qb->getQuery()->getArrayResult();
+
+        return $return;
+    }
 }

@@ -47,4 +47,22 @@ class IdentificadorRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function getQbAll() {
+        $qb = $this->createQueryBuilder( 'i' );
+
+        return $qb;
+    }
+
+    public function getByLike( $string ) {
+
+
+        $qb = $this->createQueryBuilder('i');
+        $qb->where('UPPER(i.nombre) LIKE UPPER(:string)');
+        $qb->setParameter( 'string', '%' . $string . '%' );
+
+        $return = $qb->getQuery()->getArrayResult();
+
+        return $return;
+    }
 }

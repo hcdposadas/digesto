@@ -4,7 +4,9 @@ twig:
     strict_variables: '%kernel.debug%'
     form_themes:
         - 'bootstrap_3_layout.html.twig'
-        -  'custom\fields.html.twig'
+        - 'custom\fields.html.twig'
+        - 'custom\image_widget.html.twig'
+        - 'TetranzSelect2EntityBundle:Form:fields.html.twig'
 #    form_themes: ['bootstrap_3_horizontal_layout.html.twig']
     globals:
         app_version: '%env(APP_VERSION)%'

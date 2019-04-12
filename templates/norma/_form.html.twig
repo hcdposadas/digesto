@@ -1,8 +1,94 @@
 {{ form_start(form) }}
-<div class="box-body">
-    {{ form_widget(form) }}
-    <button class="btn btn-primary">{{ button_label|default('Guardar') }}</button>
-</div>
-{{ form_end(form) }}
+<div class="row">
+    <div class="col-md-6">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">Norma</h3>
+            </div>
 
+            <div class="box-body">
+                <div class="row">
+                <div class="col-md-6">
+                    {{ form_row(form.rama) }}
+                </div>
+                <div class="col-md-6">
+                    {{ form_row(form.numero) }}
+                </div>
+                </div>
+
+                {{ form_row(form.ramaVigenteNoConsolidada) }}
+
+                <div class="row">
+                    <div class="col-md-6">
+                        {{ form_row(form.fechaSancion) }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form_row(form.paginaBoletin) }}
+                    </div>
+                </div>
+                {{ form_row(form.observacion) }}
+                <div class="row">
+                    <div class="col-md-6">
+                        {{ form_row(form.decretoPromulgatorio) }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form_row(form.fechaPromulgacion) }}
+                    </div>
+                </div>
+
+                {{ form_row(form.tipoPromulgacion) }}
+                {{ form_row(form.tipoBoletin) }}
+                {{ form_row(form.temaGeneral) }}
+                {{ form_row(form.activo) }}
+
+            </div>
+
+        </div>
+    </div>
+    <div class="col-md-6">
+
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">Palabras Claves, Identificadores, Descriptores</h3>
+            </div>
+
+            <div class="box-body">
+                {{ form_row(form.descriptores) }}
+                {{ form_row(form.palabrasClave) }}
+                {{ form_row(form.identificadores) }}
+            </div>
+
+        </div>
+
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">Beneficiarios</h3>
+            </div>
+
+            <div class="box-body">
+                {{ form_widget(form.beneficiarioNormas) }}
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">Anexos</h3>
+            </div>
+
+            <div class="box-body">
+                {{ form_row(form.anexos) }}
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<button class="btn btn-primary">{{ button_label|default('Guardar') }}</button>
+
+{{ form_end(form) }}
 

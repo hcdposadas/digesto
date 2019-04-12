@@ -47,4 +47,20 @@ class NormaRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function getQbAll()
+    {
+        $qb = $this->createQueryBuilder('n');
+        return $qb;
+    }
+
+    public function search()
+    {
+        $qb = $this->getQbAll();
+
+        $qb->orderBy('n.id', 'ASC');
+
+        return $qb;
+    }
+
 }

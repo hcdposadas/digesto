@@ -2,9 +2,16 @@
 
 namespace App\Controller;
 
+use App\Entity\Descriptor;
+use App\Entity\DescriptorNorma;
+use App\Entity\Identificador;
+use App\Entity\IdentificadorNorma;
 use App\Entity\Norma;
+use App\Entity\PalabraClave;
+use App\Entity\PalabraClaveNorma;
 use App\Form\NormaType;
 use App\Repository\NormaRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,11 +30,11 @@ class NormaController extends AbstractController
     {
 
 //	    $paginator  = $this->get('knp_paginator');
-	    $normas = $paginator->paginate(
-		    $normaRepository->findAll(), /* query NOT result */
-		    $request->query->getInt('page', 1)/*page number*/,
-		    10/*limit per page*/
-	    );
+        $normas = $paginator->paginate(
+            $normaRepository->search(), /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            10/*limit per page*/
+        );
 
         return $this->render('norma/index.html.twig', [
             'normas' => $normas,
@@ -43,10 +50,23 @@ class NormaController extends AbstractController
         $form = $this->createForm(NormaType::class, $norma);
         $form->handleRequest($request);
 
+
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($norma);
-            $entityManager->flush();
+            $em = $this->getDoctrine()->getManager();
+
+            $data = $request->get($form->getName());
+
+            // agrego descriptores
+            $this->addDescriptores($em, $data, $norma);
+
+            // agrego descriptores
+            $this->addIdentificadores($em, $data, $norma);
+
+            // agrego descriptores
+            $this->addPalabrasClaves($em, $data, $norma);
+
+            $em->persist($norma);
+            $em->flush();
 
             return $this->redirectToRoute('norma_index');
         }
@@ -72,11 +92,106 @@ class NormaController extends AbstractController
      */
     public function edit(Request $request, Norma $norma): Response
     {
-        $form = $this->createForm(NormaType::class, $norma);
+
+        $em = $this->getDoctrine()->getManager();
+
+        $descriptores = $norma->getDescriptoresNorma();
+        $identificadores = $norma->getIdentificadoresNorma();
+        $palabrasClave = $norma->getPalabrasClaveNorma();
+        $form = $this->createForm(NormaType::class, $norma, [
+            'descriptores' => $descriptores,
+            'identificadores' => $identificadores,
+            'palabrasClave' => $palabrasClave
+        ]);
+
+        $descriptoresOriginales = new ArrayCollection();
+        $identificadoresOriginales = new ArrayCollection();
+        $palabrasClaveOriginales = new ArrayCollection();
+
+        foreach ($descriptores as $descriptor) {
+            $descriptoresOriginales->add($descriptor);
+        }
+        foreach ($identificadores as $identificador) {
+            $identificadoresOriginales->add($identificador);
+        }
+        foreach ($palabrasClave as $palabrasClave) {
+            $palabrasClaveOriginales->add($palabrasClave);
+        }
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+
+//            $data = $request->get($form->getName());
+            $data = [];
+            $data['descriptores'] = $form->get('descriptores')->getData();
+            $data['identificadores'] = $form->get('identificadores')->getData();
+            $data['palabrasClave'] = $form->get('palabrasClave')->getData();
+
+            /* elimino descriptores */
+
+            $descriptoresQueQuedan = $norma->getDescriptoresNorma()->filter(
+                function ($entry) use ($data) {
+                    return in_array($entry->getDescriptor(), $data['descriptores']);
+                }
+            );
+
+            foreach ($descriptoresOriginales as $descriptor) {
+                if (false === $descriptoresQueQuedan->contains($descriptor)) {
+
+                    $descriptor->setNorma(null);
+                    $norma->getDescriptoresNorma()->removeElement($descriptor);
+
+                    $em->remove($descriptor);
+                }
+            }
+
+            /* elimino identificadores */
+
+            $identificadoresQueQuedan = $norma->getIdentificadoresNorma()->filter(
+                function ($entry) use ($data) {
+                    return in_array($entry->getIdentificador(), $data['identificadores']);
+                }
+            );
+
+            foreach ($identificadoresOriginales as $identificador) {
+                if (false === $identificadoresQueQuedan->contains($identificador)) {
+
+                    $identificador->setNorma(null);
+                    $norma->getIdentificadoresNorma()->removeElement($identificador);
+
+                    $em->remove($identificador);
+                }
+            }
+
+            /* elimino palabras clave */
+
+            $palabraClaveQueQuedan = $norma->getPalabrasClaveNorma()->filter(
+                function ($entry) use ($data) {
+                    return in_array($entry->getPalabraClave(), $data['palabrasClave']);
+                }
+            );
+
+            foreach ($identificadoresOriginales as $palabraClave) {
+                if (false === $palabraClaveQueQuedan->contains($palabraClave)) {
+
+                    $palabraClave->setNorma(null);
+                    $norma->getPalabrasClaveNorma()->removeElement($palabraClave);
+
+                    $em->remove($palabraClave);
+                }
+            }
+
+            // agrego descriptores
+            $this->addDescriptores($em, $data, $norma);
+
+            // agrego identificadores
+            $this->addIdentificadores($em, $data, $norma);
+
+            // agrego palabras clave
+            $this->addPalabrasClaves($em, $data, $norma);
+
+            $em->flush();
 
             return $this->redirectToRoute('norma_index', [
                 'id' => $norma->getId(),
@@ -89,12 +204,75 @@ class NormaController extends AbstractController
         ]);
     }
 
+    private function addDescriptores($em, $data, &$norma)
+    {
+        if (isset($data['descriptores'])) {
+            foreach ($data['descriptores'] as $descriptorId) {
+                $descriptor = $em->getRepository(Descriptor::class)->find($descriptorId);
+                $descriptorNorma = $em->getRepository(DescriptorNorma::class)->findOneBy(
+                    [
+                        'norma' => $norma,
+                        'descriptor' => $descriptor
+                    ]
+                );
+                if (!$descriptorNorma && $descriptor) {
+                    $descriptorNorma = new DescriptorNorma();
+                    $descriptorNorma->setNorma($norma);
+                    $descriptorNorma->setDescriptor($descriptor);
+                    $norma->addDescriptoresNorma($descriptorNorma);
+                }
+            }
+        }
+    }
+
+    private function addIdentificadores($em, $data, &$norma)
+    {
+        if (isset($data['identificadores'])) {
+            foreach ($data['identificadores'] as $identificadorId) {
+                $identificador = $em->getRepository(Identificador::class)->find($identificadorId);
+                $identificadorNorma = $em->getRepository(IdentificadorNorma::class)->findOneBy(
+                    [
+                        'norma' => $norma,
+                        'identificador' => $identificador
+                    ]
+                );
+                if (!$identificadorNorma && $identificador) {
+                    $identificadorNorma = new IdentificadorNorma();
+                    $identificadorNorma->setNorma($norma);
+                    $identificadorNorma->setIdentificador($identificador);
+                    $norma->addIdentificadoresNorma($identificadorNorma);
+                }
+            }
+        }
+    }
+
+    private function addPalabrasClaves($em, $data, &$norma)
+    {
+        if (isset($data['palabrasClave'])) {
+            foreach ($data['palabrasClave'] as $palabraClaveId) {
+                $palabraClave = $em->getRepository(PalabraClave::class)->find($palabraClaveId);
+                $palabraClaveNorma = $em->getRepository(PalabraClaveNorma::class)->findOneBy(
+                    [
+                        'norma' => $norma,
+                        'palabraClave' => $palabraClave
+                    ]
+                );
+                if (!$palabraClaveNorma && $palabraClave) {
+                    $palabraClaveNorma = new PalabraClaveNorma();
+                    $palabraClaveNorma->setNorma($norma);
+                    $palabraClaveNorma->setPalabraClave($palabraClave);
+                    $norma->addPalabrasClaveNorma($palabraClaveNorma);
+                }
+            }
+        }
+    }
+
     /**
      * @Route("/{id}", name="norma_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Norma $norma): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$norma->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $norma->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($norma);
             $entityManager->flush();

@@ -2,18 +2,44 @@
 
 namespace App\Form;
 
+use App\Entity\Descriptor;
+use App\Entity\Identificador;
 use App\Entity\Norma;
+use App\Entity\PalabraClave;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use App\Form\BootstrapCollectionType;
+use Tetranz\Select2EntityBundle\Form\Type\Select2EntityType;
 
 class NormaType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+
+
+        $descriptores = $options['descriptores'];
+        $identificadores = $options['identificadores'];
+        $palabrasClaves = $options['palabrasClave'];
+
+        $aCDescriptor = null;
+        foreach ($descriptores as $descriptore) {
+            $aCDescriptor[] = $descriptore->getDescriptor();
+        }
+
+        $aCIdentificador = null;
+        foreach ($identificadores as $identificador) {
+            $aCIdentificador[] = $identificador->getIdentificador();
+        }
+
+        $aCPalabraClave = null;
+        foreach ($palabrasClaves as $palabraClave) {
+            $aCPalabraClave[] = $palabraClave->getPalabraClave();
+        }
+
+
         $builder
             ->add('rama')
             ->add('ramaVigenteNoConsolidada')
@@ -32,7 +58,8 @@ class NormaType extends AbstractType
                 DateType::class,
                 [
                     'widget' => 'single_text',
-                    'html5' => true
+                    'html5' => true,
+                    'required' => false
                 ])
             ->add('tipoPromulgacion')
             ->add('tipoBoletin')
@@ -43,21 +70,36 @@ class NormaType extends AbstractType
                 'by_reference' => false,
                 'label' => 'Anexos'
             ])
-            ->add('descriptoresNorma', CollectionType::class, [
-                'entry_type' => DescriptorNormaType::class,
-                'entry_options' => [
-                    'label' => false,
-                    'by_reference' => false,
-                ],
-                'allow_add' => true
+            ->add('descriptores', Select2EntityType::class, [
+                'class' => Descriptor::class,
+                'text_property' => 'nombre',
+                'remote_route' => 'get_descriptores',
+                'allow_clear' => false,
+                'multiple' => true,
+                'language' => 'es',
+                'mapped' => false,
+                'data' => $aCDescriptor
             ])
-            ->add('palabrasClaveNorma', CollectionType::class, [
-                'entry_type' => PalabraClaveNormaType::class,
-                'entry_options' => [
-                    'label' => false,
-                    'by_reference' => false,
-                ],
-                'allow_add' => true
+            ->add('identificadores', Select2EntityType::class, [
+                'class' => Identificador::class,
+                'text_property' => 'nombre',
+                'remote_route' => 'get_identificadores',
+                'allow_clear' => false,
+                'multiple' => true,
+                'language' => 'es',
+                'mapped' => false,
+                'data' => $aCIdentificador
+            ])
+            ->add('palabrasClave', Select2EntityType::class, [
+                'class' => PalabraClave::class,
+                'text_property' => 'nombre',
+                'remote_route' => 'get_palabras_clave',
+                'allow_clear' => false,
+                'multiple' => true,
+                'language' => 'es',
+                'mapped' => false,
+                'data' => $aCPalabraClave
+
             ])
             ->add('beneficiarioNormas', BootstrapCollectionType::class, [
                 'entry_type' => BeneficiarioNormaType::class,
@@ -66,14 +108,6 @@ class NormaType extends AbstractType
                 'by_reference' => false,
                 'label' => 'Beneficiarios'
             ])
-            ->add('identificadoresNorma', CollectionType::class, [
-                'entry_type' => IdentificadorNormaType::class,
-                'entry_options' => [
-                    'label' => false,
-                    'by_reference' => false,
-                ],
-                'allow_add' => true
-            ])
             ->add('activo');
     }
 
@@ -81,6 +115,9 @@ class NormaType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Norma::class,
+            'descriptores' => [],
+            'identificadores' => [],
+            'palabrasClave' => [],
         ]);
     }
 }
