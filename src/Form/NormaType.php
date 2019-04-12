@@ -63,6 +63,7 @@ class NormaType extends AbstractType
                 ])
             ->add('tipoPromulgacion')
             ->add('tipoBoletin')
+            ->add('boletinOficialMunicipal')
             ->add('anexos', BootstrapCollectionType::class, [
                 'entry_type' => AnexoNormaType::class,
                 'allow_add' => true,

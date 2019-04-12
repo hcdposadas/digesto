@@ -1,6 +1,6 @@
 {
     "type": "project",
-    "license": "proprietary",
+    "license": "MIT",
     "require": {
         "php": "^7.1.3",
         "ext-ctype": "*",
@@ -10,6 +10,7 @@
         "friendsofsymfony/user-bundle": "^2.1",
         "knplabs/knp-menu-bundle": "^2.2",
         "knplabs/knp-paginator-bundle": "^3.0",
+        "oro/doctrine-extensions": "^1.2",
         "sensio/framework-extra-bundle": "^5.1",
         "stof/doctrine-extensions-bundle": "^1.3",
         "symfony/apache-pack": "^1.0",

@@ -2,131 +2,178 @@
 
 namespace App\Controller;
 
+use App\Entity\Norma;
 use App\Entity\WebDigestoTexto;
 use App\Form\BuscarOrdenanzaType;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class DefaultController extends AbstractController {
+class DefaultController extends AbstractController
+{
 
-	/**
-	 * @Route("/", name="public")
-	 */
-	public function index() {
-
-
-		$web = $this->getDoctrine()->getRepository( WebDigestoTexto::class )->findOneBySlug( 'web' );
-
-		if ( ! $web ) {
-			return new Response( '<h1>Sitio En construccion</h1>' );
-		}
-
-		return $this->render( 'Web/index.html.twig',
-			[
-				'web' => $web
-			] );
-	}
-
-	/**
-	 * @Route("/buscador", name="buscador")
-	 */
-	public function buscador() {
-
-		$titulo = 'Buscador';
-
-		$web = $this->getDoctrine()->getRepository( WebDigestoTexto::class )->findOneBySlug( 'web' );
-
-		if ( ! $web ) {
-			return new Response( '<h1>Sitio En construccion</h1>' );
-		}
-
-		$form = $this->createForm( BuscarOrdenanzaType::class );
+    /**
+     * @Route("/", name="public")
+     */
+    public function index()
+    {
 
 
-		return $this->render( 'Web/buscador.html.twig',
-			[
-				'web'    => $web,
-				'titulo' => $titulo,
-				'form'   => $form->createView(),
+        $web = $this->getDoctrine()->getRepository(WebDigestoTexto::class)->findOneBySlug('web');
 
-			] );
-	}
+        if (!$web) {
+            return new Response('<h1>Sitio En construccion</h1>');
+        }
 
-	/**
-	 * @Route("/documentos", name="documentos")
-	 */
-	public function documentos() {
-		$titulo = 'Documentos';
+        return $this->render('Web/index.html.twig',
+            [
+                'web' => $web
+            ]);
+    }
 
-		$web = $this->getDoctrine()->getRepository( WebDigestoTexto::class )->findOneBySlug( 'web' );
+    /**
+     * @Route("/buscador", name="buscador")
+     */
+    public function buscador(Request $request, PaginatorInterface $paginator)
+    {
 
-		if ( ! $web ) {
-			return new Response( '<h1>Sitio En construccion</h1>' );
-		}
+        $titulo = 'Buscador';
 
-		return $this->render( 'Web/documentos.html.twig',
-			[
-				'web'    => $web,
-				'titulo' => $titulo,
-			] );
-	}
+        $web = $this->getDoctrine()->getRepository(WebDigestoTexto::class)->findOneBySlug('web');
 
-	/**
-	 * @Route("/pagina/{pagina}", name="pagina")
-	 */
-	public function pagina( Request $request ) {
+        if (!$web) {
+            return new Response('<h1>Sitio En construccion</h1>');
+        }
 
-		$web = $this->getDoctrine()->getRepository( WebDigestoTexto::class )->findOneBySlug( 'web' );
+        $resultados = [];
 
-		if ( ! $web ) {
-			return new Response( '<h1>Sitio En construcción</h1>' );
-		}
+        $form = $this->createForm(BuscarOrdenanzaType::class, [], [
+            'method' => 'GET'
+        ]);
 
-		$titulo    = 'No Encontrado';
-		$pagina    = $request->get( 'pagina' );
-		$contenido = '"' . $pagina . '" contenido no encontrado';
+        $form->handleRequest($request);
 
-		switch ( $pagina ) {
-			case 'renumeracion':
-				$titulo    = 'Renumeración';
-				$contenido = $web->getRenumeracion();
-				break;
-			case 'resenia':
-				$titulo    = 'Reseña';
-				$contenido = $web->getResenia();
-				break;
-			case 'metodologiaTrabajo':
-				$titulo    = 'Metodología de Trabajo';
-				$contenido = $web->getMetodologiaTrabajo();
-				break;
-			case 'instructivoInformativo':
-				$titulo    = 'Instructivo Informativo';
-				$contenido = $web->getInstructivoInformativo();
-				break;
-		}
+        if ($form->isSubmitted()) {
+            $data = $form->getData();
+            dump($data);
+
+            $em = $this->getDoctrine();
+            $resultados = $em->getRepository(Norma::class)->buscarNormas($data);
 
 
-		return $this->render( 'Web/pagina.html.twig',
-			[
-				'web'       => $web,
-				'titulo'    => $titulo,
-				'contenido' => $contenido,
+            $resultados = $paginator->paginate(
+                $resultados,
+                $request->query->get('page', 1)/* page number */,
+                10/* limit per page */
+            );
 
-			] );
-	}
-
-
-	/**
-	 * @Route("/administrador", name="administrador")
-	 */
-	public function administrador() {
+        }
 
 
-		return $this->render( 'default/index.html.twig',
-			[
-				'controller_name' => 'DefaultController',
-			] );
-	}
+        return $this->render('Web/buscador.html.twig',
+            [
+                'web' => $web,
+                'titulo' => $titulo,
+                'form' => $form->createView(),
+                'resultados' => $resultados
+
+            ]);
+    }
+
+    /**
+     * @Route("/documentos", name="documentos")
+     */
+    public function documentos()
+    {
+        $titulo = 'Documentos';
+
+        $web = $this->getDoctrine()->getRepository(WebDigestoTexto::class)->findOneBySlug('web');
+
+        if (!$web) {
+            return new Response('<h1>Sitio En construccion</h1>');
+        }
+
+        return $this->render('Web/documentos.html.twig',
+            [
+                'web' => $web,
+                'titulo' => $titulo,
+            ]);
+    }
+
+    /**
+     * @Route("/pagina/{pagina}", name="pagina")
+     */
+    public function pagina(Request $request)
+    {
+
+        $web = $this->getDoctrine()->getRepository(WebDigestoTexto::class)->findOneBySlug('web');
+
+        if (!$web) {
+            return new Response('<h1>Sitio En construcción</h1>');
+        }
+
+        $titulo = 'No Encontrado';
+        $pagina = $request->get('pagina');
+        $contenido = '"' . $pagina . '" contenido no encontrado';
+
+        switch ($pagina) {
+            case 'renumeracion':
+                $titulo = 'Renumeración';
+                $contenido = $web->getRenumeracion();
+                break;
+            case 'resenia':
+                $titulo = 'Reseña';
+                $contenido = $web->getResenia();
+                break;
+            case 'metodologiaTrabajo':
+                $titulo = 'Metodología de Trabajo';
+                $contenido = $web->getMetodologiaTrabajo();
+                break;
+            case 'instructivoInformativo':
+                $titulo = 'Instructivo Informativo';
+                $contenido = $web->getInstructivoInformativo();
+                break;
+        }
+
+
+        return $this->render('Web/pagina.html.twig',
+            [
+                'web' => $web,
+                'titulo' => $titulo,
+                'contenido' => $contenido,
+
+            ]);
+    }
+
+
+    /**
+     * @Route("/administrador", name="administrador")
+     */
+    public function administrador()
+    {
+
+        return $this->render('default/index.html.twig',
+            [
+                'controller_name' => 'DefaultController',
+            ]);
+    }
+
+    /**
+     * @Route("/ver_ordenanza/{id}", name="ver_ordenanza")
+     */
+    public function verOrdenanza(Request $request, Norma $norma)
+    {
+        $web = $this->getDoctrine()->getRepository(WebDigestoTexto::class)->findOneBySlug('web');
+
+        $titulo = $norma->getRama() . ' ' . $norma->getRama()->getNumeroRomano() . ' - ' . $norma->getNumero();
+
+        return $this->render('Web/ordenanza.html.twig',
+            [
+                'web' => $web,
+                'titulo' => $titulo,
+                'norma' => $norma,
+            ]);
+    }
 }

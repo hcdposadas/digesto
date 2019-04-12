@@ -58,8 +58,10 @@
 
         </div>
 
-        <div class="col-xs-12">
-            {{ knp_pagination_render(normas) }}
+        <div class="row text-center">
+            <div class="col-xs-12">
+                {{ knp_pagination_render(normas) }}
+            </div>
         </div>
 
         <div class="col-xs-12">
@@ -73,11 +75,11 @@
 {{ encore_entry_script_tags('js/datatables') }}
     <script>
         $('#tabla-norma').DataTable({
-            'paging': true,
+            'paging': false,
             'lengthChange': false,
             'searching': false,
             'ordering': true,
-            'info': true,
+            'info': false,
             'autoWidth': false
         })
     </script>

@@ -108,6 +108,21 @@ class Norma extends BaseClass
      */
     private $identificadoresNorma;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\TipoOrdenanza")
+     */
+    private $tipoOrdenanza;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $numeroAnterior;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\BoletinOficialMunicipal", inversedBy="normas")
+     */
+    private $boletinOficialMunicipal;
+
     public function __construct()
     {
         $this->anexos = new ArrayCollection();
@@ -424,6 +439,42 @@ class Norma extends BaseClass
                 $descriptorNorma->setNorma(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getTipoOrdenanza(): ?TipoOrdenanza
+    {
+        return $this->tipoOrdenanza;
+    }
+
+    public function setTipoOrdenanza(?TipoOrdenanza $tipoOrdenanza): self
+    {
+        $this->tipoOrdenanza = $tipoOrdenanza;
+
+        return $this;
+    }
+
+    public function getNumeroAnterior(): ?int
+    {
+        return $this->numeroAnterior;
+    }
+
+    public function setNumeroAnterior(?int $numeroAnterior): self
+    {
+        $this->numeroAnterior = $numeroAnterior;
+
+        return $this;
+    }
+
+    public function getBoletinOficialMunicipal(): ?BoletinOficialMunicipal
+    {
+        return $this->boletinOficialMunicipal;
+    }
+
+    public function setBoletinOficialMunicipal(?BoletinOficialMunicipal $boletinOficialMunicipal): self
+    {
+        $this->boletinOficialMunicipal = $boletinOficialMunicipal;
 
         return $this;
     }

@@ -63,4 +63,53 @@ class NormaRepository extends ServiceEntityRepository
         return $qb;
     }
 
+    public function buscarNormas($data)
+    {
+        $qb = $this->getQbAll();
+
+        if (isset($data['rama'])) {
+            $qb->andWhere('n.rama = :rama')
+                ->setParameter('rama', $data['rama']);
+
+        }
+        if (isset($data['numero'])) {
+
+            $qb->andWhere('n.numero = :numero')
+                ->setParameter('numero', $data['numero']);
+
+            $qb->orWhere('n.numeroAnterior = :numeroAnterior')
+                ->setParameter('numeroAnterior', $data['numero']);
+
+        }
+        if (isset($data['anio'])) {
+//            $qb->andWhere('YEAR(n.fechaSancion) = :anio')
+//                ->setParameter('rama', $data['rama']);
+
+        }
+        if (isset($data['palabra'])) {
+            $qb->leftJoin('n.descriptoresNorma', 'descriptoresNorma')
+                ->leftJoin('descriptoresNorma.descriptor', 'descriptor')
+                ->leftJoin('n.identificadoresNorma', 'identificadoresNorma')
+                ->leftJoin('identificadoresNorma.identificador', 'identificador')
+                ->leftJoin('n.palabrasClaveNorma', 'palabrasClaveNorma')
+                ->leftJoin('palabrasClaveNorma.palabraClave', 'palabraClave');
+
+            $qb->andWhere($qb->expr()->orX()->addMultiple([
+                'UPPER(palabraClave.nombre) LIKE UPPER(:criteria)',
+                'UPPER(descriptor.nombre) LIKE UPPER(:criteria)',
+                'UPPER(identificador.nombre) LIKE UPPER(:criteria)'
+            ]))
+                ->setParameter('criteria', $data['palabra']);
+
+
+        }
+
+        $qb->andWhere('n.activo = true');
+
+        $qb->addOrderBy('n.numero', 'ASC');
+
+        return $qb;
+
+    }
+
 }

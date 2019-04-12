@@ -23,7 +23,7 @@
                         {{ form_row(form.fechaSancion) }}
                     </div>
                     <div class="col-md-6">
-                        {{ form_row(form.paginaBoletin) }}
+
                     </div>
                 </div>
                 {{ form_row(form.observacion) }}
@@ -37,10 +37,22 @@
                 </div>
 
                 {{ form_row(form.tipoPromulgacion) }}
-                {{ form_row(form.tipoBoletin) }}
                 {{ form_row(form.temaGeneral) }}
                 {{ form_row(form.activo) }}
 
+            </div>
+
+        </div>
+
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">Datos del Boletín Oficial</h3>
+            </div>
+
+            <div class="box-body">
+                {{ form_row(form.tipoBoletin) }}
+                {{ form_row(form.boletinOficialMunicipal) }}
+                {{ form_row(form.paginaBoletin) }}
             </div>
 
         </div>

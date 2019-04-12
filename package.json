@@ -1,6 +1,17 @@
 {
   "license": "MIT",
   "private": true,
+  "author": "Honorable Concejo Deliberante de la Ciudad de Posadas",
+  "contributors": [
+    {
+      "name": "Matias Solis de la Torre",
+      "email": "matias.delatorre89@gmail.com"
+    },
+    {
+      "name": "Raul Neis",
+      "email": "raulneis@gmail.com"
+    }
+  ],
   "scripts": {
     "dev-server": "encore dev-server",
     "dev": "encore dev",

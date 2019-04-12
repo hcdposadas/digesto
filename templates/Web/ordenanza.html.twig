@@ -12,6 +12,9 @@
         a {
             text-decoration: none;
         }
+        .dl-horizontal dt{
+            white-space: pre-line;
+        }
     </style>
 {% endblock stylesheets %}
 
@@ -26,25 +29,87 @@
                     <div class="well text-center">Datos de la Ordenanza</div>
                     <div class="row">
                         <div class="col-md-12">
-                            <a href="#">CARTA ORGÁNICA MUNICIPAL DE POSADAS <i class="fa fa-download"></i></a>
+
+                            <dl class="dl-horizontal">
+                                <dt>Tipo de Ordenanza</dt>
+                                <dd>{{ norma.tipoOrdenanza }}</dd>
+
+                                <dt>Rama</dt>
+                                <dd>{{ norma.rama }}</dd>
+
+                                <dt>Número</dt>
+                                <dd>{{ norma.numero }}</dd>
+
+                                <dt>Número Anterior</dt>
+                                <dd>
+                                    {{ norma.numeroAnterior }}
+                                </dd>
+
+                                <dt>Fecha de Sanción</dt>
+                                <dd>{{ norma.fechaSancion | date('d/M/Y') }}</dd>
+                            </dl>
+
+
                         </div>
                     </div>
                     <div class="well text-center">Datos de la Publicación</div>
                     <div class="row">
                         <div class="col-md-12">
-                            <a href="#">CARTA ORGÁNICA MUNICIPAL DE POSADAS <i class="fa fa-download"></i></a>
+                            <dl class="dl-horizontal">
+                                <dt>Tipo de Boletín</dt>
+                                <dd>{{ norma.tipoBoletin }}</dd>
+
+                                <dt>Número de Boletín</dt>
+                                <dd>
+                                    {% if norma.boletinOficialMunicipal %}
+                                        {{ norma.boletinOficialMunicipal.numero }}
+                                    {% endif %}
+                                </dd>
+
+                                <dt>Fecha de Publicación del Boletín</dt>
+                                <dd>
+                                    {% if norma.boletinOficialMunicipal %}
+                                        {{ norma.boletinOficialMunicipal.fechaPublicacion | date('d/M/Y') }}
+                                    {% endif %}
+                                </dd>
+
+                                <dt>Página</dt>
+                                <dd>
+                                    {{ norma.paginaBoletin }}
+                                </dd>
+                            </dl>
+
                         </div>
                     </div>
                     <div class="well text-center">Datos de la Promulgación</div>
                     <div class="row">
                         <div class="col-md-12">
-                            <a href="#">CARTA ORGÁNICA MUNICIPAL DE POSADAS <i class="fa fa-download"></i></a>
+                            <dl class="dl-horizontal">
+                                <dt>Tipo de Promulgación</dt>
+                                <dd>{{ norma.tipoPromulgacion }}</dd>
+
+                                <dt>Decreto Promulgatorio</dt>
+                                <dd>
+                                    {{ norma.decretoPromulgatorio }}
+                                </dd>
+
+                                <dt>Fecha de Promulgación</dt>
+                                <dd>{{ norma.fechaPromulgacion| date('d/M/Y') }}</dd>
+
+                                <dt>Tema General</dt>
+                                <dd>
+                                    {{ norma.temaGeneral }}
+                                </dd>
+                            </dl>
                         </div>
                     </div>
                     <div class="well text-center">Textos de la Ordenanza</div>
                     <div class="row">
                         <div class="col-md-12">
-                            <a href="#">CARTA ORGÁNICA MUNICIPAL DE POSADAS <i class="fa fa-download"></i></a>
+                            {% for anexo in norma %}
+                                <a href="#">{{ anexo.titulo }} <i class="fa fa-download"></i></a>
+                            {% endfor %}
+
                         </div>
                     </div>
                 </div>

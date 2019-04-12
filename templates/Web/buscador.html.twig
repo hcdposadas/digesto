@@ -2,6 +2,13 @@
 
 {% block title %}{{ titulo }} -{% endblock title %}
 
+{% block stylesheets %}
+    <style>
+        body {
+            background-color: #F2F3F4;
+        }
+    </style>
+{% endblock stylesheets %}
 
 {% block content %}
     <div class="page-header text-center">
@@ -9,14 +16,14 @@
     </div>
     <div class="container">
 
-        <section class="" style="padding-bottom: 140px;">
+        <section class="mb-1">
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
-{#                    <div class="row text-center">#}
-{#                        <div class="col-sm-12">#}
-{#                            <h2 class="m-b-3">{{ titulo }}</h2>#}
-{#                        </div>#}
-{#                    </div>#}
+                    {#                    <div class="row text-center">#}
+                    {#                        <div class="col-sm-12">#}
+                    {#                            <h2 class="m-b-3">{{ titulo }}</h2>#}
+                    {#                        </div>#}
+                    {#                    </div>#}
 
                     <div>
                         {{ form_start(form) }}
@@ -30,7 +37,7 @@
                         </div>
                         <div class="row">
                             <div class="text-center">
-                                <button class="btn btn-primary">Buscar</button>
+                                {{ form_row(form.buscar) }}
                             </div>
                         </div>
                         {{ form_end(form) }}
@@ -38,5 +45,41 @@
                 </div>
             </div>
         </section>
+
+        {% if resultados %}
+            <div class="row">
+                <div class="col-12">
+                    {% for row in resultados | batch(2) %}
+                        <div class="row">
+                            {% for norma in row if norma.rama%}
+                                <div class="col-sm-6">
+                                    <a class="panel panel-default"
+                                       href="{{ path('ver_ordenanza', { 'id': norma.id}) }}">
+                                        <div class="panel-body">
+                                            <div class="media">
+                                                <div class="media-left padding-5">
+                                                    <i class="fa fa-file-text-o fa-fw fa-3x text-secondary"></i>
+                                                </div>
+                                                <div class="media-body">
+                                                    <h3>{{ norma.rama.titulo }} {{ norma.rama.numeroRomano }}
+                                                        - {{ norma.numero }}</h3>
+                                                    <p class="text-muted">{{ norma.temaGeneral }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="row text-center">
+                <div class="col-xs-12">
+                    {{ knp_pagination_render(resultados) }}
+                </div>
+            </div>
+        {% endif %}
     </div>
 {% endblock content %}

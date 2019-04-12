@@ -40,6 +40,12 @@ class Builder {
 			'MENU PRINCIPAL'
 		)->setAttribute( 'class', 'header' );
 
+        $menu->addChild(
+            'Ver Web',['route'=>'public']
+        )->setAttribute( 'class', '' )
+         ->setExtra( 'icon', 'fa fa-globe' )
+        ;
+
 		if ( $this->authorizationChecker->isGranted( 'ROLE_USER' ) ) {
 
 			$keyAdministracion = 'ADMINISTRACIÓN';
@@ -55,7 +61,7 @@ class Builder {
 			     ->setExtra( 'icon', 'fa fa-folder-open-o' )
 			     ->setAttribute( 'class', 'treeview' );
 
-			if ( $this->authorizationChecker->isGranted( 'ROLE_DIGESTO_ADMIN' ) ) {
+            if ( $this->authorizationChecker->isGranted( 'ROLE_DIGESTO_ADMIN' ) ) {
 
 				$menu[ $keyAdministracion ]
 					->addChild(
