@@ -14,7 +14,7 @@
     "vue": "^2.6.8"
   },
   "devDependencies": {
-    "@symfony/webpack-encore": "^0.22.0",
+    "@symfony/webpack-encore": "^0.27.0",
     "bootstrap-sass": "^3.4.1",
     "copy-webpack-plugin": "^5.0.0",
     "node-sass": "^4.11.0",

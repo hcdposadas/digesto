@@ -36,15 +36,15 @@ class AdminController extends EasyAdminController {
 	}
 
 	public function updateUsuarioEntity( $user ) {
-		$this->container->get( 'fos_user.user_manager' )->updateUser( $user, false );
+        $this->userManager->updateUser( $user, false );
 		parent::updateEntity( $user );
 	}
 
 	public function prePersistUsuarioEntity( $user ) {
-		$this->get( 'fos_user.user_manager' )->updateUser( $user, false );
+		$this->userManager->updateUser( $user, false );
 	}
 
 	public function preUpdateUsuarioEntity( $user ) {
-		$this->get( 'fos_user.user_manager' )->updateUser( $user, false );
+		$this->userManager->updateUser( $user, false );
 	}
 }

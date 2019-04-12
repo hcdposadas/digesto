@@ -38,8 +38,12 @@
                                 <td>{{ norma.numero }}</td>
                                 <td>{{ norma.temaGeneral }}</td>
                                 <td>
-                                    <a class="btn" href="{{ path('norma_show', {'id': norma.id}) }}"></a>
-                                    <a class="btn" href="{{ path('norma_edit', {'id': norma.id}) }}"></a>
+                                    <a class="btn btn-default" href="{{ path('norma_show', {'id': norma.id}) }}">
+                                        <i class="fa fa-eye"></i>
+                                    </a>
+                                    <a class="btn btn-default" href="{{ path('norma_edit', {'id': norma.id}) }}">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
                                 </td>
                             </tr>
                         {% else %}

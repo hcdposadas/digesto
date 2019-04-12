@@ -54,9 +54,9 @@
         </tbody>
     </table>
 
-    <a href="{{ path('norma_index') }}">back to list</a>
+    <a class="btn btn-default" href="{{ path('norma_index') }}">Volver</a>
 
-    <a href="{{ path('norma_edit', {'id': norma.id}) }}">edit</a>
+    <a class="btn btn-primary" href="{{ path('norma_edit', {'id': norma.id}) }}">Editar</a>
 
-    {{ include('norma/_delete_form.html.twig') }}
+
 {% endblock %}
