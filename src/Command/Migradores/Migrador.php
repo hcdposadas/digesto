@@ -108,11 +108,14 @@ abstract class Migrador
 
             $this->io->progressAdvance();
         }
+        $this->em->flush();
         $this->io->progressFinish();
+
 
         $table = $this->em->getClassMetadata($this->class)->getTableName();
         $seq = $table.'_id_seq';
-        $this->em->getConnection()->exec('ALTER SEQUENCE '.$seq.' RESTART WITH 1');
+        $sql = 'ALTER SEQUENCE '.$seq.' RESTART WITH 1';
+        $this->em->getConnection()->exec($sql);
         $this->em->flush();
     }
 

@@ -42,6 +42,11 @@ class AnexoNorma extends BaseClass {
 	 */
 	private $archivoAnexo;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $orden = 1;
+
 	/**
 	 * @ORM\ManyToOne(targetEntity="App\Entity\Norma", inversedBy="anexos")
 	 */
@@ -113,4 +118,16 @@ class AnexoNorma extends BaseClass {
 
 		return $this;
 	}
+
+    public function getOrden()
+    {
+        return $this->orden;
+    }
+
+    public function setOrden($orden): void
+    {
+        $this->orden = $orden;
+    }
+
+
 }

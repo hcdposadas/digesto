@@ -2,8 +2,10 @@
 
 namespace App\Command;
 
+use App\Command\Migradores\MAnexo;
 use App\Command\Migradores\MBeneficiario;
 use App\Command\Migradores\MBeneficiarioNorma;
+use App\Command\Migradores\MBoletinOficialMunicipal;
 use App\Command\Migradores\MDescriptor;
 use App\Command\Migradores\MDescriptorNorma;
 use App\Command\Migradores\MIdentificador;
@@ -14,6 +16,7 @@ use App\Command\Migradores\MPalabraClaveNorma;
 use App\Command\Migradores\MRama;
 use App\Command\Migradores\MTipoBoletin;
 use App\Command\Migradores\MTipoIdentificador;
+use App\Command\Migradores\MTipoOrdenanza;
 use App\Command\Migradores\MTipoPromulgacion;
 use Doctrine\DBAL\Connection;
 use Symfony\Component\Console\Command\Command;
@@ -33,12 +36,15 @@ class DigestoMigrarCommand extends Command
         MDescriptor::class,
         MTipoPromulgacion::class,
         MTipoBoletin::class,
+        MTipoOrdenanza::class,
         MRama::class,
         MNorma::class,
         MIdentificadorNorma::class,
         MPalabraClaveNorma::class,
         MDescriptorNorma::class,
-        MBeneficiarioNorma::class
+        MBeneficiarioNorma::class,
+        MAnexo::class,
+        MBoletinOficialMunicipal::class,
     ];
 
 

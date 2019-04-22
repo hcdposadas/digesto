@@ -8,6 +8,7 @@ namespace App\Command\Migradores;
 use App\Entity\Norma;
 use App\Entity\Rama;
 use App\Entity\TipoBoletin;
+use App\Entity\TipoOrdenanza;
 use App\Entity\TipoPromulgacion;
 
 class MNorma extends Migrador
@@ -15,6 +16,7 @@ class MNorma extends Migrador
     protected $class = Norma::class;
 
     protected $tiposBoletin = [];
+    protected $tiposOrdenanza = [];
     protected $tiposPromulgacion = [];
     protected $ramas = [];
 
@@ -43,6 +45,11 @@ class MNorma extends Migrador
             $this->tiposBoletin[$this->canon($item->getNombre())] = $item;
         }
 
+        $items = $this->em->getRepository(TipoOrdenanza::class)->findAll();
+        foreach ($items as $item) {
+            $this->tiposOrdenanza[$this->canon($item->getNombre())] = $item;
+        }
+
         $items = $this->em->getRepository(TipoPromulgacion::class)->findAll();
         foreach ($items as $item) {
             $this->tiposPromulgacion[$this->canon($item->getNombre())] = $item;
@@ -64,6 +71,8 @@ class MNorma extends Migrador
 
         $numero = intval($row['numero']) ? intval($row['numero']) : 0;
         $norma->setNumero($numero);
+        $norma->setNumeroAnterior($row['numero_anterior']);
+
 
         $rama = $row['rama'];
         if (strtolower($rama) !== 'vigentes no consolidadas') {
@@ -76,14 +85,28 @@ class MNorma extends Migrador
             $rama = null;
         }
 
+        $ramaVnc = $row['rama_vnc'];
+        if (strtolower($ramaVnc) !== 'vigentes no consolidadas') {
+            if (array_key_exists($ramaVnc, $this->mapRamas)) {
+                $ramaVnc = $this->mapRamas[$ramaVnc];
+            }
+            $ramaVnc = $this->canon($ramaVnc);
+            $ramaVnc = $this->ramas[$ramaVnc];
+        } else {
+            $ramaVnc = null;
+        }
+
 
         $norma->setObservacion($row['observaciones']);
         $norma->setPaginaBoletin($row['pagina']);
         $norma->setRama($rama);
-//        $norma->setRama($this->ramas[strtolower($row['rama'])]); vnc
+        $norma->setRamaVigenteNoConsolidada($ramaVnc);
         $norma->setTemaGeneral($row['tema_general']);
         if ($tb = $this->canon($row['tipo_boletin'])) {
             $norma->setTipoBoletin($this->tiposBoletin[$tb]);
+        }
+        if ($to = $this->canon($row['tipo'])) {
+            $norma->setTipoOrdenanza($this->tiposOrdenanza[$to]);
         }
         if ($tp = $this->canon($row['tipo_promulgacion'])) {
             $norma->setTipoPromulgacion($this->tiposPromulgacion[$tp]);
