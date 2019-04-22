@@ -30,7 +30,7 @@ class MAnexo extends Migrador
         $anexo->setNorma($this->em->getReference(Norma::class, $normaId));
         $anexo->setArchivo($row['nombre']);
         $anexo->setArchivoAnexo(null);
-        $anexo->setOrden(intval($row['orden']));
+        $anexo->setOrden(intval($row['orden']) ?: 0 );
 
         return $anexo;
     }
