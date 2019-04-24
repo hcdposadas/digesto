@@ -63,7 +63,7 @@
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="#" class="btn btn-default btn-flat">Perfil</a>
+                                    <a href="{{ path('fos_user_profile_show') }}" class="btn btn-default btn-flat">Perfil</a>
                                 </div>
                                 <div class="pull-right">
                                     <a href="{{ path('fos_user_security_logout') }}" class="btn btn-default btn-flat">Cerrar Sesión</a>
@@ -90,6 +90,37 @@
 
         <!-- Main content -->
         <section class="content">
+            {% for flashMessage in app.flashes('success') %}
+                <div class="alert alert-dismissable alert-success">
+                    <i class="fa fa-check"></i>
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    {{ flashMessage }}
+                </div>
+            {% endfor %}
+            {% for flashMessage in app.flashes('error') %}
+                <div class="alert alert-dismissable alert-danger">
+                    <i class="fa fa-ban"></i>
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    {{ flashMessage }}
+                </div>
+
+            {% endfor %}
+
+            {% for flashMessage in app.flashes('warning') %}
+                <div class="alert alert-dismissable alert-warning">
+                    <i class="fa fa-warning"></i>
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    {{ flashMessage }}
+                </div>
+            {% endfor %}
+            {% for flashMessage in app.flashes('info') %}
+                <div class="alert alert-info alert-dismissable">
+                    <i class="fa fa-info"></i>
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    {{ flashMessage }}
+                </div>
+
+            {% endfor %}
             {% block body %}{% endblock %}
         </section>
         <!-- /.content -->
