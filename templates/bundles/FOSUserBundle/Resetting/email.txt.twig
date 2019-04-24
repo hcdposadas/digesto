@@ -7,7 +7,13 @@
 
 {% block body_text %}
 {% autoescape false %}
-{{ 'resetting.email.message'|trans({'%username%': user.username, '%confirmationUrl%': confirmationUrl}) }}
+{#{{ 'resetting.email.message'|trans({'%username%': user.username, '%confirmationUrl%': confirmationUrl}) }}#}
+Hola {{ user.username }}!
+
+Para restablecer tu contraseña por favor hacé click en el siguiente enlace {{ confirmationUrl }}
+
+Atentamente,
+el Equipo de Sistemas HCD Posadas.
 {% endautoescape %}
 {% endblock %}
 {% block body_html %}{% endblock %}

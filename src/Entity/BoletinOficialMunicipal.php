@@ -50,6 +50,10 @@ class BoletinOficialMunicipal extends BaseClass
      */
     private $normas;
 
+	public function __toString(): string {
+		return $this->numero;
+	}
+
     public function __construct()
     {
         $this->normas = new ArrayCollection();
