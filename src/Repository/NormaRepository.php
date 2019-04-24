@@ -82,8 +82,8 @@ class NormaRepository extends ServiceEntityRepository
 
         }
         if (isset($data['anio'])) {
-//            $qb->andWhere('YEAR(n.fechaSancion) = :anio')
-//                ->setParameter('rama', $data['rama']);
+            $qb->andWhere('YEAR(n.fechaSancion) = :anio')
+                ->setParameter('anio', $data['anio']);
 
         }
         if (isset($data['palabra'])) {

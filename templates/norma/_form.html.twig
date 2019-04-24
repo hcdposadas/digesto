@@ -61,24 +61,25 @@
 
         <div class="box box-primary">
             <div class="box-header with-border">
-                <h3 class="box-title">Palabras Claves, Identificadores, Descriptores</h3>
+                <h3 class="box-title">Análisis Documental</h3>
             </div>
 
             <div class="box-body">
                 {{ form_row(form.descriptores) }}
                 {{ form_row(form.palabrasClave) }}
                 {{ form_row(form.identificadores) }}
+                {{ form_widget(form.beneficiarioNormas) }}
             </div>
 
         </div>
 
         <div class="box box-primary">
             <div class="box-header with-border">
-                <h3 class="box-title">Beneficiarios</h3>
+                <h3 class="box-title">Textos</h3>
             </div>
 
             <div class="box-body">
-                {{ form_widget(form.beneficiarioNormas) }}
+                {{ form_widget(form.texto) }}
             </div>
 
         </div>

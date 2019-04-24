@@ -6,6 +6,7 @@ use App\Entity\Descriptor;
 use App\Entity\Identificador;
 use App\Entity\Norma;
 use App\Entity\PalabraClave;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -109,6 +110,10 @@ class NormaType extends AbstractType
                 'by_reference' => false,
                 'label' => 'Beneficiarios'
             ])
+	        ->add('texto', CKEditorType::class, [
+		        'label' => 'Texto',
+		        'config' => [ 'uiColor' => '#ffffff' ]
+	        ])
             ->add('activo');
     }
 

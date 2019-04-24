@@ -13,6 +13,7 @@ framework:
 
     #esi: true
     #fragments: true
+    translator: { fallbacks: ['es'] }
     php_errors:
         log: true
 

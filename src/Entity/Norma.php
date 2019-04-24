@@ -7,10 +7,12 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\NormaRepository")
  * @Vich\Uploadable
+ * @Gedmo\Loggable(logEntryClass="Gedmo\Loggable\Entity\LogEntry")
  */
 class Norma extends BaseClass
 {
@@ -122,6 +124,12 @@ class Norma extends BaseClass
      * @ORM\ManyToOne(targetEntity="App\Entity\BoletinOficialMunicipal", inversedBy="normas")
      */
     private $boletinOficialMunicipal;
+
+    /**
+     * @Gedmo\Versioned
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $texto;
 
     public function __construct()
     {
@@ -475,6 +483,18 @@ class Norma extends BaseClass
     public function setBoletinOficialMunicipal(?BoletinOficialMunicipal $boletinOficialMunicipal): self
     {
         $this->boletinOficialMunicipal = $boletinOficialMunicipal;
+
+        return $this;
+    }
+
+    public function getTexto(): ?string
+    {
+        return $this->texto;
+    }
+
+    public function setTexto(?string $texto): self
+    {
+        $this->texto = $texto;
 
         return $this;
     }
