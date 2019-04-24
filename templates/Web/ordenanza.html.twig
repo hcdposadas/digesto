@@ -12,7 +12,8 @@
         a {
             text-decoration: none;
         }
-        .dl-horizontal dt{
+
+        .dl-horizontal dt {
             white-space: pre-line;
         }
     </style>
@@ -106,9 +107,19 @@
                     <div class="well text-center">Textos de la Ordenanza</div>
                     <div class="row">
                         <div class="col-md-12">
-                            {% for anexo in norma %}
-                                <a href="#">{{ anexo.titulo }} <i class="fa fa-download"></i></a>
-                            {% endfor %}
+                            <ul>
+                                {% for anexo in norma.anexos %}
+                                    <li>
+                                        <a href="{{ asset('uploads/anexos_normas/' ~ anexo.archivo) }}">
+                                            {% if anexo.titulo %}
+                                                {{ anexo.titulo }}
+                                            {% else  %}
+                                                ANEXO {{ anexo.orden }}
+                                            {% endif %}
+                                            <i class="fa fa-download"></i></a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
 
                         </div>
                     </div>
