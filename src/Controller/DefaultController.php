@@ -57,7 +57,6 @@ class DefaultController extends AbstractController
 
         if ($form->isSubmitted()) {
             $data = $form->getData();
-            dump($data);
 
             $em = $this->getDoctrine();
             $resultados = $em->getRepository(Norma::class)->buscarNormas($data);
