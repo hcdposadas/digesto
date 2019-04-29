@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Identificadores {% endblock %}
+
+{% block body %}
+    <div class="row mb-3">
+        <div class="col-xs-12">
+            <a class="btn btn-primary" href="{{ path('identificador_new') }}">Nuevo identificador</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Listado de Identificadores</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+
+
+                    <table id="tabla-identificador" class="table table-bordered table-striped">
+
+
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nombre</th>
+                            <th>Tipo</th>
+                            <th>Activo</th>
+                            <th>Fecha Creacion</th>
+                            <th>Fecha Actualizacion</th>
+                            <th>acciones</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for identificador in identificadors %}
+                            <tr>
+                                <td>{{ identificador.id }}</td>
+                                <td>{{ identificador.nombre }}</td>
+                                <td>{{ identificador.tipoIdentificador }}</td>
+                                <td>{{ identificador.activo ? 'Si' : 'No' }}</td>
+                                <td>{{ identificador.fechaCreacion ? identificador.fechaCreacion|date('Y-m-d H:i:s') : '' }}</td>
+                                <td>{{ identificador.fechaActualizacion ? identificador.fechaActualizacion|date('Y-m-d H:i:s') : '' }}</td>
+                                <td>
+                                    <a class="btn btn-default btn-icon"
+                                       href="{{ path('identificador_show', {'id': identificador.id}) }}"><i
+                                                class="fa fa-eye"></i></a>
+                                    <a class="btn btn-default btn-icon"
+                                       href="{{ path('identificador_edit', {'id': identificador.id}) }}"><i
+                                                class="fa fa-edit"></i></a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="6">no records found</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row text-center">
+        <div class="col-xs-12">
+            {{ knp_pagination_render(identificadors) }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <a class="btn btn-primary" href="{{ path('identificador_new') }}">Nuevo identificador</a>
+        </div>
+    </div>
+{% endblock %}

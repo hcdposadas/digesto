@@ -1,0 +1,46 @@
+{% extends '/Web/layout.html.twig' %}
+
+{% block title %}{{ titulo }} -{% endblock title %}
+
+{% block content %}
+    <div class="page-header text-center">
+        <h1>{{ titulo }}</h1>
+    </div>
+    <div class="container">
+        <section>
+            <div class="row">
+
+                {% for boletin in boletines %}
+
+                    <div class="col-sm-3">
+
+                        <a class="panel panel-default panel-icon panel-primary" target="_blank"
+                           href="{{ asset('uploads/documentos/boletin_oficial_municipal_documentos/' ~ boletin.numero) }}">
+                              
+                            <div class="panel-heading hidden-xs"><i class="fa fa-file"></i></div>
+                              
+                            <div class="panel-body">
+                                    <h3>
+                                    <span class="visible-xs-inline">
+                                        <i class="fa fa-file text-secondary"></i>
+                                    </span>{{ boletin.numero }}
+                                </h3>
+                                    <p class="text-muted">{{ boletin.fechaPublicacion | date('d/m/Y') }}</p>
+                                  
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+    </div>
+{% endblock content %}
+
+
+
+
+
+
+
+
+

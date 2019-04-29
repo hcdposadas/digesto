@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editar Boletin Oficial Municipal{% endblock %}
+
+{% block body %}
+    <h1>Editar Boletin Oficial Municipal</h1>
+
+    {{ include('boletin_oficial_municipal/_form.html.twig', {'button_label': 'Guardar'}) }}
+
+    <a class="btn btn-default" href="{{ path('boletin_oficial_municipal_index') }}">Volver</a>
+{% endblock %}

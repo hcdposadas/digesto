@@ -19,11 +19,6 @@
         <section class="mb-1">
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
-                    {#                    <div class="row text-center">#}
-                    {#                        <div class="col-sm-12">#}
-                    {#                            <h2 class="m-b-3">{{ titulo }}</h2>#}
-                    {#                        </div>#}
-                    {#                    </div>#}
 
                     <div>
                         {{ form_start(form) }}
@@ -53,7 +48,7 @@
                         <div class="row">
                             {% for norma in row if norma.rama%}
                                 <div class="col-sm-6">
-                                    <a class="panel panel-default"
+                                    <a class="panel panel-default {% if norma.vigenteNoConsolidada %}bg-danger{% endif %}"
                                        href="{{ path('ver_ordenanza', { 'id': norma.id}) }}">
                                         <div class="panel-body">
                                             <div class="media">
@@ -62,7 +57,7 @@
                                                 </div>
                                                 <div class="media-body">
                                                     <h3>{{ norma.rama.titulo }} {{ norma.rama.numeroRomano }}
-                                                        - {{ norma.numero }}</h3>
+                                                        - {{ norma.numero }} {% if norma.numeroAnterior %} - (Nº Anterior: {{ norma.numeroAnterior }}/{{ norma.fechaSancion | date('y') }}) {% endif %}</h3>
                                                     <p class="text-muted">{{ norma.temaGeneral }}</p>
                                                 </div>
                                             </div>

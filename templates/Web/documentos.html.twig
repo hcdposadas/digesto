@@ -23,24 +23,27 @@
         <section>
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
-                    <div class="well text-center">Códigos</div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <a href="#">CARTA ORGÁNICA MUNICIPAL DE POSADAS <i class="fa fa-download"></i></a>
+                    {% for documento in documentos %}
+                        <div class="well text-center">{{ documento.grupo }}</div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <ul>
+                                    <li>
+                                        <a href="{{ asset('uploads/documentos/documentos_web/' ~ documento.nombreDocumento) }}">{{ documento.titulo }}
+                                            <i class="fa fa-download"></i></a>
+                                    </li>
+                                    {% for anexo in documento.anexos %}
+                                        <li>
+                                            <a href="{{ asset('uploads/documentos/documentos_anexos_web/' ~ anexo.nombreDocumentoAnexo) }}">{{ anexo.titulo }}
+                                                <i class="fa fa-download"></i></a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
                         </div>
-                    </div>
-                    <div class="well text-center">Carta Orgánica</div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <a href="#">CARTA ORGÁNICA MUNICIPAL DE POSADAS <i class="fa fa-download"></i></a>
-                        </div>
-                    </div>
-                    <div class="well text-center">Ordenanza de consolidación</div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <a href="#">CARTA ORGÁNICA MUNICIPAL DE POSADAS <i class="fa fa-download"></i></a>
-                        </div>
-                    </div>
+
+                    {% endfor %}
+
                 </div>
             </div>
         </section>

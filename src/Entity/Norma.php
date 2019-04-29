@@ -49,7 +49,7 @@ class Norma extends BaseClass
     private $observacion;
 
     /**
-     * @Vich\UploadableField(mapping="normas", fileNameProperty="id")
+     * @Vich\UploadableField(mapping="textos_definitivos_normas", fileNameProperty="numero")
      * @var File
      */
     private $archivoNorma;
@@ -130,6 +130,13 @@ class Norma extends BaseClass
      * @ORM\Column(type="text", nullable=true)
      */
     private $texto;
+
+	/**
+	 * @var bool
+	 *
+	 * @ORM\Column(name="vigente_no_consolidada", type="boolean", nullable=true)
+	 */
+	protected $vigenteNoConsolidada;
 
     public function __construct()
     {
@@ -498,6 +505,20 @@ class Norma extends BaseClass
 
         return $this;
     }
+
+	/**
+	 * @return bool
+	 */
+	public function isVigenteNoConsolidada() {
+		return $this->vigenteNoConsolidada;
+	}
+
+	/**
+	 * @param bool $vigenteNoConsolidada
+	 */
+	public function setVigenteNoConsolidada( bool $vigenteNoConsolidada ): void {
+		$this->vigenteNoConsolidada = $vigenteNoConsolidada;
+	}
 
 
 }

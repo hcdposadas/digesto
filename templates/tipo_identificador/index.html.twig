@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Listado de Tipo Identificador{% endblock %}
+
+{% block body %}
+    <div class="row mb-2">
+        <div class="col-xs-12">
+            <a class="btn btn-primary" href="{{ path('tipo_identificador_new') }}">Nuevo Tipo Identificador</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Listado de Tipos de identificador</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+
+
+                    <table id="tabla-tipoidentificador" class="table table-bordered table-striped">
+
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nombre</th>
+                            <th>Activo</th>
+                            <th>Fecha Creacion</th>
+                            <th>Fecha Actualizacion</th>
+                            <th>actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for tipo_identificador in tipo_identificadors %}
+                            <tr>
+                                <td>{{ tipo_identificador.id }}</td>
+                                <td>{{ tipo_identificador.nombre }}</td>
+                                <td>{{ tipo_identificador.activo ? 'Si' : 'No' }}</td>
+                                <td>{{ tipo_identificador.fechaCreacion ? tipo_identificador.fechaCreacion|date('Y-m-d H:i:s') : '' }}</td>
+                                <td>{{ tipo_identificador.fechaActualizacion ? tipo_identificador.fechaActualizacion|date('Y-m-d H:i:s') : '' }}</td>
+                                <td>
+                                    <a class="btn btn-default btn-icon" href="{{ path('tipo_identificador_show', {'id': tipo_identificador.id}) }}"><i class="fa fa-eye"></i></a>
+                                    <a class="btn btn-default btn-icon" href="{{ path('tipo_identificador_edit', {'id': tipo_identificador.id}) }}"><i class="fa fa-edit"></i></a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="6">no records found</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row text-center">
+        <div class="col-xs-12">
+            {{ knp_pagination_render(tipo_identificadors) }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <a class="btn btn-primary" href="{{ path('tipo_identificador_new') }}">Nuevo Tipo Identificador</a>
+        </div>
+    </div>
+{% endblock %}

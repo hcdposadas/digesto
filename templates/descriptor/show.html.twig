@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Descriptor{% endblock %}
+
+{% block body %}
+    <h1>Descriptor</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ descriptor.id }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ descriptor.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Activo</th>
+                <td>{{ descriptor.activo ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>FechaCreacion</th>
+                <td>{{ descriptor.fechaCreacion ? descriptor.fechaCreacion|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>FechaActualizacion</th>
+                <td>{{ descriptor.fechaActualizacion ? descriptor.fechaActualizacion|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('descriptor_index') }}">back to list</a>
+
+    <a href="{{ path('descriptor_edit', {'id': descriptor.id}) }}">edit</a>
+
+
+{% endblock %}

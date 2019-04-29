@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Boletin Oficial Municipal{% endblock %}
+
+{% block body %}
+    <div class="row mb-3">
+        <div class="col-xs-12">
+            <a class="btn btn-primary" href="{{ path('boletin_oficial_municipal_new') }}">Nuevo Boletin Oficial</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Listado de Boletin Oficial Municipal</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+
+
+                    <table id="tabla-boletin" class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Numero</th>
+                            <th>Fecha Publicacion</th>
+                            <th>Paginas</th>
+                            <th>Activo</th>
+                            <th>Fecha Creacion</th>
+                            <th>Fecha Actualizacion</th>
+                            <th>acciones</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for boletin_oficial_municipal in boletin_oficial_municipals %}
+                            <tr>
+                                <td>{{ boletin_oficial_municipal.id }}</td>
+                                <td>{{ boletin_oficial_municipal.numero }}</td>
+                                <td>{{ boletin_oficial_municipal.fechaPublicacion ? boletin_oficial_municipal.fechaPublicacion|date('Y-m-d') : '' }}</td>
+                                <td>{{ boletin_oficial_municipal.paginas }}</td>
+                                <td>{{ boletin_oficial_municipal.activo ? 'Si' : 'No' }}</td>
+                                <td>{{ boletin_oficial_municipal.fechaCreacion ? boletin_oficial_municipal.fechaCreacion|date('Y-m-d H:i:s') : '' }}</td>
+                                <td>{{ boletin_oficial_municipal.fechaActualizacion ? boletin_oficial_municipal.fechaActualizacion|date('Y-m-d H:i:s') : '' }}</td>
+                                <td>
+                                    <a class="btn btn-default btn-icon" href="{{ path('boletin_oficial_municipal_show', {'id': boletin_oficial_municipal.id}) }}"><i class="fa fa-eye"></i></a>
+                                    <a class="btn btn-default btn-icon" href="{{ path('boletin_oficial_municipal_edit', {'id': boletin_oficial_municipal.id}) }}"><i class="fa fa-edit"></i></a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="8">no records found</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row text-center">
+        <div class="col-xs-12">
+            {{ knp_pagination_render(boletin_oficial_municipals) }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <a class="btn btn-primary" href="{{ path('boletin_oficial_municipal_new') }}">Nuevo Boletin Oficial</a>
+        </div>
+    </div>
+{% endblock %}

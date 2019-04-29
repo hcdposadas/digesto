@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Identificador{% endblock %}
+
+{% block body %}
+    <h1>Create new Identificador</h1>
+
+    {{ include('identificador/_form.html.twig') }}
+
+    <a class="btn btn-default" href="{{ path('identificador_index') }}">Volver</a>
+{% endblock %}

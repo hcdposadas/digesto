@@ -28,15 +28,20 @@ class WebDigestoDocumentoAnexo extends BaseClass {
 	// ... files
 
 	/**
-	 * @Vich\UploadableField(mapping="documentos_anexos_web", fileNameProperty="titulo")
+	 * @Vich\UploadableField(mapping="documentos_anexos_web", fileNameProperty="nombreDocumentoAnexo")
 	 * @var File
 	 */
 	private $archivoDocumentoAnexo;
 
 	/**
-	 * @ORM\OneToMany(targetEntity="App\Entity\WebDigestoDocumento", mappedBy="webDigestoDocumentoAnexo")
+	 * @ORM\ManyToOne(targetEntity="App\Entity\WebDigestoDocumento", inversedBy="anexos")
 	 */
-	private $documento;
+	private $webDigestoDocumento;
+
+	/**
+	 * @ORM\Column(type="string", length=255, nullable=true)
+	 */
+	private $nombreDocumentoAnexo;
 
 	public function __construct() {
 		$this->documento = new ArrayCollection();
@@ -73,30 +78,22 @@ class WebDigestoDocumentoAnexo extends BaseClass {
 		return $this;
 	}
 
-	/**
-	 * @return Collection|WebDigestoDocumento[]
-	 */
-	public function getDocumento(): Collection {
-		return $this->documento;
+	public function getWebDigestoDocumento(): ?WebDigestoDocumento {
+		return $this->webDigestoDocumento;
 	}
 
-	public function addDocumento( WebDigestoDocumento $documento ): self {
-		if ( ! $this->documento->contains( $documento ) ) {
-			$this->documento[] = $documento;
-			$documento->setWebDigestoDocumentoAnexo( $this );
-		}
+	public function setWebDigestoDocumento( ?WebDigestoDocumento $webDigestoDocumento ): self {
+		$this->webDigestoDocumento = $webDigestoDocumento;
 
 		return $this;
 	}
 
-	public function removeDocumento( WebDigestoDocumento $documento ): self {
-		if ( $this->documento->contains( $documento ) ) {
-			$this->documento->removeElement( $documento );
-			// set the owning side to null (unless already changed)
-			if ( $documento->getWebDigestoDocumentoAnexo() === $this ) {
-				$documento->setWebDigestoDocumentoAnexo( null );
-			}
-		}
+	public function getNombreDocumentoAnexo(): ?string {
+		return $this->nombreDocumentoAnexo;
+	}
+
+	public function setNombreDocumentoAnexo( ?string $nombreDocumentoAnexo ): self {
+		$this->nombreDocumentoAnexo = $nombreDocumentoAnexo;
 
 		return $this;
 	}

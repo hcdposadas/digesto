@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit WebDigestoDocumentoAnexo{% endblock %}
+
+{% block body %}
+    <h1>Edit WebDigestoDocumentoAnexo</h1>
+
+    {{ include('web_digesto_documento_anexo/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('web_digesto_documento_anexo_index') }}">back to list</a>
+
+
+{% endblock %}

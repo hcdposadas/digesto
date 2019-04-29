@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nuevo Documento web{% endblock %}
+
+{% block body %}
+    <h1>Nuevo Documento web</h1>
+
+    {{ include('web_digesto_documento/_form.html.twig') }}
+
+    <a class="btn btn-default" href="{{ path('web_digesto_documento_index') }}">Volver</a>
+
+{% endblock %}

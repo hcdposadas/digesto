@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PalabraClave{% endblock %}
+
+{% block body %}
+    <h1>PalabraClave</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ palabra_clave.id }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ palabra_clave.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Activo</th>
+                <td>{{ palabra_clave.activo ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>FechaCreacion</th>
+                <td>{{ palabra_clave.fechaCreacion ? palabra_clave.fechaCreacion|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>FechaActualizacion</th>
+                <td>{{ palabra_clave.fechaActualizacion ? palabra_clave.fechaActualizacion|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('palabra_clave_index') }}">back to list</a>
+
+    <a href="{{ path('palabra_clave_edit', {'id': palabra_clave.id}) }}">edit</a>
+
+
+{% endblock %}

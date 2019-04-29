@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}WebDigestoDocumentoAnexo{% endblock %}
+
+{% block body %}
+    <h1>WebDigestoDocumentoAnexo</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ web_digesto_documento_anexo.id }}</td>
+            </tr>
+            <tr>
+                <th>Titulo</th>
+                <td>{{ web_digesto_documento_anexo.titulo }}</td>
+            </tr>
+            <tr>
+                <th>Activo</th>
+                <td>{{ web_digesto_documento_anexo.activo ? 'Si' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>FechaCreacion</th>
+                <td>{{ web_digesto_documento_anexo.fechaCreacion ? web_digesto_documento_anexo.fechaCreacion|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>FechaActualizacion</th>
+                <td>{{ web_digesto_documento_anexo.fechaActualizacion ? web_digesto_documento_anexo.fechaActualizacion|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('web_digesto_documento_anexo_index') }}">back to list</a>
+
+    <a href="{{ path('web_digesto_documento_anexo_edit', {'id': web_digesto_documento_anexo.id}) }}">edit</a>
+
+
+{% endblock %}

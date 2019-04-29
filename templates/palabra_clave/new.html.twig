@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nueva Palabra Clave{% endblock %}
+
+{% block body %}
+    <h1>Crear Nueva Palabra Clave</h1>
+
+    {{ include('palabra_clave/_form.html.twig') }}
+
+    <a class="btn btn-default" href="{{ path('palabra_clave_index') }}">Volver</a>
+{% endblock %}

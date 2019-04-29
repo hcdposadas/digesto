@@ -4,6 +4,12 @@ vich_uploader:
         normas:
             uri_prefix: '%app.path.normas_documentos%'
             upload_destination: '%kernel.project_dir%/public%app.path.normas_documentos%'
+        textos_normas:
+            uri_prefix: '%app.path.textos_normas%'
+            upload_destination: '%kernel.project_dir%/public%app.path.textos_normas%'
+        textos_definitivos_normas:
+            uri_prefix: '%app.path.textos_definitivos_normas%'
+            upload_destination: '%kernel.project_dir%/public%app.path.textos_definitivos_normas%'
         anexos:
             uri_prefix: '%app.path.anexos_documentos%'
             upload_destination: '%kernel.project_dir%/public%app.path.anexos_documentos%'
@@ -13,7 +19,9 @@ vich_uploader:
         documentos_web:
             uri_prefix: '%app.path.documentos_web%'
             upload_destination: '%kernel.project_dir%/public%app.path.documentos_web%'
+            namer: Vich\UploaderBundle\Naming\OrignameNamer
         documentos_anexos_web:
             uri_prefix: '%app.path.documentos_anexos_web%'
             upload_destination: '%kernel.project_dir%/public%app.path.documentos_anexos_web%'
+            namer: Vich\UploaderBundle\Naming\OrignameNamer
 

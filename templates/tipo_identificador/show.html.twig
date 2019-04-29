@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}TipoIdentificador{% endblock %}
+
+{% block body %}
+    <h1>TipoIdentificador</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ tipo_identificador.id }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ tipo_identificador.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Activo</th>
+                <td>{{ tipo_identificador.activo ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>FechaCreacion</th>
+                <td>{{ tipo_identificador.fechaCreacion ? tipo_identificador.fechaCreacion|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>FechaActualizacion</th>
+                <td>{{ tipo_identificador.fechaActualizacion ? tipo_identificador.fechaActualizacion|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('tipo_identificador_index') }}">back to list</a>
+
+    <a href="{{ path('tipo_identificador_edit', {'id': tipo_identificador.id}) }}">edit</a>
+
+
+{% endblock %}

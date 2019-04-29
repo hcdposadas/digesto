@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editar Descriptor{% endblock %}
+
+{% block body %}
+    <h1>Editar Descriptor</h1>
+
+    {{ include('descriptor/_form.html.twig', {'button_label': 'Guardar'}) }}
+
+    <a class="btn btn-default" href="{{ path('descriptor_index') }}">Volver</a>
+
+
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}BoletinOficialMunicipal{% endblock %}
+
+{% block body %}
+    <h1>BoletinOficialMunicipal</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ boletin_oficial_municipal.id }}</td>
+            </tr>
+            <tr>
+                <th>Numero</th>
+                <td>{{ boletin_oficial_municipal.numero }}</td>
+            </tr>
+            <tr>
+                <th>FechaPublicacion</th>
+                <td>{{ boletin_oficial_municipal.fechaPublicacion ? boletin_oficial_municipal.fechaPublicacion|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Paginas</th>
+                <td>{{ boletin_oficial_municipal.paginas }}</td>
+            </tr>
+            <tr>
+                <th>Activo</th>
+                <td>{{ boletin_oficial_municipal.activo ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>FechaCreacion</th>
+                <td>{{ boletin_oficial_municipal.fechaCreacion ? boletin_oficial_municipal.fechaCreacion|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>FechaActualizacion</th>
+                <td>{{ boletin_oficial_municipal.fechaActualizacion ? boletin_oficial_municipal.fechaActualizacion|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('boletin_oficial_municipal_index') }}">back to list</a>
+
+    <a href="{{ path('boletin_oficial_municipal_edit', {'id': boletin_oficial_municipal.id}) }}">edit</a>
+
+
+{% endblock %}

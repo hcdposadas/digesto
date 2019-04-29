@@ -17,6 +17,7 @@
                 </div>
 
                 {{ form_row(form.ramaVigenteNoConsolidada) }}
+                {{ form_row(form.vigenteNoConsolidada) }}
 
                 <div class="row">
                     <div class="col-md-6">
@@ -79,7 +80,8 @@
             </div>
 
             <div class="box-body">
-                {{ form_widget(form.texto) }}
+{#                {{ form_widget(form.texto) }}#}
+                {{ form_widget(form.archivoNorma) }}
             </div>
 
         </div>
@@ -103,5 +105,7 @@
 
 <button class="btn btn-primary">{{ button_label|default('Guardar') }}</button>
 
-{{ form_end(form) }}
+<div class="hidden">
+    {{ form_end(form) }}
+</div>
 

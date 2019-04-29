@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Identificador{% endblock %}
+
+{% block body %}
+    <h1>Identificador</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ identificador.id }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ identificador.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Activo</th>
+                <td>{{ identificador.activo ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>FechaCreacion</th>
+                <td>{{ identificador.fechaCreacion ? identificador.fechaCreacion|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>FechaActualizacion</th>
+                <td>{{ identificador.fechaActualizacion ? identificador.fechaActualizacion|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('identificador_index') }}">back to list</a>
+
+    <a href="{{ path('identificador_edit', {'id': identificador.id}) }}">edit</a>
+
+
+{% endblock %}

@@ -40,11 +40,11 @@ class Builder {
 			'MENU PRINCIPAL'
 		)->setAttribute( 'class', 'header' );
 
-        $menu->addChild(
-            'Ver Web',['route'=>'public']
-        )->setAttribute( 'class', '' )
-         ->setExtra( 'icon', 'fa fa-globe' )
-        ;
+		$menu->addChild(
+			'Ver Web',
+			[ 'route' => 'public' ]
+		)->setAttribute( 'class', '' )
+		     ->setExtra( 'icon', 'fa fa-globe' );
 
 		if ( $this->authorizationChecker->isGranted( 'ROLE_USER' ) ) {
 
@@ -61,7 +61,7 @@ class Builder {
 			     ->setExtra( 'icon', 'fa fa-folder-open-o' )
 			     ->setAttribute( 'class', 'treeview' );
 
-            if ( $this->authorizationChecker->isGranted( 'ROLE_DIGESTO_ADMIN' ) ) {
+			if ( $this->authorizationChecker->isGranted( 'ROLE_DIGESTO_ADMIN' ) ) {
 
 				$menu[ $keyAdministracion ]
 					->addChild(
@@ -84,9 +84,51 @@ class Builder {
 			if ( $this->authorizationChecker->isGranted( 'ROLE_DIGESTO' ) ) {
 				$menu[ $keyAdministracion ]
 					->addChild(
+						'Web Documentos',
+						array(
+							'route' => 'web_digesto_documento_index',
+						)
+					);
+				$menu[ $keyAdministracion ]
+					->addChild(
 						'Normas',
 						array(
 							'route' => 'norma_index',
+						)
+					);
+				$menu[ $keyAdministracion ]
+					->addChild(
+						'Boletín Oficial',
+						array(
+							'route' => 'boletin_oficial_municipal_index',
+						)
+					);
+				$menu[ $keyAdministracion ]
+					->addChild(
+						'Descriptores',
+						array(
+							'route' => 'descriptor_index',
+						)
+					);
+				$menu[ $keyAdministracion ]
+					->addChild(
+						'Tipo Identificador',
+						array(
+							'route' => 'tipo_identificador_index',
+						)
+					);
+				$menu[ $keyAdministracion ]
+					->addChild(
+						'Identificadores',
+						array(
+							'route' => 'identificador_index',
+						)
+					);
+				$menu[ $keyAdministracion ]
+					->addChild(
+						'Palabras Clave',
+						array(
+							'route' => 'palabra_clave_index',
 						)
 					);
 

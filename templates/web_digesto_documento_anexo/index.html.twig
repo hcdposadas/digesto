@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}WebDigestoDocumentoAnexo index{% endblock %}
+
+{% block body %}
+    <h1>WebDigestoDocumentoAnexo index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titulo</th>
+                <th>Activo</th>
+                <th>FechaCreacion</th>
+                <th>FechaActualizacion</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for web_digesto_documento_anexo in web_digesto_documento_anexos %}
+            <tr>
+                <td>{{ web_digesto_documento_anexo.id }}</td>
+                <td>{{ web_digesto_documento_anexo.titulo }}</td>
+                <td>{{ web_digesto_documento_anexo.activo ? 'Yes' : 'No' }}</td>
+                <td>{{ web_digesto_documento_anexo.fechaCreacion ? web_digesto_documento_anexo.fechaCreacion|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ web_digesto_documento_anexo.fechaActualizacion ? web_digesto_documento_anexo.fechaActualizacion|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('web_digesto_documento_anexo_show', {'id': web_digesto_documento_anexo.id}) }}">show</a>
+                    <a href="{{ path('web_digesto_documento_anexo_edit', {'id': web_digesto_documento_anexo.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('web_digesto_documento_anexo_new') }}">Create new</a>
+{% endblock %}

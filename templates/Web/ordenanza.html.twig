@@ -26,6 +26,13 @@
     <div class="container">
         <section>
             <div class="row">
+                {% if is_granted("ROLE_ADMIN") or is_granted("ROLE_USER") %}
+                    <div class="col-md-8 col-md-offset-2 text-right">
+                        <a class="btn btn-icon" href="{{ path('norma_edit', {id: norma.id}) }}">
+                            <i class="fa fa-edit"></i> Editar Norma
+                        </a>
+                    </div>
+                {% endif %}
                 <div class="col-md-8 col-md-offset-2">
                     <div class="well text-center">Datos de la Ordenanza</div>
                     <div class="row">
@@ -36,7 +43,7 @@
                                 <dd>{{ norma.tipoOrdenanza }}</dd>
 
                                 <dt>Rama</dt>
-                                <dd>{{ norma.rama }}</dd>
+                                <dd>{% if norma.rama %}{{ norma.rama }}{% endif %}</dd>
 
                                 <dt>Número</dt>
                                 <dd>{{ norma.numero }}</dd>
@@ -47,7 +54,10 @@
                                 </dd>
 
                                 <dt>Fecha de Sanción</dt>
-                                <dd>{{ norma.fechaSancion | date('d/M/Y') }}</dd>
+                                <dd>{{ norma.fechaSancion | date('d/m/Y') }}</dd>
+
+                                <dt>Observación</dt>
+                                <dd>{{ norma.observacion }}</dd>
                             </dl>
 
 
@@ -70,7 +80,7 @@
                                 <dt>Fecha de Publicación del Boletín</dt>
                                 <dd>
                                     {% if norma.boletinOficialMunicipal %}
-                                        {{ norma.boletinOficialMunicipal.fechaPublicacion | date('d/M/Y') }}
+                                        {{ norma.boletinOficialMunicipal.fechaPublicacion | date('d/m/Y') }}
                                     {% endif %}
                                 </dd>
 
@@ -95,7 +105,7 @@
                                 </dd>
 
                                 <dt>Fecha de Promulgación</dt>
-                                <dd>{{ norma.fechaPromulgacion| date('d/M/Y') }}</dd>
+                                <dd>{{ norma.fechaPromulgacion| date('d/m/Y') }}</dd>
 
                                 <dt>Tema General</dt>
                                 <dd>
@@ -108,13 +118,22 @@
                     <div class="row">
                         <div class="col-md-12">
                             <ul>
+                                <li>
+                                    <a href="{{ asset('uploads/anexos_normas/' ~ norma.numero) }}">
+                                        Texto <i class="fa fa-download"></i>
+                                    </a>
+                                </li>
                                 {% for anexo in norma.anexos %}
                                     <li>
                                         <a href="{{ asset('uploads/anexos_normas/' ~ anexo.archivo) }}">
-                                            {% if anexo.titulo %}
-                                                {{ anexo.titulo }}
-                                            {% else  %}
-                                                ANEXO {{ anexo.orden }}
+                                            {% if norma.anexos.count <=1 %}
+                                                ANEXO ÚNICO
+                                            {% else %}
+                                                {% if anexo.titulo %}
+                                                    {{ anexo.titulo }}
+                                                {% else %}
+                                                    ANEXO {{ anexo.orden + 1 }}
+                                                {% endif %}
                                             {% endif %}
                                             <i class="fa fa-download"></i></a>
                                     </li>
