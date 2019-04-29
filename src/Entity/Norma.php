@@ -49,7 +49,7 @@ class Norma extends BaseClass
     private $observacion;
 
     /**
-     * @Vich\UploadableField(mapping="textos_definitivos_normas", fileNameProperty="numero")
+     * @Vich\UploadableField(mapping="textos_definitivos_normas", fileNameProperty="nombreArchivo")
      * @var File
      */
     private $archivoNorma;
@@ -137,6 +137,11 @@ class Norma extends BaseClass
 	 * @ORM\Column(name="vigente_no_consolidada", type="boolean", nullable=true)
 	 */
 	protected $vigenteNoConsolidada;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $nombreArchivo;
 
     public function __construct()
     {
@@ -510,15 +515,27 @@ class Norma extends BaseClass
 	 * @return bool
 	 */
 	public function isVigenteNoConsolidada() {
-		return $this->vigenteNoConsolidada;
-	}
+         		return $this->vigenteNoConsolidada;
+         	}
 
 	/**
 	 * @param bool $vigenteNoConsolidada
 	 */
 	public function setVigenteNoConsolidada( bool $vigenteNoConsolidada ): void {
-		$this->vigenteNoConsolidada = $vigenteNoConsolidada;
-	}
+         		$this->vigenteNoConsolidada = $vigenteNoConsolidada;
+         	}
+
+    public function getNombreArchivo(): ?string
+    {
+        return $this->nombreArchivo;
+    }
+
+    public function setNombreArchivo(?string $nombreArchivo): self
+    {
+        $this->nombreArchivo = $nombreArchivo;
+
+        return $this;
+    }
 
 
 }

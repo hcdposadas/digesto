@@ -40,7 +40,7 @@ class BoletinOficialMunicipal extends BaseClass
 	// ... files
 
 	/**
-	 * @Vich\UploadableField(mapping="boletin_oficial_municipal", fileNameProperty="numero")
+	 * @Vich\UploadableField(mapping="boletin_oficial_municipal", fileNameProperty="nombreDocumento")
 	 * @var File
 	 */
 	private $archivoBoletin;
@@ -50,9 +50,14 @@ class BoletinOficialMunicipal extends BaseClass
      */
     private $normas;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $nombreDocumento;
+
 	public function __toString(): string {
-		return $this->numero;
-	}
+         		return $this->numero;
+         	}
 
     public function __construct()
     {
@@ -61,22 +66,22 @@ class BoletinOficialMunicipal extends BaseClass
 
 
 	public function setArchivoBoletin(File $file = null)
-                        	{
-                        		$this->archivoBoletin = $file;
-                        
-                        		// VERY IMPORTANT:
-                        		// It is required that at least one field changes if you are using Doctrine,
-                        		// otherwise the event listeners won't be called and the file is lost
-                        		if ($file) {
-                        			// if 'updatedAt' is not defined in your entity, use another property
-                        			$this->fechaActualizacion = new \DateTime('now');
-                        		}
-                        	}
+                                 	{
+                                 		$this->archivoBoletin = $file;
+                                 
+                                 		// VERY IMPORTANT:
+                                 		// It is required that at least one field changes if you are using Doctrine,
+                                 		// otherwise the event listeners won't be called and the file is lost
+                                 		if ($file) {
+                                 			// if 'updatedAt' is not defined in your entity, use another property
+                                 			$this->fechaActualizacion = new \DateTime('now');
+                                 		}
+                                 	}
 
 	public function getArchivoBoletin()
-                        	{
-                        		return $this->archivoBoletin;
-                        	}
+                                 	{
+                                 		return $this->archivoBoletin;
+                                 	}
 
     public function getId(): ?int
     {
@@ -146,6 +151,18 @@ class BoletinOficialMunicipal extends BaseClass
                 $norma->setBoletinOficialMunicipal(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getNombreDocumento(): ?string
+    {
+        return $this->nombreDocumento;
+    }
+
+    public function setNombreDocumento(?string $nombreDocumento): self
+    {
+        $this->nombreDocumento = $nombreDocumento;
 
         return $this;
     }
