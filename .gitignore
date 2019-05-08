@@ -99,3 +99,5 @@ Icon
 !/public/uploads/normas/.gitkeep
 /public/uploads/anexos_normas/*
 !/public/uploads/anexos_normas/.gitkeep
+/public/uploads/textos_definitivos_normas/*
+!/public/uploads/textos_definitivos_normas/.gitkeep

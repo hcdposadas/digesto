@@ -119,13 +119,13 @@
                         <div class="col-md-12">
                             <ul>
                                 <li>
-                                    <a target="_blank" href="{{ asset('uploads/textos_definitivos_normas/' ~ norma.nombreArchivo) }}">
+                                    <a target="_blanks" href="{{ asset('uploads/textos_definitivos_normas/' ~ norma.nombreArchivo) }}">
                                         Texto <i class="fa fa-download"></i>
                                     </a>
                                 </li>
                                 {% for anexo in norma.anexos %}
                                     <li>
-                                        <a target="_blank" href="{{ asset('uploads/anexos_normas/' ~ anexo.archivo) }}">
+                                        <a target="_blanks" href="{{ asset('uploads/anexos_normas/' ~ anexo.archivo) }}">
                                             {% if norma.anexos.count <=1 %}
                                                 ANEXO ÚNICO
                                             {% else %}
