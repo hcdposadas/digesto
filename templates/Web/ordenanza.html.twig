@@ -105,7 +105,11 @@
                                 </dd>
 
                                 <dt>Fecha de Promulgación</dt>
-                                <dd>{{ norma.fechaPromulgacion| date('d/m/Y') }}</dd>
+                                <dd>
+                                    {% if norma.fechaPromulgacion %}
+                                        {{ norma.fechaPromulgacion| date('d/m/Y') }}
+                                    {% endif %}
+                                </dd>
 
                                 <dt>Tema General</dt>
                                 <dd>
