@@ -101,3 +101,5 @@ Icon
 !/public/uploads/anexos_normas/.gitkeep
 /public/uploads/textos_definitivos_normas/*
 !/public/uploads/textos_definitivos_normas/.gitkeep
+/public/uploads/documentos/boletin_oficial_municipal/*
+!/public/uploads/documentos/boletin_oficial_municipal/.gitkeep

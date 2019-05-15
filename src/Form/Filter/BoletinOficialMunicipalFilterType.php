@@ -1,38 +1,32 @@
 <?php
 
-namespace App\Form;
+namespace App\Form\Filter;
 
 use App\Entity\BoletinOficialMunicipal;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\ResetType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Vich\UploaderBundle\Form\Type\VichFileType;
 
-class BoletinOficialMunicipalType extends AbstractType {
+class BoletinOficialMunicipalFilterType extends AbstractType {
 	public function buildForm( FormBuilderInterface $builder, array $options ) {
 		$builder
 			->add( 'numero' )
-			->add( 'fechaPublicacion',
-				DateType::class,
+			->add( 'buscar',
+				SubmitType::class,
 				[
-					'widget'   => 'single_text',
-					'html5'    => true,
-					'required' => false
+					'attr' => [ 'class' => 'btn btn-primary' ]
 				] )
-			->add( 'paginas' )
-			->add( 'archivoBoletin',
-				VichFileType::class,
-				[
-					'required'     => false,
-					'allow_delete' => true,
-				] )
-			->add( 'activo' );
+			->add( 'limpiar', ResetType::class );;
 	}
 
 	public function configureOptions( OptionsResolver $resolver ) {
 		$resolver->setDefaults( [
-			'data_class' => BoletinOficialMunicipal::class,
+
+			'required'   => false
 		] );
 	}
 }

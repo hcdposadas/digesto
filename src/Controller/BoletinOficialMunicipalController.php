@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\BoletinOficialMunicipal;
+use App\Form\Filter\BoletinOficialMunicipalFilterType;
 use App\Form\BoletinOficialMunicipalType;
 use App\Repository\BoletinOficialMunicipalRepository;
 use Knp\Component\Pager\PaginatorInterface;
@@ -24,8 +25,25 @@ class BoletinOficialMunicipalController extends AbstractController {
 		PaginatorInterface $paginator
 	): Response {
 
+		$em = $this->getDoctrine()->getManager();
+
+		$filterForm = $this->createForm( BoletinOficialMunicipalFilterType::class,
+			null,
+			[
+				'method' => 'GET'
+			] );
+
+
+		$filterForm->handleRequest( $request );
+
+		if ( $filterForm->get( 'buscar' )->isClicked() ) {
+			$boletinOficialMunicipals = $em->getRepository( BoletinOficialMunicipal::class )->getQbBuscar( $filterForm->getData() );
+		} else {
+			$boletinOficialMunicipals = $em->getRepository( BoletinOficialMunicipal::class )->search();
+		}
+
 		$boletinOficialMunicipals = $paginator->paginate(
-			$boletinOficialMunicipalRepository->findAll(),
+			$boletinOficialMunicipals,
 			$request->query->getInt( 'page', 1 )/*page number*/,
 			10/*limit per page*/
 		);
@@ -34,6 +52,7 @@ class BoletinOficialMunicipalController extends AbstractController {
 		return $this->render( 'boletin_oficial_municipal/index.html.twig',
 			[
 				'boletin_oficial_municipals' => $boletinOficialMunicipals,
+				'filter_type' => $filterForm->createView()
 			] );
 	}
 
@@ -50,7 +69,15 @@ class BoletinOficialMunicipalController extends AbstractController {
 			$entityManager->persist( $boletinOficialMunicipal );
 			$entityManager->flush();
 
-			return $this->redirectToRoute( 'boletin_oficial_municipal_index' );
+			$this->get( 'session' )->getFlashBag()->add(
+				'success',
+				'Boletin creado correctamente'
+			);
+
+			return $this->redirectToRoute( 'boletin_oficial_municipal_edit',
+				[
+					'id' => $boletinOficialMunicipal->getId(),
+				] );
 		}
 
 		return $this->render( 'boletin_oficial_municipal/new.html.twig',
@@ -80,7 +107,12 @@ class BoletinOficialMunicipalController extends AbstractController {
 		if ( $form->isSubmitted() && $form->isValid() ) {
 			$this->getDoctrine()->getManager()->flush();
 
-			return $this->redirectToRoute( 'boletin_oficial_municipal_index',
+			$this->get( 'session' )->getFlashBag()->add(
+				'success',
+				'Boletin actualizado correctamente'
+			);
+
+			return $this->redirectToRoute( 'boletin_oficial_municipal_edit',
 				[
 					'id' => $boletinOficialMunicipal->getId(),
 				] );

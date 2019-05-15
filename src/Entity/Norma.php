@@ -143,6 +143,11 @@ class Norma extends BaseClass
      */
     private $nombreArchivo;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $numeroBoletin;
+
     public function __construct()
     {
         $this->anexos = new ArrayCollection();
@@ -515,15 +520,15 @@ class Norma extends BaseClass
 	 * @return bool
 	 */
 	public function isVigenteNoConsolidada() {
-         		return $this->vigenteNoConsolidada;
-         	}
+                  		return $this->vigenteNoConsolidada;
+                  	}
 
 	/**
 	 * @param bool $vigenteNoConsolidada
 	 */
 	public function setVigenteNoConsolidada( bool $vigenteNoConsolidada ): void {
-         		$this->vigenteNoConsolidada = $vigenteNoConsolidada;
-         	}
+                  		$this->vigenteNoConsolidada = $vigenteNoConsolidada;
+                  	}
 
     public function getNombreArchivo(): ?string
     {
@@ -533,6 +538,18 @@ class Norma extends BaseClass
     public function setNombreArchivo(?string $nombreArchivo): self
     {
         $this->nombreArchivo = $nombreArchivo;
+
+        return $this;
+    }
+
+    public function getNumeroBoletin(): ?int
+    {
+        return $this->numeroBoletin;
+    }
+
+    public function setNumeroBoletin(?int $numeroBoletin): self
+    {
+        $this->numeroBoletin = $numeroBoletin;
 
         return $this;
     }

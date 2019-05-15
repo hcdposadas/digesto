@@ -46,6 +46,34 @@ class BoletinOficialMunicipalRepository extends ServiceEntityRepository {
 	}
 	*/
 
+	public function getQbAll() {
+		$qb = $this->createQueryBuilder( 'b' );
+
+		return $qb;
+	}
+
+	public function search() {
+		$qb = $this->getQbAll();
+
+		$qb->orderBy( 'b.id', 'ASC' );
+
+		return $qb;
+	}
+
+	public function getQbBuscar( $data ) {
+		$qb = $this->getQbAll();
+
+		if ( $data['numero'] ) {
+			$qb->where( 'b.numero = :numero' )
+			   ->setParameter( 'numero', $data['numero'] );
+		}
+
+
+		$qb->orderBy( 'b.numero', 'ASC' );
+
+		return $qb;
+	}
+
 	public function getAniosBoletines() {
 		return $this->createQueryBuilder( 'b' )
 		            ->select( 'YEAR(b.fechaPublicacion) AS anio' )

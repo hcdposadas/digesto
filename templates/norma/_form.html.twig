@@ -8,12 +8,12 @@
 
             <div class="box-body">
                 <div class="row">
-                <div class="col-md-6">
-                    {{ form_row(form.rama) }}
-                </div>
-                <div class="col-md-6">
-                    {{ form_row(form.numero) }}
-                </div>
+                    <div class="col-md-6">
+                        {{ form_row(form.rama) }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form_row(form.numero) }}
+                    </div>
                 </div>
 
                 {{ form_row(form.ramaVigenteNoConsolidada) }}
@@ -52,7 +52,12 @@
 
             <div class="box-body">
                 {{ form_row(form.tipoBoletin) }}
-                {{ form_row(form.boletinOficialMunicipal) }}
+                <div class="numero-boletin">
+                    {{ form_row(form.numeroBoletin) }}
+                </div>
+                <div class="boletin-oficial">
+                    {{ form_row(form.boletinOficialMunicipal) }}
+                </div>
                 {{ form_row(form.paginaBoletin) }}
             </div>
 
@@ -80,7 +85,7 @@
             </div>
 
             <div class="box-body">
-{#                {{ form_widget(form.texto) }}#}
+                {#                {{ form_widget(form.texto) }}#}
                 {{ form_widget(form.archivoNorma) }}
             </div>
 
@@ -109,3 +114,27 @@
     {{ form_end(form) }}
 </div>
 
+{% block javascripts %}
+    <script>
+        $(document).ready(function () {
+
+            if ($('.tipo-boletin').val() == 2) {
+                $('.numero-boletin').hide()
+                $('.boletin-oficial').show()
+            } else {
+                $('.numero-boletin').show()
+                $('.boletin-oficial').hide()
+            }
+
+            $('.tipo-boletin').change(function () {
+                if ($(this).val() == 2) {
+                    $('.numero-boletin').hide()
+                    $('.boletin-oficial').show()
+                } else {
+                    $('.numero-boletin').show()
+                    $('.boletin-oficial').hide()
+                }
+            })
+        });
+    </script>
+{% endblock %}

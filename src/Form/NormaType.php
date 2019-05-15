@@ -6,10 +6,13 @@ use App\Entity\Descriptor;
 use App\Entity\Identificador;
 use App\Entity\Norma;
 use App\Entity\PalabraClave;
+use App\Entity\TipoBoletin;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use App\Form\BootstrapCollectionType;
@@ -52,6 +55,7 @@ class NormaType extends AbstractType {
 			->add( 'temaGeneral' )
 			->add( 'numero' )
 			->add( 'paginaBoletin' )
+			->add( 'numeroBoletin' )
 			->add( 'observacion' )
 			->add( 'decretoPromulgatorio' )
 			->add( 'fechaPromulgacion',
@@ -62,7 +66,13 @@ class NormaType extends AbstractType {
 					'required' => false
 				] )
 			->add( 'tipoPromulgacion' )
-			->add( 'tipoBoletin' )
+			->add( 'tipoBoletin',
+				EntityType::class,
+				[
+					'class' => TipoBoletin::class,
+					'attr'  => [ 'class' => 'tipo-boletin' ]
+
+				] )
 			->add( 'boletinOficialMunicipal' )
 			->add( 'anexos',
 				BootstrapCollectionType::class,
@@ -129,7 +139,7 @@ class NormaType extends AbstractType {
 				VichFileType::class,
 				[
 					'required'     => false,
-					'allow_delete' => false,
+					'allow_delete' => true,
 					'label'        => 'Texto'
 				] )
 			->add( 'activo' )
