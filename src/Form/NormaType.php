@@ -66,6 +66,8 @@ class NormaType extends AbstractType {
 					'required' => false
 				] )
 			->add( 'tipoPromulgacion' )
+			->add( 'tipoOrdenanza' )
+			->add( 'numeroAnterior' )
 			->add( 'tipoBoletin',
 				EntityType::class,
 				[
