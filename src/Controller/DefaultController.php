@@ -193,7 +193,7 @@ class DefaultController extends AbstractController {
 		$web            = $this->getDoctrine()->getRepository( WebDigestoTexto::class )->findOneBySlug( 'web' );
 		$aniosBoletines = $this->getDoctrine()->getRepository( BoletinOficialMunicipal::class )->getAniosBoletines();
 
-		$titulo = 'Boletines oficales del ' . $anio;
+		$titulo = 'Boletines oficiales del ' . $anio;
 
 
 		$boletines = $this->getDoctrine()->getRepository( BoletinOficialMunicipal::class )->findBoletinesByYear($anio);

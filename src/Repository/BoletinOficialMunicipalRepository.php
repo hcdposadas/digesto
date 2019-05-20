@@ -55,7 +55,7 @@ class BoletinOficialMunicipalRepository extends ServiceEntityRepository {
 	public function search() {
 		$qb = $this->getQbAll();
 
-		$qb->orderBy( 'b.id', 'ASC' );
+		$qb->orderBy( 'b.numero', 'DESC' );
 
 		return $qb;
 	}
@@ -69,7 +69,7 @@ class BoletinOficialMunicipalRepository extends ServiceEntityRepository {
 		}
 
 
-		$qb->orderBy( 'b.numero', 'ASC' );
+		$qb->orderBy( 'b.numero', 'DESC' );
 
 		return $qb;
 	}
@@ -87,7 +87,7 @@ class BoletinOficialMunicipalRepository extends ServiceEntityRepository {
 		return $this->createQueryBuilder( 'b' )
 		            ->where( 'YEAR(b.fechaPublicacion) = :anio' )
 		            ->setParameter( 'anio', $anio )
-		            ->orderBy( 'b.fechaPublicacion', 'DESC' )
+		            ->orderBy( 'b.numero', 'DESC' )
 		            ->getQuery()
 		            ->getResult();
 	}
