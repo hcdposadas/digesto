@@ -74,6 +74,8 @@
                                 <dd>
                                     {% if norma.boletinOficialMunicipal %}
                                         {{ norma.boletinOficialMunicipal.numero }}
+                                    {% else %}
+                                        {{ norma.numeroBoletin }}
                                     {% endif %}
                                 </dd>
 
@@ -81,6 +83,8 @@
                                 <dd>
                                     {% if norma.boletinOficialMunicipal %}
                                         {{ norma.boletinOficialMunicipal.fechaPublicacion | date('d/m/Y') }}
+                                    {% else %}
+                                        {{ norma.fechaPublicacionBoletin | date('d/m/Y') }}
                                     {% endif %}
                                 </dd>
 

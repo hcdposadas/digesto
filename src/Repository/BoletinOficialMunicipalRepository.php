@@ -68,6 +68,11 @@ class BoletinOficialMunicipalRepository extends ServiceEntityRepository {
 			   ->setParameter( 'numero', $data['numero'] );
 		}
 
+		if ( isset( $data['anio'] ) && $data['anio'] ) {
+			$qb->andWhere( 'YEAR(b.fechaPublicacion) = :anio' )
+			   ->setParameter( 'anio', $data['anio'] );
+		}
+
 
 		$qb->orderBy( 'b.numero', 'DESC' );
 

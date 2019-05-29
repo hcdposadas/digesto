@@ -6,6 +6,7 @@ use App\Entity\BoletinOficialMunicipal;
 use App\Entity\Norma;
 use App\Entity\WebDigestoDocumento;
 use App\Entity\WebDigestoTexto;
+use App\Form\BuscarBoletinType;
 use App\Form\BuscarOrdenanzaType;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -189,21 +190,47 @@ class DefaultController extends AbstractController {
 	/**
 	 * @Route("/boletines/{anio}", name="boletines")
 	 */
-	public function boletines( Request $request, $anio ) {
+	public function boletines( Request $request, PaginatorInterface $paginator, $anio ) {
 		$web            = $this->getDoctrine()->getRepository( WebDigestoTexto::class )->findOneBySlug( 'web' );
 		$aniosBoletines = $this->getDoctrine()->getRepository( BoletinOficialMunicipal::class )->getAniosBoletines();
 
 		$titulo = 'Boletines oficiales del ' . $anio;
 
 
-		$boletines = $this->getDoctrine()->getRepository( BoletinOficialMunicipal::class )->findBoletinesByYear($anio);
+		$boletines = $this->getDoctrine()->getRepository( BoletinOficialMunicipal::class )->findBoletinesByYear( $anio );
+
+
+		$form = $this->createForm( BuscarBoletinType::class,
+			[],
+			[
+				'method' => 'GET'
+			] );
+
+		$form->handleRequest( $request );
+
+		if ( $form->isSubmitted() ) {
+			$data = $form->getData();
+
+			$em           = $this->getDoctrine();
+			$data['anio'] = $anio;
+			$boletines    = $em->getRepository( BoletinOficialMunicipal::class )->getQbBuscar( $data );
+
+
+			$boletines = $paginator->paginate(
+				$boletines,
+				$request->query->get( 'page', 1 )/* page number */,
+				10/* limit per page */
+			);
+
+		}
 
 		return $this->render( 'Web/boletines.html.twig',
 			[
 				'web'             => $web,
 				'anios_boletines' => $aniosBoletines,
 				'titulo'          => $titulo,
-				'boletines'       => $boletines
+				'boletines'       => $boletines,
+				'form'            => $form->createView()
 			] );
 	}
 }

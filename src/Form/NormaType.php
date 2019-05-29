@@ -75,6 +75,13 @@ class NormaType extends AbstractType {
 					'attr'  => [ 'class' => 'tipo-boletin' ]
 
 				] )
+			->add( 'fechaPublicacionBoletin',
+				DateType::class,
+				[
+					'widget'   => 'single_text',
+					'html5'    => true,
+					'required' => false
+				] )
 			->add( 'boletinOficialMunicipal' )
 			->add( 'anexos',
 				BootstrapCollectionType::class,
