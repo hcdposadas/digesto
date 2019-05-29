@@ -131,12 +131,12 @@ class NormaType extends AbstractType {
 					'by_reference' => false,
 					'label'        => 'Beneficiarios'
 				] )
-			->add( 'texto',
-				CKEditorType::class,
-				[
-					'label'  => 'Texto',
-					'config' => [ 'uiColor' => '#ffffff' ]
-				] )
+//			->add( 'texto',
+//				CKEditorType::class,
+//				[
+//					'label'  => 'Texto',
+//					'config' => [ 'uiColor' => '#ffffff' ]
+//				] )
 			->add( 'archivoNorma',
 				VichFileType::class,
 				[
@@ -151,6 +151,7 @@ class NormaType extends AbstractType {
 	public function configureOptions( OptionsResolver $resolver ) {
 		$resolver->setDefaults( [
 			'data_class'      => Norma::class,
+			'csrf_protection' => false,
 			'descriptores'    => [],
 			'identificadores' => [],
 			'palabrasClave'   => [],
