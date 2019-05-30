@@ -131,7 +131,7 @@
                                         Texto <i class="fa fa-download"></i>
                                     </a>
                                 </li>
-                                {% for anexo in norma.anexos %}
+                                {% for anexo in norma.anexos | sort %}
                                     <li>
                                         <a target="_blanks" href="{{ asset('uploads/anexos_normas/' ~ anexo.archivo) }}">
                                             {% if norma.anexos.count <=1 %}
