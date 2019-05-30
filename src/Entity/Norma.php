@@ -87,6 +87,7 @@ class Norma extends BaseClass
 
     /**
      * @ORM\OneToMany(targetEntity="AnexoNorma", mappedBy="norma", cascade={"persist"})
+     * @ORM\OrderBy({"id" = "ASC", "orden"= "ASC" })
      */
     private $anexos;
 
