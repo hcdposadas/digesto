@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -13,6 +14,14 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Entity(repositoryClass="App\Repository\NormaRepository")
  * @Vich\Uploadable
  * @Gedmo\Loggable(logEntryClass="Gedmo\Loggable\Entity\LogEntry")
+ * @ApiResource(
+ *   itemOperations={
+ *      "get"={"method"="GET"}
+ *   },
+ *   collectionOperations={
+ *      "get"={"method"="GET"}
+ *   }
+ * )
  */
 class Norma extends BaseClass
 {

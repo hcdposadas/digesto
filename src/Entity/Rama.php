@@ -2,10 +2,19 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\RamaRepository")
+ * @ApiResource(
+ *   itemOperations={
+ *      "get"={"method"="GET"}
+ *   },
+ *   collectionOperations={
+ *      "get"={"method"="GET"}
+ *   }
+ * )
  */
 class Rama extends BaseClass
 {
