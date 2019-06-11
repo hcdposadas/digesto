@@ -1,0 +1,141 @@
+{% extends '/app_temp/layout_app.html.twig' %}
+
+
+{% block content %}
+    <div class="page-header text-center">
+        <h1>Ficha de la Ordenanza</h1>
+    </div>
+    <div class="container">
+        <section>
+            <div class="row">
+                {% if is_granted("ROLE_ADMIN") or is_granted("ROLE_USER") %}
+                    <div class="col-md-8 col-md-offset-2 text-right">
+                        <a class="btn btn-icon" href="{{ path('norma_edit', {id: norma.id}) }}">
+                            <i class="fa fa-edit"></i> Editar Norma
+                        </a>
+                    </div>
+                {% endif %}
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="well text-center">Datos de la Ordenanza</div>
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <dl class="dl-horizontal">
+                                <dt>Tipo de Ordenanza</dt>
+                                <dd>{{ norma.tipoOrdenanza }}</dd>
+
+                                <dt>Rama</dt>
+                                <dd>{% if norma.rama %}{{ norma.rama }}{% endif %}</dd>
+
+                                <dt>Número</dt>
+                                <dd>{{ norma.numero }}</dd>
+
+                                <dt>Número Anterior</dt>
+                                <dd>
+                                    {{ norma.numeroAnterior }}
+                                </dd>
+
+                                <dt>Fecha de Sanción</dt>
+                                <dd>{{ norma.fechaSancion | date('d/m/Y') }}</dd>
+
+                                <dt>Observación</dt>
+                                <dd>{{ norma.observacion }}</dd>
+                            </dl>
+
+
+                        </div>
+                    </div>
+                    <div class="well text-center">Datos de la Publicación</div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <dl class="dl-horizontal">
+                                <dt>Tipo de Boletín</dt>
+                                <dd>{{ norma.tipoBoletin }}</dd>
+
+                                <dt>Número de Boletín</dt>
+                                <dd>
+                                    {% if norma.boletinOficialMunicipal %}
+                                        {{ norma.boletinOficialMunicipal.numero }}
+                                    {% else %}
+                                        {{ norma.numeroBoletin }}
+                                    {% endif %}
+                                </dd>
+
+                                <dt>Fecha de Publicación del Boletín</dt>
+                                <dd>
+                                    {% if norma.boletinOficialMunicipal %}
+                                        {{ norma.boletinOficialMunicipal.fechaPublicacion | date('d/m/Y') }}
+                                    {% else %}
+                                        {{ norma.fechaPublicacionBoletin | date('d/m/Y') }}
+                                    {% endif %}
+                                </dd>
+
+                                <dt>Página</dt>
+                                <dd>
+                                    {{ norma.paginaBoletin }}
+                                </dd>
+                            </dl>
+
+                        </div>
+                    </div>
+                    <div class="well text-center">Datos de la Promulgación</div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <dl class="dl-horizontal">
+                                <dt>Tipo de Promulgación</dt>
+                                <dd>{{ norma.tipoPromulgacion }}</dd>
+
+                                <dt>Decreto Promulgatorio</dt>
+                                <dd>
+                                    {{ norma.decretoPromulgatorio }}
+                                </dd>
+
+                                <dt>Fecha de Promulgación</dt>
+                                <dd>
+                                    {% if norma.fechaPromulgacion %}
+                                        {{ norma.fechaPromulgacion| date('d/m/Y') }}
+                                    {% endif %}
+                                </dd>
+
+                                <dt>Tema General</dt>
+                                <dd>
+                                    {{ norma.temaGeneral }}
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                    <div class="well text-center">Textos de la Ordenanza</div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <ul>
+                                <li>
+                                    <a target="_blanks"
+                                       href="{{ asset('uploads/textos_definitivos_normas/' ~ norma.nombreArchivo) }}">
+                                        Texto <i class="fa fa-download"></i>
+                                    </a>
+                                </li>
+                                {% for anexo in norma.anexos | sort %}
+                                    <li>
+                                        <a target="_blanks"
+                                           href="{{ asset('uploads/anexos_normas/' ~ anexo.archivo) }}">
+                                            {% if norma.anexos.count <=1 %}
+                                                ANEXO ÚNICO
+                                            {% else %}
+                                                {% if anexo.titulo %}
+                                                    {{ anexo.titulo }}
+                                                {% else %}
+                                                    ANEXO {{ loop.index }}
+                                                {% endif %}
+                                            {% endif %}
+                                            <i class="fa fa-download"></i></a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock content %}

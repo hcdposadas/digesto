@@ -233,4 +233,79 @@ class DefaultController extends AbstractController {
 				'form'            => $form->createView()
 			] );
 	}
+
+	/**
+	 * @Route("/buscador_app", name="buscador_app")
+	 */
+	public function buscadorApp( Request $request, PaginatorInterface $paginator ) {
+
+		$titulo = 'Buscador';
+
+		$web            = $this->getDoctrine()->getRepository( WebDigestoTexto::class )->findOneBySlug( 'web' );
+		$aniosBoletines = $this->getDoctrine()->getRepository( BoletinOficialMunicipal::class )->getAniosBoletines();
+
+		if ( ! $web ) {
+			return new Response( '<h1>Sitio En construccion</h1>' );
+		}
+
+		$resultados = [];
+
+		$form = $this->createForm( BuscarOrdenanzaType::class,
+			[],
+			[
+				'method' => 'GET'
+			] );
+
+		$form->handleRequest( $request );
+
+		if ( $form->isSubmitted() ) {
+			$data = $form->getData();
+
+			$em         = $this->getDoctrine();
+			$resultados = $em->getRepository( Norma::class )->buscarNormas( $data );
+
+
+			$resultados = $paginator->paginate(
+				$resultados,
+				$request->query->get( 'page', 1 )/* page number */,
+				10/* limit per page */
+			);
+
+			return $this->render( 'app_temp/resultados_app.html.twig',
+				[
+
+					'titulo'          => $titulo,
+					'resultados'      => $resultados
+
+				] );
+
+		}
+
+
+		return $this->render( 'app_temp/buscador_app.html.twig',
+			[
+
+				'titulo'          => $titulo,
+				'form'            => $form->createView(),
+
+			] );
+	}
+
+	/**
+	 * @Route("/ver_ordenanza_app/{id}", name="ver_ordenanza_app")
+	 */
+	public function verOrdenanzaApp( Request $request, Norma $norma ) {
+		$web            = $this->getDoctrine()->getRepository( WebDigestoTexto::class )->findOneBySlug( 'web' );
+		$aniosBoletines = $this->getDoctrine()->getRepository( BoletinOficialMunicipal::class )->getAniosBoletines();
+
+		$titulo = $norma->getRama() . ' ' . $norma->getRama()->getNumeroRomano() . ' - ' . $norma->getNumero();
+
+		return $this->render( 'app_temp/ver_ordenanza_app.html.twig',
+			[
+				'web'             => $web,
+				'anios_boletines' => $aniosBoletines,
+				'titulo'          => $titulo,
+				'norma'           => $norma,
+			] );
+	}
 }

@@ -1,0 +1,40 @@
+{% extends '/app_temp/layout_app.html.twig' %}
+{% block content %}
+    <div class="container">
+        {% if resultados %}
+            <div class="row">
+                <div class="col-12">
+                    {% for row in resultados | batch(2) %}
+                        <div class="row">
+                            {% for norma in row if norma.rama %}
+                                <div class="col-sm-6">
+                                    <a class="panel panel-default {% if norma.vigenteNoConsolidada %}bg-danger{% endif %}"
+                                       href="{{ path('ver_ordenanza_app', { 'id': norma.id}) }}">
+                                        <div class="panel-body">
+                                            <div class="media">
+                                                <div class="media-left padding-5">
+                                                    <i class="fa fa-file-text-o fa-fw fa-3x text-secondary"></i>
+                                                </div>
+                                                <div class="media-body">
+                                                    <h3>{{ norma.rama.titulo }} {{ norma.rama.numeroRomano }}
+                                                        - {{ norma.numero }} {% if norma.numeroAnterior %} - (Nº Anterior: {{ norma.numeroAnterior }}/{{ norma.fechaSancion | date('y') }}) {% endif %}</h3>
+                                                    <p class="text-muted">{{ norma.temaGeneral }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="row text-center">
+                <div class="col-xs-12">
+                    {{ knp_pagination_render(resultados) }}
+                </div>
+            </div>
+        {% endif %}
+    </div>
+{% endblock content %}
