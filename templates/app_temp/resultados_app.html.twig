@@ -3,7 +3,7 @@
     <div class="container">
         {% if resultados %}
             <div class="row">
-                <div class="col-12">
+                <div class="col-md-12">
                     {% for row in resultados | batch(2) %}
                         <div class="row">
                             {% for norma in row if norma.rama %}
