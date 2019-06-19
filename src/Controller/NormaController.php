@@ -203,7 +203,7 @@ class NormaController extends AbstractController {
 				}
 			);
 
-			foreach ( $identificadoresOriginales as $palabraClave ) {
+			foreach ( $palabrasClaveOriginales as $palabraClave ) {
 				if ( false === $palabraClaveQueQuedan->contains( $palabraClave ) ) {
 
 					$palabraClave->setNorma( null );
