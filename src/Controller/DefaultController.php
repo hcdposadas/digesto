@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\BoletinOficialMunicipal;
+use App\Entity\Consolidacion;
 use App\Entity\Norma;
 use App\Entity\WebDigestoDocumento;
 use App\Entity\WebDigestoTexto;
@@ -24,6 +25,7 @@ class DefaultController extends AbstractController {
 
 		$web            = $this->getDoctrine()->getRepository( WebDigestoTexto::class )->findOneBySlug( 'web' );
 		$aniosBoletines = $this->getDoctrine()->getRepository( BoletinOficialMunicipal::class )->getAniosBoletines();
+		$consolidaciones = $this->getDoctrine()->getRepository( Consolidacion::class )->getConsolidacionesOrdenadas();
 
 		if ( ! $web ) {
 			return new Response( '<h1>Sitio En construccion</h1>' );
@@ -32,7 +34,8 @@ class DefaultController extends AbstractController {
 		return $this->render( 'Web/index.html.twig',
 			[
 				'web'             => $web,
-				'anios_boletines' => $aniosBoletines
+				'anios_boletines' => $aniosBoletines,
+				'consolidaciones' => $consolidaciones
 			] );
 	}
 
@@ -45,6 +48,7 @@ class DefaultController extends AbstractController {
 
 		$web            = $this->getDoctrine()->getRepository( WebDigestoTexto::class )->findOneBySlug( 'web' );
 		$aniosBoletines = $this->getDoctrine()->getRepository( BoletinOficialMunicipal::class )->getAniosBoletines();
+		$consolidaciones = $this->getDoctrine()->getRepository( Consolidacion::class )->getConsolidacionesOrdenadas();
 
 		if ( ! $web ) {
 			return new Response( '<h1>Sitio En construccion</h1>' );
@@ -82,7 +86,8 @@ class DefaultController extends AbstractController {
 				'titulo'          => $titulo,
 				'anios_boletines' => $aniosBoletines,
 				'form'            => $form->createView(),
-				'resultados'      => $resultados
+				'resultados'      => $resultados,
+				'consolidaciones' => $consolidaciones
 
 			] );
 	}
@@ -95,6 +100,7 @@ class DefaultController extends AbstractController {
 
 		$web            = $this->getDoctrine()->getRepository( WebDigestoTexto::class )->findOneBySlug( 'web' );
 		$aniosBoletines = $this->getDoctrine()->getRepository( BoletinOficialMunicipal::class )->getAniosBoletines();
+		$consolidaciones = $this->getDoctrine()->getRepository( Consolidacion::class )->getConsolidacionesOrdenadas();
 
 		if ( ! $web ) {
 			return new Response( '<h1>Sitio En construccion</h1>' );
@@ -107,7 +113,8 @@ class DefaultController extends AbstractController {
 				'web'             => $web,
 				'titulo'          => $titulo,
 				'anios_boletines' => $aniosBoletines,
-				'documentos'      => $documentos
+				'documentos'      => $documentos,
+				'consolidaciones' => $consolidaciones
 			] );
 	}
 
@@ -118,6 +125,7 @@ class DefaultController extends AbstractController {
 
 		$web            = $this->getDoctrine()->getRepository( WebDigestoTexto::class )->findOneBySlug( 'web' );
 		$aniosBoletines = $this->getDoctrine()->getRepository( BoletinOficialMunicipal::class )->getAniosBoletines();
+		$consolidaciones = $this->getDoctrine()->getRepository( Consolidacion::class )->getConsolidacionesOrdenadas();
 
 		if ( ! $web ) {
 			return new Response( '<h1>Sitio En construcción</h1>' );
@@ -153,7 +161,7 @@ class DefaultController extends AbstractController {
 				'titulo'          => $titulo,
 				'anios_boletines' => $aniosBoletines,
 				'contenido'       => $contenido,
-
+				'consolidaciones' => $consolidaciones
 			] );
 	}
 
@@ -175,6 +183,7 @@ class DefaultController extends AbstractController {
 	public function verOrdenanza( Request $request, Norma $norma ) {
 		$web            = $this->getDoctrine()->getRepository( WebDigestoTexto::class )->findOneBySlug( 'web' );
 		$aniosBoletines = $this->getDoctrine()->getRepository( BoletinOficialMunicipal::class )->getAniosBoletines();
+		$consolidaciones = $this->getDoctrine()->getRepository( Consolidacion::class )->getConsolidacionesOrdenadas();
 
 		$titulo = $norma->getRama() . ' ' . $norma->getRama()->getNumeroRomano() . ' - ' . $norma->getNumero();
 
@@ -184,6 +193,7 @@ class DefaultController extends AbstractController {
 				'anios_boletines' => $aniosBoletines,
 				'titulo'          => $titulo,
 				'norma'           => $norma,
+				'consolidaciones' => $consolidaciones
 			] );
 	}
 
@@ -193,6 +203,7 @@ class DefaultController extends AbstractController {
 	public function boletines( Request $request, PaginatorInterface $paginator, $anio ) {
 		$web            = $this->getDoctrine()->getRepository( WebDigestoTexto::class )->findOneBySlug( 'web' );
 		$aniosBoletines = $this->getDoctrine()->getRepository( BoletinOficialMunicipal::class )->getAniosBoletines();
+		$consolidaciones = $this->getDoctrine()->getRepository( Consolidacion::class )->getConsolidacionesOrdenadas();
 
 		$titulo = 'Boletines oficiales del ' . $anio;
 
@@ -230,7 +241,8 @@ class DefaultController extends AbstractController {
 				'anios_boletines' => $aniosBoletines,
 				'titulo'          => $titulo,
 				'boletines'       => $boletines,
-				'form'            => $form->createView()
+				'form'            => $form->createView(),
+				'consolidaciones' => $consolidaciones
 			] );
 	}
 
@@ -242,7 +254,7 @@ class DefaultController extends AbstractController {
 		$titulo = 'Buscador';
 
 		$web            = $this->getDoctrine()->getRepository( WebDigestoTexto::class )->findOneBySlug( 'web' );
-		$aniosBoletines = $this->getDoctrine()->getRepository( BoletinOficialMunicipal::class )->getAniosBoletines();
+
 
 		if ( ! $web ) {
 			return new Response( '<h1>Sitio En construccion</h1>' );
@@ -274,8 +286,8 @@ class DefaultController extends AbstractController {
 			return $this->render( 'app_temp/resultados_app.html.twig',
 				[
 
-					'titulo'          => $titulo,
-					'resultados'      => $resultados
+					'titulo'     => $titulo,
+					'resultados' => $resultados
 
 				] );
 
@@ -285,8 +297,8 @@ class DefaultController extends AbstractController {
 		return $this->render( 'app_temp/buscador_app.html.twig',
 			[
 
-				'titulo'          => $titulo,
-				'form'            => $form->createView(),
+				'titulo' => $titulo,
+				'form'   => $form->createView(),
 
 			] );
 	}
@@ -296,14 +308,12 @@ class DefaultController extends AbstractController {
 	 */
 	public function verOrdenanzaApp( Request $request, Norma $norma ) {
 		$web            = $this->getDoctrine()->getRepository( WebDigestoTexto::class )->findOneBySlug( 'web' );
-		$aniosBoletines = $this->getDoctrine()->getRepository( BoletinOficialMunicipal::class )->getAniosBoletines();
 
 		$titulo = $norma->getRama() . ' ' . $norma->getRama()->getNumeroRomano() . ' - ' . $norma->getNumero();
 
 		return $this->render( 'app_temp/ver_ordenanza_app.html.twig',
 			[
 				'web'             => $web,
-				'anios_boletines' => $aniosBoletines,
 				'titulo'          => $titulo,
 				'norma'           => $norma,
 			] );

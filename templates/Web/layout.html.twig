@@ -127,6 +127,16 @@
                                     {% endfor %}
                                 </ul>
                             </li>
+                            <li class="dropdown-submenu">
+                                <a tabindex="-1" href="#">Consolidaciones</a>
+                                <ul class="dropdown-menu">
+                                    {% for consolidacion in consolidaciones %}
+                                        <li><a {% if loop.first %}tabindex="-1"{% endif %}
+                                               href="#">{{ consolidacion.titulo }}</a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
                         </ul>
                     </li>
 

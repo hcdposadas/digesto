@@ -84,6 +84,7 @@ class BoletinOficialMunicipalRepository extends ServiceEntityRepository {
 		            ->select( 'YEAR(b.fechaPublicacion) AS anio' )
 		            ->groupBy( 'anio' )
 		            ->orderBy( 'anio', 'DESC' )
+					->andWhere("YEAR(b.fechaPublicacion) >= '2016'")
 		            ->getQuery()
 		            ->getResult();
 	}
