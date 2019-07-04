@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Rama;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -22,7 +23,7 @@ class BuscarOrdenanzaType extends AbstractType {
 					'placeholder'   => 'Rama...',
 					'query_builder' => function ( EntityRepository $er ) {
 						return $er->createQueryBuilder( 'r' )
-						          ->orderBy( 'u.orden', 'ASC' );
+						          ->orderBy( 'r.orden', 'ASC' );
 					},
 				] )
 			->add( 'numero',

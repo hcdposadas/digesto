@@ -6,7 +6,9 @@ use App\Entity\Descriptor;
 use App\Entity\Identificador;
 use App\Entity\Norma;
 use App\Entity\PalabraClave;
+use App\Entity\Rama;
 use App\Entity\TipoBoletin;
+use Doctrine\ORM\EntityRepository;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -44,8 +46,24 @@ class NormaType extends AbstractType {
 
 
 		$builder
-			->add( 'rama' )
-			->add( 'ramaVigenteNoConsolidada' )
+			->add( 'rama',
+				EntityType::class,
+				[
+					'class'         => Rama::class,
+					'query_builder' => function ( EntityRepository $er ) {
+						return $er->createQueryBuilder( 'r' )
+						          ->orderBy( 'r.orden', 'ASC' );
+					},
+				] )
+			->add( 'ramaVigenteNoConsolidada',
+				EntityType::class,
+				[
+					'class'         => Rama::class,
+					'query_builder' => function ( EntityRepository $er ) {
+						return $er->createQueryBuilder( 'r' )
+						          ->orderBy( 'r.orden', 'ASC' );
+					},
+				] )
 			->add( 'fechaSancion',
 				DateType::class,
 				[
