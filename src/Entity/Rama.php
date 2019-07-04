@@ -50,9 +50,14 @@ class Rama extends BaseClass
      */
     private $numeroRomano;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $orden;
+
 	public function __toString() {
-		return $this->numeroRomano . ' - '. $this->titulo;
-	}
+         		return $this->numeroRomano . ' - '. $this->titulo;
+         	}
 
     public function getId(): ?int
     {
@@ -115,6 +120,18 @@ class Rama extends BaseClass
     public function setNumeroRomano(string $numeroRomano): self
     {
         $this->numeroRomano = $numeroRomano;
+
+        return $this;
+    }
+
+    public function getOrden(): ?int
+    {
+        return $this->orden;
+    }
+
+    public function setOrden(?int $orden): self
+    {
+        $this->orden = $orden;
 
         return $this;
     }

@@ -6,4 +6,5 @@ easy_admin:
               fields:
                 - { property: 'numeroRomano' }
                 - { property: 'titulo' }
+                - { property: 'orden' }
                 - { property: 'activo' }
