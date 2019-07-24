@@ -78,7 +78,9 @@
     {% block stylesheets %}
     {% endblock stylesheets %}
 
+    {% if app.environment != 'dev' %}
     <script src="//code.jivosite.com/widget.js" jv-id="5de8LvYDEx" async></script>
+    {% endif %}
 
 </head>
 <body cz-shortcut-listen="true">
