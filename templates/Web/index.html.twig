@@ -32,11 +32,15 @@
 
                 <div class="row panels-row">
 
-                    <div class="col-md-offset-3 col-md-3 col-xs-12 col-sm-6">
+                    <div class="col-md-3 col-xs-12 col-sm-6">
                         <div class="panel panel-default panel-icon panel-primary">
-                            <div class="panel-heading hidden-xs">
-                                <i class="fa fa-user "></i>
-                            </div>
+                            {% if web.nombreArchivoFotoPresidente %}
+                                <div style="background-image:url('{{ vich_uploader_asset(web, 'archivoFotoPresidente') }}');" class="panel-heading"></div>
+                            {% else %}
+                                <div class="panel-heading hidden-xs">
+                                    <i class="fa fa-user "></i>
+                                </div>
+                            {% endif %}
                             <div class="panel-body">
                                 <h3><span class="visible-xs-inline"><i class="fa fa-user"></i>&nbsp; </span>
                                     {{ web.presidenteHcd }}
@@ -51,9 +55,55 @@
 
                     <div class="col-md-3 col-xs-12 col-sm-6">
                         <div class="panel panel-default panel-icon panel-primary">
+                            {% if web.nombreArchivoFotoVicePresidentePrimero %}
+                                <div style="background-image:url('{{ vich_uploader_asset(web, 'archivoFotoVicePresidentePrimero') }}');" class="panel-heading"></div>
+                            {% else %}
+                                <div class="panel-heading hidden-xs">
+                                    <i class="fa fa-user "></i>
+                                </div>
+                            {% endif %}
+                            <div class="panel-body">
+                                <h3><span class="visible-xs-inline"><i class="fa fa-user"></i>&nbsp; </span>
+                                    {{ web.vicePresidentePrimeroHCD }}
+                                </h3>
+                                <div class="text-muted">
+                                    <h4>Vice Presidenta 1º</h4>
+                                    <p>HCD</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 col-xs-12 col-sm-6">
+                        <div class="panel panel-default panel-icon panel-primary">
+                            {% if web.nombreArchivoFotoVicePresidenteSegundo %}
+                                <div style="background-image:url('{{ vich_uploader_asset(web, 'archivoFotoVicePresidenteSegundo') }}');" class="panel-heading"></div>
+                            {% else %}
+                                <div class="panel-heading hidden-xs">
+                                    <i class="fa fa-user "></i>
+                                </div>
+                            {% endif %}
+                            <div class="panel-body">
+                                <h3><span class="visible-xs-inline"><i class="fa fa-user"></i>&nbsp; </span>
+                                    {{ web.vicePresidenteSegundoHCD }}
+                                </h3>
+                                <div class="text-muted">
+                                    <h4>Vice Presidente 2º</h4>
+                                    <p>HCD</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 col-xs-12 col-sm-6">
+                        <div class="panel panel-default panel-icon panel-primary">
+                            {% if web.nombreArchivoFotoDirector %}
+                                <div style="background-image:url('{{ vich_uploader_asset(web, 'archivoFotoDirector') }}');" class="panel-heading"></div>
+                            {% else %}
                             <div class="panel-heading hidden-xs">
                                 <i class="fa fa-user-o "></i>
                             </div>
+                            {% endif %}
                             <div class="panel-body">
                                 <h3><span class="visible-xs-inline"><i class="fa fa-user-o"></i>&nbsp; </span>
                                     {{ web.directorDigesto }}

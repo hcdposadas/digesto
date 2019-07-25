@@ -7,6 +7,7 @@ use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 
 class WebDigestoTextoType extends AbstractType {
 	public function buildForm( FormBuilderInterface $builder, array $options ) {
@@ -16,33 +17,71 @@ class WebDigestoTextoType extends AbstractType {
 				[
 					'label' => 'Presidente HCD'
 				] )
+			->add( 'archivoFotoPresidente',
+				VichFileType::class,
+				[
+					'required'     => false,
+					'allow_delete' => true,
+					'label'        => 'Foto Presidente'
+				] )
+			->add( 'vicePresidentePrimeroHCD',
+				null,
+				[
+					'label' => 'Vice Presidenta 1º HCD'
+				] )
+			->add( 'archivoFotoVicePresidentePrimero',
+				VichFileType::class,
+				[
+					'required'     => false,
+					'allow_delete' => true,
+					'label'        => 'Foto Vicepresidente 1º'
+				] )
+			->add( 'vicePresidenteSegundoHCD',
+				null,
+				[
+					'label' => 'Vice Presidente 2º HCD'
+				] )
+			->add( 'archivoFotoVicePresidenteSegundo',
+				VichFileType::class,
+				[
+					'required'     => false,
+					'allow_delete' => true,
+					'label'        => 'Foto Vicepresidente 2º'
+				] )
 			->add( 'directorDigesto',
 				null,
 				[
 					'label' => 'Director Digesto'
 				] )
+			->add( 'archivoFotoDirector',
+				VichFileType::class,
+				[
+					'required'     => false,
+					'allow_delete' => true,
+					'label'        => 'Foto Director'
+				] )
 			->add( 'prologo',
 				CKEditorType::class,
 				[
-					'label' => 'Prólogo',
+					'label'  => 'Prólogo',
 					'config' => [ 'uiColor' => '#ffffff' ]
 				] )
 			->add( 'resenia',
 				CKEditorType::class,
 				[
-					'label' => 'Reseña',
+					'label'  => 'Reseña',
 					'config' => [ 'uiColor' => '#ffffff' ]
 				] )
 			->add( 'metodologiaTrabajo',
 				CKEditorType::class,
 				[
-					'label' => 'Metodología de trabajo',
+					'label'  => 'Metodología de trabajo',
 					'config' => [ 'uiColor' => '#ffffff' ]
 				] )
 			->add( 'renumeracion',
 				CKEditorType::class,
 				[
-					'label' => 'Remuneración',
+					'label'  => 'Remuneración',
 					'config' => [ 'uiColor' => '#ffffff' ]
 				] )
 			->add( 'instructivoInformativo',

@@ -25,4 +25,9 @@ vich_uploader:
             uri_prefix: '%app.path.documentos_anexos_web%'
             upload_destination: '%kernel.project_dir%/public%app.path.documentos_anexos_web%'
             namer: Vich\UploaderBundle\Naming\OrignameNamer
+        recursos_web:
+            uri_prefix: '%app.path.recursos_web%'
+            upload_destination: '%kernel.project_dir%/public%app.path.recursos_web%'
+            namer: Vich\UploaderBundle\Naming\OrignameNamer
+
 
