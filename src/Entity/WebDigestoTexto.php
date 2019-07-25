@@ -3,9 +3,12 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\WebDigestoTextoRepository")
+ * @Vich\Uploadable
  */
 class WebDigestoTexto extends BaseClass
 {
@@ -81,10 +84,32 @@ class WebDigestoTexto extends BaseClass
      */
     private $presidenteHCD;
 
+	/**
+	 * @Vich\UploadableField(mapping="recursos_web", fileNameProperty="nombreArchivoFotoPresidente")
+	 * @var File
+	 */
+	private $archivoFotoPresidente;
+
+	/**
+	 * @ORM\Column(type="string", length=255, nullable=true)
+	 */
+	private $nombreArchivoFotoPresidente;
+
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $directorDigesto;
+
+	/**
+	 * @Vich\UploadableField(mapping="recursos_web", fileNameProperty="nombreArchivoFotoDirector")
+	 * @var File
+	 */
+	private $archivoFotoDirector;
+
+	/**
+	 * @ORM\Column(type="string", length=255, nullable=true)
+	 */
+	private $nombreArchivoFotoDirector;
 
 	/**
 	 * @var string
@@ -92,6 +117,38 @@ class WebDigestoTexto extends BaseClass
 	 * @ORM\Column(name="slug", type="string", length=255, nullable=true)
 	 */
 	private $slug;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $vicePresidentePrimeroHCD;
+
+	/**
+	 * @Vich\UploadableField(mapping="recursos_web", fileNameProperty="nombreArchivoFotoVicePresidentePrimero")
+	 * @var File
+	 */
+	private $archivoFotoVicePresidentePrimero;
+
+	/**
+	 * @ORM\Column(type="string", length=255, nullable=true)
+	 */
+	private $nombreArchivoFotoVicePresidentePrimero;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $vicePresidenteSegundoHCD;
+
+	/**
+	 * @Vich\UploadableField(mapping="recursos_web", fileNameProperty="nombreArchivoFotoVicePresidenteSegundo")
+	 * @var File
+	 */
+	private $archivoFotoVicePresidenteSegundo;
+
+	/**
+	 * @ORM\Column(type="string", length=255, nullable=true)
+	 */
+	private $nombreArchivoFotoVicePresidenteSegundo;
 
     public function getId(): ?int
     {
@@ -272,13 +329,174 @@ class WebDigestoTexto extends BaseClass
 	 * @return string
 	 */
 	public function getSlug(): string {
-		return $this->slug;
-	}
+                  		return $this->slug;
+                  	}
 
 	/**
 	 * @param string $slug
 	 */
 	public function setSlug( string $slug ): void {
-		$this->slug = $slug;
+                  		$this->slug = $slug;
+                  	}
+
+    public function getVicePresidentePrimeroHCD(): ?string
+    {
+        return $this->vicePresidentePrimeroHCD;
+    }
+
+    public function setVicePresidentePrimeroHCD(?string $vicePresidentePrimeroHCD): self
+    {
+        $this->vicePresidentePrimeroHCD = $vicePresidentePrimeroHCD;
+
+        return $this;
+    }
+
+    public function getVicePresidenteSegundoHCD(): ?string
+    {
+        return $this->vicePresidenteSegundoHCD;
+    }
+
+    public function setVicePresidenteSegundoHCD(?string $vicePresidenteSegundoHCD): self
+    {
+        $this->vicePresidenteSegundoHCD = $vicePresidenteSegundoHCD;
+
+        return $this;
+    }
+
+	/**
+	 * @return File
+	 */
+	public function getArchivoFotoPresidente(): ?File {
+		return $this->archivoFotoPresidente;
 	}
+
+	/**
+	 * @param File $archivoFotoPresidente
+	 */
+	public function setArchivoFotoPresidente( File $archivoFotoPresidente ): void {
+		$this->archivoFotoPresidente = $archivoFotoPresidente;
+
+		if ($archivoFotoPresidente) {
+			// if 'updatedAt' is not defined in your entity, use another property
+			$this->fechaActualizacion = new \DateTime('now');
+		}
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getNombreArchivoFotoPresidente() {
+		return $this->nombreArchivoFotoPresidente;
+	}
+
+	/**
+	 * @param mixed $nombreArchivoFotoPresidente
+	 */
+	public function setNombreArchivoFotoPresidente( $nombreArchivoFotoPresidente ): void {
+		$this->nombreArchivoFotoPresidente = $nombreArchivoFotoPresidente;
+	}
+
+	/**
+	 * @return File
+	 */
+	public function getArchivoFotoDirector(): ?File {
+		return $this->archivoFotoDirector;
+	}
+
+	/**
+	 * @param File $archivoFotoDirector
+	 */
+	public function setArchivoFotoDirector( File $archivoFotoDirector ): void {
+		$this->archivoFotoDirector = $archivoFotoDirector;
+
+		if ($archivoFotoDirector) {
+			// if 'updatedAt' is not defined in your entity, use another property
+			$this->fechaActualizacion = new \DateTime('now');
+		}
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getNombreArchivoFotoDirector() {
+		return $this->nombreArchivoFotoDirector;
+	}
+
+	/**
+	 * @param mixed $nombreArchivoFotoDirector
+	 */
+	public function setNombreArchivoFotoDirector( $nombreArchivoFotoDirector ): void {
+		$this->nombreArchivoFotoDirector = $nombreArchivoFotoDirector;
+	}
+
+	/**
+	 * @return File
+	 */
+	public function getArchivoFotoVicePresidentePrimero(): ?File {
+		return $this->archivoFotoVicePresidentePrimero;
+	}
+
+	/**
+	 * @param File $archivoFotoVicePresidentePrimero
+	 */
+	public function setArchivoFotoVicePresidentePrimero( File $archivoFotoVicePresidentePrimero ): void {
+		$this->archivoFotoVicePresidentePrimero = $archivoFotoVicePresidentePrimero;
+
+		if ($archivoFotoVicePresidentePrimero) {
+			// if 'updatedAt' is not defined in your entity, use another property
+			$this->fechaActualizacion = new \DateTime('now');
+		}
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getNombreArchivoFotoVicePresidentePrimero() {
+		return $this->nombreArchivoFotoVicePresidentePrimero;
+	}
+
+	/**
+	 * @param mixed $nombreArchivoFotoVicePresidentePrimero
+	 */
+	public function setNombreArchivoFotoVicePresidentePrimero( $nombreArchivoFotoVicePresidentePrimero ): void {
+		$this->nombreArchivoFotoVicePresidentePrimero = $nombreArchivoFotoVicePresidentePrimero;
+	}
+
+	/**
+	 * @return File
+	 */
+	public function getArchivoFotoVicePresidenteSegundo(): ?File {
+		return $this->archivoFotoVicePresidenteSegundo;
+	}
+
+	/**
+	 * @param File $archivoFotoVicePresidenteSegundo
+	 */
+	public function setArchivoFotoVicePresidenteSegundo( File $archivoFotoVicePresidenteSegundo ): void {
+
+		$this->archivoFotoVicePresidenteSegundo = $archivoFotoVicePresidenteSegundo;
+
+		// VERY IMPORTANT:
+		// It is required that at least one field changes if you are using Doctrine,
+		// otherwise the event listeners won't be called and the file is lost
+		if ($archivoFotoVicePresidenteSegundo) {
+			// if 'updatedAt' is not defined in your entity, use another property
+			$this->fechaActualizacion = new \DateTime('now');
+		}
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getNombreArchivoFotoVicePresidenteSegundo() {
+		return $this->nombreArchivoFotoVicePresidenteSegundo;
+	}
+
+	/**
+	 * @param mixed $nombreArchivoFotoVicePresidenteSegundo
+	 */
+	public function setNombreArchivoFotoVicePresidenteSegundo( $nombreArchivoFotoVicePresidenteSegundo ): void {
+		$this->nombreArchivoFotoVicePresidenteSegundo = $nombreArchivoFotoVicePresidenteSegundo;
+	}
+
 }

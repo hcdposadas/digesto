@@ -14,6 +14,7 @@ parameters:
     app.path.boletin_oficial_municipal_documentos: /uploads/documentos/boletin_oficial_municipal
     app.path.documentos_web: /uploads/documentos/documentos_web
     app.path.documentos_anexos_web: /uploads/documentos/documentos_anexos_web
+    app.path.recursos_web: /uploads/recursos_web
 
 services:
     # default configuration for services in *this* file
