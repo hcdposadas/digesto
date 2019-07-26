@@ -2,6 +2,34 @@
 
 {% block title %}{{ titulo }} -{% endblock title %}
 
+{% block meta_social %}
+
+    {% set description = 'Buscador de ordenanzas' %}
+    {% set url = app.request.uri %}
+    {% set image = absolute_url(asset('build/images/portada-share.png')) %}
+
+    {# facebook #}
+    <meta property="og:url"
+          content="{{ url }}"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:title" content="{{ titulo }}"/>
+    <meta property="og:description" content="{{ description }}"/>
+    <meta property="og:image" content="{{ image }}"/>
+
+    {# twitter #}
+    <meta name="twitter:card" content="summary"/>
+    {#        <meta name="twitter:site" content="@djmposadas"/>#}
+    {#        <meta name="twitter:creator" content="@djmposadas"/>#}
+    <meta property="og:url" content="{{ url }}"/>
+    <meta property="og:title" content="{{ titulo }}"/>
+    <meta property="og:description"
+          content="{{ description }}"/>
+    <meta property="og:image"
+          content="{{ image }}"/>
+
+{% endblock meta_social %}
+
+
 {% block stylesheets %}
     <style>
         body {
