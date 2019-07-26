@@ -1,13 +1,24 @@
 {% extends '/Web/layout.html.twig' %}
 
+{% block stylesheets %}
+    <style>
+        .jumbotron {
+            background: /* top, transparent red, faked with gradient */ linear-gradient(
+                    rgba(0, 0, 0, 0.3),
+                    rgba(0, 0, 0, 0.3)
+            ),
+                /* bottom, image */ url('{{ asset('build/images/portada.png') }}');
+        }
+    </style>
+{% endblock stylesheets %}
 
 {% block content %}
     <main role="main">
-        <section class=" bg-primary">
+        <section class="jumbotron">
 
             <div class="container jumbotron_body">
                 <div class="row">
-                    <div class="col-xs-12 col-md-8 col-md-offset-2 text-center">
+                    <div class="col-xs-12 col-md-8 col-md-offset-2 text-center text-banner">
                         <h1>Digesto Jurídico Municipal</h1>
                         <h2>Posadas - Misiones</h2>
                     </div>
@@ -35,7 +46,8 @@
                     <div class="col-md-3 col-xs-12 col-sm-6">
                         <div class="panel panel-default panel-icon panel-primary">
                             {% if web.nombreArchivoFotoPresidente %}
-                                <div style="background-image:url('{{ vich_uploader_asset(web, 'archivoFotoPresidente') }}');" class="panel-heading"></div>
+                                <div style="background-image:url('{{ vich_uploader_asset(web, 'archivoFotoPresidente') }}');"
+                                     class="panel-heading"></div>
                             {% else %}
                                 <div class="panel-heading hidden-xs">
                                     <i class="fa fa-user "></i>
@@ -56,7 +68,8 @@
                     <div class="col-md-3 col-xs-12 col-sm-6">
                         <div class="panel panel-default panel-icon panel-primary">
                             {% if web.nombreArchivoFotoVicePresidentePrimero %}
-                                <div style="background-image:url('{{ vich_uploader_asset(web, 'archivoFotoVicePresidentePrimero') }}');" class="panel-heading"></div>
+                                <div style="background-image:url('{{ vich_uploader_asset(web, 'archivoFotoVicePresidentePrimero') }}');"
+                                     class="panel-heading"></div>
                             {% else %}
                                 <div class="panel-heading hidden-xs">
                                     <i class="fa fa-user "></i>
@@ -77,7 +90,8 @@
                     <div class="col-md-3 col-xs-12 col-sm-6">
                         <div class="panel panel-default panel-icon panel-primary">
                             {% if web.nombreArchivoFotoVicePresidenteSegundo %}
-                                <div style="background-image:url('{{ vich_uploader_asset(web, 'archivoFotoVicePresidenteSegundo') }}');" class="panel-heading"></div>
+                                <div style="background-image:url('{{ vich_uploader_asset(web, 'archivoFotoVicePresidenteSegundo') }}');"
+                                     class="panel-heading"></div>
                             {% else %}
                                 <div class="panel-heading hidden-xs">
                                     <i class="fa fa-user "></i>
@@ -98,11 +112,12 @@
                     <div class="col-md-3 col-xs-12 col-sm-6">
                         <div class="panel panel-default panel-icon panel-primary">
                             {% if web.nombreArchivoFotoDirector %}
-                                <div style="background-image:url('{{ vich_uploader_asset(web, 'archivoFotoDirector') }}');" class="panel-heading"></div>
+                                <div style="background-image:url('{{ vich_uploader_asset(web, 'archivoFotoDirector') }}');"
+                                     class="panel-heading"></div>
                             {% else %}
-                            <div class="panel-heading hidden-xs">
-                                <i class="fa fa-user-o "></i>
-                            </div>
+                                <div class="panel-heading hidden-xs">
+                                    <i class="fa fa-user-o "></i>
+                                </div>
                             {% endif %}
                             <div class="panel-body">
                                 <h3><span class="visible-xs-inline"><i class="fa fa-user-o"></i>&nbsp; </span>
