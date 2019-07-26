@@ -6,12 +6,41 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="icon" type="text/x-icon" href="{{ asset('favicon.png') }}">
-    <title>{% block title %}Inicio -{% endblock title %} Digesto Jurídico Municipal Posadas</title>
+    {% set title = 'Digesto Jurídico Municipal Posadas' %}
+    <title>{% block title %}Inicio -{% endblock title %} {{ title }}</title>
 
     <!-- Nav and address bar color -->
     <meta name="theme-color" content="{{ primary_color }}">
     <meta name="msapplication-navbutton-color" content="{{ primary_color }}">
     <meta name="apple-mobile-web-app-status-bar-style" content="{{ primary_color }}">
+
+
+    {% block meta_social %}
+
+        {% set description = 'Sitio del Digesto Jurídico Municipal Posadas' %}
+        {% set url = app.request.uri %}
+        {% set image = absolute_url(asset('build/images/portada-share.png')) %}
+
+        {# facebook #}
+        <meta property="og:url"
+              content="{{ url }}"/>
+        <meta property="og:type" content="website"/>
+        <meta property="og:title" content="{{ title }}"/>
+        <meta property="og:description" content="{{ description }}"/>
+        <meta property="og:image" content="{{ image }}"/>
+
+        {# twitter #}
+        <meta name="twitter:card" content="summary"/>
+{#        <meta name="twitter:site" content="@djmposadas"/>#}
+{#        <meta name="twitter:creator" content="@djmposadas"/>#}
+        <meta property="og:url" content="{{ url }}"/>
+        <meta property="og:title" content="{{ title }}"/>
+        <meta property="og:description"
+              content="{{ description }}"/>
+        <meta property="og:image"
+              content="{{ image }}"/>
+
+    {% endblock meta_social %}
 
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i" rel="stylesheet">
     {{ encore_entry_link_tags('css/web') }}

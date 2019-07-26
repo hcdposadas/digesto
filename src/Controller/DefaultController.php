@@ -185,7 +185,7 @@ class DefaultController extends AbstractController {
 		$aniosBoletines = $this->getDoctrine()->getRepository( BoletinOficialMunicipal::class )->getAniosBoletines();
 		$consolidaciones = $this->getDoctrine()->getRepository( Consolidacion::class )->getConsolidacionesOrdenadas();
 
-		$titulo = $norma->getRama() . ' ' . $norma->getRama()->getNumeroRomano() . ' - ' . $norma->getNumero();
+		$titulo = $norma->getRama()->getNumeroRomano() .' - '. $norma->getRama()->getTitulo(). ' - ' . $norma->getNumero();
 
 		return $this->render( 'Web/ordenanza.html.twig',
 			[
