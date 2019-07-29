@@ -11,6 +11,17 @@
             background-size: cover;
             background-repeat: no-repeat;
         }
+
+        @media screen and (min-width: 768px) {
+            .panel.panel-default .panel-heading {
+                min-height: 256px;
+            }
+        }
+
+        .panel.panel-default .panel-heading {
+            min-height: 340px;
+        }
+
     </style>
 {% endblock stylesheets %}
 
@@ -43,7 +54,7 @@
                     </div>
                 </div>
 
-                <div class="row panels-row">
+                <div class="row">
 
                     <div class="col-md-3 col-xs-12 col-sm-6">
                         <div class="panel panel-default panel-icon panel-primary">
