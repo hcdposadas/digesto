@@ -15,6 +15,7 @@ use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Core\Serializer\Filter\PropertyFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\NormaRepository")
@@ -30,7 +31,13 @@ use ApiPlatform\Core\Serializer\Filter\PropertyFilter;
  *   normalizationContext={"groups"={"read"}},
  * )
  * @ApiFilter(PropertyFilter::class)
- * @ApiFilter(OrderFilter::class, properties={"rama"})
+ * @ApiFilter(SearchFilter::class, properties={
+ *     "palabrasClaveNorma.palabraClave.nombre": "partial",
+ *     "descriptoresNorma.descriptor.nombre": "partial",
+ *     "identificadoresNorma.identificador.nombre": "partial",
+ *     "beneficiarioNormas.beneficiario.nombre": "partial"
+ * })
+ * @ApiFilter(DateFilter::class, properties={"fechaSancion"})
  */
 class Norma extends BaseClass
 {
@@ -57,6 +64,7 @@ class Norma extends BaseClass
     /**
      * @ORM\Column(type="integer")
      * @Groups({"read"})
+     * @ApiFilter(SearchFilter::class)
      */
     private $numero;
 
@@ -153,6 +161,7 @@ class Norma extends BaseClass
     /**
      * @ORM\Column(type="integer", nullable=true)
      * @Groups({"read"})
+     * @ApiFilter(SearchFilter::class)
      */
     private $numeroAnterior;
 
