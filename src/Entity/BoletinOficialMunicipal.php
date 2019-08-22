@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
@@ -23,16 +24,19 @@ class BoletinOficialMunicipal extends BaseClass
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"norma"})
      */
     private $numero;
 
     /**
      * @ORM\Column(type="date")
+     * @Groups({"norma"})
      */
     private $fechaPublicacion;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"norma"})
      */
     private $paginas;
 

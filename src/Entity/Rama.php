@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\RamaRepository")
@@ -27,6 +28,7 @@ class Rama extends BaseClass
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"norma"})
      */
     private $titulo;
 
@@ -47,6 +49,7 @@ class Rama extends BaseClass
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"norma"})
      */
     private $numeroRomano;
 

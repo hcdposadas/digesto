@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TipoOrdenanzaRepository")
@@ -18,6 +19,7 @@ class TipoOrdenanza extends BaseClass
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"norma"})
      */
     private $nombre;
 
