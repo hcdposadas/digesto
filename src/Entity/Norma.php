@@ -9,6 +9,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Annotation\ApiProperty;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
+use ApiPlatform\Core\Serializer\Filter\PropertyFilter;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\NormaRepository")
@@ -20,8 +26,11 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *   },
  *   collectionOperations={
  *      "get"={"method"="GET"}
- *   }
+ *   },
+ *   normalizationContext={"groups"={"read"}},
  * )
+ * @ApiFilter(PropertyFilter::class)
+ * @ApiFilter(OrderFilter::class, properties={"rama"})
  */
 class Norma extends BaseClass
 {
@@ -29,74 +38,89 @@ class Norma extends BaseClass
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="date", nullable=true)
+     * @Groups({"read"})
      */
     private $fechaSancion;
 
     /**
      * @ORM\Column(type="string", length=2048)
+     * @Groups({"read"})
      */
     private $temaGeneral;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"read"})
      */
     private $numero;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"read"})
      */
     private $paginaBoletin;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"read"})
      */
     private $observacion;
 
     /**
      * @Vich\UploadableField(mapping="textos_definitivos_normas", fileNameProperty="nombreArchivo")
      * @var File
+     * @Groups({"read"})
      */
     private $archivoNorma;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"read"})
      */
     private $decretoPromulgatorio;
 
     /**
      * @ORM\Column(type="date", nullable=true)
+     * @Groups({"read"})
      */
     private $fechaPromulgacion;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\TipoPromulgacion")
+     * @Groups({"read"})
      */
     private $tipoPromulgacion;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Rama")
      * @ORM\JoinColumn(nullable=true)
+     * @Groups({"read"})
+     * @ApiFilter(SearchFilter::class)
      */
     private $rama;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Rama")
+     * @Groups({"read"})
      */
     private $ramaVigenteNoConsolidada;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\TipoBoletin")
+     * @Groups({"read"})
      */
     private $tipoBoletin;
 
     /**
      * @ORM\OneToMany(targetEntity="AnexoNorma", mappedBy="norma", cascade={"persist"})
      * @ORM\OrderBy({"id" = "ASC", "orden"= "ASC" })
+     * @Groups({"read"})
      */
     private $anexos;
 
@@ -122,22 +146,26 @@ class Norma extends BaseClass
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\TipoOrdenanza")
+     * @Groups({"read"})
      */
     private $tipoOrdenanza;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"read"})
      */
     private $numeroAnterior;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\BoletinOficialMunicipal", inversedBy="normas")
+     * @Groups({"read"})
      */
     private $boletinOficialMunicipal;
 
     /**
      * @Gedmo\Versioned
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"read"})
      */
     private $texto;
 
@@ -145,21 +173,25 @@ class Norma extends BaseClass
 	 * @var bool
 	 *
 	 * @ORM\Column(name="vigente_no_consolidada", type="boolean", nullable=true)
+     * @Groups({"read"})
 	 */
 	protected $vigenteNoConsolidada;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"read"})
      */
     private $nombreArchivo;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"read"})
      */
     private $numeroBoletin;
 
     /**
      * @ORM\Column(type="date", nullable=true)
+     * @Groups({"read"})
      */
     private $fechaPublicacionBoletin;
 
