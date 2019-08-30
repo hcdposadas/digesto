@@ -81,7 +81,9 @@
                                 </dd>
 
                                 <dt>Fecha de Sanción</dt>
-                                <dd>{{ norma.fechaSancion | date('d/m/Y') }}</dd>
+                                <dd>
+                                    {{ norma.fechaSancion ? norma.fechaSancion | date('d/m/Y') : '' }}
+                                </dd>
 
                                 <dt>Observación</dt>
                                 <dd>{{ norma.observacion }}</dd>
@@ -109,9 +111,9 @@
                                 <dt>Fecha de Publicación del Boletín</dt>
                                 <dd>
                                     {% if norma.boletinOficialMunicipal %}
-                                        {{ norma.boletinOficialMunicipal.fechaPublicacion | date('d/m/Y') }}
+                                        {{ norma.boletinOficialMunicipal.fechaPublicacion ? norma.boletinOficialMunicipal.fechaPublicacion | date('d/m/Y') : '' }}
                                     {% else %}
-                                        {{ norma.fechaPublicacionBoletin | date('d/m/Y') }}
+                                        {{ norma.fechaPublicacionBoletin ? norma.fechaPublicacionBoletin | date('d/m/Y') : '' }}
                                     {% endif %}
                                 </dd>
 
@@ -154,13 +156,15 @@
                         <div class="col-md-12">
                             <ul>
                                 <li>
-                                    <a target="_blanks" href="{{ asset('uploads/textos_definitivos_normas/' ~ norma.nombreArchivo) }}">
+                                    <a target="_blanks"
+                                       href="{{ asset('uploads/textos_definitivos_normas/' ~ norma.nombreArchivo) }}">
                                         Texto <i class="fa fa-download"></i>
                                     </a>
                                 </li>
                                 {% for anexo in norma.anexos | sort %}
                                     <li>
-                                        <a target="_blanks" href="{{ asset('uploads/anexos_normas/' ~ anexo.archivo) }}">
+                                        <a target="_blanks"
+                                           href="{{ asset('uploads/anexos_normas/' ~ anexo.archivo) }}">
                                             {% if norma.anexos.count <=1 %}
                                                 ANEXO ÚNICO
                                             {% else %}
