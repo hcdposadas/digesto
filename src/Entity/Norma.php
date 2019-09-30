@@ -38,6 +38,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
  *     "beneficiarioNormas.beneficiario.nombre": "partial"
  * })
  * @ApiFilter(DateFilter::class, properties={"fechaSancion"})
+ * @ApiFilter(OrderFilter::class)
  */
 class Norma extends BaseClass
 {
