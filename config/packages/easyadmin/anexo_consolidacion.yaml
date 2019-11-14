@@ -1,0 +1,11 @@
+easy_admin:
+    entities:
+        AnexoConsolidacion:
+            class: App\Entity\AnexoConsolidacion
+            form:
+                fields:
+                    - { property: 'titulo' }
+                    - { property: 'descripcion', label: 'Descripción' }
+                    - { property: 'consolidacion' }
+                    - { property: 'archivoAnexo', type: 'vich_file'}
+                    - { property: 'orden' }

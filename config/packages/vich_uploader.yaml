@@ -29,5 +29,10 @@ vich_uploader:
             uri_prefix: '%app.path.recursos_web%'
             upload_destination: '%kernel.project_dir%/public%app.path.recursos_web%'
             namer: Vich\UploaderBundle\Naming\OrignameNamer
-
-
+        consolidaciones:
+            uri_prefix: '%app.path.consolidaciones%'
+            upload_destination: '%kernel.project_dir%/public%app.path.consolidaciones%'
+        anexos_consolidacion:
+            uri_prefix: '%app.path.anexos_consolidacion%'
+            upload_destination: '%kernel.project_dir%/public%app.path.anexos_consolidacion%'
+            namer: Vich\UploaderBundle\Naming\OrignameNamer

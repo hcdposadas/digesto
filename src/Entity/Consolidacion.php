@@ -5,113 +5,199 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ConsolidacionRepository")
+ * @Vich\Uploadable
  */
-class Consolidacion extends BaseClass
-{
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private $id;
+class Consolidacion extends BaseClass {
+	/**
+	 * @ORM\Id()
+	 * @ORM\GeneratedValue()
+	 * @ORM\Column(type="integer")
+	 */
+	private $id;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $anio;
+	/**
+	 * @ORM\Column(type="integer")
+	 */
+	private $anio;
 
-    /**
-     * @ORM\Column(type="date")
-     */
-    private $fecha;
+	/**
+	 * @ORM\Column(type="date")
+	 */
+	private $fecha;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $titulo;
+	/**
+	 * @ORM\Column(type="string", length=255, nullable=true)
+	 */
+	private $titulo;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\NormaConsolidacion", mappedBy="consolidacion", orphanRemoval=true)
-     */
-    private $normaConsolidacions;
+	/**
+	 * @ORM\OneToMany(targetEntity="App\Entity\NormaConsolidacion", mappedBy="consolidacion", orphanRemoval=true)
+	 */
+	private $normaConsolidacions;
 
-    public function __construct()
-    {
-        $this->normaConsolidacions = new ArrayCollection();
-    }
+	/**
+	 * @ORM\Column(type="string", length=255, nullable=true)
+	 */
+	private $url;
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
+	/**
+	 * @ORM\OneToMany(targetEntity="App\Entity\AnexoConsolidacion", mappedBy="consolidacion", orphanRemoval=true)
+	 * @ORM\OrderBy({"orden" = "ASC"})
+	 */
+	private $anexoConsolidacions;
 
-    public function getAnio(): ?int
-    {
-        return $this->anio;
-    }
+	/**
+	 * @ORM\Column(type="string", length=255, nullable=true)
+	 */
+	private $nombreArchivoProyecto;
 
-    public function setAnio(int $anio): self
-    {
-        $this->anio = $anio;
+	/**
+	 * @Vich\UploadableField(mapping="consolidaciones", fileNameProperty="nombreArchivoProyecto")
+	 * @var File
+	 */
+	private $archivoProyecto;
 
-        return $this;
-    }
+	/**
+	 * @return mixed
+	 */
+	public function getNombreArchivoProyecto() {
+		return $this->nombreArchivoProyecto;
+	}
 
-    public function getFecha(): ?\DateTimeInterface
-    {
-        return $this->fecha;
-    }
+	/**
+	 * @param mixed $nombreArchivoProyecto
+	 */
+	public function setNombreArchivoProyecto( $nombreArchivoProyecto ): void {
+		$this->nombreArchivoProyecto = $nombreArchivoProyecto;
+	}
 
-    public function setFecha(\DateTimeInterface $fecha): self
-    {
-        $this->fecha = $fecha;
+	public function setArchivoProyecto( File $file = null ) {
+		$this->archivoProyecto = $file;
 
-        return $this;
-    }
+		// VERY IMPORTANT:
+		// It is required that at least one field changes if you are using Doctrine,
+		// otherwise the event listeners won't be called and the file is lost
+		if ( $file ) {
+			// if 'updatedAt' is not defined in your entity, use another property
+			$this->fechaActualizacion = new \DateTime( 'now' );
+		}
+	}
 
-    public function getTitulo(): ?string
-    {
-        return $this->titulo;
-    }
+	public function getArchivoProyecto() {
+		return $this->archivoProyecto;
+	}
 
-    public function setTitulo(?string $titulo): self
-    {
-        $this->titulo = $titulo;
+	public function __toString(): string {
+		return $this->titulo;
+	}
 
-        return $this;
-    }
+	public function __construct() {
+		$this->normaConsolidacions = new ArrayCollection();
+		$this->anexoConsolidacions = new ArrayCollection();
+	}
 
-    /**
-     * @return Collection|NormaConsolidacion[]
-     */
-    public function getNormaConsolidacions(): Collection
-    {
-        return $this->normaConsolidacions;
-    }
+	public function getId(): ?int {
+		return $this->id;
+	}
 
-    public function addNormaConsolidacion(NormaConsolidacion $normaConsolidacion): self
-    {
-        if (!$this->normaConsolidacions->contains($normaConsolidacion)) {
-            $this->normaConsolidacions[] = $normaConsolidacion;
-            $normaConsolidacion->setConsolidacion($this);
-        }
+	public function getAnio(): ?int {
+		return $this->anio;
+	}
 
-        return $this;
-    }
+	public function setAnio( int $anio ): self {
+		$this->anio = $anio;
 
-    public function removeNormaConsolidacion(NormaConsolidacion $normaConsolidacion): self
-    {
-        if ($this->normaConsolidacions->contains($normaConsolidacion)) {
-            $this->normaConsolidacions->removeElement($normaConsolidacion);
-            // set the owning side to null (unless already changed)
-            if ($normaConsolidacion->getConsolidacion() === $this) {
-                $normaConsolidacion->setConsolidacion(null);
-            }
-        }
+		return $this;
+	}
 
-        return $this;
-    }
+	public function getFecha(): ?\DateTimeInterface {
+		return $this->fecha;
+	}
+
+	public function setFecha( \DateTimeInterface $fecha ): self {
+		$this->fecha = $fecha;
+
+		return $this;
+	}
+
+	public function getTitulo(): ?string {
+		return $this->titulo;
+	}
+
+	public function setTitulo( ?string $titulo ): self {
+		$this->titulo = $titulo;
+
+		return $this;
+	}
+
+	/**
+	 * @return Collection|NormaConsolidacion[]
+	 */
+	public function getNormaConsolidacions(): Collection {
+		return $this->normaConsolidacions;
+	}
+
+	public function addNormaConsolidacion( NormaConsolidacion $normaConsolidacion ): self {
+		if ( ! $this->normaConsolidacions->contains( $normaConsolidacion ) ) {
+			$this->normaConsolidacions[] = $normaConsolidacion;
+			$normaConsolidacion->setConsolidacion( $this );
+		}
+
+		return $this;
+	}
+
+	public function removeNormaConsolidacion( NormaConsolidacion $normaConsolidacion ): self {
+		if ( $this->normaConsolidacions->contains( $normaConsolidacion ) ) {
+			$this->normaConsolidacions->removeElement( $normaConsolidacion );
+			// set the owning side to null (unless already changed)
+			if ( $normaConsolidacion->getConsolidacion() === $this ) {
+				$normaConsolidacion->setConsolidacion( null );
+			}
+		}
+
+		return $this;
+	}
+
+	public function getUrl(): ?string {
+		return $this->url;
+	}
+
+	public function setUrl( ?string $url ): self {
+		$this->url = $url;
+
+		return $this;
+	}
+
+	/**
+	 * @return Collection|AnexoConsolidacion[]
+	 */
+	public function getAnexoConsolidacions(): Collection {
+		return $this->anexoConsolidacions;
+	}
+
+	public function addAnexoConsolidacion( AnexoConsolidacion $anexoConsolidacion ): self {
+		if ( ! $this->anexoConsolidacions->contains( $anexoConsolidacion ) ) {
+			$this->anexoConsolidacions[] = $anexoConsolidacion;
+			$anexoConsolidacion->setConsolidacion( $this );
+		}
+
+		return $this;
+	}
+
+	public function removeAnexoConsolidacion( AnexoConsolidacion $anexoConsolidacion ): self {
+		if ( $this->anexoConsolidacions->contains( $anexoConsolidacion ) ) {
+			$this->anexoConsolidacions->removeElement( $anexoConsolidacion );
+			// set the owning side to null (unless already changed)
+			if ( $anexoConsolidacion->getConsolidacion() === $this ) {
+				$anexoConsolidacion->setConsolidacion( null );
+			}
+		}
+
+		return $this;
+	}
 }

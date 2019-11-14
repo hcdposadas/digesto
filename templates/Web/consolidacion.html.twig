@@ -1,0 +1,76 @@
+{% extends '/Web/layout.html.twig' %}
+
+{% block title %}{{ titulo }} -{% endblock title %}
+
+    {% block meta_social %}
+
+        {% set description = titulo %}
+        {% set url = app.request.uri %}
+        {% set image = absolute_url(asset('build/images/portada-share.jpg')) %}
+
+        {# facebook #}
+        <meta property="og:url"
+              content="{{ url }}"/>
+        <meta property="og:type" content="website"/>
+        <meta property="og:title" content="{{ titulo }}"/>
+        <meta property="og:description" content="{{ description }}"/>
+        <meta property="og:image" content="{{ image }}"/>
+
+        {# twitter #}
+        <meta name="twitter:card" content="summary"/>
+        {#        <meta name="twitter:site" content="@djmposadas"/>#}
+        {#        <meta name="twitter:creator" content="@djmposadas"/>#}
+        <meta property="og:url" content="{{ url }}"/>
+        <meta property="og:title" content="{{ titulo }}"/>
+        <meta property="og:description"
+              content="{{ description }}"/>
+        <meta property="og:image"
+              content="{{ image }}"/>
+
+    {% endblock meta_social %}
+
+{% block content %}
+    <div class="page-header text-center">
+        <h1>{{ titulo }} - {{ consolidacion.anio }}</h1>
+    </div>
+    <div class="container">
+
+        <section class="" style="padding-bottom: 140px;">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <a class="btn btn-primary" target="_blank" href="{{ vich_uploader_asset(consolidacion, 'archivoProyecto') }}">
+                                Ver Proyecto
+                            </a>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <tr>
+                                <th>Anexo</th>
+                                <th>Descripción</th>
+                                <th>Archivo</th>
+                            </tr>
+                            {% for anexo in consolidacion.anexoConsolidacions %}
+                                <tr>
+                                    <td>
+                                        {{ anexo.titulo }}
+                                    </td>
+                                    <td>
+                                        {{ anexo.descripcion }}
+                                    </td>
+                                    <td>
+                                        <a target="_blank" href="{{ vich_uploader_asset(anexo, 'archivoAnexo') }}">
+                                            <i class="fa fa-file-text-o fa-fw text-secondary"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock content %}
