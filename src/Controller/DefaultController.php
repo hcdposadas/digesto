@@ -23,8 +23,8 @@ class DefaultController extends AbstractController {
 	public function index() {
 
 
-		$web            = $this->getDoctrine()->getRepository( WebDigestoTexto::class )->findOneBySlug( 'web' );
-		$aniosBoletines = $this->getDoctrine()->getRepository( BoletinOficialMunicipal::class )->getAniosBoletines();
+		$web             = $this->getDoctrine()->getRepository( WebDigestoTexto::class )->findOneBySlug( 'web' );
+		$aniosBoletines  = $this->getDoctrine()->getRepository( BoletinOficialMunicipal::class )->getAniosBoletines();
 		$consolidaciones = $this->getDoctrine()->getRepository( Consolidacion::class )->getConsolidacionesOrdenadas();
 
 		if ( ! $web ) {
@@ -46,8 +46,8 @@ class DefaultController extends AbstractController {
 
 		$titulo = 'Buscador';
 
-		$web            = $this->getDoctrine()->getRepository( WebDigestoTexto::class )->findOneBySlug( 'web' );
-		$aniosBoletines = $this->getDoctrine()->getRepository( BoletinOficialMunicipal::class )->getAniosBoletines();
+		$web             = $this->getDoctrine()->getRepository( WebDigestoTexto::class )->findOneBySlug( 'web' );
+		$aniosBoletines  = $this->getDoctrine()->getRepository( BoletinOficialMunicipal::class )->getAniosBoletines();
 		$consolidaciones = $this->getDoctrine()->getRepository( Consolidacion::class )->getConsolidacionesOrdenadas();
 
 		if ( ! $web ) {
@@ -98,8 +98,8 @@ class DefaultController extends AbstractController {
 	public function documentos() {
 		$titulo = 'Documentos';
 
-		$web            = $this->getDoctrine()->getRepository( WebDigestoTexto::class )->findOneBySlug( 'web' );
-		$aniosBoletines = $this->getDoctrine()->getRepository( BoletinOficialMunicipal::class )->getAniosBoletines();
+		$web             = $this->getDoctrine()->getRepository( WebDigestoTexto::class )->findOneBySlug( 'web' );
+		$aniosBoletines  = $this->getDoctrine()->getRepository( BoletinOficialMunicipal::class )->getAniosBoletines();
 		$consolidaciones = $this->getDoctrine()->getRepository( Consolidacion::class )->getConsolidacionesOrdenadas();
 
 		if ( ! $web ) {
@@ -123,8 +123,8 @@ class DefaultController extends AbstractController {
 	 */
 	public function pagina( Request $request ) {
 
-		$web            = $this->getDoctrine()->getRepository( WebDigestoTexto::class )->findOneBySlug( 'web' );
-		$aniosBoletines = $this->getDoctrine()->getRepository( BoletinOficialMunicipal::class )->getAniosBoletines();
+		$web             = $this->getDoctrine()->getRepository( WebDigestoTexto::class )->findOneBySlug( 'web' );
+		$aniosBoletines  = $this->getDoctrine()->getRepository( BoletinOficialMunicipal::class )->getAniosBoletines();
 		$consolidaciones = $this->getDoctrine()->getRepository( Consolidacion::class )->getConsolidacionesOrdenadas();
 
 		if ( ! $web ) {
@@ -181,11 +181,11 @@ class DefaultController extends AbstractController {
 	 * @Route("/ver_ordenanza/{id}", name="ver_ordenanza")
 	 */
 	public function verOrdenanza( Request $request, Norma $norma ) {
-		$web            = $this->getDoctrine()->getRepository( WebDigestoTexto::class )->findOneBySlug( 'web' );
-		$aniosBoletines = $this->getDoctrine()->getRepository( BoletinOficialMunicipal::class )->getAniosBoletines();
+		$web             = $this->getDoctrine()->getRepository( WebDigestoTexto::class )->findOneBySlug( 'web' );
+		$aniosBoletines  = $this->getDoctrine()->getRepository( BoletinOficialMunicipal::class )->getAniosBoletines();
 		$consolidaciones = $this->getDoctrine()->getRepository( Consolidacion::class )->getConsolidacionesOrdenadas();
 
-		$titulo = $norma->getRama()->getNumeroRomano() .' - '. $norma->getRama()->getTitulo(). ' - ' . $norma->getNumero();
+		$titulo = $norma->getRama()->getNumeroRomano() . ' - ' . $norma->getRama()->getTitulo() . ' - ' . $norma->getNumero();
 
 		return $this->render( 'Web/ordenanza.html.twig',
 			[
@@ -201,8 +201,8 @@ class DefaultController extends AbstractController {
 	 * @Route("/boletines/{anio}", name="boletines")
 	 */
 	public function boletines( Request $request, PaginatorInterface $paginator, $anio ) {
-		$web            = $this->getDoctrine()->getRepository( WebDigestoTexto::class )->findOneBySlug( 'web' );
-		$aniosBoletines = $this->getDoctrine()->getRepository( BoletinOficialMunicipal::class )->getAniosBoletines();
+		$web             = $this->getDoctrine()->getRepository( WebDigestoTexto::class )->findOneBySlug( 'web' );
+		$aniosBoletines  = $this->getDoctrine()->getRepository( BoletinOficialMunicipal::class )->getAniosBoletines();
 		$consolidaciones = $this->getDoctrine()->getRepository( Consolidacion::class )->getConsolidacionesOrdenadas();
 
 		$titulo = 'Boletines oficiales del ' . $anio;
@@ -253,7 +253,7 @@ class DefaultController extends AbstractController {
 
 		$titulo = 'Buscador';
 
-		$web            = $this->getDoctrine()->getRepository( WebDigestoTexto::class )->findOneBySlug( 'web' );
+		$web = $this->getDoctrine()->getRepository( WebDigestoTexto::class )->findOneBySlug( 'web' );
 
 
 		if ( ! $web ) {
@@ -307,15 +307,35 @@ class DefaultController extends AbstractController {
 	 * @Route("/ver_ordenanza_app/{id}", name="ver_ordenanza_app")
 	 */
 	public function verOrdenanzaApp( Request $request, Norma $norma ) {
-		$web            = $this->getDoctrine()->getRepository( WebDigestoTexto::class )->findOneBySlug( 'web' );
+		$web = $this->getDoctrine()->getRepository( WebDigestoTexto::class )->findOneBySlug( 'web' );
 
 		$titulo = $norma->getRama() . ' ' . $norma->getRama()->getNumeroRomano() . ' - ' . $norma->getNumero();
 
 		return $this->render( 'app_temp/ver_ordenanza_app.html.twig',
 			[
+				'web'    => $web,
+				'titulo' => $titulo,
+				'norma'  => $norma,
+			] );
+	}
+
+	/**
+	 * @Route("/consolidacion/{id}", name="ver_consolidacion")
+	 */
+	public function verConsolidacion( Request $request, Consolidacion $consolidacion ) {
+		$web             = $this->getDoctrine()->getRepository( WebDigestoTexto::class )->findOneBySlug( 'web' );
+		$aniosBoletines  = $this->getDoctrine()->getRepository( BoletinOficialMunicipal::class )->getAniosBoletines();
+		$consolidaciones = $this->getDoctrine()->getRepository( Consolidacion::class )->getConsolidacionesOrdenadas();
+
+		$titulo = $consolidacion->getTitulo();
+
+		return $this->render( 'Web/consolidacion.html.twig',
+			[
 				'web'             => $web,
+				'anios_boletines' => $aniosBoletines,
 				'titulo'          => $titulo,
-				'norma'           => $norma,
+				'consolidacion'   => $consolidacion,
+				'consolidaciones' => $consolidaciones
 			] );
 	}
 }

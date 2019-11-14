@@ -105,3 +105,5 @@ Icon
 !/public/uploads/documentos/boletin_oficial_municipal/.gitkeep
 /public/uploads/recursos_web/*
 !/public/uploads/recursos_web/.gitkeep
+/public/uploads/consolidaciones/*
+!/public/uploads/consolidaciones/.gitkeep
