@@ -18,6 +18,7 @@ easy_admin:
           - { label: 'Usuarios', entity: Usuario }
           - { label: 'Boletín Oficial Municipal', entity: BoletinOficialMunicipal }
           - { label: 'Consolidación', entity: Consolidacion }
+          - { label: 'Anexos Consolidación', entity: AnexoConsolidacion }
           - { label: 'Beneficiarios', entity: Beneficiario }
           - { label: 'Palabras Claves', entity: PalabraClave }
           - { label: 'Descriptores', entity: Descriptor }

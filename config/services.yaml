@@ -15,6 +15,8 @@ parameters:
     app.path.documentos_web: /uploads/documentos/documentos_web
     app.path.documentos_anexos_web: /uploads/documentos/documentos_anexos_web
     app.path.recursos_web: /uploads/recursos_web
+    app.path.consolidaciones: /uploads/consolidaciones
+    app.path.anexos_consolidacion: /uploads/consolidaciones/anexos
 
 services:
     # default configuration for services in *this* file
