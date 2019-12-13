@@ -150,6 +150,26 @@ class WebDigestoTexto extends BaseClass
 	 */
 	private $nombreArchivoFotoVicePresidenteSegundo;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $vicePresidentePrimeroCargo;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $vicePresidenteSegundoCargo;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $directorCargo;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $presidenteCargo;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -329,15 +349,15 @@ class WebDigestoTexto extends BaseClass
 	 * @return string
 	 */
 	public function getSlug(): string {
-                  		return $this->slug;
-                  	}
+                                                      		return $this->slug;
+                                                      	}
 
 	/**
 	 * @param string $slug
 	 */
 	public function setSlug( string $slug ): void {
-                  		$this->slug = $slug;
-                  	}
+                                                      		$this->slug = $slug;
+                                                      	}
 
     public function getVicePresidentePrimeroHCD(): ?string
     {
@@ -367,136 +387,184 @@ class WebDigestoTexto extends BaseClass
 	 * @return File
 	 */
 	public function getArchivoFotoPresidente(): ?File {
-		return $this->archivoFotoPresidente;
-	}
+                                    		return $this->archivoFotoPresidente;
+                                    	}
 
 	/**
 	 * @param File $archivoFotoPresidente
 	 */
 	public function setArchivoFotoPresidente( File $archivoFotoPresidente ): void {
-		$this->archivoFotoPresidente = $archivoFotoPresidente;
-
-		if ($archivoFotoPresidente) {
-			// if 'updatedAt' is not defined in your entity, use another property
-			$this->fechaActualizacion = new \DateTime('now');
-		}
-	}
+                                    		$this->archivoFotoPresidente = $archivoFotoPresidente;
+                                    
+                                    		if ($archivoFotoPresidente) {
+                                    			// if 'updatedAt' is not defined in your entity, use another property
+                                    			$this->fechaActualizacion = new \DateTime('now');
+                                    		}
+                                    	}
 
 	/**
 	 * @return mixed
 	 */
 	public function getNombreArchivoFotoPresidente() {
-		return $this->nombreArchivoFotoPresidente;
-	}
+                                    		return $this->nombreArchivoFotoPresidente;
+                                    	}
 
 	/**
 	 * @param mixed $nombreArchivoFotoPresidente
 	 */
 	public function setNombreArchivoFotoPresidente( $nombreArchivoFotoPresidente ): void {
-		$this->nombreArchivoFotoPresidente = $nombreArchivoFotoPresidente;
-	}
+                                    		$this->nombreArchivoFotoPresidente = $nombreArchivoFotoPresidente;
+                                    	}
 
 	/**
 	 * @return File
 	 */
 	public function getArchivoFotoDirector(): ?File {
-		return $this->archivoFotoDirector;
-	}
+                                    		return $this->archivoFotoDirector;
+                                    	}
 
 	/**
 	 * @param File $archivoFotoDirector
 	 */
 	public function setArchivoFotoDirector( File $archivoFotoDirector ): void {
-		$this->archivoFotoDirector = $archivoFotoDirector;
-
-		if ($archivoFotoDirector) {
-			// if 'updatedAt' is not defined in your entity, use another property
-			$this->fechaActualizacion = new \DateTime('now');
-		}
-	}
+                                    		$this->archivoFotoDirector = $archivoFotoDirector;
+                                    
+                                    		if ($archivoFotoDirector) {
+                                    			// if 'updatedAt' is not defined in your entity, use another property
+                                    			$this->fechaActualizacion = new \DateTime('now');
+                                    		}
+                                    	}
 
 	/**
 	 * @return mixed
 	 */
 	public function getNombreArchivoFotoDirector() {
-		return $this->nombreArchivoFotoDirector;
-	}
+                                    		return $this->nombreArchivoFotoDirector;
+                                    	}
 
 	/**
 	 * @param mixed $nombreArchivoFotoDirector
 	 */
 	public function setNombreArchivoFotoDirector( $nombreArchivoFotoDirector ): void {
-		$this->nombreArchivoFotoDirector = $nombreArchivoFotoDirector;
-	}
+                                    		$this->nombreArchivoFotoDirector = $nombreArchivoFotoDirector;
+                                    	}
 
 	/**
 	 * @return File
 	 */
 	public function getArchivoFotoVicePresidentePrimero(): ?File {
-		return $this->archivoFotoVicePresidentePrimero;
-	}
+                                    		return $this->archivoFotoVicePresidentePrimero;
+                                    	}
 
 	/**
 	 * @param File $archivoFotoVicePresidentePrimero
 	 */
 	public function setArchivoFotoVicePresidentePrimero( File $archivoFotoVicePresidentePrimero ): void {
-		$this->archivoFotoVicePresidentePrimero = $archivoFotoVicePresidentePrimero;
-
-		if ($archivoFotoVicePresidentePrimero) {
-			// if 'updatedAt' is not defined in your entity, use another property
-			$this->fechaActualizacion = new \DateTime('now');
-		}
-	}
+                                    		$this->archivoFotoVicePresidentePrimero = $archivoFotoVicePresidentePrimero;
+                                    
+                                    		if ($archivoFotoVicePresidentePrimero) {
+                                    			// if 'updatedAt' is not defined in your entity, use another property
+                                    			$this->fechaActualizacion = new \DateTime('now');
+                                    		}
+                                    	}
 
 	/**
 	 * @return mixed
 	 */
 	public function getNombreArchivoFotoVicePresidentePrimero() {
-		return $this->nombreArchivoFotoVicePresidentePrimero;
-	}
+                                    		return $this->nombreArchivoFotoVicePresidentePrimero;
+                                    	}
 
 	/**
 	 * @param mixed $nombreArchivoFotoVicePresidentePrimero
 	 */
 	public function setNombreArchivoFotoVicePresidentePrimero( $nombreArchivoFotoVicePresidentePrimero ): void {
-		$this->nombreArchivoFotoVicePresidentePrimero = $nombreArchivoFotoVicePresidentePrimero;
-	}
+                                    		$this->nombreArchivoFotoVicePresidentePrimero = $nombreArchivoFotoVicePresidentePrimero;
+                                    	}
 
 	/**
 	 * @return File
 	 */
 	public function getArchivoFotoVicePresidenteSegundo(): ?File {
-		return $this->archivoFotoVicePresidenteSegundo;
-	}
+                                    		return $this->archivoFotoVicePresidenteSegundo;
+                                    	}
 
 	/**
 	 * @param File $archivoFotoVicePresidenteSegundo
 	 */
 	public function setArchivoFotoVicePresidenteSegundo( File $archivoFotoVicePresidenteSegundo ): void {
-
-		$this->archivoFotoVicePresidenteSegundo = $archivoFotoVicePresidenteSegundo;
-
-		// VERY IMPORTANT:
-		// It is required that at least one field changes if you are using Doctrine,
-		// otherwise the event listeners won't be called and the file is lost
-		if ($archivoFotoVicePresidenteSegundo) {
-			// if 'updatedAt' is not defined in your entity, use another property
-			$this->fechaActualizacion = new \DateTime('now');
-		}
-	}
+                                    
+                                    		$this->archivoFotoVicePresidenteSegundo = $archivoFotoVicePresidenteSegundo;
+                                    
+                                    		// VERY IMPORTANT:
+                                    		// It is required that at least one field changes if you are using Doctrine,
+                                    		// otherwise the event listeners won't be called and the file is lost
+                                    		if ($archivoFotoVicePresidenteSegundo) {
+                                    			// if 'updatedAt' is not defined in your entity, use another property
+                                    			$this->fechaActualizacion = new \DateTime('now');
+                                    		}
+                                    	}
 
 	/**
 	 * @return mixed
 	 */
 	public function getNombreArchivoFotoVicePresidenteSegundo() {
-		return $this->nombreArchivoFotoVicePresidenteSegundo;
-	}
+                                    		return $this->nombreArchivoFotoVicePresidenteSegundo;
+                                    	}
 
 	/**
 	 * @param mixed $nombreArchivoFotoVicePresidenteSegundo
 	 */
 	public function setNombreArchivoFotoVicePresidenteSegundo( $nombreArchivoFotoVicePresidenteSegundo ): void {
-		$this->nombreArchivoFotoVicePresidenteSegundo = $nombreArchivoFotoVicePresidenteSegundo;
-	}
+                                    		$this->nombreArchivoFotoVicePresidenteSegundo = $nombreArchivoFotoVicePresidenteSegundo;
+                                    	}
+
+    public function getVicePresidentePrimeroCargo(): ?string
+    {
+        return $this->vicePresidentePrimeroCargo;
+    }
+
+    public function setVicePresidentePrimeroCargo(?string $vicePresidentePrimeroCargo): self
+    {
+        $this->vicePresidentePrimeroCargo = $vicePresidentePrimeroCargo;
+
+        return $this;
+    }
+
+    public function getVicePresidenteSegundoCargo(): ?string
+    {
+        return $this->vicePresidenteSegundoCargo;
+    }
+
+    public function setVicePresidenteSegundoCargo(?string $vicePresidenteSegundoCargo): self
+    {
+        $this->vicePresidenteSegundoCargo = $vicePresidenteSegundoCargo;
+
+        return $this;
+    }
+
+    public function getDirectorCargo(): ?string
+    {
+        return $this->directorCargo;
+    }
+
+    public function setDirectorCargo(?string $directorCargo): self
+    {
+        $this->directorCargo = $directorCargo;
+
+        return $this;
+    }
+
+    public function getPresidenteCargo(): ?string
+    {
+        return $this->presidenteCargo;
+    }
+
+    public function setPresidenteCargo(?string $presidenteCargo): self
+    {
+        $this->presidenteCargo = $presidenteCargo;
+
+        return $this;
+    }
 
 }
