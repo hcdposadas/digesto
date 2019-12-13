@@ -17,6 +17,7 @@ class WebDigestoTextoType extends AbstractType {
 				[
 					'label' => 'Presidente HCD'
 				] )
+			->add('presidenteCargo')
 			->add( 'archivoFotoPresidente',
 				VichFileType::class,
 				[
@@ -29,6 +30,7 @@ class WebDigestoTextoType extends AbstractType {
 				[
 					'label' => 'Vice Presidenta 1º HCD'
 				] )
+			->add('vicePresidentePrimeroCargo')
 			->add( 'archivoFotoVicePresidentePrimero',
 				VichFileType::class,
 				[
@@ -41,6 +43,7 @@ class WebDigestoTextoType extends AbstractType {
 				[
 					'label' => 'Vice Presidente 2º HCD'
 				] )
+			->add('vicePresidenteSegundoCargo')
 			->add( 'archivoFotoVicePresidenteSegundo',
 				VichFileType::class,
 				[
@@ -53,6 +56,7 @@ class WebDigestoTextoType extends AbstractType {
 				[
 					'label' => 'Director Digesto'
 				] )
+			->add('directorCargo')
 			->add( 'archivoFotoDirector',
 				VichFileType::class,
 				[
