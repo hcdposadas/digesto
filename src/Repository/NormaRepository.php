@@ -128,6 +128,12 @@ class NormaRepository extends ServiceEntityRepository {
 
 		}
 
+		if ( isset( $data['decretoPromulgatorio'] ) ) {
+			$qb->andWhere( 'n.decretoPromulgatorio = :decretoPromulgatorio' )
+			   ->setParameter( 'decretoPromulgatorio', $data['decretoPromulgatorio'] );
+
+		}
+
 		return $qb;
 	}
 
