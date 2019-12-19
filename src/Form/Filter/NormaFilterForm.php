@@ -37,6 +37,7 @@ class NormaFilterForm extends AbstractType {
 			->add( 'numero' )
 			->add( 'paginaBoletin' )
 			->add( 'texto' )
+			->add( 'decretoPromulgatorio' )
 			->add( 'buscar',
 				SubmitType::class,
 				[
