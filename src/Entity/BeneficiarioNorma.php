@@ -23,7 +23,7 @@ class BeneficiarioNorma extends BaseClass
     private $norma;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Beneficiario")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Beneficiario",cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $beneficiario;
