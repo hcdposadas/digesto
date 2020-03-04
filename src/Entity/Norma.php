@@ -16,6 +16,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Core\Serializer\Filter\PropertyFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\NormaRepository")
@@ -39,6 +40,11 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
  * })
  * @ApiFilter(DateFilter::class, properties={"fechaSancion"})
  * @ApiFilter(OrderFilter::class)
+ * @UniqueEntity(
+ *     fields={"numero", "rama"},
+ *     errorPath="numero",
+ *     message="Ya existe la norma para esta Rama"
+ * )
  */
 class Norma extends BaseClass
 {
