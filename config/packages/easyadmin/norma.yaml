@@ -1,0 +1,14 @@
+easy_admin:
+    entities:
+        Norma:
+            class: App\Entity\Norma
+            list:
+              fields:
+                - { property: 'numero' }
+                - { property: 'rama' }
+                - { property: 'activo' }
+            form:
+              fields:
+                - { property: 'numero' }
+                - { property: 'rama' }
+                - { property: 'activo' }

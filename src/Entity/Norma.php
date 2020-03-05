@@ -132,7 +132,7 @@ class Norma extends BaseClass
     private $tipoBoletin;
 
     /**
-     * @ORM\OneToMany(targetEntity="AnexoNorma", mappedBy="norma", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="AnexoNorma", mappedBy="norma", cascade={"persist", "remove"}, orphanRemoval=true)
      * @ORM\OrderBy({"id" = "ASC", "orden"= "ASC" })
      * @Groups({"norma"})
      */
