@@ -72,6 +72,10 @@ class AnexoNorma extends BaseClass {
 		return $this->archivoAnexo;
 	}
 
+	public function __toString(): ?string {
+		return $this->titulo . ' ' . $this->fecha . ' ' . $this->archivo;
+	}
+
 	public function getId(): ?int {
 		return $this->id;
 	}
@@ -107,7 +111,7 @@ class AnexoNorma extends BaseClass {
     /**
      * @param string $archivo
      */
-    public function setArchivo(string $archivo): void
+    public function setArchivo(?string $archivo): void
     {
         $this->archivo = $archivo;
     }

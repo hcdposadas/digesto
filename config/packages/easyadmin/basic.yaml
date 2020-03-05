@@ -14,6 +14,7 @@ easy_admin:
 #        form_theme: ['horizontal']
         menu:
           - { label: 'Administración', route: 'administrador' }
+          - { label: 'Normas', entity: Norma }
           - { label: 'Ramas', entity: Rama }
           - { label: 'Usuarios', entity: Usuario }
           - { label: 'Boletín Oficial Municipal', entity: BoletinOficialMunicipal }

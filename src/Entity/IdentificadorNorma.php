@@ -28,7 +28,11 @@ class IdentificadorNorma extends BaseClass
      */
     private $identificador;
 
-    public function getId(): ?int
+    public function __toString() {
+	    return $this->identificador ? $this->identificador->__toString() : '';
+    }
+
+	public function getId(): ?int
     {
         return $this->id;
     }
