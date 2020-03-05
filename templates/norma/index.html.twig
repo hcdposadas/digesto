@@ -4,6 +4,11 @@
 
 {% block stylesheets %}
     {{ encore_entry_link_tags('css/datatables') }}
+    <style>
+        .select2-search__field{
+            width: 60rem !important;
+        }
+    </style>
 {% endblock stylesheets %}
 
 {% block body %}
@@ -35,6 +40,9 @@
                         {{ form_row(filter_type.fechaSancion) }}
                         {{ form_row(filter_type.temaGeneral) }}
                         {{ form_row(filter_type.paginaBoletin) }}
+                        {{ form_row(filter_type.descriptores) }}
+                        {{ form_row(filter_type.identificadores) }}
+                        {{ form_row(filter_type.palabrasClave) }}
 
                     </div>
                 </div>

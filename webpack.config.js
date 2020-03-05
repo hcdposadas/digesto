@@ -48,6 +48,8 @@ Encore
         { from: './assets/images', to: 'images' }
     ]))
 
+    .splitEntryChunks()
+
     .copyFiles([
         {from: './node_modules/ckeditor/', to: 'ckeditor/[path][name].[ext]', pattern: /\.(js|css)$/, includeSubdirectories: false},
         {from: './node_modules/ckeditor/adapters', to: 'ckeditor/adapters/[path][name].[ext]'},

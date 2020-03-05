@@ -106,6 +106,29 @@ class NormaRepository extends ServiceEntityRepository {
 
 		}
 
+		if ( $data['descriptores']) {
+			$qb->leftJoin( 'n.descriptoresNorma', 'descriptoresNorma' );
+
+			$qb->orWhere( $qb->expr()->in( 'descriptoresNorma.descriptor', ':descriptores' ) );
+
+			$qb->setParameter( 'descriptores', [ $data['descriptores'] ] );
+
+		}
+		if ( $data['identificadores'] ) {
+			$qb->leftJoin( 'n.identificadoresNorma', 'identificadoresNorma' );
+
+			$qb->orWhere( $qb->expr()->in( 'identificadoresNorma.identificador', ':identificadores' ) );
+
+			$qb->setParameter( 'identificadores', [ $data['identificadores'] ] );
+		}
+		if ( $data['palabrasClave'] ) {
+			$qb->leftJoin( 'n.palabrasClaveNorma', 'palabrasClaveNorma' );
+
+			$qb->orWhere( $qb->expr()->in( 'palabrasClaveNorma.palabraClave', ':palabrasClave' ) );
+
+			$qb->setParameter( 'palabrasClave', [ $data['palabrasClave'] ] );
+		}
+
 		if ( isset( $data['fechaSancion'] ) ) {
 
 			$qb->andWhere( 'n.fechaSancion = :fechaSancion' )
@@ -140,6 +163,8 @@ class NormaRepository extends ServiceEntityRepository {
 	public function getQbBuscar( $data ) {
 		$qb = $this->setFiltros( $this->getQbAll(), $data );
 
+
+		dump( $data );
 
 		$qb->orderBy( 'n.numero', 'ASC' );
 
