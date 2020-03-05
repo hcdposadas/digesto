@@ -28,6 +28,10 @@ class DescriptorNorma extends BaseClass
      */
     private $descriptor;
 
+	public function __toString() {
+		return $this->descriptor ? $this->descriptor->__toString(): '';
+	}
+
     public function getId(): ?int
     {
         return $this->id;

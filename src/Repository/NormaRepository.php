@@ -163,9 +163,6 @@ class NormaRepository extends ServiceEntityRepository {
 	public function getQbBuscar( $data ) {
 		$qb = $this->setFiltros( $this->getQbAll(), $data );
 
-
-		dump( $data );
-
 		$qb->orderBy( 'n.numero', 'ASC' );
 
 		return $qb;

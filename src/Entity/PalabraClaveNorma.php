@@ -28,6 +28,10 @@ class PalabraClaveNorma extends BaseClass
      */
     private $palabraClave;
 
+	public function __toString() {
+		return $this->palabraClave ? $this->palabraClave->__toString() : '';
+	}
+
     public function getId(): ?int
     {
         return $this->id;
