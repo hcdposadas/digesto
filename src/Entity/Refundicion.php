@@ -17,6 +17,12 @@ class Refundicion extends BaseClass
     private $id;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Consolidacion")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $consolidacion;
+
+    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Norma", inversedBy="refundiciones")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -66,6 +72,22 @@ class Refundicion extends BaseClass
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getConsolidacion()
+    {
+        return $this->consolidacion;
+    }
+
+    /**
+     * @param mixed $consolidacion
+     */
+    public function setConsolidacion($consolidacion): void
+    {
+        $this->consolidacion = $consolidacion;
     }
 
     public function getNorma(): ?Norma

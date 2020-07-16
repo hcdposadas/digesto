@@ -19,6 +19,12 @@ class Abrogacion extends BaseClass
 	private $id;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Consolidacion")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $consolidacion;
+
+    /**
 	 * La norma abrogada
 	 *
      * @ORM\ManyToOne(targetEntity="App\Entity\Norma", inversedBy="abrogaciones")
@@ -74,6 +80,22 @@ class Abrogacion extends BaseClass
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getConsolidacion()
+    {
+        return $this->consolidacion;
+    }
+
+    /**
+     * @param mixed $consolidacion
+     */
+    public function setConsolidacion($consolidacion): void
+    {
+        $this->consolidacion = $consolidacion;
     }
 
     public function getNorma(): ?Norma

@@ -17,6 +17,12 @@ class ConflictoNormativo extends BaseClass
     private $id;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Consolidacion")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $consolidacion;
+
+    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Norma", inversedBy="conflictosNormativos")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -54,9 +60,9 @@ class ConflictoNormativo extends BaseClass
     private $articuloAnexoConflicto;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="App\Entity\TipoSolucionConflicto")
      */
-    private $solucionAdoptada;
+    private $tipoSolucion;
 
     /**
      * @ORM\Column(type="text")
@@ -71,6 +77,22 @@ class ConflictoNormativo extends BaseClass
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getConsolidacion()
+    {
+        return $this->consolidacion;
+    }
+
+    /**
+     * @param mixed $consolidacion
+     */
+    public function setConsolidacion($consolidacion): void
+    {
+        $this->consolidacion = $consolidacion;
     }
 
     public function getNorma(): ?Norma
@@ -161,16 +183,20 @@ class ConflictoNormativo extends BaseClass
         return $this;
     }
 
-    public function getSolucionAdoptada(): ?string
+    /**
+     * @return mixed
+     */
+    public function getTipoSolucion()
     {
-        return $this->solucionAdoptada;
+        return $this->tipoSolucion;
     }
 
-    public function setSolucionAdoptada(string $solucionAdoptada): self
+    /**
+     * @param mixed $tipoSolucion
+     */
+    public function setTipoSolucion($tipoSolucion): void
     {
-        $this->solucionAdoptada = $solucionAdoptada;
-
-        return $this;
+        $this->tipoSolucion = $tipoSolucion;
     }
 
     public function getFundamentacion(): ?string

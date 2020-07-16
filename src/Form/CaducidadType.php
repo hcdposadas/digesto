@@ -3,8 +3,10 @@
 namespace App\Form;
 
 use App\Entity\Caducidad;
+use App\Entity\TipoCaducidad;
+use Doctrine\ORM\EntityRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -16,14 +18,14 @@ class CaducidadType extends AbstractType
             ->add('normaCompleta')
             ->add('articulo')
             ->add('articuloAnexo')
-            ->add('causal', ChoiceType::class, [
-				'choices' => [
-					'Plazo vencido' => 'plazo-vencido',
-					'Objetivo cumplido' => 'objetivo-cumplido',
-					'Cumplimiento de la condición' => 'cumplimiento-condicion',
-					'Refundición' => 'refundicion',
-				]
-			])
+            ->add('tipoCaducidad', EntityType::class, [
+                'class' => TipoCaducidad::class,
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('u')
+                        ->orderBy('u.nombre', 'ASC')
+                        ->where('u.activo = true');
+                }
+            ])
             ->add('fundamentacion')
             ->add('observaciones')
         ;

@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CaducidadRepository")
  */
-class Caducidad
+class Caducidad extends BaseClass
 {
     /**
      * @ORM\Id()
@@ -15,6 +15,12 @@ class Caducidad
      * @ORM\Column(type="integer")
      */
     private $id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Consolidacion")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $consolidacion;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Norma", inversedBy="caducidades")
@@ -38,9 +44,9 @@ class Caducidad
     private $articuloAnexo;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="App\Entity\TipoCaducidad")
      */
-    private $causal;
+    private $tipoCaducidad;
 
     /**
      * @ORM\Column(type="text")
@@ -55,6 +61,22 @@ class Caducidad
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getConsolidacion()
+    {
+        return $this->consolidacion;
+    }
+
+    /**
+     * @param mixed $consolidacion
+     */
+    public function setConsolidacion($consolidacion): void
+    {
+        $this->consolidacion = $consolidacion;
     }
 
     public function getNorma(): ?Norma
@@ -105,16 +127,20 @@ class Caducidad
         return $this;
     }
 
-    public function getCausal(): ?string
+    /**
+     * @return mixed
+     */
+    public function getTipoCaducidad()
     {
-        return $this->causal;
+        return $this->tipoCaducidad;
     }
 
-    public function setCausal(string $causal): self
+    /**
+     * @param mixed $tipoCaducidad
+     */
+    public function setTipoCaducidad($tipoCaducidad): void
     {
-        $this->causal = $causal;
-
-        return $this;
+        $this->tipoCaducidad = $tipoCaducidad;
     }
 
     public function getFundamentacion(): ?string

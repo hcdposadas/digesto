@@ -22,14 +22,20 @@ class Adhesion extends BaseClass
     private $id;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Consolidacion")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $consolidacion;
+
+    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Norma", inversedBy="adhesiones")
      */
     private $norma;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=false)
+     * @ORM\ManyToOne(targetEntity="App\Entity\TipoNormaAdhesion")
      */
-    private $tipo;
+    private $tipoNormaAdhesion;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
@@ -44,6 +50,22 @@ class Adhesion extends BaseClass
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getConsolidacion()
+    {
+        return $this->consolidacion;
+    }
+
+    /**
+     * @param mixed $consolidacion
+     */
+    public function setConsolidacion($consolidacion): void
+    {
+        $this->consolidacion = $consolidacion;
     }
 
     /**
@@ -79,18 +101,22 @@ class Adhesion extends BaseClass
         return $this;
     }
 
-
-    public function getTipo() : ?string
+    /**
+     * @return mixed
+     */
+    public function getTipoNormaAdhesion()
     {
-        return $this->tipo;
+        return $this->tipoNormaAdhesion;
     }
 
-    public function setTipo(string $tipo)
+    /**
+     * @param mixed $tipoNormaAdhesion
+     */
+    public function setTipoNormaAdhesion($tipoNormaAdhesion): void
     {
-        $this->tipo = $tipo;
-
-        return $this;
+        $this->tipoNormaAdhesion = $tipoNormaAdhesion;
     }
+
 
 	/**
 	 * @return mixed

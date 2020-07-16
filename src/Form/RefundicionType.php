@@ -15,12 +15,11 @@ class RefundicionType extends AbstractType
             ->add('articulo')
             ->add('articuloAnexo')
             ->add('normaCompleta')
+            ->add('normaRefundida')
             ->add('articuloRefundido')
             ->add('articuloAnexoRefundido')
             ->add('fundamentacion')
             ->add('observaciones')
-            ->add('norma')
-            ->add('normaRefundida')
         ;
     }
 

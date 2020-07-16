@@ -62,7 +62,13 @@ class Consolidacion extends BaseClass {
 	 */
 	private $archivoProyecto;
 
-	/**
+    /**
+     * @ORM\Column(type="boolean", options={"default":"0"})
+     */
+    private $actual = false;
+
+
+    /**
 	 * @return mixed
 	 */
 	public function getNombreArchivoProyecto() {
