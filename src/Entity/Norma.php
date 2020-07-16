@@ -54,63 +54,53 @@ class Norma extends BaseClass
      * @ORM\Column(type="integer")
      */
     private $id;
-
     /**
      * @ORM\Column(type="date", nullable=true)
      * @Groups({"norma"})
      */
     private $fechaSancion;
-
     /**
      * @ORM\Column(type="string", length=2048)
      * @Groups({"norma"})
      */
     private $temaGeneral;
-
     /**
      * @ORM\Column(type="integer")
      * @Groups({"norma"})
      * @ApiFilter(SearchFilter::class)
      */
     private $numero;
-
     /**
      * @ORM\Column(type="integer", nullable=true)
      * @Groups({"norma"})
      */
     private $paginaBoletin;
-
     /**
      * @ORM\Column(type="text", nullable=true)
      * @Groups({"norma"})
      */
     private $observacion;
-
     /**
      * @Vich\UploadableField(mapping="textos_definitivos_normas", fileNameProperty="nombreArchivo")
      * @var File
      * @Groups({"norma"})
      */
     private $archivoNorma;
-
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Groups({"norma"})
      */
     private $decretoPromulgatorio;
-
     /**
      * @ORM\Column(type="date", nullable=true)
      * @Groups({"norma"})
      */
     private $fechaPromulgacion;
-
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\TipoPromulgacion")
      * @Groups({"norma"})
      */
     private $tipoPromulgacion;
-
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Rama")
      * @ORM\JoinColumn(nullable=true)
@@ -118,65 +108,54 @@ class Norma extends BaseClass
      * @ApiFilter(SearchFilter::class)
      */
     private $rama;
-
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Rama")
      * @Groups({"norma"})
      */
     private $ramaVigenteNoConsolidada;
-
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\TipoBoletin")
      * @Groups({"norma"})
      */
     private $tipoBoletin;
-
     /**
      * @ORM\OneToMany(targetEntity="AnexoNorma", mappedBy="norma", cascade={"persist", "remove"}, orphanRemoval=true)
      * @ORM\OrderBy({"id" = "ASC", "orden"= "ASC" })
      * @Groups({"norma"})
      */
     private $anexos;
-
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\BeneficiarioNorma", mappedBy="norma", orphanRemoval=true, cascade={"persist"})
      */
     private $beneficiarioNormas;
-
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\PalabraClaveNorma", mappedBy="norma", orphanRemoval=true, cascade={"persist"})
      */
     private $palabrasClaveNorma;
-
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\DescriptorNorma", mappedBy="norma", orphanRemoval=true, cascade={"persist"})
      */
     private $descriptoresNorma;
-
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\IdentificadorNorma", mappedBy="norma", orphanRemoval=true, cascade={"persist"})
      */
     private $identificadoresNorma;
-
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\TipoOrdenanza")
      * @Groups({"norma"})
      */
     private $tipoOrdenanza;
-
     /**
      * @ORM\Column(type="integer", nullable=true)
      * @Groups({"norma"})
      * @ApiFilter(SearchFilter::class)
      */
     private $numeroAnterior;
-
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\BoletinOficialMunicipal", inversedBy="normas")
      * @Groups({"norma"})
      */
     private $boletinOficialMunicipal;
-
     /**
      * @Gedmo\Versioned
      * @ORM\Column(type="text", nullable=true)
@@ -184,13 +163,13 @@ class Norma extends BaseClass
      */
     private $texto;
 
-	/**
-	 * @var bool
-	 *
-	 * @ORM\Column(name="vigente_no_consolidada", type="boolean", nullable=true)
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="vigente_no_consolidada", type="boolean", nullable=true)
      * @Groups({"norma"})
-	 */
-	protected $vigenteNoConsolidada;
+     */
+    protected $vigenteNoConsolidada;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -210,6 +189,72 @@ class Norma extends BaseClass
      */
     private $fechaPublicacionBoletin;
 
+    /**
+     * Tabla de cambios
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\CambioNorma", mappedBy="norma", cascade={"persist", "remove"}, orphanRemoval=true))
+     */
+    private $cambiosNormas;
+
+    /**
+     * Lista de adhesiones a leyes/decretos
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\Adhesion", mappedBy="norma", cascade={"persist", "remove"}, orphanRemoval=true))
+     */
+    private $adhesiones;
+
+    /**
+     * Lista de abrogaciones que sufre esta norma o sus articulos (este lado se abroga, el otro lado queda vigente)
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\Abrogacion", mappedBy="norma", cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    private $abrogaciones;
+
+    /**
+     * Lista de abrogaciones que produce esta norma (el otro lado se abroga, este lado queda vigente)
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\Abrogacion", mappedBy="normaAbrogante", cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    private $abrogadas;
+
+    /**
+     * Lista de caducidades que caducan esta norma o sus articulos
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\Caducidad", mappedBy="norma", cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    private $caducidades;
+
+    /**
+     * Lista de conflictos que tiene esta norma o sus articulos, por los que caduca
+     * Esta es la norma o los articulos que caducan (el otro lado sigue vigente)
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\ConflictoNormativo", mappedBy="norma", cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    private $conflictosNormativos;
+
+    /**
+     * Lista de conflictos que tienen otra normas con esta
+     * Esta norma o sus articulos siguen vigentes (el otro lado caduca)
+     * @ORM\OneToMany(targetEntity="App\Entity\ConflictoNormativo", mappedBy="conflictoConNorma", cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    private $conflictosConNormas;
+
+    /**
+     * Lista de las refundiciones que recibe esta norma
+     * Es decir, esta norma o articulo sigue siendo vigente (el otro lado caduca)
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\Refundicion", mappedBy="norma", cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    private $refundiciones;
+
+    /**
+     * Lista de las refundiciones sobre esta norma
+     * Es decir, esta normao o sus articulos caducan por refundicion (el otro lado sigue vigente)
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\Refundicion", mappedBy="normaRefundida", cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    private $refundidas;
+
     public function __construct()
     {
         $this->anexos = new ArrayCollection();
@@ -217,8 +262,58 @@ class Norma extends BaseClass
         $this->palabrasClaveNorma = new ArrayCollection();
         $this->descriptoresNorma = new ArrayCollection();
         $this->identificadoresNorma = new ArrayCollection();
+        $this->cambiosNormas = new ArrayCollection();
+        $this->adhesiones = new ArrayCollection();
+        $this->abrogaciones = new ArrayCollection();
+        $this->abrogadas = new ArrayCollection();
+        $this->caducidades = new ArrayCollection();
+        $this->conflictosNormativos = new ArrayCollection();
+        $this->conflictosConNormas = new ArrayCollection();
+        $this->refundiciones = new ArrayCollection();
+        $this->refundidas = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        if ($this->getRama()) {
+            return $this->getRama()->getNumeroRomano() . ' - ' . $this->getNumero();
+        }
+        return '#' . $this->getId();
+    }
+
+    public function getRama(): ?Rama
+    {
+        return $this->rama;
+    }
+
+    public function setRama(?Rama $rama): self
+    {
+        $this->rama = $rama;
+
+        return $this;
+    }
+
+    public function getNumero(): ?int
+    {
+        return $this->numero;
+    }
+
+    public function setNumero(int $numero): self
+    {
+        $this->numero = $numero;
+
+        return $this;
+    }
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getArchivoNorma()
+    {
+        return $this->archivoNorma;
+    }
 
     public function setArchivoNorma(File $file = null)
     {
@@ -231,16 +326,6 @@ class Norma extends BaseClass
             // if 'updatedAt' is not defined in your entity, use another property
             $this->fechaActualizacion = new \DateTime('now');
         }
-    }
-
-    public function getArchivoNorma()
-    {
-        return $this->archivoNorma;
-    }
-
-    public function getId(): ?int
-    {
-        return $this->id;
     }
 
     public function getFechaSancion(): ?\DateTimeInterface
@@ -263,18 +348,6 @@ class Norma extends BaseClass
     public function setTemaGeneral(string $temaGeneral): self
     {
         $this->temaGeneral = $temaGeneral;
-
-        return $this;
-    }
-
-    public function getNumero(): ?int
-    {
-        return $this->numero;
-    }
-
-    public function setNumero(int $numero): self
-    {
-        $this->numero = $numero;
 
         return $this;
     }
@@ -335,18 +408,6 @@ class Norma extends BaseClass
     public function setTipoPromulgacion(?TipoPromulgacion $tipoPromulgacion): self
     {
         $this->tipoPromulgacion = $tipoPromulgacion;
-
-        return $this;
-    }
-
-    public function getRama(): ?Rama
-    {
-        return $this->rama;
-    }
-
-    public function setRama(?Rama $rama): self
-    {
-        $this->rama = $rama;
 
         return $this;
     }
@@ -578,19 +639,21 @@ class Norma extends BaseClass
         return $this;
     }
 
-	/**
-	 * @return bool
-	 */
-	public function isVigenteNoConsolidada() {
-                           		return $this->vigenteNoConsolidada;
-                           	}
+    /**
+     * @return bool
+     */
+    public function isVigenteNoConsolidada()
+    {
+        return $this->vigenteNoConsolidada;
+    }
 
-	/**
-	 * @param bool $vigenteNoConsolidada
-	 */
-	public function setVigenteNoConsolidada( bool $vigenteNoConsolidada ): void {
-                           		$this->vigenteNoConsolidada = $vigenteNoConsolidada;
-                           	}
+    /**
+     * @param bool $vigenteNoConsolidada
+     */
+    public function setVigenteNoConsolidada(bool $vigenteNoConsolidada): void
+    {
+        $this->vigenteNoConsolidada = $vigenteNoConsolidada;
+    }
 
     public function getNombreArchivo(): ?string
     {
@@ -629,4 +692,300 @@ class Norma extends BaseClass
     }
 
 
+    /**
+     * Get the value of cambiosNormas
+     */
+    public function getCambiosNormas()
+    {
+        return $this->cambiosNormas;
+    }
+
+    /**
+     * Set the value of cambiosNormas
+     *
+     * @return  self
+     */
+    public function setCambiosNormas($cambiosNormas)
+    {
+        $this->cambiosNormas = $cambiosNormas;
+
+        return $this;
+    }
+
+    public function addCambiosNorma(CambioNorma $cambioNorma): self
+    {
+        if (!$this->cambiosNormas->contains($cambioNorma)) {
+            $this->cambiosNormas[] = $cambioNorma;
+            $cambioNorma->setNorma($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCambiosNorma(CambioNorma $cambioNorma): self
+    {
+        if ($this->cambiosNormas->contains($cambioNorma)) {
+            $this->cambiosNormas->removeElement($cambioNorma);
+            if ($cambioNorma->getNorma() === $this) {
+                $cambioNorma->setNorma(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return ollection
+     */
+    public function getAdhesiones(): Collection
+    {
+        return $this->adhesiones;
+    }
+
+    /**
+     * @param Collection $adhesiones
+     */
+    public function setAdhesiones(Collection $adhesiones): void
+    {
+        $this->adhesiones = $adhesiones;
+    }
+
+    public function addAdhesion(Adhesion $adhesion): self
+    {
+        if (!$this->adhesiones->contains($adhesion)) {
+            $this->adhesiones[] = $adhesion;
+            $adhesion->setNorma($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAdhesion(Adhesion $adhesion): self
+    {
+        if ($this->adhesiones->contains($adhesion)) {
+            $this->adhesiones->removeElement($adhesion);
+            if ($adhesion->getNorma() === $this) {
+                $adhesion->setNorma(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Abrogacion[]
+     */
+    public function getAbrogaciones(): Collection
+    {
+        return $this->abrogaciones;
+    }
+
+    public function addAbrogacion(Abrogacion $abrogacion): self
+    {
+        if (!$this->abrogaciones->contains($abrogacion)) {
+            $this->abrogaciones[] = $abrogacion;
+            $abrogacion->setNorma($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAbrogacion(Abrogacion $abrogacion): self
+    {
+        if ($this->abrogaciones->contains($abrogacion)) {
+            $this->abrogaciones->removeElement($abrogacion);
+            // set the owning side to null (unless already changed)
+            if ($abrogacion->getNorma() === $this) {
+                $abrogacion->setNorma(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Abrogacion[]
+     */
+    public function getAbrogadas(): Collection
+    {
+        return $this->abrogadas;
+    }
+
+    public function addAbrogada(Abrogacion $abrogada): self
+    {
+        if (!$this->abrogadas->contains($abrogada)) {
+            $this->abrogadas[] = $abrogada;
+            $abrogada->setNormaAbrogante($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAbrogada(Abrogacion $abrogada): self
+    {
+        if ($this->abrogadas->contains($abrogada)) {
+            $this->abrogadas->removeElement($abrogada);
+            // set the owning side to null (unless already changed)
+            if ($abrogada->getNormaAbrogante() === $this) {
+                $abrogada->setNormaAbrogante(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Caducidad[]
+     */
+    public function getCaducidades(): Collection
+    {
+        return $this->caducidades;
+    }
+
+    public function addCaducidade(Caducidad $caducidade): self
+    {
+        if (!$this->caducidades->contains($caducidade)) {
+            $this->caducidades[] = $caducidade;
+            $caducidade->setNorma($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCaducidade(Caducidad $caducidade): self
+    {
+        if ($this->caducidades->contains($caducidade)) {
+            $this->caducidades->removeElement($caducidade);
+            // set the owning side to null (unless already changed)
+            if ($caducidade->getNorma() === $this) {
+                $caducidade->setNorma(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ConflictoNormativo[]
+     */
+    public function getConflictosNormativos(): Collection
+    {
+        return $this->conflictosNormativos;
+    }
+
+    public function addConflictosNormativo(ConflictoNormativo $conflictosNormativo): self
+    {
+        if (!$this->conflictosNormativos->contains($conflictosNormativo)) {
+            $this->conflictosNormativos[] = $conflictosNormativo;
+            $conflictosNormativo->setNorma($this);
+        }
+
+        return $this;
+    }
+
+    public function removeConflictosNormativo(ConflictoNormativo $conflictosNormativo): self
+    {
+        if ($this->conflictosNormativos->contains($conflictosNormativo)) {
+            $this->conflictosNormativos->removeElement($conflictosNormativo);
+            // set the owning side to null (unless already changed)
+            if ($conflictosNormativo->getNorma() === $this) {
+                $conflictosNormativo->setNorma(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ConflictoNormativo[]
+     */
+    public function getConflictosConNormas(): Collection
+    {
+        return $this->conflictosConNormas;
+    }
+
+    public function addConflictosConNorma(ConflictoNormativo $conflictosConNorma): self
+    {
+        if (!$this->conflictosConNormas->contains($conflictosConNorma)) {
+            $this->conflictosConNormas[] = $conflictosConNorma;
+            $conflictosConNorma->setConflictoConNorma($this);
+        }
+
+        return $this;
+    }
+
+    public function removeConflictosConNorma(ConflictoNormativo $conflictosConNorma): self
+    {
+        if ($this->conflictosConNormas->contains($conflictosConNorma)) {
+            $this->conflictosConNormas->removeElement($conflictosConNorma);
+            // set the owning side to null (unless already changed)
+            if ($conflictosConNorma->getConflictoConNorma() === $this) {
+                $conflictosConNorma->setConflictoConNorma(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Refundicion[]
+     */
+    public function getRefundiciones(): Collection
+    {
+        return $this->refundiciones;
+    }
+
+    public function addRefundicione(Refundicion $refundicione): self
+    {
+        if (!$this->refundiciones->contains($refundicione)) {
+            $this->refundiciones[] = $refundicione;
+            $refundicione->setNorma($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRefundicione(Refundicion $refundicione): self
+    {
+        if ($this->refundiciones->contains($refundicione)) {
+            $this->refundiciones->removeElement($refundicione);
+            // set the owning side to null (unless already changed)
+            if ($refundicione->getNorma() === $this) {
+                $refundicione->setNorma(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Refundicion[]
+     */
+    public function getRefundidas(): Collection
+    {
+        return $this->refundidas;
+    }
+
+    public function addRefundida(Refundicion $refundida): self
+    {
+        if (!$this->refundidas->contains($refundida)) {
+            $this->refundidas[] = $refundida;
+            $refundida->setNormaRefundida($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRefundida(Refundicion $refundida): self
+    {
+        if ($this->refundidas->contains($refundida)) {
+            $this->refundidas->removeElement($refundida);
+            // set the owning side to null (unless already changed)
+            if ($refundida->getNormaRefundida() === $this) {
+                $refundida->setNormaRefundida(null);
+            }
+        }
+
+        return $this;
+    }
 }

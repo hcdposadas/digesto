@@ -8,6 +8,7 @@ use App\Entity\Norma;
 use App\Entity\PalabraClave;
 use App\Entity\Rama;
 use App\Entity\TipoBoletin;
+use App\Form\BootstrapCollectionType;
 use Doctrine\ORM\EntityRepository;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -17,7 +18,6 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use App\Form\BootstrapCollectionType;
 use Tetranz\Select2EntityBundle\Form\Type\Select2EntityType;
 use Vich\UploaderBundle\Form\Type\VichFileType;
 
@@ -156,12 +156,83 @@ class NormaType extends AbstractType {
 					'by_reference' => false,
 					'label'        => 'Beneficiarios'
 				] )
-//			->add( 'texto',
-//				CKEditorType::class,
-//				[
-//					'label'  => 'Texto',
-//					'config' => [ 'uiColor' => '#ffffff' ]
-//				] )
+			->add( 'texto',
+				CKEditorType::class,
+				[
+					'label'  => 'Texto Definitivo',
+					'config' => [ 'uiColor' => '#ffffff' ]
+				] )
+		->add(
+			'cambiosNormas',
+			BootstrapCollectionType::class,
+			[
+				'entry_type'   => CambioNormaType::class,
+				'allow_add'    => true,
+				'allow_delete' => false,
+				'by_reference' => false,
+				'label'        => 'Tabla de Antecedentes'
+			]
+		)
+			->add(
+				'adhesiones',
+				BootstrapCollectionType::class,
+				[
+					'entry_type'   => AdhesionType::class,
+					'allow_add'    => true,
+					'allow_delete' => true,
+					'by_reference' => false,
+					'label'        => 'Adhesiones'
+				]
+			)
+
+			->add(
+				'abrogaciones',
+				BootstrapCollectionType::class,
+				[
+					'entry_type'   => AbrogacionType::class,
+					'allow_add'    => true,
+					'allow_delete' => true,
+					'by_reference' => false,
+					'label'        => 'Abrogaciones'
+				]
+			)
+
+			->add(
+				'caducidades',
+				BootstrapCollectionType::class,
+				[
+					'entry_type'   => CaducidadType::class,
+					'allow_add'    => true,
+					'allow_delete' => true,
+					'by_reference' => false,
+					'label'        => 'Caducidades'
+				]
+			)
+
+			->add(
+				'conflictosNormativos',
+				BootstrapCollectionType::class,
+				[
+					'entry_type'   => ConflictoNormativoType::class,
+					'allow_add'    => true,
+					'allow_delete' => true,
+					'by_reference' => false,
+					'label'        => 'Conflictos Normativos'
+				]
+			)
+
+			->add(
+				'refundiciones',
+				BootstrapCollectionType::class,
+				[
+					'entry_type'   => RefundicionType::class,
+					'allow_add'    => true,
+					'allow_delete' => true,
+					'by_reference' => false,
+					'label'        => 'Refundiciones'
+				]
+			)
+
 			->add( 'archivoNorma',
 				VichFileType::class,
 				[

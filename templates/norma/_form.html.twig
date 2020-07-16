@@ -1,5 +1,53 @@
 {{ form_start(form) }}
 <div class="row">
+    <div class="col-md-12">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">Análisis Epistemológico</h3>
+            </div>
+
+            <div class="box-body">
+				<div class="row">
+					<div class="col-md-12">
+						{{ form_row(form.texto) }}
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						{{ form_row(form.cambiosNormas) }}
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						{{ form_row(form.adhesiones) }}
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						{{ form_row(form.abrogaciones) }}
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						{{ form_row(form.caducidades) }}
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						{{ form_row(form.conflictosNormativos) }}
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						{{ form_row(form.refundiciones) }}
+					</div>
+				</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
     <div class="col-md-6">
         <div class="box box-primary">
             <div class="box-header with-border">
@@ -95,7 +143,7 @@
             </div>
 
             <div class="box-body">
-                {#                {{ form_widget(form.texto) }}#}
+
                 {{ form_widget(form.archivoNorma) }}
             </div>
 
@@ -111,7 +159,6 @@
 
             <div class="box-body">
                 {{ form_row(form.anexos) }}
-
             </div>
 
         </div>
