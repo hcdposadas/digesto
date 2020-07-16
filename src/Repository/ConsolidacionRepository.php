@@ -17,40 +17,23 @@ class ConsolidacionRepository extends ServiceEntityRepository {
 		parent::__construct( $registry, Consolidacion::class );
 	}
 
-	// /**
-	//  * @return Consolidacion[] Returns an array of Consolidacion objects
-	//  */
-	/*
-	public function findByExampleField($value)
-	{
-		return $this->createQueryBuilder('c')
-			->andWhere('c.exampleField = :val')
-			->setParameter('val', $value)
-			->orderBy('c.id', 'ASC')
-			->setMaxResults(10)
-			->getQuery()
-			->getResult()
-		;
-	}
-	*/
-
-	/*
-	public function findOneBySomeField($value): ?Consolidacion
-	{
-		return $this->createQueryBuilder('c')
-			->andWhere('c.exampleField = :val')
-			->setParameter('val', $value)
-			->getQuery()
-			->getOneOrNullResult()
-		;
-	}
-	*/
-
 	public function getConsolidacionesOrdenadas() {
 		return $this->createQueryBuilder( 'c' )
 		            ->where( 'c.activo = true' )
+                    ->andWhere( 'c.visible = true' )
 		            ->orderBy( 'c.anio', 'DESC' )
 		            ->getQuery()
 		            ->getResult();
+	}
+
+    /**
+     * @return Consolidacion
+     */
+    public function getConsolidacionEnCurso()
+    {
+        return $this->createQueryBuilder('c')
+            ->where('c.enCurso = true')
+            ->getQuery()
+            ->getSingleResult();
 	}
 }

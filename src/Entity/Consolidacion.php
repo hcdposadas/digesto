@@ -65,8 +65,12 @@ class Consolidacion extends BaseClass {
     /**
      * @ORM\Column(type="boolean", options={"default":"0"})
      */
-    private $actual = false;
+    private $enCurso = false;
 
+    /**
+     * @ORM\Column(type="boolean", options={"default":"0"})
+     */
+    private $visible = false;
 
     /**
 	 * @return mixed
@@ -206,4 +210,36 @@ class Consolidacion extends BaseClass {
 
 		return $this;
 	}
+
+    /**
+     * @return bool
+     */
+    public function isEnCurso(): bool
+    {
+        return $this->enCurso;
+    }
+
+    /**
+     * @param bool $enCurso
+     */
+    public function setEnCurso(bool $enCurso): void
+    {
+        $this->enCurso = $enCurso;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isVisible(): bool
+    {
+        return $this->visible;
+    }
+
+    /**
+     * @param bool $visible
+     */
+    public function setVisible(bool $visible): void
+    {
+        $this->visible = $visible;
+    }
 }
