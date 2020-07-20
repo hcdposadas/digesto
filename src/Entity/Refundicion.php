@@ -35,12 +35,12 @@ class Refundicion extends BaseClass
     private $normaRefundida;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $articulo;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $articuloAnexo;
 
@@ -50,12 +50,12 @@ class Refundicion extends BaseClass
     private $normaCompleta;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $articuloRefundido;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $articuloAnexoRefundido;
 
@@ -65,7 +65,7 @@ class Refundicion extends BaseClass
     private $fundamentacion;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
     private $observaciones;
 
@@ -114,87 +114,115 @@ class Refundicion extends BaseClass
         return $this;
     }
 
-    public function getArticulo(): ?string
+    /**
+     * @return mixed
+     */
+    public function getArticulo()
     {
         return $this->articulo;
     }
 
-    public function setArticulo(string $articulo): self
+    /**
+     * @param mixed $articulo
+     */
+    public function setArticulo($articulo): void
     {
         $this->articulo = $articulo;
-
-        return $this;
     }
 
-    public function getArticuloAnexo(): ?string
+    /**
+     * @return mixed
+     */
+    public function getArticuloAnexo()
     {
         return $this->articuloAnexo;
     }
 
-    public function setArticuloAnexo(string $articuloAnexo): self
+    /**
+     * @param mixed $articuloAnexo
+     */
+    public function setArticuloAnexo($articuloAnexo): void
     {
         $this->articuloAnexo = $articuloAnexo;
-
-        return $this;
     }
 
-    public function getNormaCompleta(): ?bool
+    /**
+     * @return mixed
+     */
+    public function getNormaCompleta()
     {
         return $this->normaCompleta;
     }
 
-    public function setNormaCompleta(bool $normaCompleta): self
+    /**
+     * @param mixed $normaCompleta
+     */
+    public function setNormaCompleta($normaCompleta): void
     {
         $this->normaCompleta = $normaCompleta;
-
-        return $this;
     }
 
-    public function getArticuloRefundido(): ?string
+    /**
+     * @return mixed
+     */
+    public function getArticuloRefundido()
     {
         return $this->articuloRefundido;
     }
 
-    public function setArticuloRefundido(string $articuloRefundido): self
+    /**
+     * @param mixed $articuloRefundido
+     */
+    public function setArticuloRefundido($articuloRefundido): void
     {
         $this->articuloRefundido = $articuloRefundido;
-
-        return $this;
     }
 
-    public function getArticuloAnexoRefundido(): ?string
+    /**
+     * @return mixed
+     */
+    public function getArticuloAnexoRefundido()
     {
         return $this->articuloAnexoRefundido;
     }
 
-    public function setArticuloAnexoRefundido(string $articuloAnexoRefundido): self
+    /**
+     * @param mixed $articuloAnexoRefundido
+     */
+    public function setArticuloAnexoRefundido($articuloAnexoRefundido): void
     {
         $this->articuloAnexoRefundido = $articuloAnexoRefundido;
-
-        return $this;
     }
 
-    public function getFundamentacion(): ?string
+    /**
+     * @return mixed
+     */
+    public function getFundamentacion()
     {
         return $this->fundamentacion;
     }
 
-    public function setFundamentacion(string $fundamentacion): self
+    /**
+     * @param mixed $fundamentacion
+     */
+    public function setFundamentacion($fundamentacion): void
     {
         $this->fundamentacion = $fundamentacion;
-
-        return $this;
     }
 
-    public function getObservaciones(): ?string
+    /**
+     * @return mixed
+     */
+    public function getObservaciones()
     {
         return $this->observaciones;
     }
 
-    public function setObservaciones(string $observaciones): self
+    /**
+     * @param mixed $observaciones
+     */
+    public function setObservaciones($observaciones): void
     {
         $this->observaciones = $observaciones;
-
-        return $this;
     }
 }

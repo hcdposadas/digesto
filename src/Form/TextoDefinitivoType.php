@@ -36,9 +36,10 @@ class TextoDefinitivoType extends AbstractType
         $resolver->setDefaults([
             'data_class' => TextoDefinitivo::class,
             'empty_data' => function (FormInterface $form) {
-                $caducidad = new Caducidad();
-                $caducidad->setConsolidacion($this->entityManager->getRepository(Consolidacion::class)->getConsolidacionEnCurso());
-                return $caducidad;
+                $class = $form->getConfig()->getOption('data_class');
+                $entity = new $class();
+                $entity->setConsolidacion($this->entityManager->getRepository(Consolidacion::class)->getConsolidacionEnCurso());
+                return $entity;
             }
         ]);
     }

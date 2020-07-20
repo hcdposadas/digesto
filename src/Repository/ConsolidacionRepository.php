@@ -36,4 +36,15 @@ class ConsolidacionRepository extends ServiceEntityRepository {
             ->getQuery()
             ->getSingleResult();
 	}
+
+    /**
+     * @return Consolidacion
+     */
+    public function getUltimaConsolidacion()
+    {
+        return $this->createQueryBuilder('c')
+            ->where('c.ultima = true')
+            ->getQuery()
+            ->getSingleResult();
+    }
 }

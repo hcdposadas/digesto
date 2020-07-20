@@ -222,15 +222,27 @@ class NormaType extends AbstractType {
 				]
 			)
 
+            ->add(
+                'conflictosConNormas',
+                BootstrapCollectionType::class,
+                [
+                    'entry_type'   => ConflictoNormativoActivaType::class,
+                    'allow_add'    => true,
+                    'allow_delete' => true,
+                    'by_reference' => false,
+                    'label'        => 'Conflictos Normativos (activa)'
+                ]
+            )
+
 			->add(
 				'conflictosNormativos',
 				BootstrapCollectionType::class,
 				[
-					'entry_type'   => ConflictoNormativoType::class,
+					'entry_type'   => ConflictoNormativoPasivaType::class,
 					'allow_add'    => true,
 					'allow_delete' => true,
 					'by_reference' => false,
-					'label'        => 'Conflictos Normativos'
+					'label'        => 'Conflictos Normativos (pasiva)'
 				]
 			)
 
@@ -256,6 +268,8 @@ class NormaType extends AbstractType {
                     'label'        => 'Refundiciones (pasiva)'
                 ]
             )
+
+            ->add('getTextoDefinitivoNoConsolidado', TextoDefinitivoType::class)
 
 			->add( 'archivoNorma',
 				VichFileType::class,

@@ -75,9 +75,10 @@ class AbrogacionPasivaType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Abrogacion::class,
             'empty_data' => function (FormInterface $form) {
-                $abrogacion = new Abrogacion();
-                $abrogacion->setConsolidacion($this->entityManager->getRepository(Consolidacion::class)->getConsolidacionEnCurso());
-                return $abrogacion;
+                $class = $form->getConfig()->getOption('data_class');
+                $entity = new $class();
+                $entity->setConsolidacion($this->entityManager->getRepository(Consolidacion::class)->getConsolidacionEnCurso());
+                return $entity;
             }
         ]);
     }

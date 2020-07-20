@@ -103,13 +103,15 @@
                     </div>
                     <div class="col-md-9">
                         <br>
-                        <span class="text-muted">Modificado el {{ norma.estadoNorma.fechaActualizacion | date }} por {{ norma.estadoNorma.actualizadoPor }}</span>
+                        {% if norma.estadoNorma %}
+                            <span class="text-muted">Modificado el {{ norma.estadoNorma.fechaActualizacion | date }} por {{ norma.estadoNorma.actualizadoPor }}</span>
+                        {% endif %}
                     </div>
                 </div>
                 <div class="nav-tabs-custom">
                     <ul class="nav nav-tabs">
                         <li class="active"><a href="#tab_textos" data-toggle="tab" aria-expanded="true">Textos</a></li>
-                        <li class=""><a href="#tab_cambios" data-toggle="tab" aria-expanded="false">Tabla de Antecedentes</a></li>
+{#                        <li class=""><a href="#tab_cambios" data-toggle="tab" aria-expanded="false">Tabla de Antecedentes</a></li>#}
                         <li class=""><a href="#tab_adhesiones" data-toggle="tab" aria-expanded="false">Adhesiones ({{ norma.adhesiones.count }})</a></li>
                         <li class=""><a href="#tab_abrogaciones" data-toggle="tab" aria-expanded="false">Abrogaciones ({{ norma.abrogaciones.count }})</a></li>
                         <li class=""><a href="#tab_caducidades" data-toggle="tab" aria-expanded="false">Caducidades ({{ norma.caducidades.count }})</a></li>
@@ -126,28 +128,29 @@
                                 </div>
                                 <div class="col-md-12">
                                     <h4 class="box-title">Texto Consolidado</h4>
-                                    <a href="{{ path('texto_definitivo_no_consolidado_editar', {norma: norma.id}) }}">Ver texto consolidado</a>
+                                    {% if norma.textoDefinitivoConsolidado %}
+                                        {{ norma.textoDefinitivoConsolidado.consolidacion }}: <a href="{{ path('texto_definitivo_consolidado_show', {norma: norma.id}) }}" target="_blank"><i class="fa fa-fw fa-external-link"></i> Ver texto consolidado</a>
+                                    {% else %}
+                                        La norma no tiene texto consolidado. <a href="{{ path('texto_definitivo_consolidado_create', {norma: norma.id}) }}" >Cargar ahora</a>
+                                    {% endif %}
                                     <br><br>
                                 </div>
                                 <div class="col-md-12">
                                     <h4 class="box-title">Texto Definitivo</h4>
-                                    {% if norma.textoDefinitivoNoConsolidado %}
-                                        <a href="{{ path('texto_definitivo_no_consolidado_editar', {norma: norma.id}) }}">Editar texto definitivo</a>
-                                    {% else %}
-                                        <span class="text-muted">El texto definitivo no está cargado</span>
-                                        <a href="{{ path('texto_definitivo_no_consolidado_editar', {norma: norma.id}) }}">Agregar texto definitivo</a>
-                                    {% endif %}
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            {{ form_widget(form.getTextoDefinitivoNoConsolidado) }}
+                                        </div>
+                                    </div>
                                     <br><br>
                                 </div>
-                            </div>
-
-                        </div>
-                        <!-- /.tab-pane -->
-                        <div class="tab-pane" id="tab_cambios">
-                            <h4 class="box-title">Tabla de Antecedentes</h4>
-                            <div class="row">
                                 <div class="col-md-12">
-                                    {{ form_widget(form.cambiosNormas) }}
+                                    <h4 class="box-title">Tabla de Antecedentes</h4>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            {{ form_widget(form.cambiosNormas) }}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -186,7 +189,13 @@
                         </div>
                         <!-- /.tab-pane -->
                         <div class="tab-pane" id="tab_conflictos">
-                            <h4 class="box-title">Conflictos Normativos</h4>
+                            <h4 class="box-title">Activa</h4>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    {{ form_widget(form.conflictosConNormas) }}
+                                </div>
+                            </div>
+                            <h4 class="box-title">Pasiva</h4>
                             <div class="row">
                                 <div class="col-md-12">
                                     {{ form_widget(form.conflictosNormativos) }}
@@ -212,6 +221,9 @@
                     </div>
                     <!-- /.tab-content -->
                 </div>
+            </div>
+            <div class="box-footer">
+                <button class="btn btn-primary">{{ button_label|default('Guardar') }}</button>
             </div>
         </div>
         <div class="box box-solid box-primary">

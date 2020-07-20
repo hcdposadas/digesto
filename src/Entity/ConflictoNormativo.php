@@ -40,22 +40,22 @@ class ConflictoNormativo extends BaseClass
 	private $normaCompleta;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $articulo;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $articuloAnexo;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $articuloConflicto;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $articuloAnexoConflicto;
 
@@ -70,7 +70,7 @@ class ConflictoNormativo extends BaseClass
     private $fundamentacion;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
     private $observaciones;
 

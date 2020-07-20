@@ -3,17 +3,21 @@
 namespace App\Form;
 
 use App\Entity\Caducidad;
+use App\Entity\ConflictoNormativo;
 use App\Entity\Consolidacion;
 use App\Entity\Norma;
-use App\Entity\Refundicion;
+use App\Entity\TipoSolucionConflicto;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\EntityRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Tetranz\Select2EntityBundle\Form\Type\Select2EntityType;
 
-class RefundicionActivaType extends AbstractType
+class ConflictoNormativoPasivaType extends AbstractType
 {
     /**
      * @var EntityManagerInterface
@@ -24,13 +28,21 @@ class RefundicionActivaType extends AbstractType
     {
         $this->entityManager = $entityManager;
     }
-
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('articulo')
-            ->add('articuloAnexo')
-            ->add('normaRefundida', Select2EntityType::class, [
+			->add('normaCompleta')
+            ->add('articulo', TextType::class, [
+                'label' => 'Artículo',
+                'required' => false,
+                'empty_data' => ''
+            ])
+            ->add('articuloAnexo', TextType::class, [
+                'label' => 'Anexo',
+                'required' => false,
+                'empty_data' => ''
+            ])
+			->add('conflictoConNorma', Select2EntityType::class, [
                 'class'         => Norma::class,
                 'remote_route'  => 'get_normas',
                 'allow_clear'   => false,
@@ -39,9 +51,24 @@ class RefundicionActivaType extends AbstractType
                 'placeholder'   => 'Seleccione una norma',
                 'minimum_input_length' => 1
             ])
-            ->add('normaCompleta')
-            ->add('articuloRefundido')
-            ->add('articuloAnexoRefundido')
+            ->add('articuloConflicto', TextType::class, [
+                'label' => 'Artículo',
+                'required' => false,
+                'empty_data' => ''
+            ])
+            ->add('articuloAnexoConflicto', TextType::class, [
+                'label' => 'Anexo',
+                'required' => false,
+                'empty_data' => ''
+            ])
+            ->add('tipoSolucion', EntityType::class, [
+                'class' => TipoSolucionConflicto::class,
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('u')
+                        ->orderBy('u.nombre', 'ASC')
+                        ->where('u.activo = true');
+                }
+            ])
             ->add('fundamentacion')
             ->add('observaciones')
         ;
@@ -50,7 +77,7 @@ class RefundicionActivaType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Refundicion::class,
+            'data_class' => ConflictoNormativo::class,
             'empty_data' => function (FormInterface $form) {
                 $class = $form->getConfig()->getOption('data_class');
                 $entity = new $class();

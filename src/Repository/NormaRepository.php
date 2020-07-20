@@ -58,15 +58,15 @@ class NormaRepository extends ServiceEntityRepository {
     }
 
 	public function getQbAll() {
-		$qb = $this->createQueryBuilder( 'n' );
-
-		return $qb;
+		return $this->createQueryBuilder( 'n' )
+            ->join('n.rama', 'r');
 	}
 
 	public function search() {
 		$qb = $this->getQbAll();
 
-		$qb->orderBy( 'n.id', 'ASC' );
+        $qb->orderBy( 'r.orden', 'ASC' );
+		$qb->addOrderBy( 'n.numero', 'ASC' );
 
 		return $qb;
 	}

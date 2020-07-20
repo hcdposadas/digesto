@@ -70,6 +70,11 @@ class Consolidacion extends BaseClass {
     /**
      * @ORM\Column(type="boolean", options={"default":"0"})
      */
+    private $ultima = false;
+
+    /**
+     * @ORM\Column(type="boolean", options={"default":"0"})
+     */
     private $visible = false;
 
     /**
@@ -241,5 +246,21 @@ class Consolidacion extends BaseClass {
     public function setVisible(bool $visible): void
     {
         $this->visible = $visible;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isUltima(): bool
+    {
+        return $this->ultima;
+    }
+
+    /**
+     * @param bool $ultima
+     */
+    public function setUltima(bool $ultima): void
+    {
+        $this->ultima = $ultima;
     }
 }

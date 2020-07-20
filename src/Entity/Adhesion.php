@@ -22,12 +22,6 @@ class Adhesion extends BaseClass
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Consolidacion")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $consolidacion;
-
-    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Norma", inversedBy="adhesiones")
      */
     private $norma;
@@ -50,22 +44,6 @@ class Adhesion extends BaseClass
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getConsolidacion()
-    {
-        return $this->consolidacion;
-    }
-
-    /**
-     * @param mixed $consolidacion
-     */
-    public function setConsolidacion($consolidacion): void
-    {
-        $this->consolidacion = $consolidacion;
     }
 
     /**

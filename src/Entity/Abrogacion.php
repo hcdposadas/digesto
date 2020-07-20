@@ -68,7 +68,7 @@ class Abrogacion extends BaseClass
     private $anexoAbrogante;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(type="text")
      */
     private $fundamentacion;
 

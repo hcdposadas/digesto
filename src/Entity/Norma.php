@@ -1043,6 +1043,16 @@ class Norma extends BaseClass
         return null;
     }
 
+    public function getTextoDefinitivoConsolidado(): ?TextoDefinitivo
+    {
+        foreach ($this->getTextosDefinitivos() as $textoDefinitivo) {
+            if ($textoDefinitivo->getConsolidacion()->isUltima()) {
+                return $textoDefinitivo;
+            }
+        }
+        return null;
+    }
+
     /**
      * @return Collection|EstadoNorma[]
      */

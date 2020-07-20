@@ -38,6 +38,61 @@ class TextoDefinitivoController extends AbstractController
     }
 
     /**
+     * @Route("/consolidado", name="texto_definitivo_consolidado_show", methods={"GET"})
+     */
+    public function showTextoDefinitivoConsolidado (Request $request, Norma $norma): Response
+    {
+        $textoDefinitivo = $norma->getTextoDefinitivoConsolidado();
+
+        return $this->render('texto_definitivo/show.html.twig', [
+            'texto_definitivo' => $textoDefinitivo,
+            'norma' => $norma
+        ]);
+    }
+
+    /**
+     * @Route("/consolidado/cargar", name="texto_definitivo_consolidado_create", methods={"GET","POST"})
+     */
+    public function createTextoConsolidado (Request $request, Norma $norma): Response
+    {
+        $textoDefinitivo = $norma->getTextoDefinitivoConsolidado();
+        if ($textoDefinitivo) {
+            throw new \Exception('La norma ya cuanta con texto consolidado. No se puede cargar uno nuevo.');
+        }
+
+        $ultimaConsolidacion = $this->getDoctrine()->getRepository(Consolidacion::class)->getUltimaConsolidacion();
+
+        $textoDefinitivo = new TextoDefinitivo();
+        $textoDefinitivo->setNorma($norma);
+        $textoDefinitivo->setConsolidacion($ultimaConsolidacion);
+        $form = $this->createForm(TextoDefinitivoType::class, $textoDefinitivo);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+//            dd($form);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($textoDefinitivo);
+            $em->flush();
+
+            $this->get( 'session' )->getFlashBag()->add(
+                'success',
+                'Texto consolidado cargado correctamente'
+            );
+
+
+            return $this->redirectToRoute('norma_edit', [
+                'id' => $norma->getId()
+            ]);
+        }
+
+        return $this->render('texto_definitivo/new.html.twig', [
+            'norma' => $norma,
+            'form' => $form->createView(),
+            'ultimaConsolidacion' => $ultimaConsolidacion
+        ]);
+    }
+
+    /**
      * @Route("/edit", name="texto_definitivo_no_consolidado_editar", methods={"GET","POST"})
      */
     public function editTextoNoConsolidado (Request $request, Norma $norma): Response
