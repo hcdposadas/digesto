@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Consolidacion;
 use App\Entity\Descriptor;
 use App\Entity\DescriptorNorma;
 use App\Entity\Identificador;
@@ -33,6 +34,8 @@ class NormaController extends AbstractController {
 	): Response {
 
 		$em = $this->getDoctrine()->getManager();
+
+		$normaRepository->updateEstados();
 
 		$filterForm = $this->createForm( NormaFilterForm::class,
 			null,

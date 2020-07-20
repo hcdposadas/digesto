@@ -1,152 +1,246 @@
 {{ form_start(form) }}
 <div class="row">
     <div class="col-md-12">
-        <div class="box box-primary">
+        <h1>Norma {{ norma }}</h1>
+        <div class="box box-solid box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">Análisis Normativo</h3>
+                <div class="box-tools pull-right">
+                    <!-- Collapse Button -->
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <div class="nav-tabs-custom">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#tab_norma" data-toggle="tab" aria-expanded="true">Norma</a></li>
+                        <li class=""><a href="#tab_boletin" data-toggle="tab" aria-expanded="false">Boletín Oficial</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tab_norma">
+                            <h4 class="box-title">Datos de la Norma</h4>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    {{ form_row(form.rama) }}
+                                </div>
+                                <div class="col-md-6">
+                                    {{ form_row(form.numero) }}
+                                </div>
+                            </div>
+
+                            {{ form_row(form.ramaVigenteNoConsolidada) }}
+                            {{ form_row(form.vigenteNoConsolidada) }}
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    {{ form_row(form.tipoOrdenanza) }}
+                                </div>
+                                <div class="col-md-6">
+                                    {{ form_row(form.numeroAnterior) }}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    {{ form_row(form.fechaSancion) }}
+                                </div>
+                                <div class="col-md-6">
+
+                                </div>
+                            </div>
+                            {{ form_row(form.observacion) }}
+                            <div class="row">
+                                <div class="col-md-6">
+                                    {{ form_row(form.decretoPromulgatorio) }}
+                                </div>
+                                <div class="col-md-6">
+                                    {{ form_row(form.fechaPromulgacion) }}
+                                </div>
+                            </div>
+
+                            {{ form_row(form.tipoPromulgacion) }}
+                            {{ form_row(form.temaGeneral) }}
+                            {{ form_row(form.activo) }}
+                        </div>
+                        <div class="tab-pane" id="tab_boletin">
+                            <h4 class="box-title">Datos del Boletín Oficial</h4>
+                            {{ form_row(form.tipoBoletin) }}
+                            <div class="numero-boletin">
+                                {{ form_row(form.numeroBoletin) }}
+                                {{ form_row(form.fechaPublicacionBoletin) }}
+                            </div>
+                            <div class="boletin-oficial">
+                                {{ form_row(form.boletinOficialMunicipal) }}
+                            </div>
+                            {{ form_row(form.paginaBoletin) }}
+                        </div>
+                        <!-- /.tab-pane -->
+                    </div>
+                </div>
+            </div>
+            <!-- /.box-body -->
+
+        </div>
+
+        <div class="box box-solid box-primary">
             <div class="box-header with-border">
                 <h3 class="box-title">Análisis Epistemológico</h3>
+                <div class="box-tools pull-right">
+                    <!-- Collapse Button -->
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
             </div>
-
-            <div class="box-body">
-				<div class="row">
-					<div class="col-md-12">
-						{{ form_row(form.texto) }}
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-12">
-						{{ form_row(form.cambiosNormas) }}
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-12">
-						{{ form_row(form.adhesiones) }}
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-12">
-						{{ form_row(form.abrogaciones) }}
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-12">
-						{{ form_row(form.caducidades) }}
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-12">
-						{{ form_row(form.conflictosNormativos) }}
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-12">
-						{{ form_row(form.refundiciones) }}
-					</div>
-				</div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-md-6">
-        <div class="box box-primary">
-            <div class="box-header with-border">
-                <h3 class="box-title">Norma</h3>
-            </div>
-
+            <!-- /.box-header -->
             <div class="box-body">
                 <div class="row">
-                    <div class="col-md-6">
-                        {{ form_row(form.rama) }}
+                    <div class="col-md-3">
+                        {{ form_row(form.estado) }}
                     </div>
-                    <div class="col-md-6">
-                        {{ form_row(form.numero) }}
-                    </div>
-                </div>
-
-                {{ form_row(form.ramaVigenteNoConsolidada) }}
-                {{ form_row(form.vigenteNoConsolidada) }}
-
-                <div class="row">
-                    <div class="col-md-6">
-                        {{ form_row(form.tipoOrdenanza) }}
-                    </div>
-                    <div class="col-md-6">
-                        {{ form_row(form.numeroAnterior) }}
+                    <div class="col-md-9">
+                        <br>
+                        <span class="text-muted">Modificado el {{ norma.estadoNorma.fechaActualizacion | date }} por {{ norma.estadoNorma.actualizadoPor }}</span>
                     </div>
                 </div>
+                <div class="nav-tabs-custom">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#tab_textos" data-toggle="tab" aria-expanded="true">Textos</a></li>
+                        <li class=""><a href="#tab_cambios" data-toggle="tab" aria-expanded="false">Tabla de Antecedentes</a></li>
+                        <li class=""><a href="#tab_adhesiones" data-toggle="tab" aria-expanded="false">Adhesiones ({{ norma.adhesiones.count }})</a></li>
+                        <li class=""><a href="#tab_abrogaciones" data-toggle="tab" aria-expanded="false">Abrogaciones ({{ norma.abrogaciones.count }})</a></li>
+                        <li class=""><a href="#tab_caducidades" data-toggle="tab" aria-expanded="false">Caducidades ({{ norma.caducidades.count }})</a></li>
+                        <li class=""><a href="#tab_conflictos" data-toggle="tab" aria-expanded="false">Conflictos ({{ norma.conflictosNormativos.count }})</a></li>
+                        <li class=""><a href="#tab_refundiciones" data-toggle="tab" aria-expanded="false">Refundiciones ({{ norma.refundiciones.count }})</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tab_textos">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h4 class="box-title">Texto Original</h4>
+                                    {{ form_widget(form.archivoNorma) }}
+                                    <br>
+                                </div>
+                                <div class="col-md-12">
+                                    <h4 class="box-title">Texto Consolidado</h4>
+                                    <a href="{{ path('texto_definitivo_no_consolidado_editar', {norma: norma.id}) }}">Ver texto consolidado</a>
+                                    <br><br>
+                                </div>
+                                <div class="col-md-12">
+                                    <h4 class="box-title">Texto Definitivo</h4>
+                                    {% if norma.textoDefinitivoNoConsolidado %}
+                                        <a href="{{ path('texto_definitivo_no_consolidado_editar', {norma: norma.id}) }}">Editar texto definitivo</a>
+                                    {% else %}
+                                        <span class="text-muted">El texto definitivo no está cargado</span>
+                                        <a href="{{ path('texto_definitivo_no_consolidado_editar', {norma: norma.id}) }}">Agregar texto definitivo</a>
+                                    {% endif %}
+                                    <br><br>
+                                </div>
+                            </div>
 
-                <div class="row">
-                    <div class="col-md-6">
-                        {{ form_row(form.fechaSancion) }}
+                        </div>
+                        <!-- /.tab-pane -->
+                        <div class="tab-pane" id="tab_cambios">
+                            <h4 class="box-title">Tabla de Antecedentes</h4>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    {{ form_widget(form.cambiosNormas) }}
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.tab-pane -->
+                        <div class="tab-pane" id="tab_adhesiones">
+                            <h4 class="box-title">Adhesiones a otras Normas</h4>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    {{ form_widget(form.adhesiones) }}
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.tab-pane -->
+                        <div class="tab-pane" id="tab_abrogaciones">
+                            <h4 class="box-title">Activa</h4>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    {{ form_widget(form.abrogadas) }}
+                                </div>
+                            </div>
+                            <h4 class="box-title">Pasiva</h4>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    {{ form_widget(form.abrogaciones) }}
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.tab-pane -->
+                        <div class="tab-pane" id="tab_caducidades">
+                            <h4 class="box-title">Caducidades</h4>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    {{ form_widget(form.caducidades) }}
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.tab-pane -->
+                        <div class="tab-pane" id="tab_conflictos">
+                            <h4 class="box-title">Conflictos Normativos</h4>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    {{ form_widget(form.conflictosNormativos) }}
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.tab-pane -->
+                        <div class="tab-pane" id="tab_refundiciones">
+                            <h4 class="box-title">Activa</h4>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    {{ form_widget(form.refundiciones) }}
+                                </div>
+                            </div>
+                            <h4 class="box-title">Pasiva</h4>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    {{ form_widget(form.refundidas) }}
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.tab-pane -->
                     </div>
-                    <div class="col-md-6">
-
-                    </div>
+                    <!-- /.tab-content -->
                 </div>
-                {{ form_row(form.observacion) }}
-                <div class="row">
-                    <div class="col-md-6">
-                        {{ form_row(form.decretoPromulgatorio) }}
-                    </div>
-                    <div class="col-md-6">
-                        {{ form_row(form.fechaPromulgacion) }}
-                    </div>
-                </div>
-
-                {{ form_row(form.tipoPromulgacion) }}
-                {{ form_row(form.temaGeneral) }}
-                {{ form_row(form.activo) }}
-
             </div>
-
         </div>
-
-        <div class="box box-primary">
-            <div class="box-header with-border">
-                <h3 class="box-title">Datos del Boletín Oficial</h3>
-            </div>
-
-            <div class="box-body">
-                {{ form_row(form.tipoBoletin) }}
-                <div class="numero-boletin">
-                    {{ form_row(form.numeroBoletin) }}
-                    {{ form_row(form.fechaPublicacionBoletin) }}
-                </div>
-                <div class="boletin-oficial">
-                    {{ form_row(form.boletinOficialMunicipal) }}
-                </div>
-                {{ form_row(form.paginaBoletin) }}
-            </div>
-
-        </div>
-    </div>
-    <div class="col-md-6">
-
-        <div class="box box-primary">
+        <div class="box box-solid box-primary">
             <div class="box-header with-border">
                 <h3 class="box-title">Análisis Documental</h3>
+                <div class="box-tools pull-right">
+                    <!-- Collapse Button -->
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
             </div>
-
+            <!-- /.box-header -->
             <div class="box-body">
-                {{ form_row(form.descriptores) }}
-                {{ form_row(form.palabrasClave) }}
-                {{ form_row(form.identificadores) }}
-                {{ form_widget(form.beneficiarioNormas) }}
+                <div class="row">
+                    <div class="col-md-12">
+                        {{ form_row(form.descriptores) }}
+                    </div>
+                    <div class="col-md-12">
+                        {{ form_row(form.palabrasClave) }}
+                    </div>
+                    <div class="col-md-12">
+                        {{ form_row(form.identificadores) }}
+                    </div>
+                    <div class="col-md-12">
+                        {{ form_widget(form.beneficiarioNormas) }}
+                    </div>
+                </div>
             </div>
-
-        </div>
-
-        <div class="box box-primary">
-            <div class="box-header with-border">
-                <h3 class="box-title">Textos</h3>
-            </div>
-
-            <div class="box-body">
-
-                {{ form_widget(form.archivoNorma) }}
-            </div>
-
         </div>
     </div>
 </div>
@@ -193,5 +287,13 @@
                 }
             })
         });
+    </script>
+    <script src="{{ asset('bundles/tetranzselect2entity/js/select2entity.js') }}"></script>
+    <script>
+        $('.bootstrapcollection-agregar-otro-item').click(function(e) {
+            setTimeout(function () {
+                $('.select2entity:not(.select2-hidden-accessible)').select2entity()
+            }, 10)
+        })
     </script>
 {% endblock %}

@@ -6,6 +6,7 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Console\Descriptor\TextDescriptor;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -255,6 +256,16 @@ class Norma extends BaseClass
      */
     private $refundidas;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\TextoDefinitivo", mappedBy="norma", cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    private $textosDefinitivos;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\EstadoNorma", mappedBy="norma", cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    private $estadosNormas;
+
     public function __construct()
     {
         $this->anexos = new ArrayCollection();
@@ -271,6 +282,8 @@ class Norma extends BaseClass
         $this->conflictosConNormas = new ArrayCollection();
         $this->refundiciones = new ArrayCollection();
         $this->refundidas = new ArrayCollection();
+        $this->textosDefinitivos = new ArrayCollection();
+        $this->estadosNormas = new ArrayCollection();
     }
 
     public function __toString()
@@ -986,6 +999,109 @@ class Norma extends BaseClass
             }
         }
 
+        return $this;
+    }
+
+    /**
+     * @return Collection|TextoDefinitivo[]
+     */
+    public function getTextosDefinitivos(): Collection
+    {
+        return $this->textosDefinitivos;
+    }
+
+    public function addTextosDefinitivo(TextoDefinitivo $textosDefinitivo): self
+    {
+        if (!$this->textosDefinitivos->contains($textosDefinitivo)) {
+            $this->textosDefinitivos[] = $textosDefinitivo;
+            $textosDefinitivo->setNorma($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTextosDefinitivo(TextoDefinitivo $textosDefinitivo): self
+    {
+        if ($this->textosDefinitivos->contains($textosDefinitivo)) {
+            $this->textosDefinitivos->removeElement($textosDefinitivo);
+            // set the owning side to null (unless already changed)
+            if ($textosDefinitivo->getNorma() === $this) {
+                $textosDefinitivo->setNorma(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getTextoDefinitivoNoConsolidado(): ?TextoDefinitivo
+    {
+        foreach ($this->getTextosDefinitivos() as $textoDefinitivo) {
+            if ($textoDefinitivo->getConsolidacion()->isEnCurso()) {
+                return $textoDefinitivo;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * @return Collection|EstadoNorma[]
+     */
+    public function getEstadosNormas(): Collection
+    {
+        return $this->estadosNormas;
+    }
+
+    public function addEstadosNorma(EstadoNorma $estadosNorma): self
+    {
+        if (!$this->estadosNormas->contains($estadosNorma)) {
+            $this->estadosNormas[] = $estadosNorma;
+            $estadosNorma->setNorma($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEstadosNorma(EstadoNorma $estadosNorma): self
+    {
+        if ($this->estadosNormas->contains($estadosNorma)) {
+            $this->estadosNormas->removeElement($estadosNorma);
+            // set the owning side to null (unless already changed)
+            if ($estadosNorma->getNorma() === $this) {
+                $estadosNorma->setNorma(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getEstadoNorma(): ?EstadoNorma
+    {
+        foreach ($this->getEstadosNormas() as $estadoNorma) {
+            if ($estadoNorma->getConsolidacion()->isEnCurso()) {
+                return $estadoNorma;
+            }
+        }
+        return null;
+    }
+
+    public function getEstado(): ?TipoEstadoNorma
+    {
+        foreach ($this->getEstadosNormas() as $estadoNorma) {
+            if ($estadoNorma->getConsolidacion()->isEnCurso()) {
+                return $estadoNorma->getEstado();
+            }
+        }
+        return null;
+    }
+
+    public function setEstado(TipoEstadoNorma $estado) : self
+    {
+        foreach ($this->getEstadosNormas() as $estadoNorma) {
+            if ($estadoNorma->getConsolidacion()->isEnCurso()) {
+                $estadoNorma->setEstado($estado);
+                return $this;
+            }
+        }
         return $this;
     }
 }

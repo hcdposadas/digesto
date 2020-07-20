@@ -1,0 +1,5 @@
+<form method="post" action="{{ path('texto_definitivo_delete', {'norma': texto_definitivo.norma.id}) }}" onsubmit="return confirm('Está seguro que desea descartar el texto definitivo no consolidado?');">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ texto_definitivo.id) }}">
+    <button class="btn">Descartar</button>
+</form>

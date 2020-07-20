@@ -17,6 +17,7 @@ class AdhesionType extends AbstractType
     {
         $builder
             ->add('tipoNormaAdhesion', EntityType::class, [
+                'label' => 'Tipo de Norma',
                 'class' => TipoNormaAdhesion::class,
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('u')

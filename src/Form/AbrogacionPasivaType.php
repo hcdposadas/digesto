@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Abrogacion;
 use App\Entity\Caducidad;
 use App\Entity\Consolidacion;
+use App\Entity\Norma;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -12,8 +13,9 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Tetranz\Select2EntityBundle\Form\Type\Select2EntityType;
 
-class AbrogacionType extends AbstractType
+class AbrogacionPasivaType extends AbstractType
 {
     /**
      * @var EntityManagerInterface
@@ -29,7 +31,8 @@ class AbrogacionType extends AbstractType
     {
         $builder
             ->add('normaCompleta', CheckboxType::class, [
-            	'label' => 'Completa'
+            	'label' => 'Completa',
+                'required' => false
 			])
             ->add('articulo', TextType::class, [
 				'label' => 'Artículo',
@@ -39,7 +42,15 @@ class AbrogacionType extends AbstractType
             	'label' => 'Artículo del anexo',
 				'required' => false
 			])
-			->add('normaAbrogante')
+			->add('normaAbrogante', Select2EntityType::class, [
+                    'class'         => Norma::class,
+                    'remote_route'  => 'get_normas',
+                    'allow_clear'   => false,
+                    'multiple'      => false,
+                    'language'      => 'es',
+                    'placeholder'   => 'Seleccione una norma',
+                    'minimum_input_length' => 1
+            ])
 			->add('articuloAbrogante', TextType::class, [
 				'label' => 'Artículo',
 				'required' => false
@@ -51,7 +62,10 @@ class AbrogacionType extends AbstractType
             ->add('fundamentacion', TextType::class, [
 				'label' => 'Fundamentación'
 			])
-            ->add('observaciones')
+            ->add('observaciones', TextType::class, [
+                'label' => 'Observaciones',
+                'required' => false
+            ])
 
         ;
     }
@@ -61,9 +75,9 @@ class AbrogacionType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Abrogacion::class,
             'empty_data' => function (FormInterface $form) {
-                $caducidad = new Caducidad();
-                $caducidad->setConsolidacion($this->entityManager->getRepository(Consolidacion::class)->getConsolidacionEnCurso());
-                return $caducidad;
+                $abrogacion = new Abrogacion();
+                $abrogacion->setConsolidacion($this->entityManager->getRepository(Consolidacion::class)->getConsolidacionEnCurso());
+                return $abrogacion;
             }
         ]);
     }

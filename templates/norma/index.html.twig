@@ -34,6 +34,7 @@
                         {{ form_row(filter_type.numero) }}
                         {{ form_row(filter_type.texto) }}
                         {{ form_row(filter_type.decretoPromulgatorio) }}
+                        {{ form_row(filter_type.estado) }}
 
                     </div>
                     <div class="col-md-6">
@@ -81,7 +82,7 @@
                         {% for norma in normas %}
                             <tr>
                                 <td>{{ norma.id }}</td>
-                                <td>{{ norma.rama }}</td>
+                                <td style="white-space: nowrap;">{{ norma.rama }}</td>
                                 <td>{{ norma.numero }}</td>
                                 <td>{{ norma.temaGeneral }}</td>
                                 <td>

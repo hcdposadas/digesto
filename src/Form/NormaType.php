@@ -8,14 +8,12 @@ use App\Entity\Norma;
 use App\Entity\PalabraClave;
 use App\Entity\Rama;
 use App\Entity\TipoBoletin;
-use App\Form\BootstrapCollectionType;
+use App\Entity\TipoEstadoNorma;
 use Doctrine\ORM\EntityRepository;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Tetranz\Select2EntityBundle\Form\Type\Select2EntityType;
@@ -46,6 +44,10 @@ class NormaType extends AbstractType {
 
 
 		$builder
+            ->add('estado', EntityType::class, [
+                'class' => TipoEstadoNorma::class
+            ])
+
 			->add( 'rama',
 				EntityType::class,
 				[
@@ -189,13 +191,24 @@ class NormaType extends AbstractType {
 				'abrogaciones',
 				BootstrapCollectionType::class,
 				[
-					'entry_type'   => AbrogacionType::class,
+					'entry_type'   => AbrogacionPasivaType::class,
 					'allow_add'    => true,
 					'allow_delete' => true,
 					'by_reference' => false,
-					'label'        => 'Abrogaciones'
+					'label'        => 'Abrogaciones (pasiva)'
 				]
 			)
+            ->add(
+                'abrogadas',
+                BootstrapCollectionType::class,
+                [
+                    'entry_type'   => AbrogacionActivaType::class,
+                    'allow_add'    => true,
+                    'allow_delete' => true,
+                    'by_reference' => false,
+                    'label'        => 'Abrogaciones (activa)'
+                ]
+            )
 
 			->add(
 				'caducidades',
@@ -225,13 +238,24 @@ class NormaType extends AbstractType {
 				'refundiciones',
 				BootstrapCollectionType::class,
 				[
-					'entry_type'   => RefundicionType::class,
+					'entry_type'   => RefundicionActivaType::class,
 					'allow_add'    => true,
 					'allow_delete' => true,
 					'by_reference' => false,
-					'label'        => 'Refundiciones'
+					'label'        => 'Refundiciones (activa)'
 				]
 			)
+            ->add(
+                'refundidas',
+                BootstrapCollectionType::class,
+                [
+                    'entry_type'   => RefundicionPasivaType::class,
+                    'allow_add'    => true,
+                    'allow_delete' => true,
+                    'by_reference' => false,
+                    'label'        => 'Refundiciones (pasiva)'
+                ]
+            )
 
 			->add( 'archivoNorma',
 				VichFileType::class,

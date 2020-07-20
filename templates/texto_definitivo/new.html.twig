@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New TextoDefinitivo{% endblock %}
+
+{% block body %}
+    <h1>Create new TextoDefinitivo</h1>
+
+    {{ include('texto_definitivo/_form.html.twig') }}
+
+    <a href="{{ path('texto_definitivo_index') }}">back to list</a>
+{% endblock %}

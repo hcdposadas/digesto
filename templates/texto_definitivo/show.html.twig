@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}TextoDefinitivo{% endblock %}
+
+{% block body %}
+    <h1>Norma {{ norma }} - Texto Definitivo para {{ texto_definitivo.consolidacion }}</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>TextoDefinitivo</th>
+                <td>{{ texto_definitivo.textoDefinitivo }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('texto_definitivo_index') }}">back to list</a>
+
+    <a href="{{ path('texto_definitivo_edit', {'id': texto_definitivo.id}) }}">edit</a>
+
+    {{ include('texto_definitivo/_delete_form.html.twig') }}
+{% endblock %}
