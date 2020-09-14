@@ -17,7 +17,7 @@ class Caducidad extends BaseClass
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Consolidacion")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Consolidacion", inversedBy="caducidades")
      * @ORM\JoinColumn(nullable=false)
      */
     private $consolidacion;

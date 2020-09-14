@@ -63,6 +63,21 @@ class Consolidacion extends BaseClass {
 	private $archivoProyecto;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Caducidad", mappedBy="consolidacion", orphanRemoval=true)
+     */
+	private $caducidades;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Abrogacion", mappedBy="consolidacion", orphanRemoval=true)
+     */
+    private $abrogaciones;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Refundicion", mappedBy="consolidacion", orphanRemoval=true)
+     */
+    private $refundidas;
+
+    /**
      * @ORM\Column(type="boolean", options={"default":"0"})
      */
     private $enCurso = false;
@@ -114,6 +129,7 @@ class Consolidacion extends BaseClass {
 	public function __construct() {
 		$this->normaConsolidacions = new ArrayCollection();
 		$this->anexoConsolidacions = new ArrayCollection();
+		$this->caducidades = new ArrayCollection();
 	}
 
 	public function getId(): ?int {
@@ -262,5 +278,118 @@ class Consolidacion extends BaseClass {
     public function setUltima(bool $ultima): void
     {
         $this->ultima = $ultima;
+    }
+
+    /**
+     * @return Caducidad[]
+     */
+    public function getCaducidades(): Collection
+    {
+        return $this->caducidades;
+    }
+
+    /**
+     * @param Caducidad[] $caducidades
+     */
+    public function setCaducidades(Collection $caducidades): void
+    {
+        $this->caducidades = $caducidades;
+    }
+
+    /**
+     * @return Abrogacion[]
+     */
+    public function getAbrogaciones(): Collection
+    {
+        return $this->abrogaciones;
+    }
+
+    /**
+     * @param Abrogacion[] $abrogaciones
+     */
+    public function setAbrogaciones($abrogaciones): void
+    {
+        $this->abrogaciones = $abrogaciones;
+    }
+
+    /**
+     * @return Refundicion[]
+     */
+    public function getRefundidas(): Collection
+    {
+        return $this->refundidas;
+    }
+
+    /**
+     * @param Refundicion[] $refundidas
+     */
+    public function setRefundidas($refundidas): void
+    {
+        $this->refundidas = $refundidas;
+    }
+
+
+    /**
+     * @return array
+     */
+    public function getAnexoA(): Collection
+    {
+        return new ArrayCollection();
+    }
+
+    /**
+     * @return array
+     */
+    public function getAnexoB(): Collection
+    {
+        return new ArrayCollection();
+    }
+
+    /**
+     * @return Caducidad[]
+     */
+    public function getAnexoC(): Collection
+    {
+        return $this->getCaducidades();
+    }
+
+    /**
+     * @return Abrogacion[]
+     */
+    public function getAnexoD(): Collection
+    {
+        return $this->getAbrogaciones();
+    }
+
+    /**
+     * @return Abrogacion[]
+     */
+    public function getAnexoE(): Collection
+    {
+        return $this->getAbrogaciones();
+    }
+
+    /**
+     * @return Refundicion[]
+     */
+    public function getAnexoF(): Collection
+    {
+        return $this->getRefundidas();
+    }
+
+    /**
+     * @return array
+     */
+    public function getAnexoG(): Collection
+    {
+        return new ArrayCollection();
+    }
+
+    /**
+     * @return array
+     */
+    public function getAnexoH(): Collection
+    {
+        return new ArrayCollection();
     }
 }

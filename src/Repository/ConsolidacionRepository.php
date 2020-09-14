@@ -26,6 +26,14 @@ class ConsolidacionRepository extends ServiceEntityRepository {
 		            ->getResult();
 	}
 
+    public function getActivas() {
+        return $this->createQueryBuilder( 'c' )
+            ->where( 'c.activo = true' )
+            ->orderBy( 'c.anio', 'ASC' )
+            ->getQuery()
+            ->getResult();
+    }
+
     /**
      * @return Consolidacion
      */

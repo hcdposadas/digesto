@@ -49,6 +49,7 @@ class AbrogacionActivaType extends AbstractType
             ])
             ->add('normaCompleta', CheckboxType::class, [
                 'label' => 'Completa',
+                'help' => 'Tildar si la abrogación aplica a la norma completa',
                 'required' => false
             ])
             ->add('articulo', TextType::class, [
@@ -59,7 +60,6 @@ class AbrogacionActivaType extends AbstractType
                 'label' => 'Artículo del anexo',
                 'required' => false
             ])
-
             ->add('fundamentacion', TextType::class, [
 				'label' => 'Fundamentación'
 			])

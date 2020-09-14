@@ -3,7 +3,6 @@
 namespace App\Form;
 
 use App\Entity\Abrogacion;
-use App\Entity\Caducidad;
 use App\Entity\Consolidacion;
 use App\Entity\Norma;
 use Doctrine\ORM\EntityManagerInterface;
@@ -31,7 +30,8 @@ class AbrogacionPasivaType extends AbstractType
     {
         $builder
             ->add('normaCompleta', CheckboxType::class, [
-            	'label' => 'Completa',
+                'label' => 'Completa',
+                'help' => 'Tildar si la abrogación aplica a la norma completa',
                 'required' => false
 			])
             ->add('articulo', TextType::class, [

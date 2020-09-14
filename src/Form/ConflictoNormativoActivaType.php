@@ -2,7 +2,6 @@
 
 namespace App\Form;
 
-use App\Entity\Caducidad;
 use App\Entity\ConflictoNormativo;
 use App\Entity\Consolidacion;
 use App\Entity\Norma;
@@ -11,6 +10,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
@@ -49,7 +49,11 @@ class ConflictoNormativoActivaType extends AbstractType
                 'placeholder'   => 'Seleccione una norma',
                 'minimum_input_length' => 1
             ])
-            ->add('normaCompleta')
+            ->add('normaCompleta', CheckboxType::class, [
+                'label' => 'Completa',
+                'help' => 'Tildar si el conflicto normativo aplica a la norma completa',
+                'required' => false
+            ])
             ->add('articulo', TextType::class, [
                 'label' => 'Artículo',
                 'required' => false
@@ -67,8 +71,13 @@ class ConflictoNormativoActivaType extends AbstractType
                         ->where('u.activo = true');
                 }
             ])
-            ->add('fundamentacion')
-            ->add('observaciones')
+            ->add('fundamentacion', TextType::class, [
+                'label' => 'Fundamentación'
+            ])
+            ->add('observaciones', TextType::class, [
+                'label' => 'Observaciones',
+                'required' => false
+            ])
         ;
     }
 

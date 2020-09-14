@@ -19,7 +19,7 @@ class Abrogacion extends BaseClass
 	private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Consolidacion")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Consolidacion", inversedBy="abrogaciones")
      * @ORM\JoinColumn(nullable=false)
      */
     private $consolidacion;

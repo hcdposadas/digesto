@@ -131,6 +131,20 @@ class Builder {
 							'route' => 'palabra_clave_index',
 						)
 					);
+                $menu[ $keyAdministracion ]
+                    ->addChild(
+                        'Listado de consolidaciones',
+                        array(
+                            'route' => 'consolidaciones',
+                        )
+                    );
+                $menu[ $keyAdministracion ]
+                    ->addChild(
+                        'Consolidación en curso',
+                        array(
+                            'route' => 'consolidacion_en_curso',
+                        )
+                    );
 
 
 			}

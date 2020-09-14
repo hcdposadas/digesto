@@ -17,7 +17,7 @@ class Refundicion extends BaseClass
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Consolidacion")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Consolidacion", inversedBy="refundidas")
      * @ORM\JoinColumn(nullable=false)
      */
     private $consolidacion;

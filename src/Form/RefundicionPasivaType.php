@@ -2,7 +2,6 @@
 
 namespace App\Form;
 
-use App\Entity\Caducidad;
 use App\Entity\Consolidacion;
 use App\Entity\Norma;
 use App\Entity\Refundicion;
@@ -10,6 +9,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Tetranz\Select2EntityBundle\Form\Type\Select2EntityType;
 
@@ -28,9 +29,19 @@ class RefundicionPasivaType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('normaCompleta')
-            ->add('articuloRefundido')
-            ->add('articuloAnexoRefundido')
+            ->add('normaCompleta', CheckboxType::class, [
+                'label' => 'Completa',
+                'help' => 'Tildar si la refundición aplica a la norma completa',
+                'required' => false
+            ])
+            ->add('articuloRefundido', TextType::class, [
+                'label' => 'Artículo refundido',
+                'required' => false
+            ])
+            ->add('articuloAnexoRefundido', TextType::class, [
+                'label' => 'Artículo anexo refundido',
+                'required' => false
+            ])
             ->add('norma', Select2EntityType::class, [
                 'class'         => Norma::class,
                 'remote_route'  => 'get_normas',
@@ -40,10 +51,21 @@ class RefundicionPasivaType extends AbstractType
                 'placeholder'   => 'Seleccione una norma',
                 'minimum_input_length' => 1
             ])
-            ->add('articulo')
-            ->add('articuloAnexo')
-            ->add('fundamentacion')
-            ->add('observaciones')
+            ->add('articulo', TextType::class, [
+                'label' => 'Artículo',
+                'required' => false
+            ])
+            ->add('articuloAnexo', TextType::class, [
+                'label' => 'Artículo del anexo',
+                'required' => false
+            ])
+            ->add('fundamentacion', TextType::class, [
+                'label' => 'Fundamentación'
+            ])
+            ->add('observaciones', TextType::class, [
+                'label' => 'Observaciones',
+                'required' => false
+            ])
         ;
     }
 

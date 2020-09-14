@@ -8,6 +8,8 @@ use App\Entity\TipoCaducidad;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
@@ -28,10 +30,21 @@ class CaducidadType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('normaCompleta')
-            ->add('articulo')
-            ->add('articuloAnexo')
+            ->add('normaCompleta', CheckboxType::class, [
+                'label' => 'Completa',
+                'help' => 'Tildar si la caducidad aplica a la norma completa',
+                'required' => false
+            ])
+            ->add('articulo', TextType::class, [
+                'label' => 'Artículo',
+                'required' => false
+            ])
+            ->add('articuloAnexo', TextType::class, [
+                'label' => 'Artículo del anexo',
+                'required' => false
+            ])
             ->add('tipoCaducidad', EntityType::class, [
+                'label' => 'Tipo de Caducidad',
                 'class' => TipoCaducidad::class,
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('u')
@@ -39,8 +52,13 @@ class CaducidadType extends AbstractType
                         ->where('u.activo = true');
                 }
             ])
-            ->add('fundamentacion')
-            ->add('observaciones')
+            ->add('fundamentacion', TextType::class, [
+                'label' => 'Fundamentación'
+            ])
+            ->add('observaciones', TextType::class, [
+                'label' => 'Observaciones',
+                'required' => false
+            ])
         ;
     }
 

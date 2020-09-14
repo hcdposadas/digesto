@@ -14,10 +14,6 @@ class TipoEstadoNormaType extends AbstractType
         $builder
             ->add('nombre')
             ->add('activo')
-            ->add('fechaCreacion')
-            ->add('fechaActualizacion')
-            ->add('creadoPor')
-            ->add('actualizadoPor')
         ;
     }
 
