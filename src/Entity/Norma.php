@@ -1033,6 +1033,14 @@ class Norma extends BaseClass
         return $this;
     }
 
+    public function setTextoDefinitivoNoConsolidado(TextoDefinitivo $textoDefinitivo): self
+    {
+        if ($textoDefinitivo->getConsolidacion()->isEnCurso()) {
+            $this->addTextosDefinitivo($textoDefinitivo);
+        }
+        return $this;
+    }
+
     public function getTextoDefinitivoNoConsolidado(): ?TextoDefinitivo
     {
         foreach ($this->getTextosDefinitivos() as $textoDefinitivo) {

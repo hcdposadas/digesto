@@ -269,7 +269,7 @@ class NormaType extends AbstractType {
                 ]
             )
 
-            ->add('getTextoDefinitivoNoConsolidado', TextoDefinitivoType::class)
+            ->add('textoDefinitivoNoConsolidado', TextoDefinitivoType::class)
 
 			->add( 'archivoNorma',
 				VichFileType::class,
