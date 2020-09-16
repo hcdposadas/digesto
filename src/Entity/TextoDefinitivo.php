@@ -31,7 +31,7 @@ class TextoDefinitivo extends BaseClass
     /**
      * @ORM\Column(type="text")
      */
-    private $textoDefinitivo;
+    private $textoDefinitivo = '';
 
     public function getId(): ?int
     {
