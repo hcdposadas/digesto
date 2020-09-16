@@ -161,7 +161,7 @@ class NormaType extends AbstractType {
 			->add( 'texto',
 				CKEditorType::class,
 				[
-					'label'  => 'Texto Definitivo',
+					'label'  => 'Texto',
 					'config' => [ 'uiColor' => '#ffffff' ]
 				] )
 		->add(

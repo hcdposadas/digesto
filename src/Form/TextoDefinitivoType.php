@@ -27,7 +27,10 @@ class TextoDefinitivoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('textoDefinitivo', CKEditorType::class)
+            ->add('textoDefinitivo', CKEditorType::class, [
+            'label'  => 'Texto Definitivo',
+            'config' => ['uiColor' => '#ffffff']
+        ])
         ;
     }
 
