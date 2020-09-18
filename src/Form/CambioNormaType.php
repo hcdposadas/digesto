@@ -21,17 +21,24 @@ class CambioNormaType extends AbstractType
                 [
                     'widget' => 'single_text',
                     'html5' => true,
-                    'required' => false
+                    'required' => false,
+                    'disabled' => true
                 ]
             )
             ->add('articulo', TextType::class, [
                 'label' => 'Artículo del Texto Definitivo'
             ])
             ->add('fuente', TextareaType::class, [
-                'label' => 'Fuente'
+                'label' => 'Fuente',
+                'required'     => false
             ])
             ->add('remisionExterna', TextareaType::class, [
-                'label' => 'Remisión Externa'
+                'label' => 'Remisión Externa',
+                'required'     => false
+            ])
+            ->add('articulosSuprimidos', TextareaType::class, [
+                'label' => 'Artículos suprimidos',
+                'required'     => false
             ]);
     }
 

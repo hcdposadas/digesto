@@ -362,6 +362,7 @@ class Consolidacion extends BaseClass {
     }
 
     /**
+     * Listado de Ordenanzas que fueron expresamente abrogadas por otras Ordenanzas
      * @return Abrogacion[]
      */
     public function getAnexoE(): Collection

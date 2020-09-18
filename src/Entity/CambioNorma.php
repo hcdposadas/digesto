@@ -42,9 +42,19 @@ class CambioNorma extends BaseClass
 	private $fuente;
 
 	/**
-	 * @ORM\Column(type="string", length=2048, nullable=true)
+	 * @ORM\Column(type="text", nullable=true)
 	 */
 	private $remisionExterna;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $articulosSuprimidos;
+
+	public function __construct()
+    {
+        $this->fecha = new \DateTime();
+    }
 
     /**
      * Get id
@@ -178,4 +188,20 @@ class CambioNorma extends BaseClass
 
 		return $this;
 	}
+
+    /**
+     * @return mixed
+     */
+    public function getArticulosSuprimidos()
+    {
+        return $this->articulosSuprimidos;
+    }
+
+    /**
+     * @param mixed $articulosSuprimidos
+     */
+    public function setArticulosSuprimidos($articulosSuprimidos): void
+    {
+        $this->articulosSuprimidos = $articulosSuprimidos;
+    }
 }

@@ -23,14 +23,21 @@ class NormaRepository extends ServiceEntityRepository {
 
 	public function getByLike($texto)
     {
-        $texto = strtolower($texto);
-        $numero = preg_replace('/\D+/i', '', $texto);
-        $numeroRomano = preg_replace('/[^ivx]+/i', '', $texto);
-        $titulo = $texto;
-        if ($numero || $numeroRomano) {
-            $titulo = preg_replace('/(' . implode('|', [$numero, $numeroRomano]) . ')/i', ' ', $titulo);
+        $texto = trim(strtolower($texto));
+        $texto = trim(preg_replace('/ +/', ' ', $texto));
+
+        if (preg_match('/[ivx]+\s*(-+\s*)?\d+/i', $texto)) {
+            $numero = preg_replace('/\D+/i', '', $texto);
+            $numeroRomano = preg_replace('/[^ivx]+/i', '', $texto);
+            $titulo = null;
+        } else {
+            $numero = preg_replace('/\D+/i', '', $texto);
+            $numeroRomano = preg_replace('/[^ivx]+/i', '', $texto);
+            $titulo = $texto;
+            if ($numero || $numeroRomano) {
+                $titulo = preg_replace('/(' . implode('|', [$numero, $numeroRomano]) . ')/i', ' ', $titulo);
+            }
         }
-        $titulo = trim(preg_replace('/ +/', ' ', $titulo));
 
         $qb = $this->createQueryBuilder('n');
         $qb->join('n.rama', 'r');

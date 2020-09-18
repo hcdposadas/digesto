@@ -5,10 +5,7 @@ namespace App\Form;
 use App\Entity\ConflictoNormativo;
 use App\Entity\Consolidacion;
 use App\Entity\Norma;
-use App\Entity\TipoSolucionConflicto;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\EntityRepository;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -47,7 +44,8 @@ class ConflictoNormativoActivaType extends AbstractType
                 'multiple'      => false,
                 'language'      => 'es',
                 'placeholder'   => 'Seleccione una norma',
-                'minimum_input_length' => 1
+                'minimum_input_length' => 1,
+                'width' => 300
             ])
             ->add('normaCompleta', CheckboxType::class, [
                 'label' => 'Completa',
@@ -61,15 +59,6 @@ class ConflictoNormativoActivaType extends AbstractType
             ->add('articuloAnexo', TextType::class, [
                 'label' => 'Anexo',
                 'required' => false
-            ])
-
-            ->add('tipoSolucion', EntityType::class, [
-                'class' => TipoSolucionConflicto::class,
-                'query_builder' => function (EntityRepository $er) {
-                    return $er->createQueryBuilder('u')
-                        ->orderBy('u.nombre', 'ASC')
-                        ->where('u.activo = true');
-                }
             ])
             ->add('fundamentacion', TextType::class, [
                 'label' => 'Fundamentación'

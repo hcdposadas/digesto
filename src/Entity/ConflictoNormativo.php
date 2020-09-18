@@ -60,11 +60,6 @@ class ConflictoNormativo extends BaseClass
     private $articuloAnexoConflicto;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\TipoSolucionConflicto")
-     */
-    private $tipoSolucion;
-
-    /**
      * @ORM\Column(type="text")
      */
     private $fundamentacion;
@@ -152,7 +147,7 @@ class ConflictoNormativo extends BaseClass
         return $this->articuloAnexo;
     }
 
-    public function setArticuloAnexo(string $articuloAnexo): self
+    public function setArticuloAnexo(?string $articuloAnexo): self
     {
         $this->articuloAnexo = $articuloAnexo;
 
@@ -164,7 +159,7 @@ class ConflictoNormativo extends BaseClass
         return $this->articuloConflicto;
     }
 
-    public function setArticuloConflicto(string $articuloConflicto): self
+    public function setArticuloConflicto(?string $articuloConflicto): self
     {
         $this->articuloConflicto = $articuloConflicto;
 
@@ -176,27 +171,11 @@ class ConflictoNormativo extends BaseClass
         return $this->articuloAnexoConflicto;
     }
 
-    public function setArticuloAnexoConflicto(string $articuloAnexoConflicto): self
+    public function setArticuloAnexoConflicto(?string $articuloAnexoConflicto): self
     {
         $this->articuloAnexoConflicto = $articuloAnexoConflicto;
 
         return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getTipoSolucion()
-    {
-        return $this->tipoSolucion;
-    }
-
-    /**
-     * @param mixed $tipoSolucion
-     */
-    public function setTipoSolucion($tipoSolucion): void
-    {
-        $this->tipoSolucion = $tipoSolucion;
     }
 
     public function getFundamentacion(): ?string
@@ -216,7 +195,7 @@ class ConflictoNormativo extends BaseClass
         return $this->observaciones;
     }
 
-    public function setObservaciones(string $observaciones): self
+    public function setObservaciones(?string $observaciones): self
     {
         $this->observaciones = $observaciones;
 

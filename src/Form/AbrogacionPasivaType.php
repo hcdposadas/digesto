@@ -43,13 +43,14 @@ class AbrogacionPasivaType extends AbstractType
 				'required' => false
 			])
 			->add('normaAbrogante', Select2EntityType::class, [
-                    'class'         => Norma::class,
-                    'remote_route'  => 'get_normas',
-                    'allow_clear'   => false,
-                    'multiple'      => false,
-                    'language'      => 'es',
-                    'placeholder'   => 'Seleccione una norma',
-                    'minimum_input_length' => 1
+                'class'         => Norma::class,
+                'remote_route'  => 'get_normas',
+                'allow_clear'   => false,
+                'multiple'      => false,
+                'language'      => 'es',
+                'placeholder'   => 'Seleccione una norma',
+                'minimum_input_length' => 1,
+                'width' => 300
             ])
 			->add('articuloAbrogante', TextType::class, [
 				'label' => 'Artículo',

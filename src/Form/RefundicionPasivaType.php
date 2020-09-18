@@ -49,7 +49,8 @@ class RefundicionPasivaType extends AbstractType
                 'multiple'      => false,
                 'language'      => 'es',
                 'placeholder'   => 'Seleccione una norma',
-                'minimum_input_length' => 1
+                'minimum_input_length' => 1,
+                'width' => 300
             ])
             ->add('articulo', TextType::class, [
                 'label' => 'Artículo',
