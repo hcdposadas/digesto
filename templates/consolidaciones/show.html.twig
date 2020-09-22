@@ -1,0 +1,216 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Consolidación {{ consolidacion.anio }} - En curso{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-xs-12">
+            <h1>
+                Consolidación {{ consolidacion.anio }}
+                <small>{{ consolidacion.enCurso ? 'En curso' : consolidacion.ultima ? 'Última vigente' : consolidacion.visible ? 'Visible' : '?' }}</small>
+            </h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Anexo A</h3>
+                </div>
+                <div class="box-body">
+                    <table id="tabla-anexo-a" class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Rama</th>
+                            <th>Número</th>
+                            <th>Tema general</th>
+                            <th>Acciones</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td colspan="5">No implementado</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Anexo B</h3>
+                </div>
+                <div class="box-body">
+                    <table id="tabla-anexo-b" class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Rama</th>
+                            <th>Número</th>
+                            <th>Tema general</th>
+                            <th>Acciones</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td colspan="5">No implementado</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Anexo C</h3>
+                </div>
+                <div class="box-body">
+                    <span>Listado de Ordenanzas y normas de igual jerarquía que se declaran caducas por plazo vencido, objeto o condición cumplidos u otras causales.</span>
+                    <table id="tabla-anexo-c" class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <th>Norma</th>
+                            <th>Fecha sanción</th>
+                            <th>Causal</th>
+                            <th>Rama</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for caducidad in consolidacion.anexoC %}
+                            <tr>
+                                <td>{{ caducidad.norma.rama.numeroRomano }} - {{ caducidad.norma.numero }}</td>
+                                <td>{{ caducidad.norma.fechaSancion | date('d/m/Y') }}</td>
+                                <td>{{ caducidad.tipoCaducidad }}</td>
+                                <td>{{ caducidad.norma.rama.titulo }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Anexo D</h3>
+                </div>
+                <div class="box-body">
+                    <table id="tabla-anexo-d" class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Rama</th>
+                            <th>Número</th>
+                            <th>Tema general</th>
+                            <th>Acciones</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td colspan="5">No implementado</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Anexo E</h3>
+                </div>
+                <div class="box-body">
+                    <table id="tabla-anexo-e" class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Rama</th>
+                            <th>Número</th>
+                            <th>Tema general</th>
+                            <th>Acciones</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td colspan="5">No implementado</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Anexo F</h3>
+                </div>
+                <div class="box-body">
+                    <span>Listado de Ordenanzas refundidas y fusionadas en otras Ordenanzas</span>
+                    <table id="tabla-anexo-f" class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <th>Rama</th>
+                            <th>Norma</th>
+                            <th>Fecha sanción</th>
+                            <th></th>
+                            <th>Norma</th>
+                            <th>Fecha sanción</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for refundida in consolidacion.anexoF %}
+                            <tr>
+                                <td>{{ refundida.normaRefundida.rama.titulo }}</td>
+                                <td>{{ refundida.normaRefundida.rama.numeroRomano }} - {{ refundida.normaRefundida.numero }}</td>
+                                <td>{{ refundida.normaRefundida.fechaSancion | date('d/m/Y') }}</td>
+                                <td>Refundida en</td>
+                                <td>{{ refundida.norma.rama.numeroRomano }} - {{ refundida.norma.numero }}</td>
+                                <td>{{ refundida.norma.fechaSancion | date('d/m/Y') }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Anexo G</h3>
+                </div>
+                <div class="box-body">
+                    <table id="tabla-anexo-g" class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Rama</th>
+                            <th>Número</th>
+                            <th>Tema general</th>
+                            <th>Acciones</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td colspan="5">No implementado</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Anexo H</h3>
+                </div>
+                <div class="box-body">
+                    <table id="tabla-anexo-h" class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Rama</th>
+                            <th>Número</th>
+                            <th>Tema general</th>
+                            <th>Acciones</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td colspan="5">No implementado</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

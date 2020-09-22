@@ -1,4 +1,4 @@
-FROM php:7.1-apache
+FROM php:7.4-apache
 MAINTAINER @raulneis <raulneis@gmail.com>
 
 ENV PATH="./vendor/bin:${PATH}"
@@ -19,35 +19,40 @@ RUN apt-get update \
                libpng-dev \
                libxml2-dev \
                nano \
-               mysql-client \
+            #    mysql-client \
                # libxext6 \
                # libmcrypt-dev libreadline-dev \
                # ssh \
                # rsync \
                unzip \
+			   npm \
+			   libzip-dev \
     && apt-get -y autoremove
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+RUN pecl install mcrypt-1.0.3
+RUN docker-php-ext-enable mcrypt
 
 RUN  docker-php-ext-install exif  \
                             gd \
                             intl \
                             bcmath \
-                            mcrypt \
                             opcache \
                             pdo \
                             pdo_pgsql \
                             pdo_mysql \
                             xml \
                             zip \
-    && docker-php-ext-configure gd \
-                                --enable-gd-native-ttf \
-                                --with-freetype-dir=/usr/include/freetype2 \
-                                --with-png-dir=/usr/include \
-                                --with-jpeg-dir=/usr/include \
+    # && docker-php-ext-configure gd \
+    #                             --enable-gd-native-ttf \
+    #                             --with-freetype-dir=/usr/include/freetype2 \
+    #                             --with-png-dir=/usr/include \
+    #                             --with-jpeg-dir=/usr/include \
     && docker-php-ext-install gd
 
 COPY docker/php.ini /usr/local/etc/php/php.ini
+COPY docker/000-default.conf /etc/apache2/sites-enabled/000-default.conf
 
 WORKDIR /var/www/html
 RUN a2enmod rewrite headers

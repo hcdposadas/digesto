@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Refundicion index{% endblock %}
+
+{% block body %}
+    <h1>Refundicion index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Articulo</th>
+                <th>ArticuloAnexo</th>
+                <th>NormaCompleta</th>
+                <th>ArticuloRefundido</th>
+                <th>ArticuloAnexoRefundido</th>
+                <th>Fundamentacion</th>
+                <th>Observaciones</th>
+                <th>Activo</th>
+                <th>FechaCreacion</th>
+                <th>FechaActualizacion</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for refundicion in refundicions %}
+            <tr>
+                <td>{{ refundicion.id }}</td>
+                <td>{{ refundicion.articulo }}</td>
+                <td>{{ refundicion.articuloAnexo }}</td>
+                <td>{{ refundicion.normaCompleta ? 'Yes' : 'No' }}</td>
+                <td>{{ refundicion.articuloRefundido }}</td>
+                <td>{{ refundicion.articuloAnexoRefundido }}</td>
+                <td>{{ refundicion.fundamentacion }}</td>
+                <td>{{ refundicion.observaciones }}</td>
+                <td>{{ refundicion.activo ? 'Yes' : 'No' }}</td>
+                <td>{{ refundicion.fechaCreacion ? refundicion.fechaCreacion|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ refundicion.fechaActualizacion ? refundicion.fechaActualizacion|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('refundicion_show', {'id': refundicion.id}) }}">show</a>
+                    <a href="{{ path('refundicion_edit', {'id': refundicion.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="12">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('refundicion_new') }}">Create new</a>
+{% endblock %}

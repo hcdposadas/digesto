@@ -7,6 +7,7 @@ use App\Entity\Descriptor;
 use App\Entity\Identificador;
 use App\Entity\PalabraClave;
 use App\Entity\Rama;
+use App\Entity\TipoEstadoNorma;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 
@@ -42,6 +43,11 @@ class NormaFilterForm extends AbstractType {
 			->add( 'paginaBoletin' )
 			->add( 'texto' )
 			->add( 'decretoPromulgatorio' )
+            ->add( 'estado', EntityType::class, [
+                'empty_data' => null,
+                'required' => false,
+                'class' => TipoEstadoNorma::class
+            ])
 			->add( 'descriptores',
 				Select2EntityType::class,
 				[

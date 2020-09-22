@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ norma }} - Editar Texto Definitivo{% endblock %}
+
+{% block body %}
+    <h1>Norma {{ norma }} - Texto Definitivo para {{ texto_definitivo.consolidacion }}</h1>
+
+
+
+    {{ include('texto_definitivo/_form.html.twig', {'button_label': 'Guardar y volver a la norma'}) }}
+
+
+    <a href="{{ path('norma_edit', {id: norma.id}) }}">Volver a la norma {{ norma }}</a>
+
+    {{ include('texto_definitivo/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Consolidaciones{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Listado de Consolidaciones</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <table id="tabla-consolidaciones" class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <th>Título</th>
+                            <th>Año</th>
+                            <th title="Visible en la página web"">Visible</th>
+                            <th>Última vigente</th>
+                            <th>En curso</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            {% for consolidacion in consolidaciones %}
+                                <tr>
+                                    <td>{{ consolidacion.titulo }}</td>
+                                    <td>{{ consolidacion.anio }}</td>
+                                    <td>{{ consolidacion.visible ? 'SI' : 'NO' }}</td>
+                                    <td>{{ consolidacion.ultima ? 'SI' : 'NO '}}</td>
+                                    <td>{{ consolidacion.enCurso ? 'SI' : 'NO' }}</td>
+    {#                                <td>{{ palabra_clave.nombre }}</td>#}
+    {#                                <td>{{ palabra_clave.activo ? 'Si' : 'No' }}</td>#}
+    {#                                <td>{{ palabra_clave.fechaCreacion ? palabra_clave.fechaCreacion|date('Y-m-d H:i:s') : '' }}</td>#}
+    {#                                <td>{{ palabra_clave.fechaActualizacion ? palabra_clave.fechaActualizacion|date('Y-m-d H:i:s') : '' }}</td>#}
+                                    <td>
+                                        <a class="btn btn-default btn-icon" href="{{ path('consolidaciones_show', {'id': consolidacion.id}) }}"><i class="fa fa-eye"></i></a>
+    {#                                    <a class="btn btn-default btn-icon" href="{{ path('palabra_clave_edit', {'id': palabra_clave.id}) }}"><i class="fa fa-edit"></i></a>#}
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="6">No hay consolidaciones para mostrar</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

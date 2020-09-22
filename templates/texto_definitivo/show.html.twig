@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}TextoDefinitivo{% endblock %}
+
+{% block body %}
+    <h1>Norma {{ norma }} - Texto Definitivo para {{ texto_definitivo.consolidacion }}</h1>
+
+    <div style="background-color: white; padding: 2em;">
+        {{ texto_definitivo.textoDefinitivo | raw }}
+    </div>
+
+{#    {{ include('texto_definitivo/_delete_form.html.twig') }}#}
+{% endblock %}
