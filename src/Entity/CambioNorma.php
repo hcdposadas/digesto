@@ -21,6 +21,12 @@ class CambioNorma extends BaseClass
      */
 	private $id;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Consolidacion", inversedBy="cambios")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $consolidacion;
+
 	/**
 	 * @ORM\ManyToOne(targetEntity="App\Entity\Norma", inversedBy="cambiosNormas")
 	 */
@@ -203,5 +209,21 @@ class CambioNorma extends BaseClass
     public function setArticulosSuprimidos($articulosSuprimidos): void
     {
         $this->articulosSuprimidos = $articulosSuprimidos;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getConsolidacion()
+    {
+        return $this->consolidacion;
+    }
+
+    /**
+     * @param mixed $consolidacion
+     */
+    public function setConsolidacion($consolidacion): void
+    {
+        $this->consolidacion = $consolidacion;
     }
 }

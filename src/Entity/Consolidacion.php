@@ -78,6 +78,11 @@ class Consolidacion extends BaseClass {
     private $refundidas;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\CambioNorma", mappedBy="consolidacion", orphanRemoval=true)
+     */
+    private $cambios;
+
+    /**
      * @ORM\Column(type="boolean", options={"default":"0"})
      */
     private $enCurso = false;
@@ -165,6 +170,22 @@ class Consolidacion extends BaseClass {
 
 		return $this;
 	}
+
+    /**
+     * @return mixed
+     */
+    public function getCambios()
+    {
+        return $this->cambios;
+    }
+
+    /**
+     * @param mixed $cambios
+     */
+    public function setCambios($cambios): void
+    {
+        $this->cambios = $cambios;
+    }
 
 	/**
 	 * @return Collection|NormaConsolidacion[]
