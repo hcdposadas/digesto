@@ -8,16 +8,14 @@ use App\Entity\Norma;
 use App\Entity\PalabraClave;
 use App\Entity\Rama;
 use App\Entity\TipoBoletin;
+use App\Entity\TipoEstadoNorma;
 use Doctrine\ORM\EntityRepository;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use App\Form\BootstrapCollectionType;
 use Tetranz\Select2EntityBundle\Form\Type\Select2EntityType;
 use Vich\UploaderBundle\Form\Type\VichFileType;
 
@@ -46,6 +44,10 @@ class NormaType extends AbstractType {
 
 
 		$builder
+            ->add('estado', EntityType::class, [
+                'class' => TipoEstadoNorma::class
+            ])
+
 			->add( 'rama',
 				EntityType::class,
 				[
@@ -156,12 +158,119 @@ class NormaType extends AbstractType {
 					'by_reference' => false,
 					'label'        => 'Beneficiarios'
 				] )
-//			->add( 'texto',
-//				CKEditorType::class,
-//				[
-//					'label'  => 'Texto',
-//					'config' => [ 'uiColor' => '#ffffff' ]
-//				] )
+			->add( 'texto',
+				CKEditorType::class,
+				[
+					'label'  => 'Texto',
+					'config' => [ 'uiColor' => '#ffffff' ]
+				] )
+		->add(
+			'cambiosNormas',
+			BootstrapCollectionType::class,
+			[
+				'entry_type'   => CambioNormaType::class,
+				'allow_add'    => true,
+				'allow_delete' => true,
+				'by_reference' => false,
+				'label'        => 'Tabla de Antecedentes'
+			]
+		)
+			->add(
+				'adhesiones',
+				BootstrapCollectionType::class,
+				[
+					'entry_type'   => AdhesionType::class,
+					'allow_add'    => true,
+					'allow_delete' => true,
+					'by_reference' => false,
+					'label'        => 'Adhesiones'
+				]
+			)
+
+			->add(
+				'abrogaciones',
+				BootstrapCollectionType::class,
+				[
+					'entry_type'   => AbrogacionPasivaType::class,
+					'allow_add'    => true,
+					'allow_delete' => true,
+					'by_reference' => false,
+					'label'        => 'Abrogaciones (pasiva)'
+				]
+			)
+            ->add(
+                'abrogadas',
+                BootstrapCollectionType::class,
+                [
+                    'entry_type'   => AbrogacionActivaType::class,
+                    'allow_add'    => true,
+                    'allow_delete' => true,
+                    'by_reference' => false,
+                    'label'        => 'Abrogaciones (activa)'
+                ]
+            )
+
+			->add(
+				'caducidades',
+				BootstrapCollectionType::class,
+				[
+					'entry_type'   => CaducidadType::class,
+					'allow_add'    => true,
+					'allow_delete' => true,
+					'by_reference' => false,
+					'label'        => 'Caducidades'
+				]
+			)
+
+            ->add(
+                'conflictosConNormas',
+                BootstrapCollectionType::class,
+                [
+                    'entry_type'   => ConflictoNormativoActivaType::class,
+                    'allow_add'    => true,
+                    'allow_delete' => true,
+                    'by_reference' => false,
+                    'label'        => 'Conflictos Normativos (activa)'
+                ]
+            )
+
+			->add(
+				'conflictosNormativos',
+				BootstrapCollectionType::class,
+				[
+					'entry_type'   => ConflictoNormativoPasivaType::class,
+					'allow_add'    => true,
+					'allow_delete' => true,
+					'by_reference' => false,
+					'label'        => 'Conflictos Normativos (pasiva)'
+				]
+			)
+
+			->add(
+				'refundiciones',
+				BootstrapCollectionType::class,
+				[
+					'entry_type'   => RefundicionActivaType::class,
+					'allow_add'    => true,
+					'allow_delete' => true,
+					'by_reference' => false,
+					'label'        => 'Refundiciones (activa)'
+				]
+			)
+            ->add(
+                'refundidas',
+                BootstrapCollectionType::class,
+                [
+                    'entry_type'   => RefundicionPasivaType::class,
+                    'allow_add'    => true,
+                    'allow_delete' => true,
+                    'by_reference' => false,
+                    'label'        => 'Refundiciones (pasiva)'
+                ]
+            )
+
+            ->add('textoDefinitivoNoConsolidado', TextoDefinitivoType::class)
+
 			->add( 'archivoNorma',
 				VichFileType::class,
 				[

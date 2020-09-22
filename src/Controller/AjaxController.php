@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Descriptor;
 use App\Entity\Identificador;
+use App\Entity\Norma;
 use App\Entity\PalabraClave;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -115,5 +116,32 @@ class AjaxController extends AbstractController
 
         return new JsonResponse($json);
 
+    }
+
+    /**
+     * @Route("/get_normas", name="get_normas", methods={"GET"})
+     */
+    public function getANormas(Request $request)
+    {
+        $texto = strtolower($request->get('q'));
+        $normas = $this->getDoctrine()->getRepository(Norma::class)->getByLike($texto);
+
+        $json = array();
+        if (!count($normas)) {
+            $json[] = array(
+                'label' => 'No se encontraron coincidencias',
+                'value' => ''
+            );
+        } else {
+            /** @var Norma $norma */
+            foreach ($normas as $norma) {
+                $json[] = array(
+                    'id' => $norma->getId(),
+                    'text' => $norma->getRama()->getTitulo().' '. $norma->__toString()
+                );
+            }
+        }
+
+        return new JsonResponse($json);
     }
 }

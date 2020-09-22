@@ -2,7 +2,10 @@
 
 namespace App\Repository;
 
+use App\Entity\Consolidacion;
+use App\Entity\EstadoNorma;
 use App\Entity\Norma;
+use App\Entity\TipoEstadoNorma;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -18,45 +21,59 @@ class NormaRepository extends ServiceEntityRepository {
 		parent::__construct( $registry, Norma::class );
 	}
 
-	// /**
-	//  * @return Norma[] Returns an array of Norma objects
-	//  */
-	/*
-	public function findByExampleField($value)
-	{
-		return $this->createQueryBuilder('n')
-			->andWhere('n.exampleField = :val')
-			->setParameter('val', $value)
-			->orderBy('n.id', 'ASC')
-			->setMaxResults(10)
-			->getQuery()
-			->getResult()
-		;
-	}
-	*/
+	public function getByLike($texto)
+    {
+        $texto = trim(strtolower($texto));
+        $texto = trim(preg_replace('/ +/', ' ', $texto));
 
-	/*
-	public function findOneBySomeField($value): ?Norma
-	{
-		return $this->createQueryBuilder('n')
-			->andWhere('n.exampleField = :val')
-			->setParameter('val', $value)
-			->getQuery()
-			->getOneOrNullResult()
-		;
-	}
-	*/
+        if (preg_match('/[ivx]+\s*(-+\s*)?\d+/i', $texto)) {
+            $numero = preg_replace('/\D+/i', '', $texto);
+            $numeroRomano = preg_replace('/[^ivx]+/i', '', $texto);
+            $titulo = null;
+        } else {
+            $numero = preg_replace('/\D+/i', '', $texto);
+            $numeroRomano = preg_replace('/[^ivx]+/i', '', $texto);
+            $titulo = $texto;
+            if ($numero || $numeroRomano) {
+                $titulo = preg_replace('/(' . implode('|', [$numero, $numeroRomano]) . ')/i', ' ', $titulo);
+            }
+        }
+
+        $qb = $this->createQueryBuilder('n');
+        $qb->join('n.rama', 'r');
+
+        if ($numero) {
+            $qb->andWhere('n.numero = :numero');
+            $qb->setParameter('numero', $numero);
+        }
+        if ($numeroRomano) {
+            $qb->andWhere('LOWER(r.numeroRomano) = :numeroRomano');
+            $qb->setParameter('numeroRomano', $numeroRomano);
+        }
+        if ($titulo) {
+            $qb->andWhere('LOWER(r.titulo) LIKE :titulo');
+            $qb->setParameter('titulo', '%'.$titulo.'%');
+        }
+
+        $qb->setMaxResults(8);
+        $qb->orderBy('r.orden');
+        $qb->addOrderBy('n.numero');
+
+//        dd($qb->getQuery()->getSQL(), $qb->getQuery()->getParameters());
+
+	    return $qb->getQuery()->getResult();
+    }
 
 	public function getQbAll() {
-		$qb = $this->createQueryBuilder( 'n' );
-
-		return $qb;
+		return $this->createQueryBuilder( 'n' )
+            ->join('n.rama', 'r');
 	}
 
 	public function search() {
 		$qb = $this->getQbAll();
 
-		$qb->orderBy( 'n.id', 'ASC' );
+        $qb->orderBy( 'r.orden', 'ASC' );
+		$qb->addOrderBy( 'n.numero', 'ASC' );
 
 		return $qb;
 	}
@@ -157,6 +174,14 @@ class NormaRepository extends ServiceEntityRepository {
 
 		}
 
+        if ( isset( $data['estado'] ) ) {
+            $qb->join('n.estadosNormas', 'en')
+                ->join('en.estado', 'e')
+                ->andWhere('e.id = :estadoId')
+                ->setParameter( 'estadoId', $data['estado'] );
+
+        }
+
 		return $qb;
 	}
 
@@ -179,5 +204,46 @@ class NormaRepository extends ServiceEntityRepository {
 		return $qb;
 
 	}
+
+	public function updateEstados()
+    {
+        $consolidacion = $this->getEntityManager()->getRepository(Consolidacion::class)->getConsolidacionEnCurso();
+        $pendiente = $this->getEntityManager()->getRepository(TipoEstadoNorma::class)->getPendiente();
+
+
+	    $normasConEstado = $this->createQueryBuilder('n')
+            ->join('n.estadosNormas', 'e')
+            ->join('e.consolidacion', 'c')
+            ->where('c.enCurso = true')
+            ->getQuery()
+            ->getResult();
+
+	    if (count($normasConEstado)) {
+            $normasSinEstado = $this->createQueryBuilder('n')
+                ->where('n.id NOT IN (:ids)')
+                ->setParameters([
+                    'ids' => array_map(function ($n) { return $n->getId(); }, $normasConEstado)
+                ])
+                ->getQuery()
+                ->getResult();
+        } else {
+            $normasSinEstado = $this->createQueryBuilder('n')
+                ->getQuery()
+                ->getResult();
+        }
+
+
+
+	    /** @var $norma Norma */
+	    foreach ($normasSinEstado as $norma) {
+	        $estado = new EstadoNorma();
+	        $estado->setEstado($pendiente);
+	        $estado->setConsolidacion($consolidacion);
+	        $norma->addEstadosNorma($estado);
+	        $this->getEntityManager()->persist($norma);
+        }
+
+        $this->getEntityManager()->flush();
+    }
 
 }
