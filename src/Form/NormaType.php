@@ -170,7 +170,7 @@ class NormaType extends AbstractType {
 			[
 				'entry_type'   => CambioNormaType::class,
 				'allow_add'    => true,
-				'allow_delete' => false,
+				'allow_delete' => true,
 				'by_reference' => false,
 				'label'        => 'Tabla de Antecedentes'
 			]
