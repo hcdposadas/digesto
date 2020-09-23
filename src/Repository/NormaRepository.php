@@ -55,11 +55,8 @@ class NormaRepository extends ServiceEntityRepository {
             $qb->setParameter('titulo', '%'.$titulo.'%');
         }
 
-        $qb->setMaxResults(8);
         $qb->orderBy('r.orden');
         $qb->addOrderBy('n.numero');
-
-//        dd($qb->getQuery()->getSQL(), $qb->getQuery()->getParameters());
 
 	    return $qb->getQuery()->getResult();
     }
