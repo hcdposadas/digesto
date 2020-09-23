@@ -272,6 +272,16 @@ class Norma extends BaseClass
      */
     private $estadosNormas;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ObservacionAntecedente", mappedBy="norma", cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    private $observacionAntecedentes;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Fundamentacion", mappedBy="norma", cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    private $fundamentaciones;
+
     public function __construct()
     {
         $this->anexos = new ArrayCollection();
@@ -291,6 +301,8 @@ class Norma extends BaseClass
         $this->refundidas = new ArrayCollection();
         $this->textosDefinitivos = new ArrayCollection();
         $this->estadosNormas = new ArrayCollection();
+        $this->observacionAntecedentes = new ArrayCollection();
+        $this->fundamentaciones = new ArrayCollection();
     }
 
     public function __toString()
@@ -1151,7 +1163,7 @@ class Norma extends BaseClass
         return null;
     }
 
-    public function setEstado(TipoEstadoNorma $estado) : self
+    public function setEstado(TipoEstadoNorma $estado): self
     {
         foreach ($this->getEstadosNormas() as $estadoNorma) {
             if ($estadoNorma->getConsolidacion()->isEnCurso()) {
@@ -1161,4 +1173,97 @@ class Norma extends BaseClass
         }
         return $this;
     }
+
+    /**
+     * @return Collection|ObservacionAntecedente[]
+     */
+    public function getObservacionAntecedentes(): Collection
+    {
+        return $this->observacionAntecedentes;
+    }
+
+    public function addObservacionAntecedente(ObservacionAntecedente $observacionAntecedente): self
+    {
+        if (!$this->observacionAntecedentes->contains($observacionAntecedente)) {
+            $this->observacionAntecedentes[] = $observacionAntecedente;
+            $observacionAntecedente->setNorma($this);
+        }
+
+        return $this;
+    }
+
+    public function removeObservacionAntecedente(ObservacionAntecedente $observacionAntecedente): self
+    {
+        if ($this->observacionAntecedentes->contains($observacionAntecedente)) {
+            $this->observacionAntecedentes->removeElement($observacionAntecedente);
+            // set the owning side to null (unless already changed)
+            if ($observacionAntecedente->getNorma() === $this) {
+                $observacionAntecedente->setNorma(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getObservacionAntecedente(): ?ObservacionAntecedente
+    {
+        foreach ($this->getObservacionAntecedentes() as $observacionAntecedente) {
+            if ($observacionAntecedente->getConsolidacion()->isEnCurso()) {
+                return $observacionAntecedente;
+            }
+        }
+        return null;
+    }
+
+    public function setObservacionAntecedente($observacionAntecedente)
+    {
+        return $this->addObservacionAntecedente($observacionAntecedente);
+    }
+
+    /**
+     * @return Collection|Fundamentacion[]
+     */
+    public function getFundamentaciones(): Collection
+    {
+        return $this->fundamentaciones;
+    }
+
+    public function addFundamentacione(Fundamentacion $fundamentacione): self
+    {
+        if (!$this->fundamentaciones->contains($fundamentacione)) {
+            $this->fundamentaciones[] = $fundamentacione;
+            $fundamentacione->setNorma($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFundamentacione(Fundamentacion $fundamentacione): self
+    {
+        if ($this->fundamentaciones->contains($fundamentacione)) {
+            $this->fundamentaciones->removeElement($fundamentacione);
+            // set the owning side to null (unless already changed)
+            if ($fundamentacione->getNorma() === $this) {
+                $fundamentacione->setNorma(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getFundamentacion(): ?Fundamentacion
+    {
+        foreach ($this->getFundamentaciones() as $fundamentacion) {
+            if ($fundamentacion->getConsolidacion()->isEnCurso()) {
+                return $fundamentacion;
+            }
+        }
+        return null;
+    }
+
+    public function setFundamentacion($fundamentacion)
+    {
+        return $this->addFundamentacione($fundamentacion);
+    }
+
 }

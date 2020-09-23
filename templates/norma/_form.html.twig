@@ -121,6 +121,7 @@
                         <li class=""><a href="#tab_caducidades" data-toggle="tab" aria-expanded="false">Caducidades ({{ norma.caducidades.count }})</a></li>
                         <li class=""><a href="#tab_conflictos" data-toggle="tab" aria-expanded="false">Abrogaciones implícita ({{ norma.conflictosNormativos.count }})</a></li>
                         <li class=""><a href="#tab_refundiciones" data-toggle="tab" aria-expanded="false">Refundiciones ({{ norma.refundiciones.count }})</a></li>
+                        <li class=""><a href="#tab_fundamentacion" data-toggle="tab" aria-expanded="false">Fundamentación</a></li>
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane active" id="tab_textos">
@@ -162,6 +163,10 @@
                                     <h4 class="box-title">Tabla de Antecedentes</h4>
                                     <div class="row">
                                         <div class="col-md-12">
+                                            {{ form_widget(form.observacionAntecedente) }}
+                                        </div>
+                                        <div class="col-md-12">
+                                            <b>Antecedentes por artículo</b>
                                             {{ form_widget(form.cambiosNormas) }}
                                         </div>
                                     </div>
@@ -228,6 +233,14 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     {{ form_widget(form.refundidas) }}
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.tab-pane -->
+                        <div class="tab-pane" id="tab_fundamentacion">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    {{ form_widget(form.fundamentacion) }}
                                 </div>
                             </div>
                         </div>
