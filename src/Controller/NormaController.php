@@ -154,89 +154,96 @@ class NormaController extends AbstractController {
 
 		$form->handleRequest( $request );
 
-		if ( $form->isSubmitted() && $form->isValid() ) {
+		if ( $form->isSubmitted()) {
+            if ($form->isValid()) {
 
-//            $data = $request->get($form->getName());
-			$data                    = [];
-			$data['descriptores']    = $form->get( 'descriptores' )->getData();
-			$data['identificadores'] = $form->get( 'identificadores' )->getData();
-			$data['palabrasClave']   = $form->get( 'palabrasClave' )->getData();
+                $data = [];
+                $data['descriptores'] = $form->get('descriptores')->getData();
+                $data['identificadores'] = $form->get('identificadores')->getData();
+                $data['palabrasClave'] = $form->get('palabrasClave')->getData();
 
-			/* elimino descriptores */
+                /* elimino descriptores */
 
-			$descriptoresQueQuedan = $norma->getDescriptoresNorma()->filter(
-				function ( $entry ) use ( $data ) {
-					return in_array( $entry->getDescriptor(), $data['descriptores'] );
-				}
-			);
+                $descriptoresQueQuedan = $norma->getDescriptoresNorma()->filter(
+                    function ($entry) use ($data) {
+                        return in_array($entry->getDescriptor(), $data['descriptores']);
+                    }
+                );
 
-			foreach ( $descriptoresOriginales as $descriptor ) {
-				if ( false === $descriptoresQueQuedan->contains( $descriptor ) ) {
+                foreach ($descriptoresOriginales as $descriptor) {
+                    if (false === $descriptoresQueQuedan->contains($descriptor)) {
 
-					$descriptor->setNorma( null );
-					$norma->getDescriptoresNorma()->removeElement( $descriptor );
+                        $descriptor->setNorma(null);
+                        $norma->getDescriptoresNorma()->removeElement($descriptor);
 
-					$em->remove( $descriptor );
-				}
-			}
+                        $em->remove($descriptor);
+                    }
+                }
 
-			/* elimino identificadores */
+                /* elimino identificadores */
 
-			$identificadoresQueQuedan = $norma->getIdentificadoresNorma()->filter(
-				function ( $entry ) use ( $data ) {
-					return in_array( $entry->getIdentificador(), $data['identificadores'] );
-				}
-			);
+                $identificadoresQueQuedan = $norma->getIdentificadoresNorma()->filter(
+                    function ($entry) use ($data) {
+                        return in_array($entry->getIdentificador(), $data['identificadores']);
+                    }
+                );
 
-			foreach ( $identificadoresOriginales as $identificador ) {
-				if ( false === $identificadoresQueQuedan->contains( $identificador ) ) {
+                foreach ($identificadoresOriginales as $identificador) {
+                    if (false === $identificadoresQueQuedan->contains($identificador)) {
 
-					$identificador->setNorma( null );
-					$norma->getIdentificadoresNorma()->removeElement( $identificador );
+                        $identificador->setNorma(null);
+                        $norma->getIdentificadoresNorma()->removeElement($identificador);
 
-					$em->remove( $identificador );
-				}
-			}
+                        $em->remove($identificador);
+                    }
+                }
 
-			/* elimino palabras clave */
+                /* elimino palabras clave */
 
-			$palabraClaveQueQuedan = $norma->getPalabrasClaveNorma()->filter(
-				function ( $entry ) use ( $data ) {
-					return in_array( $entry->getPalabraClave(), $data['palabrasClave'] );
-				}
-			);
+                $palabraClaveQueQuedan = $norma->getPalabrasClaveNorma()->filter(
+                    function ($entry) use ($data) {
+                        return in_array($entry->getPalabraClave(), $data['palabrasClave']);
+                    }
+                );
 
-			foreach ( $palabrasClaveOriginales as $palabraClave ) {
-				if ( false === $palabraClaveQueQuedan->contains( $palabraClave ) ) {
+                foreach ($palabrasClaveOriginales as $palabraClave) {
+                    if (false === $palabraClaveQueQuedan->contains($palabraClave)) {
 
-					$palabraClave->setNorma( null );
-					$norma->getPalabrasClaveNorma()->removeElement( $palabraClave );
+                        $palabraClave->setNorma(null);
+                        $norma->getPalabrasClaveNorma()->removeElement($palabraClave);
 
-					$em->remove( $palabraClave );
-				}
-			}
+                        $em->remove($palabraClave);
+                    }
+                }
 
-			// agrego descriptores
-			$this->addDescriptores( $em, $data, $norma );
+                // agrego descriptores
+                $this->addDescriptores($em, $data, $norma);
 
-			// agrego identificadores
-			$this->addIdentificadores( $em, $data, $norma );
+                // agrego identificadores
+                $this->addIdentificadores($em, $data, $norma);
 
-			// agrego palabras clave
-			$this->addPalabrasClaves( $em, $data, $norma );
+                // agrego palabras clave
+                $this->addPalabrasClaves($em, $data, $norma);
 
-			$em->flush();
+                $em->flush();
 
-			$this->get( 'session' )->getFlashBag()->add(
-				'success',
-				'Norma actualizada correctamente'
-			);
+                $this->get('session')->getFlashBag()->add(
+                    'success',
+                    'Norma actualizada correctamente'
+                );
 
-			return $this->redirectToRoute( 'norma_edit',
-				[
-					'id' => $norma->getId(),
-				] );
-		}
+                return $this->redirectToRoute('norma_edit',
+                    [
+                        'id' => $norma->getId(),
+                    ]);
+            } else {
+                return $this->render('norma/edit.html.twig',
+                    [
+                        'norma' => $norma,
+                        'form' => $form->createView(),
+                    ]);
+            }
+        }
 
 		return $this->render( 'norma/edit.html.twig',
 			[

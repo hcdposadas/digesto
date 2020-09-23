@@ -11,6 +11,7 @@ parameters:
     app.path.textos_normas: /uploads/textos_normas
     app.path.textos_definitivos_normas: /uploads/textos_definitivos_normas
     app.path.anexos_documentos: /uploads/anexos_normas
+    app.path.anexos_originales: /uploads/anexos_originales
     app.path.boletin_oficial_municipal_documentos: /uploads/documentos/boletin_oficial_municipal
     app.path.documentos_web: /uploads/documentos/documentos_web
     app.path.documentos_anexos_web: /uploads/documentos/documentos_anexos_web
