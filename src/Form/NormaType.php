@@ -112,6 +112,15 @@ class NormaType extends AbstractType {
 					'by_reference' => false,
 					'label'        => 'Anexos'
 				] )
+            ->add( 'anexosOriginales',
+                BootstrapCollectionType::class,
+                [
+                    'entry_type'   => AnexoOriginalNormaType::class,
+                    'allow_add'    => true,
+                    'allow_delete' => true,
+                    'by_reference' => false,
+                    'label'        => 'Anexos Originales'
+                ] )
 			->add( 'descriptores',
 				Select2EntityType::class,
 				[
@@ -164,17 +173,23 @@ class NormaType extends AbstractType {
 					'label'  => 'Texto',
 					'config' => [ 'uiColor' => '#ffffff' ]
 				] )
-		->add(
-			'cambiosNormas',
-			BootstrapCollectionType::class,
-			[
-				'entry_type'   => CambioNormaType::class,
-				'allow_add'    => true,
-				'allow_delete' => true,
-				'by_reference' => false,
-				'label'        => 'Tabla de Antecedentes'
-			]
-		)
+            ->add(
+                'cambiosNormas',
+                BootstrapCollectionType::class,
+                [
+                    'entry_type'   => CambioNormaType::class,
+                    'allow_add'    => true,
+                    'allow_delete' => true,
+                    'by_reference' => false,
+                    'label'        => 'Tabla de Antecedentes'
+                ]
+            )
+            ->add(
+                'observacionAntecedente', ObservacionAntecedenteType::class
+            )
+            ->add(
+                'fundamentacion', FundamentacionType::class
+            )
 			->add(
 				'adhesiones',
 				BootstrapCollectionType::class,
@@ -278,6 +293,7 @@ class NormaType extends AbstractType {
 					'allow_delete' => true,
 					'label'        => 'Texto'
 				] )
+
 			->add( 'activo' )
 			->add( 'vigenteNoConsolidada' );
 	}

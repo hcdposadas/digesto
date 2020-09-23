@@ -83,6 +83,16 @@ class Consolidacion extends BaseClass {
     private $cambios;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ObservacionAntecedente", mappedBy="consolidacion", orphanRemoval=true)
+     */
+    private $observacionesAntecendentes;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Fundamentacion", mappedBy="consolidacion", orphanRemoval=true)
+     */
+    private $fundamentaciones;
+
+    /**
      * @ORM\Column(type="boolean", options={"default":"0"})
      */
     private $enCurso = false;
@@ -185,6 +195,38 @@ class Consolidacion extends BaseClass {
     public function setCambios($cambios): void
     {
         $this->cambios = $cambios;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getObservacionesAntecendentes()
+    {
+        return $this->observacionesAntecendentes;
+    }
+
+    /**
+     * @param mixed $observacionesAntecendentes
+     */
+    public function setObservacionesAntecendentes($observacionesAntecendentes): void
+    {
+        $this->observacionesAntecendentes = $observacionesAntecendentes;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFundamentaciones()
+    {
+        return $this->fundamentaciones;
+    }
+
+    /**
+     * @param mixed $fundamentaciones
+     */
+    public function setFundamentaciones($fundamentaciones): void
+    {
+        $this->fundamentaciones = $fundamentaciones;
     }
 
 	/**
