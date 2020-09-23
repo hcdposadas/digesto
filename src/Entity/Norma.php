@@ -126,6 +126,12 @@ class Norma extends BaseClass
      */
     private $anexos;
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\AnexoOriginalNorma", mappedBy="norma", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\OrderBy({"id" = "ASC", "orden"= "ASC" })
+     * @Groups({"norma"})
+     */
+    private $anexosOriginales;
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\BeneficiarioNorma", mappedBy="norma", orphanRemoval=true, cascade={"persist"})
      */
     private $beneficiarioNormas;
@@ -269,6 +275,7 @@ class Norma extends BaseClass
     public function __construct()
     {
         $this->anexos = new ArrayCollection();
+        $this->anexosOriginales = new ArrayCollection();
         $this->beneficiarioNormas = new ArrayCollection();
         $this->palabrasClaveNorma = new ArrayCollection();
         $this->descriptoresNorma = new ArrayCollection();
@@ -471,6 +478,37 @@ class Norma extends BaseClass
     {
         if ($this->anexos->contains($anexo)) {
             $this->anexos->removeElement($anexo);
+            // set the owning side to null (unless already changed)
+            if ($anexo->getNorma() === $this) {
+                $anexo->setNorma(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getAnexosOriginales(): Collection
+    {
+        return $this->anexosOriginales;
+    }
+
+    public function addAnexosOriginale(AnexoOriginalNorma $anexo): self
+    {
+        if (!$this->anexosOriginales->contains($anexo)) {
+            $this->anexosOriginales[] = $anexo;
+            $anexo->setNorma($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAnexosOriginale(AnexoOriginalNorma $anexo): self
+    {
+        if ($this->anexosOriginales->contains($anexo)) {
+            $this->anexosOriginales->removeElement($anexo);
             // set the owning side to null (unless already changed)
             if ($anexo->getNorma() === $this) {
                 $anexo->setNorma(null);

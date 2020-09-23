@@ -99,6 +99,8 @@ Icon
 !/public/uploads/normas/.gitkeep
 /public/uploads/anexos_normas/*
 !/public/uploads/anexos_normas/.gitkeep
+/public/uploads/anexos_originales/*
+!/public/uploads/anexos_originales/.gitkeep
 /public/uploads/textos_definitivos_normas/*
 !/public/uploads/textos_definitivos_normas/.gitkeep
 /public/uploads/documentos/boletin_oficial_municipal/*
