@@ -32,10 +32,15 @@ class NormaRepository extends ServiceEntityRepository {
             $titulo = null;
         } else {
             $numero = preg_replace('/\D+/i', '', $texto);
-            $numeroRomano = preg_replace('/[^ivx]+/i', '', $texto);
+            $numeroRomano = '';
+            preg_match('/(^|(?<= ))[ivx]+((?= )|$)/i', $texto, $matches);
+            if (count($matches)) {
+                $numeroRomano = $matches[0];
+            }
+
             $titulo = $texto;
             if ($numero || $numeroRomano) {
-                $titulo = preg_replace('/(' . implode('|', [$numero, $numeroRomano]) . ')/i', ' ', $titulo);
+                $titulo = trim(preg_replace('/(' . implode('|', array_filter([$numero, $numeroRomano])) . ')/i', ' ', $titulo));
             }
         }
 
