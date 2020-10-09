@@ -282,6 +282,16 @@ class Norma extends BaseClass
      */
     private $fundamentaciones;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ArticuloSuprimido", mappedBy="norma", cascade={"persist", "remove"}, orphanRemoval=true))
+     */
+    private $articulosSuprimidos;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\CambioAnexo", mappedBy="norma", cascade={"persist", "remove"}, orphanRemoval=true))
+     */
+    private $cambiosAnexos;
+
     public function __construct()
     {
         $this->anexos = new ArrayCollection();
@@ -303,6 +313,8 @@ class Norma extends BaseClass
         $this->estadosNormas = new ArrayCollection();
         $this->observacionAntecedentes = new ArrayCollection();
         $this->fundamentaciones = new ArrayCollection();
+        $this->articulosSuprimidos = new ArrayCollection();
+        $this->cambiosAnexos = new ArrayCollection();
     }
 
     public function __toString()
@@ -1264,6 +1276,68 @@ class Norma extends BaseClass
     public function setFundamentacion($fundamentacion)
     {
         return $this->addFundamentacione($fundamentacion);
+    }
+
+    /**
+     * @return Collection|ArticuloSuprimido[]
+     */
+    public function getArticulosSuprimidos(): Collection
+    {
+        return $this->articulosSuprimidos;
+    }
+
+    public function addArticulosSuprimido(ArticuloSuprimido $articulosSuprimido): self
+    {
+        if (!$this->articulosSuprimidos->contains($articulosSuprimido)) {
+            $this->articulosSuprimidos[] = $articulosSuprimido;
+            $articulosSuprimido->setNorma($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArticulosSuprimido(ArticuloSuprimido $articulosSuprimido): self
+    {
+        if ($this->articulosSuprimidos->contains($articulosSuprimido)) {
+            $this->articulosSuprimidos->removeElement($articulosSuprimido);
+            // set the owning side to null (unless already changed)
+            if ($articulosSuprimido->getNorma() === $this) {
+                $articulosSuprimido->setNorma(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|CambioAnexo[]
+     */
+    public function getCambiosAnexos(): Collection
+    {
+        return $this->cambiosAnexos;
+    }
+
+    public function addCambiosAnexo(CambioAnexo $cambiosAnexo): self
+    {
+        if (!$this->cambiosAnexos->contains($cambiosAnexo)) {
+            $this->cambiosAnexos[] = $cambiosAnexo;
+            $cambiosAnexo->setNorma($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCambiosAnexo(CambioAnexo $cambiosAnexo): self
+    {
+        if ($this->cambiosAnexos->contains($cambiosAnexo)) {
+            $this->cambiosAnexos->removeElement($cambiosAnexo);
+            // set the owning side to null (unless already changed)
+            if ($cambiosAnexo->getNorma() === $this) {
+                $cambiosAnexo->setNorma(null);
+            }
+        }
+
+        return $this;
     }
 
 }

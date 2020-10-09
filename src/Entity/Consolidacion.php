@@ -83,6 +83,16 @@ class Consolidacion extends BaseClass {
     private $cambios;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ArticuloSuprimido", mappedBy="consolidacion", orphanRemoval=true)
+     */
+    private $articulosSuprimidos;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\CambioAnexo", mappedBy="consolidacion", orphanRemoval=true)
+     */
+    private $cambiosAnexos;
+
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\ObservacionAntecedente", mappedBy="consolidacion", orphanRemoval=true)
      */
     private $observacionesAntecendentes;
@@ -195,6 +205,38 @@ class Consolidacion extends BaseClass {
     public function setCambios($cambios): void
     {
         $this->cambios = $cambios;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getArticulosSuprimidos()
+    {
+        return $this->articulosSuprimidos;
+    }
+
+    /**
+     * @param mixed $articulosSuprimidos
+     */
+    public function setArticulosSuprimidos($articulosSuprimidos): void
+    {
+        $this->articulosSuprimidos = $articulosSuprimidos;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCambiosAnexos()
+    {
+        return $this->cambiosAnexos;
+    }
+
+    /**
+     * @param mixed $cambiosAnexos
+     */
+    public function setCambiosAnexos($cambiosAnexos): void
+    {
+        $this->cambiosAnexos = $cambiosAnexos;
     }
 
     /**

@@ -52,11 +52,6 @@ class CambioNorma extends BaseClass
 	 */
 	private $remisionExterna;
 
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $articulosSuprimidos;
-
 	public function __construct()
     {
         $this->fecha = new \DateTime();
@@ -194,22 +189,6 @@ class CambioNorma extends BaseClass
 
 		return $this;
 	}
-
-    /**
-     * @return mixed
-     */
-    public function getArticulosSuprimidos()
-    {
-        return $this->articulosSuprimidos;
-    }
-
-    /**
-     * @param mixed $articulosSuprimidos
-     */
-    public function setArticulosSuprimidos($articulosSuprimidos): void
-    {
-        $this->articulosSuprimidos = $articulosSuprimidos;
-    }
 
     /**
      * @return mixed
