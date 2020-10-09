@@ -27,7 +27,7 @@ class ObservacionAntecedenteType extends AbstractType
     {
         $builder
             ->add('observaciones', TextareaType::class, [
-                'label' => 'Observaciones generales',
+                'label' => 'Observaciones Generales',
                 'required'     => false,
                 'attr' => [
                     'rows' => 5
