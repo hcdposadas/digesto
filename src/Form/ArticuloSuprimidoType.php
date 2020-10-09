@@ -2,18 +2,18 @@
 
 namespace App\Form;
 
-use App\Entity\CambioNorma;
+use App\Entity\ArticuloSuprimido;
 use App\Entity\Consolidacion;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class CambioNormaType extends AbstractType
+class ArticuloSuprimidoType extends AbstractType
 {
     /**
      * @var EntityManagerInterface
@@ -39,28 +39,22 @@ class CambioNormaType extends AbstractType
                 ]
             )
             ->add('articulo', TextType::class, [
-                'label' => 'Artículo del Texto Definitivo'
+                'label' => 'Artículo Suprimido'
             ])
-            ->add('fuente', TextareaType::class, [
-                'label' => 'Fuente',
+            ->add('descripcion', TextareaType::class, [
+                'label' => 'Descripción',
                 'required'     => false,
                 'attr' => [
                     'rows' => 5
                 ]
             ])
-            ->add('remisionExterna', TextareaType::class, [
-                'label' => 'Remisión Externa',
-                'required'     => false,
-                'attr' => [
-                    'rows' => 5
-                ]
-            ]);
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => CambioNorma::class,
+            'data_class' => ArticuloSuprimido::class,
             'empty_data' => function (FormInterface $form) {
                 $class = $form->getConfig()->getOption('data_class');
                 $entity = new $class();

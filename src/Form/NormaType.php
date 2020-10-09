@@ -185,6 +185,28 @@ class NormaType extends AbstractType {
                 ]
             )
             ->add(
+                'articulosSuprimidos',
+                BootstrapCollectionType::class,
+                [
+                    'entry_type'   => ArticuloSuprimidoType::class,
+                    'allow_add'    => true,
+                    'allow_delete' => true,
+                    'by_reference' => false,
+                    'label'        => 'Artículos Suprimidos'
+                ]
+            )
+            ->add(
+                'cambiosAnexos',
+                BootstrapCollectionType::class,
+                [
+                    'entry_type'   => CambioAnexoType::class,
+                    'allow_add'    => true,
+                    'allow_delete' => true,
+                    'by_reference' => false,
+                    'label'        => 'Antecedentes de los anexos'
+                ]
+            )
+            ->add(
                 'observacionAntecedente', ObservacionAntecedenteType::class
             )
             ->add(
