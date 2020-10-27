@@ -47,4 +47,10 @@ class RamaRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function getRamaParticular(): Rama {
+        return $this->findOneBy(array(
+            'numeroRomano' => 'IX'
+        ));
+    }
 }

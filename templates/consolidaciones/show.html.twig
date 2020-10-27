@@ -16,22 +16,30 @@
             <div class="box">
                 <div class="box-header">
                     <h3 class="box-title">Anexo A</h3>
+                    <div class="box-tools pull-right">
+                        <a href="{{ path('consolidaciones_pdf_anexo_a', {consolidacion: consolidacion.id}) }}" target="_blank" >Ver PDF</a>
+                    </div>
                 </div>
                 <div class="box-body">
+                    <span>Listado de Ordenanzas y normas de igual jerarquía de alcance general que por imperio de la presente Ordenanza se consolidan en el Digesto Jurídico de la Ciudad de Posadas.</span>
                     <table id="tabla-anexo-a" class="table table-bordered table-striped">
                         <thead>
                         <tr>
-                            <th>Id</th>
                             <th>Rama</th>
                             <th>Número</th>
                             <th>Tema general</th>
-                            <th>Acciones</th>
+                            <th>Fecha sanción</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td colspan="5">No implementado</td>
-                        </tr>
+                        {% for norma in anexoA %}
+                            <tr>
+                                <td>{{ norma.rama.numeroRomano }}</td>
+                                <td>{{ norma.numero }}</td>
+                                <td>{{ norma.temaGeneral }}</td>
+                                <td>{{ norma.fechaSancion | date('d/m/Y') }}</td>
+                            </tr>
+                        {% endfor %}
                         </tbody>
                     </table>
                 </div>
@@ -39,22 +47,29 @@
             <div class="box">
                 <div class="box-header">
                     <h3 class="box-title">Anexo B</h3>
+                    <div class="box-tools pull-right">
+                        <a href="{{ path('consolidaciones_pdf_anexo_b', {consolidacion: consolidacion.id}) }}" target="_blank" >Ver PDF</a>
+                    </div>
                 </div>
                 <div class="box-body">
                     <table id="tabla-anexo-b" class="table table-bordered table-striped">
                         <thead>
                         <tr>
-                            <th>Id</th>
                             <th>Rama</th>
                             <th>Número</th>
                             <th>Tema general</th>
-                            <th>Acciones</th>
+                            <th>Fecha sanción</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td colspan="5">No implementado</td>
-                        </tr>
+                        {% for norma in anexoB %}
+                            <tr>
+                                <td>{{ norma.rama.numeroRomano }}</td>
+                                <td>{{ norma.numero }}</td>
+                                <td>{{ norma.temaGeneral }}</td>
+                                <td>{{ norma.fechaSancion | date('d/m/Y') }}</td>
+                            </tr>
+                        {% endfor %}
                         </tbody>
                     </table>
                 </div>
@@ -68,19 +83,22 @@
                     <table id="tabla-anexo-c" class="table table-bordered table-striped">
                         <thead>
                         <tr>
-                            <th>Norma</th>
+                            <th>Rama</th>
+                            <th>Número</th>
+                            <th>Tema general</th>
                             <th>Fecha sanción</th>
                             <th>Causal</th>
-                            <th>Rama</th>
                         </tr>
                         </thead>
                         <tbody>
-                        {% for caducidad in consolidacion.anexoC %}
+                        {% for caducidad in anexoC %}
                             <tr>
-                                <td>{{ caducidad.norma.rama.numeroRomano }} - {{ caducidad.norma.numero }}</td>
+                                <td>{{ caducidad.norma.rama.numeroRomano }}</td>
+                                <td>{{ caducidad.norma.numero }}</td>
+                                <td>{{ caducidad.norma.temaGeneral }}</td>
                                 <td>{{ caducidad.norma.fechaSancion | date('d/m/Y') }}</td>
                                 <td>{{ caducidad.tipoCaducidad }}</td>
-                                <td>{{ caducidad.norma.rama.titulo }}</td>
+
                             </tr>
                         {% endfor %}
                         </tbody>
@@ -95,17 +113,26 @@
                     <table id="tabla-anexo-d" class="table table-bordered table-striped">
                         <thead>
                         <tr>
-                            <th>Id</th>
                             <th>Rama</th>
                             <th>Número</th>
                             <th>Tema general</th>
-                            <th>Acciones</th>
+                            <th>Fecha sanción</th>
+                            <th>Norma Abrogante</th>
+                            <th>Fecha sanción</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td colspan="5">No implementado</td>
-                        </tr>
+                        {% for conflicto in anexoD %}
+                            <tr>
+                                <td>{{ conflicto.norma.rama.numeroRomano }}</td>
+                                <td>{{ conflicto.norma.numero }}</td>
+                                <td>{{ conflicto.norma.temaGeneral }}</td>
+                                <td>{{ conflicto.norma.fechaSancion | date('d/m/Y') }}</td>
+                                <td>{{ conflicto.normaAbrogante }}</td>
+                                <td>{{ conflicto.normaAbrogante.fechaSancion | date('d/m/Y') }}</td>
+
+                            </tr>
+                        {% endfor %}
                         </tbody>
                     </table>
                 </div>
@@ -115,20 +142,29 @@
                     <h3 class="box-title">Anexo E</h3>
                 </div>
                 <div class="box-body">
+                    <span>Listado de Ordenanzas y normas de igual jerarquía que fueron expresamente abrogadas por otras Ordenanzas.</span>
                     <table id="tabla-anexo-e" class="table table-bordered table-striped">
                         <thead>
                         <tr>
-                            <th>Id</th>
                             <th>Rama</th>
-                            <th>Número</th>
-                            <th>Tema general</th>
-                            <th>Acciones</th>
+                            <th>Norma</th>
+                            <th>Fecha sanción</th>
+                            <th></th>
+                            <th>Norma</th>
+                            <th>Fecha sanción</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td colspan="5">No implementado</td>
-                        </tr>
+                        {% for abrogada in anexoE %}
+                            <tr>
+                                <td>{{ abrogada.normaAbrogante.rama.titulo }}</td>
+                                <td>{{ abrogada.normaAbrogante.rama.numeroRomano }} - {{ abrogada.normaAbrogante.numero }}</td>
+                                <td>{{ abrogada.normaAbrogante.fechaSancion | date('d/m/Y') }}</td>
+                                <td>Abrogada Expresamente por</td>
+                                <td>{{ abrogada.norma }}</td>
+                                <td>{{ abrogada.norma.fechaSancion | date('d/m/Y') }}</td>
+                            </tr>
+                        {% endfor %}
                         </tbody>
                     </table>
                 </div>
@@ -151,7 +187,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        {% for refundida in consolidacion.anexoF %}
+                        {% for refundida in anexoF %}
                             <tr>
                                 <td>{{ refundida.normaRefundida.rama.titulo }}</td>
                                 <td>{{ refundida.normaRefundida.rama.numeroRomano }} - {{ refundida.normaRefundida.numero }}</td>
@@ -170,20 +206,25 @@
                     <h3 class="box-title">Anexo G</h3>
                 </div>
                 <div class="box-body">
+                    <span>Listado de Ordenanzas y normas de igual jerarquía de alcance particular sancionadas en el período ordinario de sesiones y publicadas hasta el 31 de octubre del {{ consolidacion.anio }} que quedan con texto definitivo vigente.</span>
                     <table id="tabla-anexo-g" class="table table-bordered table-striped">
                         <thead>
                         <tr>
-                            <th>Id</th>
                             <th>Rama</th>
-                            <th>Número</th>
+                            <th>Norma</th>
                             <th>Tema general</th>
-                            <th>Acciones</th>
+                            <th>Fecha sanción</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td colspan="5">No implementado</td>
-                        </tr>
+                        {% for norma in anexoG %}
+                            <tr>
+                                <td>{{ norma.rama.numeroRomano }}</td>
+                                <td>{{ norma.numero }}</td>
+                                <td>{{ norma.temaGeneral }}</td>
+                                <td>{{ norma.fechaSancion | date('d/m/Y') }}</td>
+                            </tr>
+                        {% endfor %}
                         </tbody>
                     </table>
                 </div>
@@ -193,20 +234,26 @@
                     <h3 class="box-title">Anexo H</h3>
                 </div>
                 <div class="box-body">
+                    <span>Listado general de Ordenanzas vigentes que constituyen el Digesto Jurídico de la Ciudad de Posadas.</span>
                     <table id="tabla-anexo-h" class="table table-bordered table-striped">
-                        <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Rama</th>
-                            <th>Número</th>
-                            <th>Tema general</th>
-                            <th>Acciones</th>
-                        </tr>
-                        </thead>
+{#                        <thead>#}
+{#                        <tr>#}
+{#                            <th>Rama</th>#}
+{#                            <th>Número</th>#}
+{#                            <th>Título</th>#}
+{#                            <th>Fecha sanción</th>#}
+{#                        </tr>#}
+{#                        </thead>#}
                         <tbody>
-                        <tr>
-                            <td colspan="5">No implementado</td>
-                        </tr>
+                        {% for norma in anexoH %}
+                            <tr>
+                                <td>{{ norma.rama.numeroRomano }}</td>
+                                <td>{{ norma.numero }}</td>
+                                <td>{{ norma.nombreAnterior }}</td>
+                                <td>{{ norma.temaGeneral }}</td>
+                                <td>{{ norma.fechaSancion | date('d/m/Y') }}</td>
+                            </tr>
+                        {% endfor %}
                         </tbody>
                     </table>
                 </div>
