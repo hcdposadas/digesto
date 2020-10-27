@@ -73,6 +73,11 @@ class Consolidacion extends BaseClass {
     private $abrogaciones;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ConflictoNormativo", mappedBy="consolidacion", orphanRemoval=true)
+     */
+    private $conflictosNormativos;
+
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Refundicion", mappedBy="consolidacion", orphanRemoval=true)
      */
     private $refundidas;
@@ -418,6 +423,22 @@ class Consolidacion extends BaseClass {
     }
 
     /**
+     * @return ConflictoNormativo[]
+     */
+    public function getConflictosNormativos() : Collection
+    {
+        return $this->conflictosNormativos;
+    }
+
+    /**
+     * @param ConflictoNormativo[] $conflictosNormativos
+     */
+    public function setConflictosNormativos($conflictosNormativos): void
+    {
+        $this->conflictosNormativos = $conflictosNormativos;
+    }
+
+    /**
      * @return Refundicion[]
      */
     public function getRefundidas(): Collection
@@ -431,71 +452,5 @@ class Consolidacion extends BaseClass {
     public function setRefundidas($refundidas): void
     {
         $this->refundidas = $refundidas;
-    }
-
-
-    /**
-     * @return array
-     */
-    public function getAnexoA(): Collection
-    {
-        return new ArrayCollection();
-    }
-
-    /**
-     * @return array
-     */
-    public function getAnexoB(): Collection
-    {
-        return new ArrayCollection();
-    }
-
-    /**
-     * @return Caducidad[]
-     */
-    public function getAnexoC(): Collection
-    {
-        return $this->getCaducidades();
-    }
-
-    /**
-     * @return Abrogacion[]
-     */
-    public function getAnexoD(): Collection
-    {
-        return $this->getAbrogaciones();
-    }
-
-    /**
-     * Listado de Ordenanzas que fueron expresamente abrogadas por otras Ordenanzas
-     * @return Abrogacion[]
-     */
-    public function getAnexoE(): Collection
-    {
-        return $this->getAbrogaciones();
-    }
-
-    /**
-     * @return Refundicion[]
-     */
-    public function getAnexoF(): Collection
-    {
-        return $this->getRefundidas();
-    }
-
-    /**
-     * @return array
-     */
-    public function getAnexoG(): Collection
-    {
-        return new ArrayCollection();
-    }
-
-    /**
-     * @return array
-     */
-    public function getAnexoH(): Collection
-    {
-        return new ArrayCollection();
     }
 }

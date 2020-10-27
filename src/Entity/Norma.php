@@ -325,6 +325,14 @@ class Norma extends BaseClass
         return '#' . $this->getId();
     }
 
+    public function getNombreAnterior()
+    {
+        if ($this->getNumeroAnterior() && $this->getTipoOrdenanza() && $this->getNumeroAnterior() != $this->getNumero()) {
+            return $this->getTipoOrdenanza()->getNombre() . ' - ' . $this->getNumeroAnterior();
+        }
+        return $this->__toString();
+    }
+
     public function getRama(): ?Rama
     {
         return $this->rama;

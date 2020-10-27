@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title> Consolidación {{ consolidacion.anio }} - Anexo B{{ consolidacion.enCurso ? ' - Listado Provisorio' : '' }} </title>
+</head>
+<style>
+    body {
+        font-size: 16px;
+    }
+    .norma {
+        page-break-inside: avoid;
+        line-height: 1.5em;
+    }
+    .norma p {
+        text-align: justify;
+    }
+</style>
+<body>
+<h1 style="text-align: center;">Consolidación {{ consolidacion.anio }}<small>{{ consolidacion.enCurso ? ' Listado Provisorio' : '' }}</small></h1>
+<br>
+<h2 style="text-align: center; text-decoration: underline;">ANEXO B</h2>
+<br>
+<p style="text-align: justify;">Listado de Ordenanzas y normas de igual jerarquía de alcance general que por imperio de la presente Ordenanza se consolidan en el Digesto Jurídico de la Ciudad de Posadas.</p>
+{% for item in anexoB %}
+    <br>
+    <h2 style="text-align: center; page-break-before: always; page-break-after: always; font-size: 40px;">{{ item.rama }}</h2>
+    <br>
+    {% for norma in item.normas %}
+        <div class="norma">
+        {{ norma.textoDefinitivoNoConsolidado.textoDefinitivo | raw }}
+        </div>
+    {% endfor %}
+{% endfor %}
+</body>
+</html>

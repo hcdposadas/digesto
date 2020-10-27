@@ -17,7 +17,7 @@ class ConflictoNormativo extends BaseClass
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Consolidacion")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Consolidacion", inversedBy="conflictosNormativos")
      * @ORM\JoinColumn(nullable=false)
      */
     private $consolidacion;

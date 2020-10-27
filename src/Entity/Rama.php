@@ -19,6 +19,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
  */
 class Rama extends BaseClass
 {
+    public const RAMA_PARTICULAR = 'IX';
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()

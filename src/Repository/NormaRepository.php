@@ -248,4 +248,21 @@ class NormaRepository extends ServiceEntityRepository {
         $this->getEntityManager()->flush();
     }
 
+    public function getVigentesNoConsolidadas($fechaPromulgacionMaxima, $rama = null)
+    {
+	    $qb = $this->createQueryBuilder('n');
+
+        $qb->where('n.vigenteNoConsolidada = true')
+            ->andWhere('n.fechaPromulgacion <= :fechaPromulgacionMaxima')
+            ->setParameter('fechaPromulgacionMaxima', $fechaPromulgacionMaxima->format('Y-m-d'));
+
+        if ($rama) {
+	        $qb->join('n.rama', 'r')
+                ->andWhere('r.id = :rama')
+                ->setParameter('rama', $rama->getId());
+        }
+
+        return $qb->getQuery()->getResult();
+    }
+
 }
