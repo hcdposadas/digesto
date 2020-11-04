@@ -245,10 +245,57 @@ class NormaController extends AbstractController {
             }
         }
 
-		return $this->render( 'norma/edit.html.twig',
+        $consolidacionRepository = $this->getDoctrine()->getRepository(Consolidacion::class);
+        $consolidacion = $consolidacionRepository->getConsolidacionEnCurso();
+        $anexoA = $consolidacionRepository->getAnexoA($consolidacion);
+        $anexoB = $consolidacionRepository->getAnexoB($consolidacion);
+        $anexoC = $consolidacionRepository->getAnexoC($consolidacion);
+        $anexoD = $consolidacionRepository->getAnexoD($consolidacion);
+        $anexoE = $consolidacionRepository->getAnexoE($consolidacion);
+        $anexoF = $consolidacionRepository->getAnexoF($consolidacion);
+        $anexoG = $consolidacionRepository->getAnexoG($consolidacion);
+        $anexoH = $consolidacionRepository->getAnexoH($consolidacion);
+
+        $enAnexoA = count(array_filter($anexoA, function (Norma $n) use ($norma) { return $norma->getId() === $n->getId(); })) > 0;
+        $enAnexoB = count(array_filter($anexoB, function (Norma $n) use ($norma) { return $norma->getId() === $n->getId(); })) > 0;
+        $enAnexoC = count(array_filter(array_map(function ($c) { return $c->getNorma(); }, $anexoC), function (Norma $n) use ($norma) { return $norma->getId() === $n->getId(); })) > 0;
+        $enAnexoD = count(array_filter(array_map(function ($c) { return $c->getNorma(); }, $anexoD), function (Norma $n) use ($norma) { return $norma->getId() === $n->getId(); })) > 0;
+        $enAnexoE = count(array_filter(array_map(function ($c) { return $c->getNorma(); }, $anexoE), function (Norma $n) use ($norma) { return $norma->getId() === $n->getId(); })) > 0;
+        $enAnexoF = count(array_filter(array_map(function ($c) { return $c->getNorma(); }, $anexoF), function (Norma $n) use ($norma) { return $norma->getId() === $n->getId(); })) > 0;
+        $enAnexoG = count(array_filter($anexoG, function (Norma $n) use ($norma) { return $norma->getId() === $n->getId(); })) > 0;
+        $enAnexoH = count(array_filter($anexoH, function (Norma $n) use ($norma) { return $norma->getId() === $n->getId(); })) > 0;
+
+        $anexos = [];
+        if ($enAnexoA) {
+            $anexos[] = 'A';
+        }
+        if ($enAnexoB) {
+            $anexos[] = 'B';
+        }
+        if ($enAnexoC) {
+            $anexos[] = 'C';
+        }
+        if ($enAnexoD) {
+            $anexos[] = 'D';
+        }
+        if ($enAnexoE) {
+            $anexos[] = 'E';
+        }
+        if ($enAnexoF) {
+            $anexos[] = 'F';
+        }
+        if ($enAnexoG) {
+            $anexos[] = 'G';
+        }
+        if ($enAnexoH) {
+            $anexos[] = 'H';
+        }
+
+        return $this->render( 'norma/edit.html.twig',
 			[
 				'norma' => $norma,
 				'form'  => $form->createView(),
+                'anexos' => count($anexos) ? 'Anexos '.implode(', ', $anexos) : ''
 			] );
 	}
 
