@@ -149,6 +149,9 @@
                                     <h4 class="box-title">Texto Definitivo</h4>
                                     <div class="row">
                                         <div class="col-md-12">
+                                            {% if norma.textoDefinitivoNoConsolidado %}
+                                                <a href="{{ path('texto_definitivo_delete', {norma: norma.id }) }}" class="pull-right" onclick="return confirm('Está seguro que desea quitar el texto definitivo?\nEsta operación NO SE PUEDE DESHACER. Una vez confirmada la operación, el texto definitivo se elimina permanentemente.')"><i class="fa fa-fw fa-trash"></i>Quitar texto definitivo</a>
+                                            {% endif %}
                                             {{ form_widget(form.textoDefinitivoNoConsolidado) }}
                                         </div>
                                     </div>

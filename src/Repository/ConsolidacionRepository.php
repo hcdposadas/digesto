@@ -190,7 +190,8 @@ class ConsolidacionRepository extends ServiceEntityRepository {
         $normas = $this->quitarNoParticulares($normas);
 
         $normas = array_filter($normas, function (Norma $norma) use ($fecha) {
-            return $norma->isVigenteNoConsolidada() && $norma->getFechaPublicacionBoletin() <= $fecha;
+//            return $norma->isVigenteNoConsolidada() && $norma->getFechaPublicacionBoletin() <= $fecha;
+            return $norma->getFechaPublicacionBoletin() <= $fecha;
         });
 
         return $this->ordenarNormas($normas);

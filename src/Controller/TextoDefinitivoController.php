@@ -118,16 +118,15 @@ class TextoDefinitivoController extends AbstractController
     }
 
     /**
-     * @Route("/delete", name="texto_definitivo_delete", methods={"DELETE"})
+     * @Route("/delete", name="texto_definitivo_delete", methods={"GET"})
      */
-    public function delete(Request $request, TextoDefinitivo $textoDefinitivo): Response
+    public function delete(Request $request, Norma $norma): Response
     {
-//        if ($this->isCsrfTokenValid('delete'.$textoDefinitivo->getId(), $request->request->get('_token'))) {
-//            $entityManager = $this->getDoctrine()->getManager();
-//            $entityManager->remove($textoDefinitivo);
-//            $entityManager->flush();
-//        }
-//
-//        return $this->redirectToRoute('texto_definitivo_index');
+        $textoDefinitivo = $this->getTextoDefinitivoNoConsolidado($norma);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($textoDefinitivo);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('norma_edit', array('id' => $norma->getId()));
     }
 }
