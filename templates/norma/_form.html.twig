@@ -105,11 +105,15 @@
                     <div class="col-md-3">
                         {{ form_row(form.estado) }}
                     </div>
-                    <div class="col-md-9">
+                    <div class="col-md-4">
                         <br>
                         {% if norma.estadoNorma %}
                             <span class="text-muted">Modificado el {{ norma.estadoNorma.fechaActualizacion | date }} por {{ norma.estadoNorma.actualizadoPor }}</span>
                         {% endif %}
+                    </div>
+                    <div class="col-md-5">
+                        <br>
+                        {{ anexos }}
                     </div>
                 </div>
                 <div class="nav-tabs-custom">
@@ -149,7 +153,7 @@
                                     <h4 class="box-title">Texto Definitivo</h4>
                                     <div class="row">
                                         <div class="col-md-12">
-                                            {% if norma.textoDefinitivoNoConsolidado %}
+                                            {% if norma.textoDefinitivoNoConsolidado and norma.textoDefinitivoNoConsolidado.textoDefinitivo %}
                                                 <a href="{{ path('texto_definitivo_delete', {norma: norma.id }) }}" class="pull-right" onclick="return confirm('Está seguro que desea quitar el texto definitivo?\nEsta operación NO SE PUEDE DESHACER. Una vez confirmada la operación, el texto definitivo se elimina permanentemente.')"><i class="fa fa-fw fa-trash"></i>Quitar texto definitivo</a>
                                             {% endif %}
                                             {{ form_widget(form.textoDefinitivoNoConsolidado) }}
