@@ -217,12 +217,12 @@ class ConsolidacionRepository extends ServiceEntityRepository {
                 }
             }
             foreach ($this->getAnexoE($consolidacion) as $abrogacion) {
-                if ($abrogacion->getNorma()->getId() === $norma->getId()) {
+                if ($abrogacion->getNormaAbrogante()->getId() === $norma->getId()) {
                     return false;
                 }
             }
             foreach ($this->getAnexoF($consolidacion) as $refundicion) {
-                if ($refundicion->getNorma()->getId() === $norma->getId()) {
+                if ($refundicion->getNormaRefundida()->getId() === $norma->getId()) {
                     return false;
                 }
             }
