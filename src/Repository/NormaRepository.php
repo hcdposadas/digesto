@@ -125,7 +125,7 @@ class NormaRepository extends ServiceEntityRepository {
 
 		}
 
-		if ( $data['descriptores']) {
+		if ( isset( $data['descriptores'] ) ) {
 			$qb->leftJoin( 'n.descriptoresNorma', 'descriptoresNorma' );
 
 			$qb->orWhere( $qb->expr()->in( 'descriptoresNorma.descriptor', ':descriptores' ) );
@@ -133,14 +133,14 @@ class NormaRepository extends ServiceEntityRepository {
 			$qb->setParameter( 'descriptores', [ $data['descriptores'] ] );
 
 		}
-		if ( $data['identificadores'] ) {
+		if ( isset ( $data['identificadores'] ) )  {
 			$qb->leftJoin( 'n.identificadoresNorma', 'identificadoresNorma' );
 
 			$qb->orWhere( $qb->expr()->in( 'identificadoresNorma.identificador', ':identificadores' ) );
 
 			$qb->setParameter( 'identificadores', [ $data['identificadores'] ] );
 		}
-		if ( $data['palabrasClave'] ) {
+		if ( isset ( $data['palabrasClave'] ) ) {
 			$qb->leftJoin( 'n.palabrasClaveNorma', 'palabrasClaveNorma' );
 
 			$qb->orWhere( $qb->expr()->in( 'palabrasClaveNorma.palabraClave', ':palabrasClave' ) );

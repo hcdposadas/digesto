@@ -11,7 +11,17 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  * @Vich\Uploadable
  */
 class AnexoConsolidacion extends BaseClass {
-	/**
+
+    public const ANEXO_A = 1;
+    public const ANEXO_B = 2;
+    public const ANEXO_C = 3;
+    public const ANEXO_D = 4;
+    public const ANEXO_E = 5;
+    public const ANEXO_F = 6;
+    public const ANEXO_G = 7;
+    public const ANEXO_H = 8;
+
+    /**
 	 * @ORM\Id()
 	 * @ORM\GeneratedValue()
 	 * @ORM\Column(type="integer")
