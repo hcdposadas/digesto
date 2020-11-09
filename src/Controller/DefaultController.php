@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\AnexoConsolidacion;
 use App\Entity\BoletinOficialMunicipal;
 use App\Entity\Consolidacion;
 use App\Entity\Norma;
+use App\Entity\TextoDefinitivo;
 use App\Entity\WebDigestoDocumento;
 use App\Entity\WebDigestoTexto;
 use App\Form\BuscarBoletinType;
@@ -338,4 +340,94 @@ class DefaultController extends AbstractController {
 				'consolidaciones' => $consolidaciones
 			] );
 	}
+
+    /**
+     * @Route("/consolidacion/{id}/anexo/{anexo}", name="ver_anexo_consolidacion")
+     */
+    public function verAnexoConsolidacion( Request $request, Consolidacion $consolidacion, AnexoConsolidacion $anexo ) {
+        $web             = $this->getDoctrine()->getRepository( WebDigestoTexto::class )->findOneBySlug( 'web' );
+        $aniosBoletines  = $this->getDoctrine()->getRepository( BoletinOficialMunicipal::class )->getAniosBoletines();
+        $consolidaciones = $this->getDoctrine()->getRepository( Consolidacion::class )->getConsolidacionesOrdenadas();
+
+        $titulo = $consolidacion->getTitulo();
+
+        $anexoA = null;
+        $anexoB = null;
+        $anexoC = null;
+        $anexoD = null;
+        $anexoE = null;
+        $anexoF = null;
+        $anexoG = null;
+        $anexoH = null;
+
+        $consolidacionRepository = $this->getDoctrine()->getRepository(Consolidacion::class);
+        if ($anexo->getOrden() === AnexoConsolidacion::ANEXO_A) {
+            $anexoA = $consolidacionRepository->getAnexoA($consolidacion);
+        }
+        if ($anexo->getOrden() === AnexoConsolidacion::ANEXO_B) {
+            $anexoB = $consolidacionRepository->getAnexoB($consolidacion);
+        }
+        if ($anexo->getOrden() === AnexoConsolidacion::ANEXO_C) {
+            $anexoC = $consolidacionRepository->getAnexoC($consolidacion);
+        }
+        if ($anexo->getOrden() === AnexoConsolidacion::ANEXO_D) {
+            $anexoD = $consolidacionRepository->getAnexoD($consolidacion);
+        }
+        if ($anexo->getOrden() === AnexoConsolidacion::ANEXO_E) {
+            $anexoE = $consolidacionRepository->getAnexoE($consolidacion);
+        }
+        if ($anexo->getOrden() === AnexoConsolidacion::ANEXO_F) {
+            $anexoF = $consolidacionRepository->getAnexoF($consolidacion);
+        }
+        if ($anexo->getOrden() === AnexoConsolidacion::ANEXO_G) {
+            $anexoG = $consolidacionRepository->getAnexoG($consolidacion);
+        }
+        if ($anexo->getOrden() === AnexoConsolidacion::ANEXO_H) {
+            $anexoH = $consolidacionRepository->getAnexoH($consolidacion);
+        }
+
+        return $this->render( 'Web/anexo_consolidacion.html.twig',
+            [
+                'web'             => $web,
+                'anios_boletines' => $aniosBoletines,
+                'titulo'          => $titulo,
+                'consolidacion'   => $consolidacion,
+                'consolidaciones' => $consolidaciones,
+                'anexoA' => $anexoA,
+                'anexoB' => $anexoB,
+                'anexoC' => $anexoC,
+                'anexoD' => $anexoD,
+                'anexoE' => $anexoE,
+                'anexoF' => $anexoF,
+                'anexoG' => $anexoG,
+                'anexoH' => $anexoH
+            ] );
+    }
+
+    /**
+     * @Route("/consolidacion/{consolidacion}/norma/{norma}", name="ver_ordenanza_en_consolidacion")
+     */
+    public function verOrdenanzaEnConsolidacion( Request $request, Consolidacion $consolidacion, Norma $norma ) {
+        $web             = $this->getDoctrine()->getRepository( WebDigestoTexto::class )->findOneBySlug( 'web' );
+        $aniosBoletines  = $this->getDoctrine()->getRepository( BoletinOficialMunicipal::class )->getAniosBoletines();
+        $consolidaciones = $this->getDoctrine()->getRepository( Consolidacion::class )->getConsolidacionesOrdenadas();
+
+        $textoDefinitivo = $this->getDoctrine()->getRepository(TextoDefinitivo::class)->findOneBy(array(
+            'consolidacion' => $consolidacion,
+            'norma' => $norma,
+            'activo' => true
+        ));
+
+        $titulo = $norma->getRama()->getNumeroRomano() . ' - ' . $norma->getRama()->getTitulo() . ' - ' . $norma->getNumero();
+
+        return $this->render( 'Web/ordenanza.html.twig',
+            [
+                'web'             => $web,
+                'anios_boletines' => $aniosBoletines,
+                'titulo'          => $titulo,
+                'norma'           => $norma,
+                'consolidaciones' => $consolidaciones,
+                'textoDefinitivo' => $textoDefinitivo
+            ] );
+    }
 }

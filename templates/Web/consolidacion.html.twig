@@ -32,19 +32,26 @@
 {% block content %}
     <div class="page-header text-center">
         <h1>{{ titulo }} - {{ consolidacion.anio }}</h1>
+        {% if consolidacion.enCurso %}
+        <div class="row">
+            <div class="col-md-12 text-center"><span class="text-muted">No consolidada</span></div>
+        </div>
+        {% endif %}
     </div>
     <div class="container">
 
         <section class="" style="padding-bottom: 140px;">
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
-                    <div class="row">
-                        <div class="col-md-12 text-center">
-                            <a class="btn btn-primary" target="_blank" href="{{ vich_uploader_asset(consolidacion, 'archivoProyecto') }}">
-                                Ver Proyecto
-                            </a>
+                    {% if not consolidacion.enCurso %}
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <a class="btn btn-primary" target="_blank" href="{{ vich_uploader_asset(consolidacion, 'archivoProyecto') }}">
+                                    Ver Proyecto
+                                </a>
+                            </div>
                         </div>
-                    </div>
+                    {% endif %}
                     <div class="table-responsive">
                         <table class="table table-striped">
                             <tr>
@@ -61,9 +68,13 @@
                                         {{ anexo.descripcion }}
                                     </td>
                                     <td>
-                                        <a target="_blank" href="{{ vich_uploader_asset(anexo, 'archivoAnexo') }}">
-                                            <i class="fa fa-file-text-o fa-fw text-secondary"></i>
-                                        </a>
+                                        {% if anexo.nombreArchivo %}
+                                            <a target="_blank" href="{{ vich_uploader_asset(anexo, 'archivoAnexo') }}">
+                                                <i class="fa fa-file-text-o fa-fw text-secondary"></i>
+                                            </a>
+                                        {% else %}
+                                            <a target="_blank" href="{{ path('ver_anexo_consolidacion', { id: consolidacion.id, anexo: anexo.id }) }}">Ver listado de normas</a>
+                                        {% endif %}
                                     </td>
                                 </tr>
                             {% endfor %}
