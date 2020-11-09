@@ -1,0 +1,365 @@
+{% extends '/Web/layout.html.twig' %}
+
+{% block title %}{{ titulo }} -{% endblock title %}
+
+    {% block meta_social %}
+
+        {% set description = titulo %}
+        {% set url = app.request.uri %}
+        {% set image = absolute_url(asset('build/images/portada-share.jpg')) %}
+
+        {# facebook #}
+        <meta property="og:url"
+              content="{{ url }}"/>
+        <meta property="og:type" content="website"/>
+        <meta property="og:title" content="{{ titulo }}"/>
+        <meta property="og:description" content="{{ description }}"/>
+        <meta property="og:image" content="{{ image }}"/>
+
+        {# twitter #}
+        <meta name="twitter:card" content="summary"/>
+        {#        <meta name="twitter:site" content="@djmposadas"/>#}
+        {#        <meta name="twitter:creator" content="@djmposadas"/>#}
+        <meta property="og:url" content="{{ url }}"/>
+        <meta property="og:title" content="{{ titulo }}"/>
+        <meta property="og:description"
+              content="{{ description }}"/>
+        <meta property="og:image"
+              content="{{ image }}"/>
+
+    {% endblock meta_social %}
+
+{% block content %}
+    <div class="page-header text-center">
+        <h1>{{ titulo }} - {{ consolidacion.anio }}</h1>
+        {% if consolidacion.enCurso %}
+            <div class="row">
+                <div class="col-md-12 text-center"><span class="text-muted">No consolidada</span></div>
+            </div>
+        {% endif %}
+    </div>
+    <div class="container">
+
+        <section class="" style="padding-bottom: 140px;">
+            <div class="row">
+                <div class="col-md-12">
+                    {% if not consolidacion.enCurso %}
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <a class="btn btn-primary" target="_blank" href="{{ vich_uploader_asset(consolidacion, 'archivoProyecto') }}">
+                                    Ver Proyecto
+                                </a>
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% if (anexoA is not null) %}
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                        <h3>Anexo A</h3>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <span>Listado de Ordenanzas y normas de igual jerarquía de alcance general que por imperio de la presente Ordenanza se consolidan en el Digesto Jurídico de la Ciudad de Posadas.</span>
+                        <br><br>
+                        <table id="tabla-anexo-a" class="table table-bordered table-striped">
+                            <thead>
+                            <tr>
+                                <th>Rama</th>
+                                <th>Número</th>
+                                <th>Tema general</th>
+                                <th>Fecha sanción</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for norma in anexoA %}
+                                <tr>
+                                    <td>{{ norma.rama.numeroRomano }}</td>
+                                    <td>{{ norma.numero }}</td>
+                                    <td>{{ norma.temaGeneral }}</td>
+                                    <td>{{ norma.fechaSancion | date('d/m/Y') }}</td>
+                                    <td><a target="_blank" href="{{ path('ver_ordenanza_en_consolidacion', { consolidacion: consolidacion.id, norma: norma.id }) }}">Ver</a></td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="5"><span class="text-muted">No hay normas en este Anexo.</span></td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% endif %}
+                    {% if (anexoB is not null) %}
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <h3>Anexo B</h3>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table id="tabla-anexo-b" class="table table-bordered table-striped">
+                                <thead>
+                                <tr>
+                                    <th>Rama</th>
+                                    <th>Número</th>
+                                    <th>Tema general</th>
+                                    <th>Fecha sanción</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for norma in anexoB %}
+                                    <tr>
+                                        <td>{{ norma.rama.numeroRomano }}</td>
+                                        <td>{{ norma.numero }}</td>
+                                        <td>{{ norma.temaGeneral }}</td>
+                                        <td>{{ norma.fechaSancion | date('d/m/Y') }}</td>
+                                        <td><a target="_blank" href="{{ path('ver_ordenanza_en_consolidacion', { consolidacion: consolidacion.id, norma: norma.id }) }}">Ver</a></td>
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                        <td colspan="5"><span class="text-muted">No hay normas en este Anexo.</span></td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% endif %}
+                    {% if (anexoC is not null) %}
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <h3>Anexo C</h3>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <span>Listado de Ordenanzas y normas de igual jerarquía que se declaran caducas por plazo vencido, objeto o condición cumplidos u otras causales.</span>
+                            <br><br>
+                            <table id="tabla-anexo-c" class="table table-bordered table-striped">
+                                <thead>
+                                <tr>
+                                    <th>Rama</th>
+                                    <th>Número</th>
+                                    <th>Tema general</th>
+                                    <th>Fecha sanción</th>
+                                    <th>Causal</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for caducidad in anexoC %}
+                                    <tr>
+                                        <td>{{ caducidad.norma.rama.numeroRomano }}</td>
+                                        <td>{{ caducidad.norma.numero }}</td>
+                                        <td>{{ caducidad.norma.temaGeneral }}</td>
+                                        <td>{{ caducidad.norma.fechaSancion | date('d/m/Y') }}</td>
+                                        <td>{{ caducidad.tipoCaducidad }}</td>
+                                        <td><a target="_blank" href="{{ path('ver_ordenanza_en_consolidacion', { consolidacion: consolidacion.id, norma: caducidad.norma.id }) }}">Ver</a></td>
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                        <td colspan="6"><span class="text-muted">No hay normas en este Anexo.</span></td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% endif %}
+                    {% if (anexoD is not null) %}
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <h3>Anexo D</h3>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table id="tabla-anexo-d" class="table table-bordered table-striped">
+                                <thead>
+                                <tr>
+                                    <th>Rama</th>
+                                    <th>Número</th>
+                                    <th>Tema general</th>
+                                    <th>Fecha sanción</th>
+                                    <th>Norma Abrogante</th>
+                                    <th>Fecha sanción</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for conflicto in anexoD %}
+                                    <tr>
+                                        <td>{{ conflicto.norma.rama.numeroRomano }}</td>
+                                        <td>{{ conflicto.norma.numero }}</td>
+                                        <td>{{ conflicto.norma.temaGeneral }}</td>
+                                        <td>{{ conflicto.norma.fechaSancion | date('d/m/Y') }}</td>
+                                        <td>{{ conflicto.normaAbrogante }}</td>
+                                        <td>{{ conflicto.normaAbrogante.fechaSancion | date('d/m/Y') }}</td>
+                                        <td><a target="_blank" href="{{ path('ver_ordenanza_en_consolidacion', { consolidacion: consolidacion.id, norma: conflicto.norma.id }) }}">Ver</a></td>
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                        <td colspan="7"><span class="text-muted">No hay normas en este Anexo.</span></td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% endif %}
+                    {% if (anexoE is not null) %}
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <h3>Anexo E</h3>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <span>Listado de Ordenanzas y normas de igual jerarquía que fueron expresamente abrogadas por otras Ordenanzas.</span>
+                            <br><br>
+                            <table id="tabla-anexo-e" class="table table-bordered table-striped">
+                                <thead>
+                                <tr>
+                                    <th>Rama</th>
+                                    <th>Norma</th>
+                                    <th>Fecha sanción</th>
+                                    <th></th>
+                                    <th>Norma</th>
+                                    <th>Fecha sanción</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for abrogada in anexoE %}
+                                    <tr>
+                                        <td>{{ abrogada.normaAbrogante.rama.titulo }}</td>
+                                        <td>{{ abrogada.normaAbrogante.rama.numeroRomano }} - {{ abrogada.normaAbrogante.numero }}</td>
+                                        <td>{{ abrogada.normaAbrogante.fechaSancion | date('d/m/Y') }}</td>
+                                        <td>Abrogada Expresamente por</td>
+                                        <td>{{ abrogada.norma }}</td>
+                                        <td>{{ abrogada.norma.fechaSancion | date('d/m/Y') }}</td>
+                                        <td><a target="_blank" href="{{ path('ver_ordenanza_en_consolidacion', { consolidacion: consolidacion.id, norma: abrogada.norma.id }) }}">Ver</a></td>
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                        <td colspan="7"><span class="text-muted">No hay normas en este Anexo.</span></td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% endif %}
+                    {% if (anexoF is not null) %}
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <h3>Anexo F</h3>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <span>Listado de Ordenanzas refundidas y fusionadas en otras Ordenanzas</span>
+                            <br><br>
+                            <table id="tabla-anexo-f" class="table table-bordered table-striped">
+                                <thead>
+                                <tr>
+                                    <th>Rama</th>
+                                    <th>Norma</th>
+                                    <th>Fecha sanción</th>
+                                    <th></th>
+                                    <th>Norma</th>
+                                    <th>Fecha sanción</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for refundida in anexoF %}
+                                    <tr>
+                                        <td>{{ refundida.normaRefundida.rama.titulo }}</td>
+                                        <td>{{ refundida.normaRefundida.rama.numeroRomano }} - {{ refundida.normaRefundida.numero }}</td>
+                                        <td>{{ refundida.normaRefundida.fechaSancion | date('d/m/Y') }}</td>
+                                        <td>Refundida en</td>
+                                        <td>{{ refundida.norma.rama.numeroRomano }} - {{ refundida.norma.numero }}</td>
+                                        <td>{{ refundida.norma.fechaSancion | date('d/m/Y') }}</td>
+                                        <td><a target="_blank" href="{{ path('ver_ordenanza_en_consolidacion', { consolidacion: consolidacion.id, norma: refundida.norma.id }) }}">Ver</a></td>
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                        <td colspan="7"><span class="text-muted">No hay normas en este Anexo.</span></td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% endif %}
+                    {% if (anexoG is not null) %}
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <h3>Anexo G</h3>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <span>Listado de Ordenanzas y normas de igual jerarquía de alcance particular sancionadas en el período ordinario de sesiones y publicadas hasta el 31 de octubre del {{ consolidacion.anio }} que quedan con texto definitivo vigente.</span>
+                            <br><br>
+                            <table id="tabla-anexo-g" class="table table-bordered table-striped">
+                                <thead>
+                                <tr>
+                                    <th>Rama</th>
+                                    <th>Norma</th>
+                                    <th>Tema general</th>
+                                    <th>Fecha sanción</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for norma in anexoG %}
+                                    <tr>
+                                        <td>{{ norma.rama.numeroRomano }}</td>
+                                        <td>{{ norma.numero }}</td>
+                                        <td>{{ norma.temaGeneral }}</td>
+                                        <td>{{ norma.fechaSancion | date('d/m/Y') }}</td>
+                                        <td><a target="_blank" href="{{ path('ver_ordenanza_en_consolidacion', { consolidacion: consolidacion.id, norma: norma.id }) }}">Ver</a></td>
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                        <td colspan="5"><span class="text-muted">No hay normas en este Anexo.</span></td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% endif %}
+                    {% if (anexoH is not null) %}
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <h3>Anexo H</h3>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <span>Listado general de Ordenanzas vigentes que constituyen el Digesto Jurídico de la Ciudad de Posadas.</span>
+                            <br><br>
+                            <table id="tabla-anexo-h" class="table table-bordered table-striped">
+                                {#                        <thead>#}
+                                {#                        <tr>#}
+                                {#                            <th>Rama</th>#}
+                                {#                            <th>Número</th>#}
+                                {#                            <th>Título</th>#}
+                                {#                            <th>Fecha sanción</th>#}
+                                {#                        </tr>#}
+                                {#                        </thead>#}
+                                <tbody>
+                                {% for norma in anexoH %}
+                                    <tr>
+                                        <td>{{ norma.rama.numeroRomano }}</td>
+                                        <td>{{ norma.numero }}</td>
+                                        <td style="white-space: nowrap;">{{ norma.nombreAnterior }}</td>
+                                        <td>{{ norma.temaGeneral }}</td>
+                                        <td>{{ norma.fechaSancion | date('d/m/Y') }}</td>
+                                        <td><a target="_blank" href="{{ path('ver_ordenanza_en_consolidacion', { consolidacion: consolidacion.id, norma: norma.id }) }}">Ver</a></td>
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                        <td colspan="5"><span class="text-muted">No hay normas en este Anexo.</span></td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock content %}
