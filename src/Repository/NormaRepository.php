@@ -21,60 +21,61 @@ class NormaRepository extends ServiceEntityRepository {
 		parent::__construct( $registry, Norma::class );
 	}
 
-	public function getByLike($texto)
-    {
-        $texto = trim(strtolower($texto));
-        $texto = trim(preg_replace('/ +/', ' ', $texto));
+	public function getByLike( $texto ) {
+		$texto = trim( strtolower( $texto ) );
+		$texto = trim( preg_replace( '/ +/', ' ', $texto ) );
 
-        if (preg_match('/[ivx]+\s*(-+\s*)?\d+/i', $texto)) {
-            $numero = preg_replace('/\D+/i', '', $texto);
-            $numeroRomano = preg_replace('/[^ivx]+/i', '', $texto);
-            $titulo = null;
-        } else {
-            $numero = preg_replace('/\D+/i', '', $texto);
-            $numeroRomano = '';
-            preg_match('/(^|(?<= ))[ivx]+((?= )|$)/i', $texto, $matches);
-            if (count($matches)) {
-                $numeroRomano = $matches[0];
-            }
+		if ( preg_match( '/[ivx]+\s*(-+\s*)?\d+/i', $texto ) ) {
+			$numero       = preg_replace( '/\D+/i', '', $texto );
+			$numeroRomano = preg_replace( '/[^ivx]+/i', '', $texto );
+			$titulo       = null;
+		} else {
+			$numero       = preg_replace( '/\D+/i', '', $texto );
+			$numeroRomano = '';
+			preg_match( '/(^|(?<= ))[ivx]+((?= )|$)/i', $texto, $matches );
+			if ( count( $matches ) ) {
+				$numeroRomano = $matches[0];
+			}
 
-            $titulo = $texto;
-            if ($numero || $numeroRomano) {
-                $titulo = trim(preg_replace('/(' . implode('|', array_filter([$numero, $numeroRomano])) . ')/i', ' ', $titulo));
-            }
-        }
+			$titulo = $texto;
+			if ( $numero || $numeroRomano ) {
+				$titulo = trim( preg_replace( '/(' . implode( '|', array_filter( [ $numero, $numeroRomano ] ) ) . ')/i',
+					' ',
+					$titulo ) );
+			}
+		}
 
-        $qb = $this->createQueryBuilder('n');
-        $qb->join('n.rama', 'r');
+		$qb = $this->createQueryBuilder( 'n' );
+		$qb->join( 'n.rama', 'r' );
 
-        if ($numero) {
-            $qb->andWhere('n.numero = :numero');
-            $qb->setParameter('numero', $numero);
-        }
-        if ($numeroRomano) {
-            $qb->andWhere('LOWER(r.numeroRomano) = :numeroRomano');
-            $qb->setParameter('numeroRomano', $numeroRomano);
-        }
-        if ($titulo) {
-            $qb->andWhere('LOWER(r.titulo) LIKE :titulo');
-            $qb->setParameter('titulo', '%'.$titulo.'%');
-        }
+		if ( $numero ) {
+			$qb->andWhere( 'n.numero = :numero' );
+			$qb->setParameter( 'numero', $numero );
+		}
+		if ( $numeroRomano ) {
+			$qb->andWhere( 'LOWER(r.numeroRomano) = :numeroRomano' );
+			$qb->setParameter( 'numeroRomano', $numeroRomano );
+		}
+		if ( $titulo ) {
+			$qb->andWhere( 'LOWER(r.titulo) LIKE :titulo' );
+			$qb->setParameter( 'titulo', '%' . $titulo . '%' );
+		}
 
-        $qb->orderBy('r.orden');
-        $qb->addOrderBy('n.numero');
+		$qb->orderBy( 'r.orden' );
+		$qb->addOrderBy( 'n.numero' );
 
-	    return $qb->getQuery()->getResult();
-    }
+		return $qb->getQuery()->getResult();
+	}
 
 	public function getQbAll() {
 		return $this->createQueryBuilder( 'n' )
-            ->join('n.rama', 'r');
+		            ->join( 'n.rama', 'r' );
 	}
 
 	public function search() {
 		$qb = $this->getQbAll();
 
-        $qb->orderBy( 'r.orden', 'ASC' );
+		$qb->orderBy( 'r.orden', 'ASC' );
 		$qb->addOrderBy( 'n.numero', 'ASC' );
 
 		return $qb;
@@ -125,7 +126,7 @@ class NormaRepository extends ServiceEntityRepository {
 
 		}
 
-		if ( isset( $data['descriptores'] ) ) {
+		if ( isset( $data['descriptores'] ) && ! empty( $data['descriptores'] ) ) {
 			$qb->leftJoin( 'n.descriptoresNorma', 'descriptoresNorma' );
 
 			$qb->orWhere( $qb->expr()->in( 'descriptoresNorma.descriptor', ':descriptores' ) );
@@ -133,14 +134,14 @@ class NormaRepository extends ServiceEntityRepository {
 			$qb->setParameter( 'descriptores', [ $data['descriptores'] ] );
 
 		}
-		if ( isset ( $data['identificadores'] ) )  {
+		if ( isset ( $data['identificadores'] ) && ! empty( $data['identificadores'] ) ) {
 			$qb->leftJoin( 'n.identificadoresNorma', 'identificadoresNorma' );
 
 			$qb->orWhere( $qb->expr()->in( 'identificadoresNorma.identificador', ':identificadores' ) );
 
 			$qb->setParameter( 'identificadores', [ $data['identificadores'] ] );
 		}
-		if ( isset ( $data['palabrasClave'] ) ) {
+		if ( isset ( $data['palabrasClave'] ) && ! empty( $data['palabrasClave'] ) ) {
 			$qb->leftJoin( 'n.palabrasClaveNorma', 'palabrasClaveNorma' );
 
 			$qb->orWhere( $qb->expr()->in( 'palabrasClaveNorma.palabraClave', ':palabrasClave' ) );
@@ -176,13 +177,13 @@ class NormaRepository extends ServiceEntityRepository {
 
 		}
 
-        if ( isset( $data['estado'] ) ) {
-            $qb->join('n.estadosNormas', 'en')
-                ->join('en.estado', 'e')
-                ->andWhere('e.id = :estadoId')
-                ->setParameter( 'estadoId', $data['estado'] );
+		if ( isset( $data['estado'] ) ) {
+			$qb->join( 'n.estadosNormas', 'en' )
+			   ->join( 'en.estado', 'e' )
+			   ->andWhere( 'e.id = :estadoId' )
+			   ->setParameter( 'estadoId', $data['estado'] );
 
-        }
+		}
 
 		return $qb;
 	}
@@ -207,62 +208,62 @@ class NormaRepository extends ServiceEntityRepository {
 
 	}
 
-	public function updateEstados()
-    {
-        $consolidacion = $this->getEntityManager()->getRepository(Consolidacion::class)->getConsolidacionEnCurso();
-        $pendiente = $this->getEntityManager()->getRepository(TipoEstadoNorma::class)->getPendiente();
+	public function updateEstados() {
+		$consolidacion = $this->getEntityManager()->getRepository( Consolidacion::class )->getConsolidacionEnCurso();
+		$pendiente     = $this->getEntityManager()->getRepository( TipoEstadoNorma::class )->getPendiente();
 
 
-	    $normasConEstado = $this->createQueryBuilder('n')
-            ->join('n.estadosNormas', 'e')
-            ->join('e.consolidacion', 'c')
-            ->where('c.enCurso = true')
-            ->getQuery()
-            ->getResult();
+		$normasConEstado = $this->createQueryBuilder( 'n' )
+		                        ->join( 'n.estadosNormas', 'e' )
+		                        ->join( 'e.consolidacion', 'c' )
+		                        ->where( 'c.enCurso = true' )
+		                        ->getQuery()
+		                        ->getResult();
 
-	    if (count($normasConEstado)) {
-            $normasSinEstado = $this->createQueryBuilder('n')
-                ->where('n.id NOT IN (:ids)')
-                ->setParameters([
-                    'ids' => array_map(function ($n) { return $n->getId(); }, $normasConEstado)
-                ])
-                ->getQuery()
-                ->getResult();
-        } else {
-            $normasSinEstado = $this->createQueryBuilder('n')
-                ->getQuery()
-                ->getResult();
-        }
+		if ( count( $normasConEstado ) ) {
+			$normasSinEstado = $this->createQueryBuilder( 'n' )
+			                        ->where( 'n.id NOT IN (:ids)' )
+			                        ->setParameters( [
+				                        'ids' => array_map( function ( $n ) {
+					                        return $n->getId();
+				                        },
+					                        $normasConEstado )
+			                        ] )
+			                        ->getQuery()
+			                        ->getResult();
+		} else {
+			$normasSinEstado = $this->createQueryBuilder( 'n' )
+			                        ->getQuery()
+			                        ->getResult();
+		}
 
 
+		/** @var $norma Norma */
+		foreach ( $normasSinEstado as $norma ) {
+			$estado = new EstadoNorma();
+			$estado->setEstado( $pendiente );
+			$estado->setConsolidacion( $consolidacion );
+			$norma->addEstadosNorma( $estado );
+			$this->getEntityManager()->persist( $norma );
+		}
 
-	    /** @var $norma Norma */
-	    foreach ($normasSinEstado as $norma) {
-	        $estado = new EstadoNorma();
-	        $estado->setEstado($pendiente);
-	        $estado->setConsolidacion($consolidacion);
-	        $norma->addEstadosNorma($estado);
-	        $this->getEntityManager()->persist($norma);
-        }
+		$this->getEntityManager()->flush();
+	}
 
-        $this->getEntityManager()->flush();
-    }
+	public function getVigentesNoConsolidadas( $fechaPromulgacionMaxima, $rama = null ) {
+		$qb = $this->createQueryBuilder( 'n' );
 
-    public function getVigentesNoConsolidadas($fechaPromulgacionMaxima, $rama = null)
-    {
-	    $qb = $this->createQueryBuilder('n');
+		$qb->where( 'n.vigenteNoConsolidada = true' )
+		   ->andWhere( 'n.fechaPromulgacion <= :fechaPromulgacionMaxima' )
+		   ->setParameter( 'fechaPromulgacionMaxima', $fechaPromulgacionMaxima->format( 'Y-m-d' ) );
 
-        $qb->where('n.vigenteNoConsolidada = true')
-            ->andWhere('n.fechaPromulgacion <= :fechaPromulgacionMaxima')
-            ->setParameter('fechaPromulgacionMaxima', $fechaPromulgacionMaxima->format('Y-m-d'));
+		if ( $rama ) {
+			$qb->join( 'n.rama', 'r' )
+			   ->andWhere( 'r.id = :rama' )
+			   ->setParameter( 'rama', $rama->getId() );
+		}
 
-        if ($rama) {
-	        $qb->join('n.rama', 'r')
-                ->andWhere('r.id = :rama')
-                ->setParameter('rama', $rama->getId());
-        }
-
-        return $qb->getQuery()->getResult();
-    }
+		return $qb->getQuery()->getResult();
+	}
 
 }
