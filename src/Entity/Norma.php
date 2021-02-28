@@ -102,6 +102,19 @@ class Norma extends BaseClass
      * @Groups({"norma"})
      */
     private $tipoPromulgacion;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\TipoVeto")
+     * @Groups({"norma"})
+     */
+    private $tipoVeto;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     * @Groups({"norma"})
+     */
+    private $observacionesVeto;
+
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Rama")
      * @ORM\JoinColumn(nullable=true)
@@ -292,6 +305,11 @@ class Norma extends BaseClass
      */
     private $cambiosAnexos;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\TemaNorma", mappedBy="norma", cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    private $temaNormas;
+
     public function __construct()
     {
         $this->anexos = new ArrayCollection();
@@ -315,6 +333,7 @@ class Norma extends BaseClass
         $this->fundamentaciones = new ArrayCollection();
         $this->articulosSuprimidos = new ArrayCollection();
         $this->cambiosAnexos = new ArrayCollection();
+        $this->temaNormas = new ArrayCollection();
     }
 
     public function __toString()
@@ -1122,10 +1141,15 @@ class Norma extends BaseClass
         return null;
     }
 
+    /**
+     * Devuelve el texto definitivo de la norma, de la última consolidación, si lo hubiere
+     *
+     * @return TextoDefinitivo|null
+     */
     public function getTextoDefinitivoConsolidado(): ?TextoDefinitivo
     {
         foreach ($this->getTextosDefinitivos() as $textoDefinitivo) {
-            if ($textoDefinitivo->getConsolidacion()->isUltima()) {
+            if ($textoDefinitivo->getConsolidacion()->isUltima() && $textoDefinitivo->getTextoDefinitivo()) {
                 return $textoDefinitivo;
             }
         }
@@ -1348,4 +1372,66 @@ class Norma extends BaseClass
         return $this;
     }
 
+    /**
+     * @return Collection|TemaNorma[]
+     */
+    public function getTemaNormas(): Collection
+    {
+        return $this->temaNormas;
+    }
+
+    public function addTemaNorma(TemaNorma $temaNorma): self
+    {
+        if (!$this->temaNormas->contains($temaNorma)) {
+            $this->temaNormas[] = $temaNorma;
+            $temaNorma->setNorma($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTemaNorma(TemaNorma $temaNorma): self
+    {
+        if ($this->temaNormas->contains($temaNorma)) {
+            $this->temaNormas->removeElement($temaNorma);
+            // set the owning side to null (unless already changed)
+            if ($temaNorma->getNorma() === $this) {
+                $temaNorma->setNorma(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTipoVeto()
+    {
+        return $this->tipoVeto;
+    }
+
+    /**
+     * @param mixed $tipoVeto
+     */
+    public function setTipoVeto($tipoVeto): void
+    {
+        $this->tipoVeto = $tipoVeto;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getObservacionesVeto()
+    {
+        return $this->observacionesVeto;
+    }
+
+    /**
+     * @param mixed $observacionesVeto
+     */
+    public function setObservacionesVeto($observacionesVeto): void
+    {
+        $this->observacionesVeto = $observacionesVeto;
+    }
 }

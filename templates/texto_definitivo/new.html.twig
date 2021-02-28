@@ -3,12 +3,25 @@
 {% block title %}{{ norma }} - Cargar Texto Consolidado{% endblock %}
 
 {% block body %}
-    <h1>{{ norma }} - Cargar Texto Consolidado</h1>
-    <h4>{{ ultimaConsolidacion }}</h4>
+    <h1>Norma {{ norma }}</h1>
+    <h2>Cargar Texto Consolidado</h2>
 
     {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <button class="btn btn-primary">{{ button_label|default('Guardar') }}</button>
-        <a class="btn btn-link" href="{{ path('norma_edit', {id: norma.id}) }}">Volver a la {{ norma }}</a>
+    <div class="row">
+        <div class="col-md-12">
+            {{ form_row(form.consolidacion) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            {{ form_row(form.textoDefinitivo) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <a class="btn btn-link" href="{{ path('norma_edit', {id: norma.id}) }}"><i class="fa fa-fw fa-chevron-left"></i> Volver a {{ norma }}</a>
+            <button class="btn btn-primary"><i class="fa fa-fw fa-save"></i> {{ button_label|default('Guardar') }}</button>
+        </div>
+    </div>
     {{ form_end(form) }}
 {% endblock %}

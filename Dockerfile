@@ -30,7 +30,7 @@ RUN apt-get update \
 			   libxrender-dev \
 			   libfontconfig \
 			   libxext-dev \
-			   libx11-dev
+			   libx11-dev \
     && apt-get -y autoremove
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer

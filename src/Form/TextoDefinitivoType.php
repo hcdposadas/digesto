@@ -7,6 +7,7 @@ use App\Entity\Consolidacion;
 use App\Entity\TextoDefinitivo;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
@@ -27,11 +28,18 @@ class TextoDefinitivoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('textoDefinitivo', CKEditorType::class, [
-            'label'  => 'Texto Definitivo',
-            'config' => ['uiColor' => '#ffffff']
-        ])
-        ;
+            ->add('textoDefinitivo', CKEditorType::class, array(
+                'label'  => 'Texto Definitivo',
+                'config' => ['uiColor' => '#ffffff']
+            ));
+
+        if ($options['show_consolidacion']) {
+            $builder
+                ->add('consolidacion', EntityType::class, array(
+                    'label' => 'Consolidación',
+                    'class' => Consolidacion::class
+                ));
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver)
@@ -43,7 +51,10 @@ class TextoDefinitivoType extends AbstractType
                 $entity = new $class();
                 $entity->setConsolidacion($this->entityManager->getRepository(Consolidacion::class)->getConsolidacionEnCurso());
                 return $entity;
-            }
+            },
+            'show_consolidacion' => true,
         ]);
+
+        $resolver->setAllowedTypes('show_consolidacion', 'bool');
     }
 }

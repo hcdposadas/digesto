@@ -1,0 +1,26 @@
+<div class="box-group" id="accordion-{{ id }}">
+    {% for tema in temas -%}
+    <div class="panel box box-default">
+        <div class="box-header with-border">
+            <div data-toggle="collapse" data-parent="#accordion" href="#collapse-t{{ tema.id }}" aria-expanded="false" class="collapsed" style="cursor: pointer;">
+                <div>{{ tema }} ({{ tema.temas | length }})</div>
+            </div>
+        </div>
+        <div id="collapse-t{{ tema.id }}" class="panel-collapse collapse" aria-expanded="false" style="height: 0px; padding: 15px;">
+            <div class="box-body">
+                <div class="box-group" id="accordion">
+                    <a class="btn-default" href="{{ path('temas_new', { 'rama': tema.rama.id, 'padre': tema.id}) }}">Agregar</a>
+                    {% if tema.temas|length == 0 %}
+                        <button>Eliminar</button>
+                    {% endif %}
+                    <br><br>
+
+                    {{ include('temas/_bloque.html.twig', {'temas': tema.temas, 'id': 't' ~ tema.id}) }}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+{#        <div>No hay temas para mostrar. <a href="">Agregar</a></div>#}
+    {% endfor %}
+</div>

@@ -6,6 +6,7 @@ use App\Entity\Descriptor;
 use App\Entity\Identificador;
 use App\Entity\Norma;
 use App\Entity\PalabraClave;
+use App\Entity\Tema;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -110,6 +111,39 @@ class AjaxController extends AbstractController
                     'id' => $entity['id'],
                     //'label' => $entity[$property],
                     'text' => $entity['nombre']
+                );
+            }
+        }
+
+        return new JsonResponse($json);
+
+    }
+
+    /**
+     * @Route("/get_temas", name="get_temas", methods={"GET"})
+     */
+    public function getATemas(Request $request)
+    {
+
+        $value = strtoupper($request->get('q'));
+
+        $em = $this->getDoctrine();
+
+        $entities = $em->getRepository(Tema::class)->getByLike($value);
+
+        $json = array();
+
+        if (!count($entities)) {
+            $json[] = array(
+                'label' => 'No se encontraron coincidencias',
+                'value' => ''
+            );
+        } else {
+
+            foreach ($entities as $entity) {
+                $json[] = array(
+                    'id' => $entity->getId(),
+                    'text' => $entity->getTitulo() . ' (' . $entity->getRama() . ')'
                 );
             }
         }

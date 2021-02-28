@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nuevo Tema{% endblock %}
+
+{% block body %}
+    <h1>Índice Temático Básico</h1>
+
+    {{ include('temas/_form.html.twig', {'nuevo': true, 'titulo': 'Nuevo Tema'}) }}
+{% endblock %}

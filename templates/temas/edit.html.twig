@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editar Tema{% endblock %}
+
+{% block body %}
+    <h1>Editar Tema</h1>
+
+    {{ include('temas/_form.html.twig', {'titulo': 'Editar Tema', 'button_label': 'Editar', 'nuevo': false}) }}
+
+
+
+    {{ include('temas/_delete_form.html.twig') }}
+{% endblock %}

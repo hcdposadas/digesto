@@ -3,11 +3,46 @@
 {% block title %}TextoDefinitivo{% endblock %}
 
 {% block body %}
-    <h1>Norma {{ norma }} - Texto Definitivo para {{ texto_definitivo.consolidacion }}</h1>
+    <h1>Norma {{ norma }} - Texto Definitivo {{ texto_definitivo.consolidacion }}</h1>
 
-    <div style="background-color: white; padding: 2em;">
-        {{ texto_definitivo.textoDefinitivo | raw }}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label class="control-label required" for="norma_textoDefinitivoNoConsolidado_consolidacion">Consolidación</label>
+                <select id="norma_textoDefinitivoNoConsolidado_consolidacion" name="norma[textoDefinitivoNoConsolidado][consolidacion]" class="form-control">
+                    {% for tdc in norma.textosDefinitivos|filter(tdc => tdc.textoDefinitivo is not empty) %}
+                        <option value="{{ tdc.id }}" {{ tdc.id == texto_definitivo.id ? 'selected' : '' }}>{{ tdc.consolidacion }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
     </div>
 
-{#    {{ include('texto_definitivo/_delete_form.html.twig') }}#}
+    {% if texto_definitivo.consolidacion.enCurso %}
+        <div class="row">
+            <div class="col-md-12">
+                <div class="callout callout-warning">
+                    <h5><i class="fa fa-fw fa-warning"></i> Texto Definitivo No Consolidado</h5>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="row">
+        <div class="col-md-12">
+            <div style="background-color: white; padding: 2em;">
+                {{ texto_definitivo.textoDefinitivo | raw }}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12"><a class="btn btn-link" href="{{ path('norma_edit', {id: norma.id}) }}">Volver a {{ norma }}</a></div>
+    </div>
+
+    <script>
+        $('#norma_textoDefinitivoNoConsolidado_consolidacion').change(function (e) {
+            var c = $(this).val()
+            document.location = '{{ path('texto_definitivo_consolidado_show_id', {'norma': norma.id, 'textoDefinitivo': '@'}) }}'.replace('@', c)
+        })
+    </script>
 {% endblock %}

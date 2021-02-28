@@ -6,6 +6,7 @@ use App\Entity\Consolidacion;
 use App\Entity\Norma;
 use App\Entity\TextoDefinitivo;
 use App\Form\TextoDefinitivoType;
+use App\Repository\ConsolidacionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -51,12 +52,23 @@ class TextoDefinitivoController extends AbstractController
     }
 
     /**
+     * @Route("/show/{textoDefinitivo}", name="texto_definitivo_consolidado_show_id", methods={"GET"})
+     */
+    public function showTextoDefinitivoConsolidadoId (Request $request, TextoDefinitivo $textoDefinitivo): Response
+    {
+        return $this->render('texto_definitivo/show.html.twig', [
+            'texto_definitivo' => $textoDefinitivo,
+            'norma' => $textoDefinitivo->getNorma()
+        ]);
+    }
+
+    /**
      * @Route("/consolidado/cargar", name="texto_definitivo_consolidado_create", methods={"GET","POST"})
      */
     public function createTextoConsolidado (Request $request, Norma $norma): Response
     {
         $textoDefinitivo = $norma->getTextoDefinitivoConsolidado();
-        if ($textoDefinitivo) {
+        if ($textoDefinitivo ) {
             throw new \Exception('La norma ya cuanta con texto consolidado. No se puede cargar uno nuevo.');
         }
 
@@ -69,7 +81,6 @@ class TextoDefinitivoController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-//            dd($form);
             $em = $this->getDoctrine()->getManager();
             $em->persist($textoDefinitivo);
             $em->flush();
@@ -123,10 +134,31 @@ class TextoDefinitivoController extends AbstractController
     public function delete(Request $request, Norma $norma): Response
     {
         $textoDefinitivo = $this->getTextoDefinitivoNoConsolidado($norma);
+        $textoDefinitivo->setTextoDefinitivo('');
         $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->remove($textoDefinitivo);
+        $entityManager->persist($textoDefinitivo);
         $entityManager->flush();
 
-        return $this->redirectToRoute('norma_edit', array('id' => $norma->getId()));
+        return $this->redirectToRoute('norma_edit', array(
+            'id' => $norma->getId(),
+            '_fragment' => 'anchorTextoDefinitivo'
+        ));
+    }
+
+    /**
+     * @Route("/copiar/{textoDefinitivoOrigen}", name="texto_definitivo_copiar", methods={"GET"})
+     */
+    public function copiar (Request $request, Norma $norma, TextoDefinitivo $textoDefinitivoOrigen): Response
+    {
+        $norma->getTextoDefinitivoNoConsolidado()->setTextoDefinitivo($textoDefinitivoOrigen->getTextoDefinitivo());
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($norma);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('norma_edit', array(
+            'id' => $norma->getId(),
+            '_fragment' => 'anchorTextoDefinitivo'
+        ));
     }
 }

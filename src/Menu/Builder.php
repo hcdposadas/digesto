@@ -54,12 +54,14 @@ class Builder {
 				array(
 					'childrenAttributes' => array(
 						'class' => 'treeview-menu',
+                        'style' => 'display: block'
 					),
 				)
 			)
 			     ->setUri( '#' )
 			     ->setExtra( 'icon', 'fa fa-folder-open-o' )
-			     ->setAttribute( 'class', 'treeview' );
+			     ->setAttribute( 'class', 'treeview menu-open' )
+			     ->setAttribute('data-expand-sidebar', 'true');
 
 			if ( $this->authorizationChecker->isGranted( 'ROLE_DIGESTO_ADMIN' ) ) {
 
@@ -143,6 +145,13 @@ class Builder {
                         'Consolidación en curso',
                         array(
                             'route' => 'consolidacion_en_curso',
+                        )
+                    );
+                $menu[ $keyAdministracion ]
+                    ->addChild(
+                        'Índice Temático Básico',
+                        array(
+                            'route' => 'temas_index',
                         )
                     );
 

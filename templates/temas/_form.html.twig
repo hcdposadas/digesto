@@ -1,0 +1,56 @@
+{{ form_start(form) }}
+<div class="row">
+    <div class="col-md-12">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">{{ titulo }}</h3>
+            </div>
+            <div class="box-body">
+                <div>
+                    <ol class="breadcrumb">
+                        {% if temaPadre %}
+                            <li><a href="{{ path('temas_index') }}">Ramas</a></li>
+                            <li><a href="{{ path('temas_index', { 'rama': temaPadre.rama.id }) }}">{{ temaPadre.rama }}</a></li>
+                            {% for t in temaPadre.breadcrumbs  %}
+                                <li><a href="{{ path('temas_index', { 'rama': t.rama.id, 'tema': t.id }) }}">{{ t }}</a></li>
+                            {% endfor %}
+
+                            {% if tema %}
+                                <li><a href="{{ path('temas_index', { 'rama': temaPadre.rama.id, 'tema': temaPadre.id }) }}">{{ temaPadre }}</a></li>
+                                <li><span class="text-muted">Editar</span> {{ tema }}</li>
+                            {% else %}
+                                <li>{{ temaPadre }}</li>
+                            {% endif %}
+                        {% elseif rama %}
+                            <li><a href="{{ path('temas_index') }}">Ramas</a></li>
+                            {% if tema %}
+                                <li><a href="{{ path('temas_index', { 'rama': tema.rama.id }) }}">{{ tema.rama }}</a></li>
+                                <li><span class="text-muted">Editar</span> {{ tema }}</li>
+                            {% else %}
+                                <li>{{ rama }}</li>
+                            {% endif %}
+
+                        {% endif %}
+                    </ol>
+                </div>
+                {{ form_widget(form) }}
+            </div>
+            <div class="box-footer">
+                <button class="btn btn-primary">{{ button_label|default('Guardar') }}</button>
+                {% if tema %}
+                    <a class="btn btn-secondary" href="{{ path('temas_index', {'rama': tema.rama.id, 'tema': tema.temaPadre ? tema.temaPadre.id : null }) }}">Volver a la lista</a>
+                {% else %}
+                    <a class="btn btn-secondary" href="{{ path('temas_index', {'rama': temaPadre ? rama.id : null, 'tema': temaPadre and temaPadre.temaPadre ? temaPadre.temaPadre.id : null }) }}">Volver a la lista</a>
+                {% endif %}
+
+            </div>
+
+        </div>
+    </div>
+</div>
+{{ form_end(form) }}
+
+{#    {{ form_widget(form) }}#}
+{#    <button class="btn btn-primary">{{ button_label|default('Guardar') }}</button>#}
+{#    #}
+{#{{ form_end(form) }}#}

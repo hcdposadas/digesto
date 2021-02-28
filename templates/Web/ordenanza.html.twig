@@ -181,11 +181,11 @@
 
                         </div>
                     </div>
-                    {% if textoDefinitivo is not null and textoDefinitivo.textoDefinitivo %}
-                    <div class="well text-center">Texto Definitivo {{ textoDefinitivo.consolidacion.titulo }}</div>
+                    {% if norma.textoDefinitivoConsolidado is not null and norma.textoDefinitivoConsolidado.textoDefinitivo %}
+                    <div class="well text-center">Texto Definitivo {{ norma.textoDefinitivoConsolidado.consolidacion.titulo }}</div>
                     <div class="row">
                         <div class="col-md-12">
-                            {{ textoDefinitivo.textoDefinitivo|raw }}
+                            {{ norma.textoDefinitivoConsolidado.textoDefinitivo|raw }}
                         </div>
                         <div class="col-md-12">
                             {% if norma.anexos|length %}
