@@ -127,6 +127,9 @@ class NormaController extends AbstractController {
 	 */
 	public function edit( Request $request, Norma $norma ): Response {
 
+        $consolidacionRepository = $this->getDoctrine()->getRepository(Consolidacion::class);
+        $consolidacion = $consolidacionRepository->getConsolidacionEnCurso();
+
 		$em = $this->getDoctrine()->getManager();
 
 		$descriptores    = $norma->getDescriptoresNorma();
@@ -275,12 +278,11 @@ class NormaController extends AbstractController {
                     [
                         'norma' => $norma,
                         'form' => $form->createView(),
+                        'consolidacion' => $consolidacion
                     ]);
             }
         }
 
-        $consolidacionRepository = $this->getDoctrine()->getRepository(Consolidacion::class);
-        $consolidacion = $consolidacionRepository->getConsolidacionEnCurso();
         $anexoA = $consolidacionRepository->getAnexoA($consolidacion);
         $anexoB = $consolidacionRepository->getAnexoB($consolidacion);
         $anexoC = $consolidacionRepository->getAnexoC($consolidacion);
@@ -329,7 +331,8 @@ class NormaController extends AbstractController {
 			[
 				'norma' => $norma,
 				'form'  => $form->createView(),
-                'anexos' => count($anexos) ? 'Anexos '.implode(', ', $anexos) : ''
+                'anexos' => count($anexos) ? 'Anexos '.implode(', ', $anexos) : '',
+                'consolidacion' => $consolidacion
 			] );
 	}
 

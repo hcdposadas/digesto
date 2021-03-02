@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\BoletinOficialMunicipal;
 use App\Entity\Descriptor;
 use App\Entity\Identificador;
 use App\Entity\Norma;
@@ -125,7 +126,12 @@ class NormaType extends AbstractType {
 					'html5'    => true,
 					'required' => false
 				] )
-			->add( 'boletinOficialMunicipal' )
+			->add( 'boletinOficialMunicipal', EntityType::class, [
+			    'class' => BoletinOficialMunicipal::class,
+                'choice_label' => function (BoletinOficialMunicipal $boletinOficialMunicipal) {
+                    return $boletinOficialMunicipal->getNumero() . ' (Publicado el ' . $boletinOficialMunicipal->getFechaPublicacion()->format('d/m/Y') . ')';
+                }
+            ] )
 			->add( 'anexos',
 				BootstrapCollectionType::class,
 				[

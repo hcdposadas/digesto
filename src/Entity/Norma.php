@@ -1157,6 +1157,28 @@ class Norma extends BaseClass
     }
 
     /**
+     * Devuelve el texto definitivo y publicado en el boletín oficial, si la hubiere
+     *
+     * @return TextoDefinitivo|null
+     */
+    public function getTextoDefinitivoConsolidadoPublicado(): ?TextoDefinitivo
+    {
+        $anio = 0;
+        $textoDefinitivo = null;
+
+        foreach ($this->getTextosDefinitivos() as $td) {
+            if ($td->getConsolidacion()->isPublicadaEnElBoletin()) {
+                if ($td->getConsolidacion()->getAnio() > $anio) {
+                    $anio = $td->getConsolidacion()->getAnio();
+                    $textoDefinitivo = $td;
+                }
+            }
+        }
+
+        return $textoDefinitivo;
+    }
+
+    /**
      * @return Collection|EstadoNorma[]
      */
     public function getEstadosNormas(): Collection

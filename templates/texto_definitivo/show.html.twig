@@ -11,7 +11,7 @@
                 <label class="control-label required" for="norma_textoDefinitivoNoConsolidado_consolidacion">Consolidación</label>
                 <select id="norma_textoDefinitivoNoConsolidado_consolidacion" name="norma[textoDefinitivoNoConsolidado][consolidacion]" class="form-control">
                     {% for tdc in norma.textosDefinitivos|filter(tdc => tdc.textoDefinitivo is not empty) %}
-                        <option value="{{ tdc.id }}" {{ tdc.id == texto_definitivo.id ? 'selected' : '' }}>{{ tdc.consolidacion }}</option>
+                        <option value="{{ tdc.id }}" {{ tdc.id == texto_definitivo.id ? 'selected' : '' }}>{{ tdc.consolidacion }}{{ tdc.consolidacion.enCurso ? ' (en curso)' : '' }}</option>
                     {% endfor %}
                 </select>
             </div>

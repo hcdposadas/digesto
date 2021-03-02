@@ -5,6 +5,7 @@
 
 <div class="row">
     <div class="col-md-12">
+        <div class="pull-right"><a href="{{ path('ver_ordenanza', { id: norma.id }) }}" target="_blank">Ver vista pública <i class="fa fa-external-link"></i></a></div>
         <h1>Norma {{ norma }}</h1>
         <div class="box box-solid box-primary">
             <div class="box-header with-border">
@@ -164,10 +165,9 @@
 
                                     {% endfor %}
                                     </table>
-
                                 </div>
                                 <div class="col-md-12">
-                                    <h4 id="#anchorTextoDefinitivo" class="box-title">Texto Definitivo</h4>
+                                    <h4 id="#anchorTextoDefinitivo" class="box-title">Texto Definitivo (para {{ consolidacion }})</h4>
                                     <div class="row">
                                         <div class="col-md-12">
                                             {% if norma.textoDefinitivoNoConsolidado and norma.textoDefinitivoNoConsolidado.textoDefinitivo %}
@@ -285,9 +285,6 @@
                     <!-- /.tab-content -->
                 </div>
             </div>
-            <div class="box-footer">
-                <button class="btn btn-primary">{{ button_label|default('Guardar') }}</button>
-            </div>
         </div>
         <div class="box box-solid box-primary">
             <div class="box-header with-border">
@@ -337,11 +334,17 @@
     </div>
 </div>
 
-<button class="btn btn-primary"><i class="fa fa-fw fa-save"></i> {{ button_label|default('Guardar') }}</button>
+<div>
+    <div class="text-muted">Creación {{ norma.fechaCreacion|date }} por {{ norma.creadoPor }}</div>
+    <div class="text-muted">Última actualización {{ norma.fechaActualizacion|date }} por {{ norma.actualizadoPor }}</div>
+</div>
+<br><br>
+
+<button onclick="window.onbeforeunload = null" class="btn btn-primary"><i class="fa fa-fw fa-save"></i> {{ button_label|default('Guardar') }}</button>
 <a class="btn btn-secondary" href="{{ path('norma_index') }}"><i class="fa fa-fw fa-chevron-left"></i> Volver a la lista</a>
 
 <div id="floating-save" style="padding: 10px 15px; box-shadow: 4px -5px 19px -8px rgb(204 204 204 / 67%); border: 2px solid #3c8dbc; border-bottom: none; border-radius: 3px; background: white; position: fixed; bottom: 0; right: 35px;">
-    <button class="btn btn-sm btn-primary pull-right"><i class="fa fa-fw fa-save"></i> {{ button_label|default('Guardar') }}</button>
+    <button onclick="window.onbeforeunload = null" class="btn btn-sm btn-primary pull-right"><i class="fa fa-fw fa-save"></i> {{ button_label|default('Guardar') }}</button>
     <a class="btn btn-sm btn-secondary pull-right" href="{{ path('norma_index') }}"><i class="fa fa-fw fa-chevron-left"></i> Volver a la lista</a>
 </div>
 
