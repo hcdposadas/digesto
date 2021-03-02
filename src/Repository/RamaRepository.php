@@ -9,7 +9,6 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
 /**
  * @method Rama|null find($id, $lockMode = null, $lockVersion = null)
  * @method Rama|null findOneBy(array $criteria, array $orderBy = null)
- * @method Rama[]    findAll()
  * @method Rama[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class RamaRepository extends ServiceEntityRepository
@@ -19,34 +18,13 @@ class RamaRepository extends ServiceEntityRepository
         parent::__construct($registry, Rama::class);
     }
 
-    // /**
-    //  * @return Rama[] Returns an array of Rama objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @return Rama[]
+     */
+    public function findAll()
     {
-        return $this->createQueryBuilder('r')
-            ->andWhere('r.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('r.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        return $this->findBy(array(), array('orden' => 'ASC'));
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Rama
-    {
-        return $this->createQueryBuilder('r')
-            ->andWhere('r.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 
     public function getRamaParticular(): Rama {
         return $this->findOneBy(array(
