@@ -1,0 +1,160 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Índice Temático Básico{% endblock %}
+
+{% block body %}
+    <style>
+        .opciones-tema {
+            display: none;
+            margin-left: 15px;
+        }
+        .opciones-tema a {
+            padding-right: 10px;
+        }
+        td:hover .opciones-tema {
+            display: inline-block;
+        }
+    </style>
+
+<ol class="breadcrumb">
+    {% if tema %}
+        <li><a href="{{ path('temas_index') }}">Ramas</a></li>
+        <li><a href="{{ path('temas_index', { 'rama': tema.rama.id }) }}">{{ tema.rama }}</a></li>
+        {% for t in tema.breadcrumbs  %}
+            <li><a href="{{ path('temas_index', { 'rama': t.rama.id, 'tema': t.id }) }}">{{ t }}</a></li>
+        {% endfor %}
+        <li>{{ tema }}</li>
+    {% elseif rama %}
+        <li><a href="{{ path('temas_index') }}">Ramas</a></li>
+        <li>{{ rama }}</li>
+    {% else %}
+        <li>Ramas</li>
+    {% endif %}
+</ol>
+<h1>Índice Temático Básico</h1>
+<div class="row">
+    <div class="col-md-12">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">
+                    {% if tema %}
+                        {{ tema }}
+                    {% elseif rama %}
+                        {{ rama }}
+                    {% else %}
+                        Ramas
+                    {% endif %}
+                </h3>
+            </div>
+            <div class="box-body">
+                {% if rama and temas is not null %}
+                    {% if temas|length > 0 %}
+                        <table class="table table-hover">
+                            {% for tema in temas %}
+                                <tr>
+                                    <td>
+                                        <a href="{{ path('temas_index', { 'rama': tema.rama.id, 'tema': tema.id }) }}">{{ tema }}</a>
+                                        <span class="text-muted">(Temas: {{ tema.temas|length }}, Normas: {{ tema.temaNormas|length }})</span>
+                                    </td><td class="pull-right">
+{#                                        <a class="btn btn-sm btn-default" title="Agregar subtema" href="{{ path('temas_new', { 'rama': tema.rama.id, 'tema': tema.id }) }}"><i class="fa fa-fw fa-plus"></i></a>#}
+                                        <a class="btn btn-sm btn-default" title="Editar" href="{{ path('temas_edit', { 'id': tema.id }) }}"><i class="fa fa-fw fa-edit"></i></a>
+
+                                        <form style="display: inline" method="post" action="{{ path('temas_delete', {'id': tema.id}) }}" onsubmit="return confirm('Está seguro que desea eliminar este tema? Todos los subtemas, si hubiera, se eliminar conjuntamente!!');">
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ tema.id) }}">
+                                            <button class="btn btn-sm btn-danger" title="Eliminar"><i class="fa fa-fw fa-trash"></i></button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    {% else %}
+                        <table class="table">
+                            <tr>
+                                <td class="text-muted">
+                                    No hay temas para mostrar
+                                </td>
+                            </tr>
+                        </table>
+                    {% endif %}
+                {% else %}
+                    <table class="table table-hover">
+                    {% for rama in ramas %}
+                        <tr>
+                            <td>
+                                <a href="{{ path('temas_index', { 'rama': rama.id }) }}">{{ rama }}</a>
+                                <span class="text-muted">(Temas: {{ temas|filter(t => t.rama.id == rama.id and t.temaPadre is null)|length }})</span>
+                            </td><td class="pull-right">
+                                <a class="btn btn-sm btn-default" title="Agregar tema" href="{{ path('temas_new', { 'rama': rama.id }) }}"><i class="fa fa-fw fa-plus"></i></a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </table>
+                {% endif %}
+                <hr>
+                {% if tema %}
+                    <a class="btn btn-primary pull-right" href="{{ path('temas_new', { 'rama': tema.rama.id, 'tema': tema.id }) }}">Agregar subtema</a>
+                    {% if tema.temaPadre %}
+                        <a class="btn btn-link" href="{{ path('temas_index', { 'rama': tema.rama.id, 'tema': tema.temaPadre.id }) }}"><i class="fa fa-fw fa-chevron-left"></i> Subir a {{ tema.temaPadre }}</a>
+                    {% else %}
+                        <a class="btn btn-link" href="{{ path('temas_index', { 'rama': tema.rama.id }) }}"><i class="fa fa-fw fa-chevron-left"></i> Subir a {{ tema.rama }}</a>
+                    {% endif %}
+                {% elseif rama %}
+                    <a class="btn btn-primary pull-right" href="{{ path('temas_new', { 'rama': rama.id }) }}">Agregar tema</a>
+                    <a class="btn btn-link" href="{{ path('temas_index') }}"><i class="fa fa-fw fa-chevron-left"></i> Subir a lista de ramas</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if tema %}
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">
+                        Normas relacionadas a {{ tema }}
+                    </h3>
+                </div>
+                <div class="box-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Rama</th>
+                                <th>Número</th>
+                                <th>Tema General</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for temaNorma in tema.temaNormas  %}
+                            <tr>
+                                <td>{{ temaNorma.norma.id }}</td>
+                                <td style="white-space: nowrap;">{{ temaNorma.norma.rama }}</td>
+                                <td>{{ temaNorma.norma.numero }}</td>
+                                <td>{{ temaNorma.norma.temaGeneral }}</td>
+                                <td>
+                                    <a class="btn btn-default" href="{{ path('norma_show', {'id': temaNorma.norma.id}) }}">
+                                        <i class="fa fa-eye"></i>
+                                    </a>
+                                    <a class="btn btn-default" href="{{ path('norma_edit', {'id': temaNorma.norma.id}) }}">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="5" class="text-muted">No hay normas en este tema</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+{% endblock %}

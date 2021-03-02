@@ -151,66 +151,65 @@
                             </dl>
                         </div>
                     </div>
-                    <div class="well text-center">Textos de la Ordenanza (Originales)</div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <ul>
-                                <li>
-                                    <a target="_blanks"
-                                       href="{{ asset('uploads/textos_definitivos_normas/' ~ norma.nombreArchivo) }}">
-                                        Texto <i class="fa fa-download"></i>
-                                    </a>
-                                </li>
-                                {% for anexo in norma.anexos | sort %}
+                    <div class="well text-center">Texto</div>
+                    {% if norma.textoDefinitivoConsolidadoPublicado is not null %}
+                        <div class="row">
+                            <div class="col-md-12">
+                                {{ norma.textoDefinitivoConsolidadoPublicado.textoDefinitivo|raw }}
+                            </div>
+                            <div class="col-md-12">
+                                {% if norma.anexos|length %}
+                                <h4>Anexos</h4>
+                                <ul>
+                                    {% for anexo in norma.anexos | sort %}
+                                        <li>
+                                            <a target="_blanks"
+                                               href="{{ asset('uploads/anexos_normas/' ~ anexo.archivo) }}">
+                                                {% if norma.anexos.count <=1 %}
+                                                    ANEXO ÚNICO
+                                                {% else %}
+                                                    {% if anexo.titulo %}
+                                                        {{ anexo.titulo }}
+                                                    {% else %}
+                                                        ANEXO {{ loop.index }}
+                                                    {% endif %}
+                                                {% endif %}
+                                                <i class="fa fa-download"></i></a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="row">
+                            <div class="col-md-12">
+                                <ul>
                                     <li>
                                         <a target="_blanks"
-                                           href="{{ asset('uploads/anexos_normas/' ~ anexo.archivo) }}">
-                                            {% if norma.anexos.count <=1 %}
-                                                ANEXO ÚNICO
-                                            {% else %}
-                                                {% if anexo.titulo %}
-                                                    {{ anexo.titulo }}
-                                                {% else %}
-                                                    ANEXO {{ loop.index }}
-                                                {% endif %}
-                                            {% endif %}
-                                            <i class="fa fa-download"></i></a>
+                                           href="{{ asset('uploads/textos_definitivos_normas/' ~ norma.nombreArchivo) }}">
+                                            Texto <i class="fa fa-download"></i>
+                                        </a>
                                     </li>
-                                {% endfor %}
-                            </ul>
-
-                        </div>
-                    </div>
-                    {% if textoDefinitivo is not null and textoDefinitivo.textoDefinitivo %}
-                    <div class="well text-center">Texto Definitivo {{ textoDefinitivo.consolidacion.titulo }}</div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            {{ textoDefinitivo.textoDefinitivo|raw }}
-                        </div>
-                        <div class="col-md-12">
-                            {% if norma.anexos|length %}
-                            <h4>Anexos</h4>
-                            <ul>
-                                {% for anexo in norma.anexos | sort %}
-                                    <li>
-                                        <a target="_blanks"
-                                           href="{{ asset('uploads/anexos_normas/' ~ anexo.archivo) }}">
-                                            {% if norma.anexos.count <=1 %}
-                                                ANEXO ÚNICO
-                                            {% else %}
-                                                {% if anexo.titulo %}
-                                                    {{ anexo.titulo }}
+                                    {% for anexo in norma.anexos | sort %}
+                                        <li>
+                                            <a target="_blanks"
+                                               href="{{ asset('uploads/anexos_normas/' ~ anexo.archivo) }}">
+                                                {% if norma.anexos.count <=1 %}
+                                                    ANEXO ÚNICO
                                                 {% else %}
-                                                    ANEXO {{ loop.index }}
+                                                    {% if anexo.titulo %}
+                                                        {{ anexo.titulo }}
+                                                    {% else %}
+                                                        ANEXO {{ loop.index }}
+                                                    {% endif %}
                                                 {% endif %}
-                                            {% endif %}
-                                            <i class="fa fa-download"></i></a>
-                                    </li>
-                                {% endfor %}
-                            </ul>
-                            {% endif %}
+                                                <i class="fa fa-download"></i></a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
                         </div>
-                    </div>
                     {% endif %}
                 </div>
             </div>

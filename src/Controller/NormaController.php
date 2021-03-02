@@ -10,6 +10,8 @@ use App\Entity\IdentificadorNorma;
 use App\Entity\Norma;
 use App\Entity\PalabraClave;
 use App\Entity\PalabraClaveNorma;
+use App\Entity\Tema;
+use App\Entity\TemaNorma;
 use App\Form\Filter\NormaFilterForm;
 use App\Form\NormaType;
 use App\Repository\NormaRepository;
@@ -125,22 +127,28 @@ class NormaController extends AbstractController {
 	 */
 	public function edit( Request $request, Norma $norma ): Response {
 
+        $consolidacionRepository = $this->getDoctrine()->getRepository(Consolidacion::class);
+        $consolidacion = $consolidacionRepository->getConsolidacionEnCurso();
+
 		$em = $this->getDoctrine()->getManager();
 
 		$descriptores    = $norma->getDescriptoresNorma();
 		$identificadores = $norma->getIdentificadoresNorma();
 		$palabrasClave   = $norma->getPalabrasClaveNorma();
+		$temas           = $norma->getTemaNormas();
 		$form            = $this->createForm( NormaType::class,
 			$norma,
 			[
 				'descriptores'    => $descriptores,
 				'identificadores' => $identificadores,
-				'palabrasClave'   => $palabrasClave
+				'palabrasClave'   => $palabrasClave,
+                'temas'           => $temas,
 			] );
 
 		$descriptoresOriginales    = new ArrayCollection();
 		$identificadoresOriginales = new ArrayCollection();
 		$palabrasClaveOriginales   = new ArrayCollection();
+        $temasOriginales           = new ArrayCollection();
 
 		foreach ( $descriptores as $descriptor ) {
 			$descriptoresOriginales->add( $descriptor );
@@ -151,6 +159,9 @@ class NormaController extends AbstractController {
 		foreach ( $palabrasClave as $palabrasClave ) {
 			$palabrasClaveOriginales->add( $palabrasClave );
 		}
+        foreach ( $temas as $tema ) {
+            $temasOriginales->add( $tema );
+        }
 
 		$form->handleRequest( $request );
 
@@ -161,6 +172,7 @@ class NormaController extends AbstractController {
                 $data['descriptores'] = $form->get('descriptores')->getData();
                 $data['identificadores'] = $form->get('identificadores')->getData();
                 $data['palabrasClave'] = $form->get('palabrasClave')->getData();
+                $data['temas'] = $form->get('temas')->getData();
 
                 /* elimino descriptores */
 
@@ -216,6 +228,24 @@ class NormaController extends AbstractController {
                     }
                 }
 
+                /* elimino temas */
+
+                $temaQueQuedan = $norma->getTemaNormas()->filter(
+                    function ($entry) use ($data) {
+                        return in_array($entry->getTema(), $data['temas']);
+                    }
+                );
+
+                foreach ($temasOriginales as $tema) {
+                    if (false === $palabraClaveQueQuedan->contains($tema)) {
+
+                        $tema->setNorma(null);
+                        $norma->getTemaNormas()->removeElement($tema);
+
+                        $em->remove($tema);
+                    }
+                }
+
                 // agrego descriptores
                 $this->addDescriptores($em, $data, $norma);
 
@@ -224,6 +254,13 @@ class NormaController extends AbstractController {
 
                 // agrego palabras clave
                 $this->addPalabrasClaves($em, $data, $norma);
+
+                // agrego temas
+                $this->addTemas($em, $data, $norma);
+
+                if (!$norma->getTipoVeto()) {
+                    $norma->setObservacionesVeto(null);
+                }
 
                 $em->flush();
 
@@ -241,12 +278,11 @@ class NormaController extends AbstractController {
                     [
                         'norma' => $norma,
                         'form' => $form->createView(),
+                        'consolidacion' => $consolidacion
                     ]);
             }
         }
 
-        $consolidacionRepository = $this->getDoctrine()->getRepository(Consolidacion::class);
-        $consolidacion = $consolidacionRepository->getConsolidacionEnCurso();
         $anexoA = $consolidacionRepository->getAnexoA($consolidacion);
         $anexoB = $consolidacionRepository->getAnexoB($consolidacion);
         $anexoC = $consolidacionRepository->getAnexoC($consolidacion);
@@ -295,7 +331,8 @@ class NormaController extends AbstractController {
 			[
 				'norma' => $norma,
 				'form'  => $form->createView(),
-                'anexos' => count($anexos) ? 'Anexos '.implode(', ', $anexos) : ''
+                'anexos' => count($anexos) ? 'Anexos '.implode(', ', $anexos) : '',
+                'consolidacion' => $consolidacion
 			] );
 	}
 
@@ -358,6 +395,24 @@ class NormaController extends AbstractController {
 			}
 		}
 	}
+
+    private function addTemas( $em, $data, &$norma ) {
+        if ( isset( $data['temas'] ) ) {
+            foreach ( $data['temas'] as $temaId ) {
+                $tema      = $em->getRepository( Tema::class )->find( $temaId );
+                $temaNorma = $em->getRepository( TemaNorma::class )->findOneBy([
+                    'norma' => $norma,
+                    'tema'  => $tema
+                ]);
+                if ( ! $temaNorma && $tema ) {
+                    $temaNorma = new TemaNorma();
+                    $temaNorma->setNorma( $norma );
+                    $temaNorma->setTema( $tema );
+                    $norma->addTemaNorma( $temaNorma );
+                }
+            }
+        }
+    }
 
 	/**
 	 * @Route("/{id}", name="norma_delete", methods={"DELETE"})

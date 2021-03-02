@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
@@ -60,9 +62,19 @@ class Rama extends BaseClass
      */
     private $orden;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Tema", mappedBy="rama", orphanRemoval=true)
+     */
+    private $temas;
+
+    public function __construct()
+    {
+        $this->temas = new ArrayCollection();
+    }
+
 	public function __toString() {
-         		return $this->numeroRomano . ' - '. $this->titulo;
-         	}
+        return $this->numeroRomano . ' - '. $this->titulo;
+    }
 
     public function getId(): ?int
     {
@@ -137,6 +149,37 @@ class Rama extends BaseClass
     public function setOrden(?int $orden): self
     {
         $this->orden = $orden;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Tema[]
+     */
+    public function getTemas(): Collection
+    {
+        return $this->temas;
+    }
+
+    public function addTema(Tema $tema): self
+    {
+        if (!$this->temas->contains($tema)) {
+            $this->temas[] = $tema;
+            $tema->setRama($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTema(Tema $tema): self
+    {
+        if ($this->temas->contains($tema)) {
+            $this->temas->removeElement($tema);
+            // set the owning side to null (unless already changed)
+            if ($tema->getRama() === $this) {
+                $tema->setRama(null);
+            }
+        }
 
         return $this;
     }

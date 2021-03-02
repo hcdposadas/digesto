@@ -97,4 +97,19 @@ class BoletinOficialMunicipalRepository extends ServiceEntityRepository {
 		            ->getQuery()
 		            ->getResult();
 	}
+
+    /**
+     * @param $numero
+     * @return BoletinOficialMunicipal[]
+     */
+    public function getByLike( $numero )
+    {
+        $qb = $this->createQueryBuilder('b');
+        $qb->where('b.numero  :numero');
+        $qb->setParameter( 'numero', $numero . '%' );
+//        $qb->where('b.activo = true');
+        $qb->orderBy('b.numero');
+
+        return $qb->getQuery()->getResult();
+    }
 }

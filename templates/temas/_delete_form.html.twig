@@ -1,0 +1,5 @@
+<form method="post" action="{{ path('temas_delete', {'id': tema.id}) }}" onsubmit="return confirm('Está seguro que desea eliminar este tema? Todos los subtemas, si hubiera, se eliminar conjuntamente!!');">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ tema.id) }}">
+    <button class="btn">Eliminar</button>
+</form>

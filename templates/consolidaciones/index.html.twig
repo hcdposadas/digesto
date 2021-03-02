@@ -19,6 +19,7 @@
                             <th title="Visible en la página web"">Visible</th>
                             <th>Última vigente</th>
                             <th>En curso</th>
+                            <th>Publicada en BOM</th>
                             <th></th>
                         </tr>
                         </thead>
@@ -30,10 +31,7 @@
                                     <td>{{ consolidacion.visible ? 'SI' : 'NO' }}</td>
                                     <td>{{ consolidacion.ultima ? 'SI' : 'NO '}}</td>
                                     <td>{{ consolidacion.enCurso ? 'SI' : 'NO' }}</td>
-    {#                                <td>{{ palabra_clave.nombre }}</td>#}
-    {#                                <td>{{ palabra_clave.activo ? 'Si' : 'No' }}</td>#}
-    {#                                <td>{{ palabra_clave.fechaCreacion ? palabra_clave.fechaCreacion|date('Y-m-d H:i:s') : '' }}</td>#}
-    {#                                <td>{{ palabra_clave.fechaActualizacion ? palabra_clave.fechaActualizacion|date('Y-m-d H:i:s') : '' }}</td>#}
+                                    <td>{{ consolidacion.publicadaEnElBoletin ? 'SI' : 'NO' }}</td>
                                     <td>
                                         <a class="btn btn-default btn-icon" href="{{ path('consolidaciones_show', {'id': consolidacion.id}) }}"><i class="fa fa-eye"></i></a>
     {#                                    <a class="btn btn-default btn-icon" href="{{ path('palabra_clave_edit', {'id': palabra_clave.id}) }}"><i class="fa fa-edit"></i></a>#}

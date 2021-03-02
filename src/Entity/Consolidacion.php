@@ -123,6 +123,11 @@ class Consolidacion extends BaseClass {
     private $visible = false;
 
     /**
+     * @ORM\Column(type="boolean", options={"default":"0"})
+     */
+    private $publicadaEnElBoletin = false;
+
+    /**
 	 * @return mixed
 	 */
 	public function getNombreArchivoProyecto() {
@@ -452,5 +457,21 @@ class Consolidacion extends BaseClass {
     public function setRefundidas($refundidas): void
     {
         $this->refundidas = $refundidas;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isPublicadaEnElBoletin(): bool
+    {
+        return $this->publicadaEnElBoletin;
+    }
+
+    /**
+     * @param bool $publicadaEnElBoletin
+     */
+    public function setPublicadaEnElBoletin(bool $publicadaEnElBoletin): void
+    {
+        $this->publicadaEnElBoletin = $publicadaEnElBoletin;
     }
 }

@@ -2,13 +2,16 @@
 
 namespace App\Form;
 
+use App\Entity\BoletinOficialMunicipal;
 use App\Entity\Descriptor;
 use App\Entity\Identificador;
 use App\Entity\Norma;
 use App\Entity\PalabraClave;
 use App\Entity\Rama;
+use App\Entity\Tema;
 use App\Entity\TipoBoletin;
 use App\Entity\TipoEstadoNorma;
+use App\Entity\TipoVeto;
 use Doctrine\ORM\EntityRepository;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -26,8 +29,10 @@ class NormaType extends AbstractType {
 		$descriptores    = $options['descriptores'];
 		$identificadores = $options['identificadores'];
 		$palabrasClaves  = $options['palabrasClave'];
+        $temas  = $options['temas'];
 
-		$aCDescriptor = null;
+
+        $aCDescriptor = null;
 		foreach ( $descriptores as $descriptore ) {
 			$aCDescriptor[] = $descriptore->getDescriptor();
 		}
@@ -41,6 +46,10 @@ class NormaType extends AbstractType {
 		foreach ( $palabrasClaves as $palabraClave ) {
 			$aCPalabraClave[] = $palabraClave->getPalabraClave();
 		}
+        $aCtema = null;
+        foreach ( $temas as $tema ) {
+            $aCtema[] = $tema->getTema();
+        }
 
 
 		$builder
@@ -86,6 +95,21 @@ class NormaType extends AbstractType {
 					'required' => false
 				] )
 			->add( 'tipoPromulgacion' )
+            ->add( 'tipoVeto',
+                EntityType::class,
+                [
+                    'required' => false,
+                    'class' => TipoVeto::class,
+                    'attr'  => [ 'class' => 'tipo-veto' ],
+                    'label' => 'Veto'
+                ])
+            ->add('observacionesVeto',
+                CKEditorType::class,
+                [
+                    'label'  => 'Observaciones Veto',
+                    'config' => [ 'uiColor' => '#ffffff' ],
+                    'attr'  => [ 'class' => 'observaciones-veto' ],
+                ] )
 			->add( 'tipoOrdenanza' )
 			->add( 'numeroAnterior' )
 			->add( 'tipoBoletin',
@@ -102,7 +126,12 @@ class NormaType extends AbstractType {
 					'html5'    => true,
 					'required' => false
 				] )
-			->add( 'boletinOficialMunicipal' )
+			->add( 'boletinOficialMunicipal', EntityType::class, [
+			    'class' => BoletinOficialMunicipal::class,
+                'choice_label' => function (BoletinOficialMunicipal $boletinOficialMunicipal) {
+                    return $boletinOficialMunicipal->getNumero() . ' (Publicado el ' . $boletinOficialMunicipal->getFechaPublicacion()->format('d/m/Y') . ')';
+                }
+            ] )
 			->add( 'anexos',
 				BootstrapCollectionType::class,
 				[
@@ -158,6 +187,20 @@ class NormaType extends AbstractType {
 					'data'          => $aCPalabraClave
 
 				] )
+            ->add( 'temas',
+                Select2EntityType::class,
+                [
+                    'label'         => 'Índice Temático Básico',
+                    'class'         => Tema::class,
+                    'text_property' => 'titulo',
+                    'remote_route'  => 'get_temas',
+                    'allow_clear'   => false,
+                    'multiple'      => true,
+                    'language'      => 'es',
+                    'mapped'        => false,
+                    'data'          => $aCtema
+
+                ] )
 			->add( 'beneficiarioNormas',
 				BootstrapCollectionType::class,
 				[
@@ -306,7 +349,9 @@ class NormaType extends AbstractType {
                 ]
             )
 
-            ->add('textoDefinitivoNoConsolidado', TextoDefinitivoType::class)
+            ->add('textoDefinitivoNoConsolidado', TextoDefinitivoType::class, [
+                'show_consolidacion' => false
+            ])
 
 			->add( 'archivoNorma',
 				VichFileType::class,
@@ -327,6 +372,7 @@ class NormaType extends AbstractType {
 			'descriptores'    => [],
 			'identificadores' => [],
 			'palabrasClave'   => [],
+            'temas'           => [],
 		] );
 	}
 }
