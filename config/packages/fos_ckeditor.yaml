@@ -12,7 +12,8 @@ fos_ck_editor:
     configs:
         my_config:
             toolbar: full
-            extraPlugins: "justify, liststyle"
+            extraPlugins: "justify, liststyle, lineheight"
+            line_height: "1px;1.1px;1.2px;1.3px;1.4px;1.5px"
             removeButtons: 'Subscript,Superscript'
     plugins:
         justify:
@@ -20,6 +21,9 @@ fos_ck_editor:
             filename: "plugin.js"
         liststyle:
             path:     "build/ckeditor/plugins/liststyle/" # with trailing slash
+            filename: "plugin.js"
+        lineheight:
+            path:     "build/ckeditor/plugins/lineheight/" # with trailing slash
             filename: "plugin.js"
 
 
