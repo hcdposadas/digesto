@@ -152,7 +152,8 @@
                         </div>
                     </div>
                     <div class="well text-center">Texto</div>
-                    {% if norma.textoDefinitivoConsolidadoPublicado is not null %}
+                    {% if norma.textoDefinitivoConsolidadoPublicado is not null and
+                        norma.textoDefinitivoConsolidadoPublicado.textoDefinitivo |length > 0 %}
                         <div class="row">
                             <div class="col-md-12">
                                 {{ norma.textoDefinitivoConsolidadoPublicado.textoDefinitivo|raw }}
