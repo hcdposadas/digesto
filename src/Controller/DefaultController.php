@@ -442,7 +442,7 @@ class DefaultController extends AbstractController {
 				'norma' => $norma
 			] );
 
-		$titulo = $norma->getRama()->getNumeroRomano() . ' - ' . $norma->getRama()->getTitulo() . ' - ' . $norma->getNumero();
+		$titulo = $norma->getRama()->getNumeroRomano() . ' - ' . $norma->getNumero();
 
 		return new PdfResponse(
 			$snappy->getOutputFromHtml( $html, [
