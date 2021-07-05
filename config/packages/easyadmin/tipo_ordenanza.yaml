@@ -1,0 +1,8 @@
+easy_admin:
+    entities:
+        TipoOrdenanza:
+            class: App\Entity\TipoOrdenanza
+            form:
+                fields:
+                    - { property: 'nombre' }
+                    - { property: 'activo' }

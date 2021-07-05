@@ -6,7 +6,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "api-platform/api-pack": "^1.2",
-        "easycorp/easyadmin-bundle": "^2.1",
+        "easycorp/easyadmin-bundle": "v2.3.12",
         "friendsofsymfony/ckeditor-bundle": "^2.0",
         "friendsofsymfony/user-bundle": "^2.1",
         "h4cc/wkhtmltopdf-amd64": "^0.12.4",

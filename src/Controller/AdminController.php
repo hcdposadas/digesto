@@ -26,7 +26,6 @@ class AdminController extends EasyAdminController {
 	{
 		if (!$this->isGranted("ROLE_ADMIN")) {
 			return $this->redirectToRoute('administrador');
-//			return $this->redirectToRoute('administrador', ['entity' => 'Usuario', 'action' => 'edit', 'id' => $this->getUser()->getId()]);
 		}
 		return $this->listAction();
 	}
