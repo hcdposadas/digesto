@@ -25,5 +25,6 @@ easy_admin:
           - { label: 'Descriptores', entity: Descriptor }
           - { label: 'Identificadores', entity: Identificador }
           - { label: 'Tipo de Identificador', entity: TipoIdentificador }
+          - { label: 'Tipo de Ordenanza', entity: TipoOrdenanza }
         assets:
           favicon: 'bundles/app/img/favicon.png'
