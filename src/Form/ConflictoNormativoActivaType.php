@@ -8,6 +8,7 @@ use App\Entity\Norma;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
@@ -60,12 +61,14 @@ class ConflictoNormativoActivaType extends AbstractType
                 'label' => 'Anexo',
                 'required' => false
             ])
-            ->add('fundamentacion', TextType::class, [
-                'label' => 'Fundamentación'
+            ->add('fundamentacion', TextareaType::class, [
+                'label' => 'Fundamentación',
+                'attr' => array('style' => 'width: 200px;height:400px')
             ])
-            ->add('observaciones', TextType::class, [
+            ->add('observaciones', TextareaType::class, [
                 'label' => 'Observaciones',
-                'required' => false
+                'required' => false,
+                'attr' => array('style' => 'width: 200px;height:400px')
             ])
         ;
     }
