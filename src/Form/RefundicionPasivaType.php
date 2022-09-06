@@ -64,12 +64,12 @@ class RefundicionPasivaType extends AbstractType
             ])
             ->add('fundamentacion', TextareaType::class, [
                 'label' => 'Fundamentación',
-                'attr' => array('style' => 'width: 200px;height:400px')
+                'attr' => array('style' => 'width: 125px;height:400px')
             ])
             ->add('observaciones', TextareaType::class, [
                 'label' => 'Observaciones',
                 'required' => false,
-                'attr' => array('style' => 'width: 200px;height:400px')
+                'attr' => array('style' => 'width: 125px;height:400px')
             ])
         ;
     }
