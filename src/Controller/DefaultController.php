@@ -456,4 +456,19 @@ class DefaultController extends AbstractController {
 			'inline'
 		);
 	}
+
+	/**
+	 * @Route("/turismo", name="turismo", methods={"GET"})
+	 */
+	public function turista(){
+		$aniosBoletines  = $this->getDoctrine()->getRepository( BoletinOficialMunicipal::class )->getAniosBoletines();
+		$consolidaciones = $this->getDoctrine()->getRepository( Consolidacion::class )->getConsolidacionesOrdenadas();
+		$web             = $this->getDoctrine()->getRepository( WebDigestoTexto::class )->findOneBySlug( 'web' );
+
+		return $this->render( 'Web/turista.html.twig',
+		['web'             => $web,
+		'anios_boletines' => $aniosBoletines,
+		'consolidaciones' => $consolidaciones,]);
+
+	}
 }
