@@ -1,53 +1,64 @@
 {% extends '/Web/layout.html.twig' %}
 {% block stylesheets %}
-    <style>
-        .jumbotron {
-            background: /* top, transparent red, faked with gradient */ linear-gradient(
-                    rgba(0, 0, 0, 0.3),
-                    rgba(0, 0, 0, 0.3)
-            ),
-                /* bottom, image */ url('{{ asset('build/images/portada.png') }}');
-            background-size: cover;
-            background-repeat: no-repeat;
-        }
+	<style>
+		.jumbotron {
+			background: /* top, transparent red, faked with gradient */
+			linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), /* bottom, image */ url('{{ asset('build/images/portada.png') }}');
+			background-size: cover;
+			background-repeat: no-repeat;
+		}
 
-        @media screen and (min-width: 900px) {
-            .panel.panel-default .panel-heading {
-                min-height: 300px;
-            }
-        }
+		@media screen and(min-width: 900px) {
+			.panel.panel-default .panel-heading {
+				min-height: 300px;
+			}
+		}
 
-        .panel.panel-default .panel-heading {
-            min-height: 340px;
-        }
-
-    </style>
+		.panel.panel-default .panel-heading {
+			min-height: 340px;
+		}
+	</style>
 {% endblock stylesheets %}
 {% block content %}
 
-    <main role="main">
-        <section class="jumbotron">
+	<main role="main">
+		<section class="jumbotron">
 
-            <div class="container jumbotron_body">
-                <div class="row">
-                    <div class="col-xs-12 col-md-8 col-md-offset-2 text-center text-banner">
-                        <h1>Digesto Jurídico Municipal</h1>
-                        <h2>Posadas - Misiones</h2>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12 col-md-8 col-md-offset-2 text-center">  
-                        <iframe width="420" height="315"
-                        src="{{video}}">
-                        </iframe>
-                    </div>
+			<div class="container jumbotron_body">
+				<div class="row">
+					<div class="col-xs-12 col-md-8 col-md-offset-2 text-center text-banner">
+						<h1>Digesto Jurídico Municipal</h1>
+						<h2>Posadas - Misiones</h2>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12 col-md-8 col-md-offset-2 text-center">
+						<iframe width="420" height="315" src="{{video}}"></iframe>
+					</div>
 
-                </div>
-            </div>
+				</div>
+			</div>
 
-        </section>
+		</section>
+		<section class="p-b-0 prologo">
+			<div class="container ">
 
-    </main>
+				<section class="" style="padding-bottom: 140px;">
+					<div class="row">
+						<div class="col-md-8 col-md-offset-2">
+							<div class="row text-center">
+								<div class="col-sm-12">
+									<h2 class="m-b-3">Prólogo</h2>
+								</div>
+							</div>
+
+							<div></div>
+						</div>
+					</div>
+				</section>
+			</div>
+		</section>
+	</main>
 
 
 {% endblock content %}
