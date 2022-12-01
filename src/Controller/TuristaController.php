@@ -145,16 +145,44 @@ class TuristaController extends AbstractController
             ';
             $video='3';
         }elseif($id=='4'){
-            $contenido='SISTEMA DE ESTACIONAMIENTO MEDIDO / PARKING SYSTEM
-            Sistema de Estacionamiento Ordenado Municipal. Normas Generales. Estructura Vial. Estacionamiento medido. Franquicias especiales. Espacios Reservados. Módulos de estacionamiento exclusivo para discapacitados. Prohibiciones y sanciones. Autoridad de Aplicación. En esta norma conocerás sobre el sistema de tránsito municipal, y sus beneficios en el orden civil.
-            Además, aprenderá sobre el uso de la aplicación para cargar créditos por el uso de los lugares para garaje de su vehículo
-            Municipal Ordered Parking System. General Rules. Road structure. Metered parking. Special franchises. Reserved Spaces. Exclusive parking modules for the disabled. Prohibitions and sanctions. Enforcement Authority. In this norm you will know about the municipal traffic system, and its benefits in the civilian order.
-            Also, you will learn about the use of the app to charge credits for the use of the places to garage you vehicle.
-            Puede descargar la Ordenanza XVI – Nº 47 y la Aplicación desde los siguientes links:
-            You can download the Norm XVI – Nº 14 and its App from the links below:
-            SISTEMA DE ESTACIONAMIENTO / PARKING SYSTEM
-            APP SISTEMA ESTACIONAMIENTO MEDIDO / APP PARKING SYSTEM
-             
+            $contenido='
+            <div class="row text-center">
+                <div class="col-sm-12">
+                    <h2 class="m-b-3">SISTEMA DE ESTACIONAMIENTO MEDIDO / PARKING SYSTEM</h2>
+                </div>
+            </div>
+            <div>
+                <p>
+                    Sistema de Estacionamiento Ordenado Municipal. Normas Generales. Estructura Vial. Estacionamiento medido. Franquicias especiales. Espacios Reservados. Módulos de estacionamiento exclusivo para discapacitados. Prohibiciones y sanciones. Autoridad de Aplicación. En esta norma conocerás sobre el sistema de tránsito municipal, y sus beneficios en el orden civil.
+                    Además, aprenderá sobre el uso de la aplicación para cargar créditos por el uso de los lugares para garaje de su vehículo
+                </p>
+            </div>
+            <div>
+                <p>
+                    <i>
+                    Municipal Ordered Parking System. General Rules. Road structure. Metered parking. Special franchises. Reserved Spaces. Exclusive parking modules for the disabled. Prohibitions and sanctions. Enforcement Authority. In this norm you will know about the municipal traffic system, and its benefits in the civilian order.
+                    Also, you will learn about the use of the app to charge credits for the use of the places to garage you vehicle.
+                    </i>
+                </p>
+            </div>
+            <div class="row text-center">
+                <div class="col-sm-12"> 
+                    <p>
+                        Puede descargar la Ordenanza XVI – Nº 47 desde el siguiente link:
+                    </p>
+                    <p> 
+                        <i>
+                            You can download the Norm XVI – Nº 47 from the link below:
+                        </i>
+                    </p>
+                    <a>
+                        SISTEMA DE ESTACIONAMIENTO / PARKING SYSTEM
+                    </a>
+                    <a>
+                        APP SISTEMA ESTACIONAMIENTO MEDIDO / APP PARKING SYSTEM
+                    </a>
+                </div>
+            </div>
             ';
             $video='4';
         }elseif($id=='5'){
