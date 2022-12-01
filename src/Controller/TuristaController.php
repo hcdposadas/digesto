@@ -186,24 +186,77 @@ class TuristaController extends AbstractController
             ';
             $video='4';
         }elseif($id=='5'){
-            $contenido='MARCO REGULATORIO DE CONVIVENCIA CIUDADANA / COEXISTENCE RULES
-            Adopta Marco Regulador de Normas de Convivencia Ciudadana y Vía Pública.
-            Esta norma garantiza los métodos correctos para prevenir incidentes en la vía pública, y evitar problemas entre vecinos por cuestiones de respeto, limpieza y orden general.
-            This standard guarantees the correct methods to prevent incidents on public roads, and avoid problems between neighbors for reasons of respect, cleanliness and general order.
-            Puede descargar la Ordenanza XI – Nº 56 desde el siguiente link:
-            You can download the Norm XI – Nº 56 from the link below:
-            MARCO REGULATORIO DE CONVIVENCIA / COEXISTENCE RULES
-            
+            $contenido='
+            <div class="row text-center">
+                <div class="col-sm-12">
+                    <h2 class="m-b-3">MARCO REGULATORIO DE CONVIVENCIA CIUDADANA / COEXISTENCE RULES</h2>
+                </div>
+            </div>
+            <div>
+                <p>
+                    Adopta Marco Regulador de Normas de Convivencia Ciudadana y Vía Pública.
+                    Esta norma garantiza los métodos correctos para prevenir incidentes en la vía pública, y evitar problemas entre vecinos por cuestiones de respeto, limpieza y orden general.
+                </p>
+            </div>
+            <div>
+                <p>
+                    <i>
+                        This standard guarantees the correct methods to prevent incidents on public roads, and avoid problems between neighbors for reasons of respect, cleanliness and general order.
+                    </i>
+                </p>
+            </div>
+            <div class="row text-center">
+                <div class="col-sm-12"> 
+                    <p>
+                        Puede descargar la Ordenanza XI – Nº 56 desde el siguiente link:
+                    </p>
+                    <p> 
+                        <i>
+                            You can download the Norm XI – Nº 56 from the link below:
+                        </i>
+                    </p>
+                    <a>
+                        MARCO REGULATORIO DE CONVIVENCIA / COEXISTENCE RULES
+                    </a>
+                </div>
+            </div>
             ';
             $video='4';
         }elseif($id=='6'){
             $contenido='
-            CUIDADO RESPONSABLE DE MASCOTAS / PET CARES AND OWNERS RESPONSABILITY
-            Establece como Política de Gobierno las acciones tendientes a la protección de la fauna urbana en la Ciudad de Posadas. Las Autoridades Municipales serán agentes de control del cuidado responsable, facilitando con sus acciones el cuidado sanitario de los animales y de los ciudadanos. Registro Municipal de Asociaciones Protectoras de la Vida Animal y Registro Único y Público de Infractores. Creación. Prohibiciones.
-            Establishes as Government Policy the actions tending to the protection of urban fauna in the City of Posadas. The Municipal Authorities will be responsible care control agents, facilitating with their actions the health care of animals and citizens. Municipal Registry of Associations for the Protection of Animal Life and the Single and Public Registry of Offenders. Creation. prohibitions.
-            Puede descargar la Ordenanza X – Nº 11 desde el siguiente link:
-            You can download the Norm X – Nº 11 from the link below:
-            CUIDADOS RESPONSABLES MASCOTAS / PET CARES
+            <div class="row text-center">
+                <div class="col-sm-12">
+                    <h2 class="m-b-3">CUIDADO RESPONSABLE DE MASCOTAS / PET CARES AND OWNERS RESPONSABILITY</h2>
+                </div>
+            </div>
+            <div>
+                <p>
+                    Establece como Política de Gobierno las acciones tendientes a la protección de la fauna urbana en la Ciudad de Posadas. Las Autoridades Municipales serán agentes de control del cuidado responsable, facilitando con sus acciones el cuidado sanitario de los animales y de los ciudadanos. Registro Municipal de Asociaciones Protectoras de la Vida Animal y Registro Único y Público de Infractores. Creación. Prohibiciones.
+                </p>
+            </div>
+            <div>
+                <p>
+                    <i>
+                        Establishes as Government Policy the actions tending to the protection of urban fauna in the City of Posadas. The Municipal Authorities will be responsible care control agents, facilitating with their actions the health care of animals and citizens. Municipal Registry of Associations for the Protection of Animal Life and the Single and Public Registry of Offenders. Creation. prohibitions.
+                    </i>
+                </p>
+            </div>
+            <div class="row text-center">
+                <div class="col-sm-12"> 
+                    <p>
+                        Puede descargar la Ordenanza X – Nº 11 desde el siguiente link:
+                    </p>
+                    <p> 
+                        <i>
+                            You can download the Norm X – Nº 11 from the link below:
+                        </i>
+                    </p>
+                    <a>
+                    CUIDADOS RESPONSABLES MASCOTAS / PET CARES
+                    </a>
+                </div>
+            </div>
+
             ';
             $video='4';
         }
