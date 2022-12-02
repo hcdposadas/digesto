@@ -107,7 +107,7 @@ class TuristaController extends AbstractController
     </div>
 
             ';
-            $video='2';
+            $video='';
         }elseif($id=='3'){
             $contenido='
             <div class="row text-center">
@@ -143,7 +143,7 @@ class TuristaController extends AbstractController
                 </div>
             </div>
             ';
-            $video='3';
+            $video='';
         }elseif($id=='4'){
             $contenido='
             <div class="row text-center">
@@ -184,7 +184,7 @@ class TuristaController extends AbstractController
                 </div>
             </div>
             ';
-            $video='4';
+            $video='';
         }elseif($id=='5'){
             $contenido='
             <div class="row text-center">
@@ -221,7 +221,7 @@ class TuristaController extends AbstractController
                 </div>
             </div>
             ';
-            $video='4';
+            $video='';
         }elseif($id=='6'){
             $contenido='
             <div class="row text-center">
@@ -258,7 +258,7 @@ class TuristaController extends AbstractController
             </div>
 
             ';
-            $video='4';
+            $video='';
         }
         return $this->render('turista/show.html.twig', [
         'contenido'       =>$contenido,
