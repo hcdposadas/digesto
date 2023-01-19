@@ -15,32 +15,35 @@ class TuristaController extends AbstractController
      */
     public function index()
     {
-        $aniosBoletines  = $this->getDoctrine()->getRepository( BoletinOficialMunicipal::class )->getAniosBoletines();
-		$consolidaciones = $this->getDoctrine()->getRepository( Consolidacion::class )->getConsolidacionesOrdenadas();
-		$web             = $this->getDoctrine()->getRepository( WebDigestoTexto::class )->findOneBySlug( 'web' );
-        
+        $aniosBoletines  = $this->getDoctrine()->getRepository(BoletinOficialMunicipal::class)->getAniosBoletines();
+        $consolidaciones = $this->getDoctrine()->getRepository(Consolidacion::class)->getConsolidacionesOrdenadas();
+        $web             = $this->getDoctrine()->getRepository(WebDigestoTexto::class)->findOneBySlug('web');
+
         return $this->render('turista/index.html.twig', [
             'web'             => $web,
-		'anios_boletines' => $aniosBoletines,
-		'consolidaciones' => $consolidaciones
+            'anios_boletines' => $aniosBoletines,
+            'consolidaciones' => $consolidaciones
         ]);
     }
 
-     /**
+    /**
      * @Route("/turista/{id}", name="turistaVer", methods={"GET"})
      */
     public function ver($id)
     {
-        $aniosBoletines  = $this->getDoctrine()->getRepository( BoletinOficialMunicipal::class )->getAniosBoletines();
-		$consolidaciones = $this->getDoctrine()->getRepository( Consolidacion::class )->getConsolidacionesOrdenadas();
-		$web             = $this->getDoctrine()->getRepository( WebDigestoTexto::class )->findOneBySlug( 'web' );
-        
-        if($id=='1'){
-            $contenido='
+        $aniosBoletines  = $this->getDoctrine()->getRepository(BoletinOficialMunicipal::class)->getAniosBoletines();
+        $consolidaciones = $this->getDoctrine()->getRepository(Consolidacion::class)->getConsolidacionesOrdenadas();
+        $web             = $this->getDoctrine()->getRepository(WebDigestoTexto::class)->findOneBySlug('web');
+
+        if ($id == '1') {
+            $contenido = '
             <div class="row text-center">
-                <div class="col-sm-12">
+                <div class="col-sm-12" >
                     <h2 class="m-b-3">CÓDIGO DE NOCTURNIDAD / NIGHT CODE</h2>
+                    <img src="/build/images/noche.jpg" alt="noche" width="400" style="margin-bottom: 30px;" >
+                    <br>
                 </div>
+
             </div>
             <div>
                 <p>
@@ -64,18 +67,19 @@ class TuristaController extends AbstractController
                             You can download the Norm II – Nº 42 from the link below:
                         </i>
                     </p>
-                    <a>
+                    <a href="/uploads/textos_definitivos_normas/II%20-%20Nº%2042%20(1).pdf">
                         CÓDIGO DE NOCTURNIDAD / NIGHT CODE
                     </a>
                 </div>
             </div>
             ';
-            $video='';
-        }elseif($id=='2'){
-            $contenido='
+            $video = '';
+        } elseif ($id == '2') {
+            $contenido = '
         <div class="row text-center">
             <div class="col-sm-12">
                 <h2 class="m-b-3">POSADAS CIUDAD “LIBRE DE PIROTECNIA” / POSADAS WITHOUT PYROTECHNICS</h2>
+                <img src="/build/images/pirotecnia.jpg" alt="pirotecnia" width="400" style="margin-bottom: 30px;">
             </div>
         </div>
         <div>
@@ -100,19 +104,20 @@ class TuristaController extends AbstractController
                     You can download the Norm II – Nº 81 from the link below:
                 </i>
             </p>
-            <a>
+            <a href="/texto-sin-consolidar/1108">
                 PIROTECNIA CERO / NO PYROTECHNIC ALLOWED
             </a>
         </div>
     </div>
 
             ';
-            $video='';
-        }elseif($id=='3'){
-            $contenido='
+            $video = '';
+        } elseif ($id == '3') {
+            $contenido = '
             <div class="row text-center">
                 <div class="col-sm-12">
                     <h2 class="m-b-3">ORDENANZA DE RUIDOS MOLESTOS / ANNOYING SOUNDS</h2>
+                    <img src="/build/images/ruidos.jpg" alt="ruidos" width="400" style="margin-bottom: 30px;">
                 </div>
             </div>
             <div>
@@ -137,18 +142,19 @@ class TuristaController extends AbstractController
                             You can download the Norm VI – Nº 14 from the link below:
                         </i>
                     </p>
-                    <a>
+                    <a href="/uploads/textos_definitivos_normas/ORDENANZA%20VI%20-%20Nº%2014%20.pdf">
                         ORDENANZA RUIDOS MOLESTOS / ANNONING SOUNDS ISSUE
                     </a>
                 </div>
             </div>
             ';
-            $video='';
-        }elseif($id=='4'){
-            $contenido='
+            $video = '';
+        } elseif ($id == '4') {
+            $contenido = '
             <div class="row text-center">
                 <div class="col-sm-12">
                     <h2 class="m-b-3">SISTEMA DE ESTACIONAMIENTO MEDIDO / PARKING SYSTEM</h2>
+                    <img src="/build/images/transito.webp" alt="transito" width="400" style="margin-bottom: 30px;">
                 </div>
             </div>
             <div>
@@ -175,21 +181,27 @@ class TuristaController extends AbstractController
                             You can download the Norm XVI – Nº 47 from the link below:
                         </i>
                     </p>
-                    <a>
+                    <a href="/uploads/textos_definitivos_normas/ORDENANZA%20XVI%20-%20Nº%2047%20(2).pdf">
                         SISTEMA DE ESTACIONAMIENTO / PARKING SYSTEM
                     </a>
-                    <a>
-                        APP SISTEMA ESTACIONAMIENTO MEDIDO / APP PARKING SYSTEM
+                    <br>
+                    <a href="https://play.google.com/store/apps/details?id=ar.edu.unlp.semmobile.posadas&hl=es_419&gl=US&pli=1">
+                        APP SISTEMA ESTACIONAMIENTO MEDIDO / APP PARKING SYSTEM (ANDROID)
+                    </a>
+                    <br>
+                    <a href="https://apps.apple.com/ar/app/sem-mobile/id1387705895">
+                    APP SISTEMA ESTACIONAMIENTO MEDIDO / APP PARKING SYSTEM (iOS)
                     </a>
                 </div>
             </div>
             ';
-            $video='';
-        }elseif($id=='5'){
-            $contenido='
+            $video = '';
+        } elseif ($id == '5') {
+            $contenido = '
             <div class="row text-center">
                 <div class="col-sm-12">
                     <h2 class="m-b-3">MARCO REGULATORIO DE CONVIVENCIA CIUDADANA / COEXISTENCE RULES</h2>
+                    <img src="/build/images/convivencia.jpg" alt="transito" width="400" style="margin-bottom: 30px;">
                 </div>
             </div>
             <div>
@@ -215,18 +227,19 @@ class TuristaController extends AbstractController
                             You can download the Norm XI – Nº 56 from the link below:
                         </i>
                     </p>
-                    <a>
+                    <a href="/uploads/textos_definitivos_normas/IX-56.pdf">
                         MARCO REGULATORIO DE CONVIVENCIA / COEXISTENCE RULES
                     </a>
                 </div>
             </div>
             ';
-            $video='';
-        }elseif($id=='6'){
-            $contenido='
+            $video = '';
+        } elseif ($id == '6') {
+            $contenido = '
             <div class="row text-center">
                 <div class="col-sm-12">
                     <h2 class="m-b-3">CUIDADO RESPONSABLE DE MASCOTAS / PET CARES AND OWNERS RESPONSABILITY</h2>
+                    <img src="/build/images/imusa.jpg" alt="masCOTGA" width="400" style="margin-bottom: 30px;">
                 </div>
             </div>
             <div>
@@ -251,21 +264,21 @@ class TuristaController extends AbstractController
                             You can download the Norm X – Nº 11 from the link below:
                         </i>
                     </p>
-                    <a>
+                    <a href="/uploads/textos_definitivos_normas/ORDENANZA%20X%20N°%2011%20(1).pdf">
                     CUIDADOS RESPONSABLES MASCOTAS / PET CARES
                     </a>
                 </div>
             </div>
 
             ';
-            $video='';
+            $video = '';
         }
         return $this->render('turista/show.html.twig', [
-        'contenido'       =>$contenido,
-        'video'           =>$video,
-        'web'             => $web,
-		'anios_boletines' => $aniosBoletines,
-		'consolidaciones' => $consolidaciones
+            'contenido'       => $contenido,
+            'video'           => $video,
+            'web'             => $web,
+            'anios_boletines' => $aniosBoletines,
+            'consolidaciones' => $consolidaciones
         ]);
     }
 }
