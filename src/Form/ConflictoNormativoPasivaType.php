@@ -2,16 +2,17 @@
 
 namespace App\Form;
 
-use App\Entity\ConflictoNormativo;
-use App\Entity\Consolidacion;
 use App\Entity\Norma;
+use App\Entity\Consolidacion;
+use App\Entity\ConflictoNormativo;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Tetranz\Select2EntityBundle\Form\Type\Select2EntityType;
 
 class ConflictoNormativoPasivaType extends AbstractType
@@ -63,12 +64,14 @@ class ConflictoNormativoPasivaType extends AbstractType
                 'required' => false,
                 'empty_data' => ''
             ])
-            ->add('fundamentacion', TextType::class, [
-                'label' => 'Fundamentación'
+            ->add('fundamentacion', TextareaType::class, [
+                'label' => 'Fundamentación',
+                'attr' => array('style' => 'width: 125px;height:400px')
             ])
-            ->add('observaciones', TextType::class, [
+            ->add('observaciones', TextareaType::class, [
                 'label' => 'Observaciones',
-                'required' => false
+                'required' => false,
+                'attr' => array('style' => 'width: 125px;height:400px')
             ])
         ;
     }

@@ -1167,7 +1167,7 @@ class Norma extends BaseClass
         $textoDefinitivo = null;
 
         foreach ($this->getTextosDefinitivos() as $td) {
-            if ($td->getConsolidacion()->isPublicadaEnElBoletin()) {
+            if ($td->getConsolidacion()->isPublicadaEnElBoletin() && strlen($td->getTextoDefinitivo())>0) {
                 if ($td->getConsolidacion()->getAnio() > $anio) {
                     $anio = $td->getConsolidacion()->getAnio();
                     $textoDefinitivo = $td;

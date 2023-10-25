@@ -8,7 +8,7 @@
                         <div class="row">
                             {% for norma in row if norma.rama %}
                                 <div class="col-sm-6">
-                                    <a class="panel panel-default {% if norma.vigenteNoConsolidada %}bg-danger{% endif %}"
+                                    <a class="panel panel-default {% if norma.vigenteNoConsolidada %}bg-info{% endif %}"
                                        href="{{ path('ver_ordenanza_app', { 'id': norma.id}) }}">
                                         <div class="panel-body">
                                             <div class="media">

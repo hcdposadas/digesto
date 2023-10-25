@@ -6,10 +6,12 @@ use App\Entity\Consolidacion;
 use App\Entity\Norma;
 use App\Entity\Refundicion;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\DomCrawler\Field\TextareaFormField;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Tetranz\Select2EntityBundle\Form\Type\Select2EntityType;
@@ -60,12 +62,14 @@ class RefundicionPasivaType extends AbstractType
                 'label' => 'Artículo del anexo',
                 'required' => false
             ])
-            ->add('fundamentacion', TextType::class, [
-                'label' => 'Fundamentación'
+            ->add('fundamentacion', TextareaType::class, [
+                'label' => 'Fundamentación',
+                'attr' => array('style' => 'width: 125px;height:400px')
             ])
-            ->add('observaciones', TextType::class, [
+            ->add('observaciones', TextareaType::class, [
                 'label' => 'Observaciones',
-                'required' => false
+                'required' => false,
+                'attr' => array('style' => 'width: 125px;height:400px')
             ])
         ;
     }

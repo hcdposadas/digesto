@@ -29,9 +29,10 @@ class DefaultController extends AbstractController {
 		$web             = $this->getDoctrine()->getRepository( WebDigestoTexto::class )->findOneBySlug( 'web' );
 		$aniosBoletines  = $this->getDoctrine()->getRepository( BoletinOficialMunicipal::class )->getAniosBoletines();
 		$consolidaciones = $this->getDoctrine()->getRepository( Consolidacion::class )->getConsolidacionesOrdenadas();
-
-		if ( ! $web ) {
-			return new Response( '<h1>Sitio En construccion</h1>' );
+		
+			
+		if (  !$web ) {
+			return new Response( '<h1>Sitio En mantenimiento</h1>' );
 		}
 
 		return $this->render( 'Web/index.html.twig',
@@ -53,8 +54,8 @@ class DefaultController extends AbstractController {
 		$aniosBoletines  = $this->getDoctrine()->getRepository( BoletinOficialMunicipal::class )->getAniosBoletines();
 		$consolidaciones = $this->getDoctrine()->getRepository( Consolidacion::class )->getConsolidacionesOrdenadas();
 
-		if ( ! $web ) {
-			return new Response( '<h1>Sitio En construccion</h1>' );
+		if (  !$web ) {
+			return new Response( '<h1>Sitio En mantenimiento</h1>' );
 		}
 
 		$resultados = [];
@@ -105,8 +106,8 @@ class DefaultController extends AbstractController {
 		$aniosBoletines  = $this->getDoctrine()->getRepository( BoletinOficialMunicipal::class )->getAniosBoletines();
 		$consolidaciones = $this->getDoctrine()->getRepository( Consolidacion::class )->getConsolidacionesOrdenadas();
 
-		if ( ! $web ) {
-			return new Response( '<h1>Sitio En construccion</h1>' );
+		if (  !$web ) {
+			return new Response( '<h1>Sitio En mantenimiento</h1>' );
 		}
 
 		$documentos = $this->getDoctrine()->getRepository( WebDigestoDocumento::class )->getDocumentosWeb();
@@ -130,8 +131,8 @@ class DefaultController extends AbstractController {
 		$aniosBoletines  = $this->getDoctrine()->getRepository( BoletinOficialMunicipal::class )->getAniosBoletines();
 		$consolidaciones = $this->getDoctrine()->getRepository( Consolidacion::class )->getConsolidacionesOrdenadas();
 
-		if ( ! $web ) {
-			return new Response( '<h1>Sitio En construcción</h1>' );
+		if (  !$web ) {
+			return new Response( '<h1>Sitio En mantenimiento</h1>' );
 		}
 
 		$titulo    = 'No Encontrado';
@@ -259,7 +260,7 @@ class DefaultController extends AbstractController {
 		$web = $this->getDoctrine()->getRepository( WebDigestoTexto::class )->findOneBySlug( 'web' );
 
 
-		if ( ! $web ) {
+		if ( !$web ) {
 			return new Response( '<h1>Sitio En construccion</h1>' );
 		}
 

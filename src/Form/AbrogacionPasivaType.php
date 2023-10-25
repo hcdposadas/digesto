@@ -13,6 +13,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Tetranz\Select2EntityBundle\Form\Type\Select2EntityType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class AbrogacionPasivaType extends AbstractType
 {
@@ -60,12 +61,14 @@ class AbrogacionPasivaType extends AbstractType
 				'label' => 'Anexo',
 				'required' => false
 			])
-            ->add('fundamentacion', TextType::class, [
-				'label' => 'Fundamentación'
+            ->add('fundamentacion', TextareaType::class, [
+				'label' => 'Fundamentación',
+                'attr' => array('style' => 'width: 125px;height:400px')
 			])
-            ->add('observaciones', TextType::class, [
+            ->add('observaciones', TextareaType::class, [
                 'label' => 'Observaciones',
-                'required' => false
+                'required' => false,
+                'attr' => array('style' => 'width: 125px;height:400px')
             ])
 
         ;

@@ -1,0 +1,83 @@
+{% extends '/Web/layout.html.twig' %}
+{% block stylesheets %}
+	<style>
+		.jumbotron {
+			background: /* top, transparent red, faked with gradient */
+			linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), /* bottom, image */ url('{{ asset('build/images/portada.png') }}');
+			background-size: cover;
+			background-repeat: no-repeat;
+		}
+
+		@media screen and(min-width: 900px) {
+			.panel.panel-default .panel-heading {
+				min-height: 300px;
+			}
+		}
+
+		.panel.panel-default .panel-heading {
+			min-height: 340px;
+		}
+	</style>
+{% endblock stylesheets %}
+{% block content %}
+
+	<main role="main">
+			<section class="jumbotron">
+
+			<div class="container jumbotron_body">
+				<div class="row">
+					<div class="col-xs-12 col-md-8 col-md-offset-2 text-center text-banner">
+						<h1>Digesto Jurídico Municipal</h1>
+						<h2>Posadas - Misiones</h2>
+					</div>
+				</div>
+			</div>
+
+		</section>
+			<section class="p-b-0 prologo">
+			<div class="container ">
+
+				<section class="" style="padding-bottom: 140px;">
+					<div class="row">
+						<div class="col-md-8 col-md-offset-2">
+
+									{{contenido | raw}}
+
+							<div></div>
+						</div>
+					</div>
+				</section>
+			</div>
+		</section>
+		<section class="jumbotron">
+
+			<div class="container jumbotron_body">
+				<div class="row">
+
+					<div class="col-xs-12 col-md-6 col-md-offset-3 text-center">
+						<a href="{{ path('turistaVer', { 'id': 1}) }}" class="btn btn-info btn-lg">CÓDIGO DE NOCTURNIDAD / NIGHT CODE</a>
+					</div>
+					<div class="col-xs-12 col-md-6 col-md-offset-3 text-center">
+						<a href="{{ path('turistaVer', { 'id': 2}) }}" class="btn btn-info btn-lg">POSADAS CIUDAD “LIBRE DE PIROTECNIA” / POSADAS WITHOUT PYROTECHNICS</a>
+					</div>
+					<div class="col-xs-12 col-md-6 col-md-offset-3 text-center">
+						<a href="{{ path('turistaVer', { 'id': 3}) }}" class="btn btn-info btn-lg">ORDENANZA DE RUIDOS MOLESTOS / ANNOYING SOUNDS</a>
+					</div>
+					<div class="col-xs-12 col-md-6 col-md-offset-3 text-center">
+						<a href="{{ path('turistaVer', { 'id': 4}) }}" class="btn btn-info btn-lg">SISTEMA DE ESTACIONAMIENTO MEDIDO / PARKING SYSTEM</a>
+					</div>
+					<div class="col-xs-12 col-md-6 col-md-offset-3 text-center">
+						<a href="{{ path('turistaVer', { 'id': 5}) }}" class="btn btn-info btn-lg">MARCO REGULATORIO DE CONVIVENCIA CIUDADANA / COEXISTENCE RULES</a>
+					</div>
+					<div class="col-xs-12 col-md-6 col-md-offset-3 text-center">
+						<a href="{{ path('turistaVer', { 'id': 6}) }}" class="btn btn-info btn-lg">CUIDADO RESPONSABLE DE MASCOTAS / PET CARES AND OWNERS RESPONSABILITY</a>
+					</div>
+				</div>
+			</div>
+
+		</section>
+
+	</main>
+
+
+{% endblock content %}
