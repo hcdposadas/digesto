@@ -39,3 +39,6 @@ vich_uploader:
             uri_prefix: '%app.path.anexos_consolidacion%'
             upload_destination: '%kernel.project_dir%/public%app.path.anexos_consolidacion%'
             namer: Vich\UploaderBundle\Naming\OrignameNamer
+        textos_definitivos_consolidacion:
+            uri_prefix: '%app.path.textos_definitivos_consolidacion%'
+            upload_destination: '%kernel.project_dir%/public%app.path.textos_definitivos_consolidacion%'

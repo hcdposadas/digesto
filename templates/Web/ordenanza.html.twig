@@ -162,9 +162,16 @@
                                 <h4>Descargar</h4>
                                 <ul>
                                     <li>
-                                        <a target="_blank" href="{{ path('texto_sin_consolidar', {'norma': norma.id}) }}">
+                                                                {% set extension = norma.textoDefinitivoConsolidadoPublicado.textoDefinitivo|split('.')|last %}
+                                {% if extension == 'pdf' or extension == 'doc' %}
+                                    <a target="_blank" href="{{ asset('uploads/anexos_normas/' ~ anexo.archivo) }}">
+                                    Texto {{norma.textoDefinitivoConsolidadoPublicado.textoDefinitivo}}
+                                i class="fa fa-download"></i></a>
+                                {% else %}
+                                                                        <a target="_blank" href="{{ path('texto_sin_consolidar', {'norma': norma.id}) }}">
                                             TEXTO
                                             <i class="fa fa-download"></i></a>
+                                {% endif %}
                                     </li>
                                 </ul>
                             </div>

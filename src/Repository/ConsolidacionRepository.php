@@ -118,6 +118,9 @@ class ConsolidacionRepository extends ServiceEntityRepository {
         ));
 
         $textos = array_filter($textos, function (TextoDefinitivo $textoDefinitivo) {
+            if($textoDefinitivo->getNombreArchivoTextoDefinitivo()){
+                return $textoDefinitivo->getNombreArchivoTextoDefinitivo();
+            }
             return $textoDefinitivo->getTextoDefinitivo() != '';
         });
 

@@ -18,6 +18,7 @@ parameters:
     app.path.recursos_web: /uploads/recursos_web
     app.path.consolidaciones: /uploads/consolidaciones
     app.path.anexos_consolidacion: /uploads/consolidaciones/anexos
+    app.path.textos_definitivos_consolidacion: /uploads/textos_definitivos_consolidacion
 
 services:
     # default configuration for services in *this* file

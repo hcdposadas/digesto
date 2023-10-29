@@ -121,7 +121,9 @@
                     </div>
                     <div class="col-md-5">
                         <br>
+                        {% if anexos|default() %}
                         {{ anexos }}
+                        {% endif %}
                     </div>
                 </div>
                 <div class="nav-tabs-custom">

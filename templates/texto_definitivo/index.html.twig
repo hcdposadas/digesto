@@ -17,7 +17,15 @@
         {% for texto_definitivo in texto_definitivos %}
             <tr>
                 <td>{{ texto_definitivo.id }}</td>
-                <td>{{ texto_definitivo.textoDefinitivo }}</td>
+                <td>       
+                                {%if texto_definitivo.nombreArchivoTextoDefinitivo %}
+                                    <a target="_blank" href="{{ asset('uploads/textos_definitivo/' ~ texto_definitivo.archivoTextoDefinitivo) }}">
+                                    Texto
+                                i class="fa fa-download"></i></a>
+                                {% elseif %}
+                                    {{ texto_definitivo.textoDefinitivo }}
+                                {% endif %}
+                </td>
                 <td>
                     <a href="{{ path('texto_definitivo_show', {'id': texto_definitivo.id}) }}">show</a>
                     <a href="{{ path('texto_definitivo_edit', {'id': texto_definitivo.id}) }}">edit</a>

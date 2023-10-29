@@ -1149,7 +1149,7 @@ class Norma extends BaseClass
     public function getTextoDefinitivoConsolidado(): ?TextoDefinitivo
     {
         foreach ($this->getTextosDefinitivos() as $textoDefinitivo) {
-            if ($textoDefinitivo->getConsolidacion()->isUltima() && $textoDefinitivo->getTextoDefinitivo()) {
+            if ($textoDefinitivo->getConsolidacion()->isUltima() && ($textoDefinitivo->getTextoDefinitivo())) {
                 return $textoDefinitivo;
             }
         }

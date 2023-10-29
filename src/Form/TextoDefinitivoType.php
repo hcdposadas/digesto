@@ -12,6 +12,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 
 class TextoDefinitivoType extends AbstractType
 {
@@ -28,10 +29,12 @@ class TextoDefinitivoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('textoDefinitivo', CKEditorType::class, array(
-                'label'  => 'Texto Definitivo',
-                'config' => ['uiColor' => '#ffffff']
-            ));
+            ->add('archivoTextoDefinitivo', VichFileType::class,
+            [
+                'required'     => false,
+                'allow_delete' => true,
+                'label'        => 'Texto'
+            ] );
 
         if ($options['show_consolidacion']) {
             $builder

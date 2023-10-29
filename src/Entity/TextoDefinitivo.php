@@ -3,8 +3,11 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\File\File;
 
 /**
+ * @Vich\Uploadable
  * @ORM\Entity(repositoryClass="App\Repository\TextoDefinitivoRepository")
  */
 class TextoDefinitivo extends BaseClass
@@ -32,6 +35,47 @@ class TextoDefinitivo extends BaseClass
      * @ORM\Column(type="text")
      */
     private $textoDefinitivo;
+
+    	/**
+	 * @ORM\Column(type="string", length=255, nullable=true)
+	 */
+	private $nombreArchivoTextoDefinitivo;
+
+	/**
+	 * @Vich\UploadableField(mapping="textos_definitivos_consolidacion", fileNameProperty="nombreArchivoTextoDefinitivo")
+	 * @var File
+	 */
+	private $archivoTextoDefinitivo;
+
+    public function getArchivoTextoDefinitivo()
+    {
+        return $this->archivoTextoDefinitivo;
+    }
+
+    public function setArchivoTextoDefinitivo(File $file = null)
+    {
+        $this->archivoTextoDefinitivo = $file;
+
+        // VERY IMPORTANT:
+        // It is required that at least one field changes if you are using Doctrine,
+        // otherwise the event listeners won't be called and the file is lost
+        if ($file) {
+            // if 'updatedAt' is not defined in your entity, use another property
+            $this->fechaActualizacion = new \DateTime('now');
+        }
+    }
+
+    public function getNombreArchivoTextoDefinitivo(): ?string
+    {
+        return $this->nombreArchivoTextoDefinitivo;
+    }
+
+    public function setNombreArchivoTextoDefinitivo(?string $nombreArchivoTextoDefinitivo): self
+    {
+        $this->nombreArchivoTextoDefinitivo = $nombreArchivoTextoDefinitivo;
+
+        return $this;
+    }
 
     public function getId(): ?int
     {
@@ -64,6 +108,9 @@ class TextoDefinitivo extends BaseClass
 
     public function getTextoDefinitivo(): ?string
     {
+        if($this->nombreArchivoTextoDefinitivo){
+            return $this->nombreArchivoTextoDefinitivo;
+        }
         return $this->textoDefinitivo;
     }
 
