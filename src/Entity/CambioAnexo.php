@@ -3,8 +3,10 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\File\File;
 /**
+ * @Vich\Uploadable
  * @ORM\Entity(repositoryClass="App\Repository\CambioAnexoRepository")
  */
 class CambioAnexo extends BaseClass
@@ -34,7 +36,7 @@ class CambioAnexo extends BaseClass
     private $fecha;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $anexo;
 
@@ -42,6 +44,63 @@ class CambioAnexo extends BaseClass
      * @ORM\Column(type="text")
      */
     private $descripcion = '';
+
+   	/**
+	 * @ORM\Column(type="string", length=255, nullable=true)
+	 */
+	private $titulo;
+
+	/**
+	 * @ORM\Column(type="string", length=255, nullable=true)
+	 */
+	private $nombreArchivoCambioAnexo;
+
+	/**
+	 * @Vich\UploadableField(mapping="cambios_anexo", fileNameProperty="nombreArchivoCambioAnexo")
+	 * @var File
+	 */
+	private $archivoCambioAnexo;
+
+    public function getArchivoCambioAnexo()
+    {
+        return $this->archivoCambioAnexo;
+    }
+
+    public function setArchivoCambioAnexo(File $file = null)
+    {
+        $this->archivoCambioAnexo= $file;
+
+        // VERY IMPORTANT:
+        // It is required that at least one field changes if you are using Doctrine,
+        // otherwise the event listeners won't be called and the file is lost
+        if ($file) {
+            // if 'updatedAt' is not defined in your entity, use another property
+            $this->fechaActualizacion = new \DateTime('now');
+        }
+    }
+
+    public function getNombreArchivoCambioAnexo(): ?string
+    {
+        return $this->nombreArchivoCambioAnexo;
+    }
+
+    public function setNombreArchivoCambioAnexo(?string $nombreArchivoCambioAnexo): self
+    {
+        $this->nombreArchivoCambioAnexo = $nombreArchivoCambioAnexo;
+
+        return $this;
+    }
+
+    public function setTitulo($titulo)
+    {
+        $this->titulo=$titulo;
+		return $this;
+    }
+
+	public function getTitulo()
+    {
+        return $this->titulo;
+    }
 
     public function __construct()
     {

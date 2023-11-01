@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 
 class ArticuloSuprimidoType extends AbstractType
 {
@@ -38,16 +39,26 @@ class ArticuloSuprimidoType extends AbstractType
                     'disabled' => true
                 ]
             )
-            ->add('articulo', TextType::class, [
-                'label' => 'Artículo Suprimido'
+            ->add('titulo', TextType::class, [
+                'label' => 'Titulo'
             ])
-            ->add('descripcion', TextareaType::class, [
-                'label' => 'Descripción',
+
+            ->add('archivoArticuloSuprimido', VichFileType::class,
+            [
                 'required'     => false,
-                'attr' => [
-                    'rows' => 5
-                ]
-            ])
+                'allow_delete' => true,
+                'label'        => 'Archivo'
+            ] );
+            //->add('articulo', TextType::class, [
+            //    'label' => 'Artículo Suprimido'
+            //])
+            //->add('descripcion', TextareaType::class, [
+            //    'label' => 'Descripción',
+            //    'required'     => false,
+            //    'attr' => [
+            //        'rows' => 5
+            //    ]
+            //])
         ;
     }
 

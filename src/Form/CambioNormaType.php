@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 
 class CambioNormaType extends AbstractType
 {
@@ -38,23 +39,35 @@ class CambioNormaType extends AbstractType
                     'disabled' => true
                 ]
             )
-            ->add('articulo', TextType::class, [
-                'label' => 'Artículo del Texto Definitivo'
+            ->add('titulo', TextType::class, [
+                'label' => 'Titulo'
             ])
-            ->add('fuente', TextareaType::class, [
-                'label' => 'Fuente',
+
+            ->add('archivoCambioNorma', VichFileType::class,
+            [
                 'required'     => false,
-                'attr' => [
-                    'rows' => 5
-                ]
-            ])
-            ->add('remisionExterna', TextareaType::class, [
-                'label' => 'Remisión Externa',
-                'required'     => false,
-                'attr' => [
-                    'rows' => 5
-                ]
-            ]);
+                'allow_delete' => true,
+                'label'        => 'Archivo'
+            ] );
+
+            //->add('articulo', TextType::class, [
+            //    'label' => 'Artículo del Texto Definitivo'
+            //])
+            //->add('fuente', TextareaType::class, [
+            //    'label' => 'Fuente',
+            //    'required'     => false,
+            //    'attr' => [
+            //        'rows' => 5
+            //    ]
+            //])
+            //->add('remisionExterna', TextareaType::class, [
+            //    'label' => 'Remisión Externa',
+            //    'required'     => false,
+            //    'attr' => [
+            //        'rows' => 5
+            //    ]
+            //])
+            ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

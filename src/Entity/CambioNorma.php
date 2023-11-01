@@ -3,10 +3,17 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\File\File;
+
+/**
+ *
+ * @ORM\Entity(repositoryClass="App\Repository\TextoDefinitivoRepository")
+ */
 
 /**
  * CambioNorma
- *
+ * @Vich\Uploadable
  * @ORM\Table(name="cambio_norma")
  * @ORM\Entity(repositoryClass="App\Repository\CambioNormaRepository")
  */
@@ -38,7 +45,7 @@ class CambioNorma extends BaseClass
 	private $fecha;
 
 	/**
-	 * @ORM\Column(type="string", length=255, nullable=false)
+	 * @ORM\Column(type="string", length=255, nullable=true)
 	 */
 	private $articulo;
 
@@ -48,9 +55,55 @@ class CambioNorma extends BaseClass
 	private $fuente;
 
 	/**
+	 * @ORM\Column(type="string", length=255, nullable=true)
+	 */
+	private $titulo;
+
+	/**
 	 * @ORM\Column(type="text", nullable=true)
 	 */
 	private $remisionExterna;
+
+		/**
+	 * @ORM\Column(type="string", length=255, nullable=true)
+	 */
+	private $nombreArchivoCambioNorma;
+
+	/**
+	 * @Vich\UploadableField(mapping="cambios_norma", fileNameProperty="nombreArchivoCambioNorma")
+	 * @var File
+	 */
+	private $archivoCambioNorma;
+
+    public function getArchivoCambioNorma()
+    {
+        return $this->archivoCambioNorma;
+    }
+
+    public function setArchivoCambioNorma(File $file = null)
+    {
+        $this->archivoCambioNorma= $file;
+
+        // VERY IMPORTANT:
+        // It is required that at least one field changes if you are using Doctrine,
+        // otherwise the event listeners won't be called and the file is lost
+        if ($file) {
+            // if 'updatedAt' is not defined in your entity, use another property
+            $this->fechaActualizacion = new \DateTime('now');
+        }
+    }
+
+    public function getNombreArchivoCambioNorma(): ?string
+    {
+        return $this->nombreArchivoCambioNorma;
+    }
+
+    public function setNombreArchivoCambioNorma(?string $nombreArchivoCambioNorma): self
+    {
+        $this->nombreArchivoCambioNorma = $nombreArchivoCambioNorma;
+
+        return $this;
+    }
 
 	public function __construct()
     {
@@ -65,6 +118,17 @@ class CambioNorma extends BaseClass
     public function getId()
     {
         return $this->id;
+    }
+
+	public function setTitulo($titulo)
+    {
+        $this->titulo=$titulo;
+		return $this;
+    }
+
+	public function getTitulo()
+    {
+        return $this->titulo;
     }
 
     public function setCreadoPor(Usuario $creadoPor = null)

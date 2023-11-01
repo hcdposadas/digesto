@@ -19,7 +19,9 @@ parameters:
     app.path.consolidaciones: /uploads/consolidaciones
     app.path.anexos_consolidacion: /uploads/consolidaciones/anexos
     app.path.textos_definitivos_consolidacion: /uploads/textos_definitivos_consolidacion
-
+    app.path.articulos_suprimido: /uploads/articulos_suprimido
+    app.path.cambios_anexo: /uploads/cambios_anexo
+    app.path.cambios_norma: /uploads/cambios_norma
 services:
     # default configuration for services in *this* file
     _defaults:

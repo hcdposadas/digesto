@@ -42,3 +42,12 @@ vich_uploader:
         textos_definitivos_consolidacion:
             uri_prefix: '%app.path.textos_definitivos_consolidacion%'
             upload_destination: '%kernel.project_dir%/public%app.path.textos_definitivos_consolidacion%'
+        articulos_suprimido:
+            uri_prefix: '%app.path.articulos_suprimido%'
+            upload_destination: '%kernel.project_dir%/public%app.path.articulos_suprimido%'
+        cambios_norma:
+            uri_prefix: '%app.path.cambios_norma%'
+            upload_destination: '%kernel.project_dir%/public%app.path.cambios_norma%'
+        cambios_anexo:
+            uri_prefix: '%app.path.cambios_anexo%'
+            upload_destination: '%kernel.project_dir%/public%app.path.cambios_anexo%'

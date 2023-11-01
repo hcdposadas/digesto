@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 
 class CambioAnexoType extends AbstractType
 {
@@ -38,17 +39,16 @@ class CambioAnexoType extends AbstractType
                     'disabled' => true
                 ]
             )
-            ->add('anexo', TextType::class, [
-                'label' => 'Artículo del Anexo'
+            ->add('titulo', TextType::class, [
+                'label' => 'Titulo'
             ])
-            ->add('descripcion', TextareaType::class, [
-                'label' => 'Descripción',
+
+            ->add('archivoCambioAnexo', VichFileType::class,
+            [
                 'required'     => false,
-                'attr' => [
-                    'rows' => 5
-                ]
-            ])
-        ;
+                'allow_delete' => true,
+                'label'        => 'Archivo'
+            ] );
     }
 
     public function configureOptions(OptionsResolver $resolver)
