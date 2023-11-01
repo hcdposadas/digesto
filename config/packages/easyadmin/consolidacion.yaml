@@ -2,9 +2,19 @@ easy_admin:
     entities:
         Consolidacion:
             class: App\Entity\Consolidacion
+            list:
+                fields:
+                    - { property: 'titulo' }
+                    - { property: 'anio', label: 'Año' }
+                    - { property: 'visible' }
+                    - { property: 'ultima' }
+                    - { property: 'publicadaEnElBoletin', label: 'Publicada' }
             form:
                 fields:
                     - { property: 'titulo' }
                     - { property: 'anio', label: 'Año' }
                     - { property: 'fecha', type_options: { widget: 'single_text', html5: true } }
                     - { property: 'archivoProyecto', type: 'vich_file'}
+                    - { property: 'visible' }
+                    - { property: 'ultima' }
+                    - { property: 'publicadaEnElBoletin', label: 'Publicada en el boletín' }
