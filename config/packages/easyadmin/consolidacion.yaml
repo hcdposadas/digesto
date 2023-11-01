@@ -7,6 +7,7 @@ easy_admin:
                     - { property: 'titulo' }
                     - { property: 'anio', label: 'Año' }
                     - { property: 'visible' }
+                    - { property: 'enCurso', label: 'En Curso'}
                     - { property: 'ultima' }
                     - { property: 'publicadaEnElBoletin', label: 'Publicada' }
             form:
