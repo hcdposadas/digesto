@@ -209,10 +209,12 @@
                                             Texto <i class="fa fa-download"></i>
                                         </a>
                                     </li>
-                                    {% for anexo in norma.anexos | sort %}
+                                    
+                                    {% for anexo in norma.anexosOriginales | sort %}
                                         <li>
                                             <a target="_blanks"
-                                               href="{{ asset('uploads/anexos_normas/' ~ anexo.archivo) }}">
+                                               href="{{ asset('uploads/anexos_originales/' ~ anexo.archivo) }}">
+                                               //
                                                 {% if norma.anexos.count <=1 %}
                                                     ANEXO ÚNICO
                                                 {% else %}
