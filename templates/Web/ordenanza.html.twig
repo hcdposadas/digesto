@@ -210,10 +210,10 @@
                                         </a>
                                     </li>
                                     
-                                    {% for anexo in norma.anexosOriginales | sort %}
+                                    {% for anexo in norma.anexos | sort %}
                                         <li>
                                             <a target="_blanks"
-                                               href="{{ asset('uploads/anexos_originales/' ~ anexo.archivo) }}">
+                                               href="{{ asset('uploads/anexos_normas/' ~ anexo.archivo) }}">
                                                //
                                                 {% if norma.anexos.count <=1 %}
                                                     ANEXO ÚNICO
