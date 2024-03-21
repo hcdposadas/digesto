@@ -310,6 +310,11 @@ class Norma extends BaseClass
      */
     private $temaNormas;
 
+    /**
+     * @ORM\Column(type="text",  nullable=true)
+     */
+    private $acciones;
+
     public function __construct()
     {
         $this->anexos = new ArrayCollection();
@@ -1455,5 +1460,17 @@ class Norma extends BaseClass
     public function setObservacionesVeto($observacionesVeto): void
     {
         $this->observacionesVeto = $observacionesVeto;
+    }
+
+    public function getAcciones(): ?string
+    {
+        return $this->acciones;
+    }
+
+    public function setAcciones(?string $acciones): self
+    {
+        $this->acciones = $acciones;
+
+        return $this;
     }
 }

@@ -86,6 +86,7 @@ class NormaType extends AbstractType {
 			->add( 'paginaBoletin' )
 			->add( 'numeroBoletin' )
 			->add( 'observacion' )
+			->add('acciones' )
 			->add( 'decretoPromulgatorio' )
 			->add( 'fechaPromulgacion',
 				DateType::class,
