@@ -158,17 +158,17 @@
                         norma.textoDefinitivoConsolidadoPublicado.textoDefinitivo |length > 0 %}
                         <div class="row">
                             <div class="col-md-12">
-                                {{ norma.textoDefinitivoConsolidadoPublicado.textoDefinitivo|raw }}
+                                
                             </div>
                             <div class="col-md-12">
                                 <h4>Descargar</h4>
                                 <ul>
                                     <li>
                                                                 {% set extension = norma.textoDefinitivoConsolidadoPublicado.textoDefinitivo|split('.')|last %}
-                                {% if extension == 'pdf' or extension == 'doc' %}
-                                    <a target="_blank" href="{{ asset('uploads/anexos_normas/' ~ anexo.archivo) }}">
-                                    Texto {{norma.textoDefinitivoConsolidadoPublicado.textoDefinitivo}}
-                                i class="fa fa-download"></i></a>
+                                {% if extension == 'pdf' or extension == 'doc' or  extension == 'docx' %}
+                                    <a target="_blank" href="{{ asset('uploads/textos_definitivos_consolidacion/' ~ norma.textoDefinitivoConsolidadoPublicado.textoDefinitivo) }}">
+                                    TEXTO DEFINITIVO
+                                <i class="fa fa-download"></i></a>
                                 {% else %}
                                                                         <a target="_blank" href="{{ path('texto_sin_consolidar', {'norma': norma.id}) }}">
                                             TEXTO

@@ -39,7 +39,7 @@ class TuristaController extends AbstractController
             $contenido = '
             <div class="row text-center">
                 <div class="col-sm-12" >
-                    <h2 class="m-b-3">CÓDIGO DE NOCTURNIDAD / NIGHT CODE</h2>
+                    <h2 class="m-b-3">CÓDIGO DE NOCTURNIDAD / NIGHT CODE / CÓDIGO DE NOCTURNIDADE</h2>
                     <img src="/build/images/noche.jpg" alt="noche" width="400" style="margin-bottom: 30px;" >
                     <br>
                 </div>
@@ -57,6 +57,13 @@ class TuristaController extends AbstractController
                     </i>
                 </p>
             </div>
+	    <div>
+		<p>
+		  <i>
+			Neste regulamento, você encontrará todas as disposições relacionadas às atividades que ocorrem durante a noite, desde regulamentações para espaços recreativos, comerciais ou gastronômicos até questões que visam garantir uma convivência adequada.
+		  </i>
+		</p>
+	   </div>
             <div class="row text-center">
                 <div class="col-sm-12"> 
                     <p>
@@ -67,8 +74,13 @@ class TuristaController extends AbstractController
                             You can download the Norm II – Nº 42 from the link below:
                         </i>
                     </p>
+		    <p>
+			<i>
+			Você pode baixar o regulamento II - Nº 42  no seguinte link:
+			</i>
+		   </p>
                     <a href="/uploads/textos_definitivos_normas/II%20-%20Nº%2042%20(1).pdf">
-                        CÓDIGO DE NOCTURNIDAD / NIGHT CODE
+                        CÓDIGO DE NOCTURNIDAD / NIGHT CODE / CÓDIGO DE NOCTURNIDADE
                     </a>
                 </div>
             </div>
@@ -78,7 +90,7 @@ class TuristaController extends AbstractController
             $contenido = '
         <div class="row text-center">
             <div class="col-sm-12">
-                <h2 class="m-b-3">POSADAS CIUDAD “LIBRE DE PIROTECNIA” / POSADAS WITHOUT PYROTECHNICS</h2>
+                <h2 class="m-b-3">POSADAS CIUDAD “LIBRE DE PIROTECNIA” / POSADAS WITHOUT PYROTECHNICS / POSADAS, CIDADE "LIVRE DE FOGOS DE ARTIFÍCIO"</h2>
                 <img src="/build/images/pirotecnia.jpg" alt="pirotecnia" width="400" style="margin-bottom: 30px;">
             </div>
         </div>
@@ -94,6 +106,13 @@ class TuristaController extends AbstractController
             </i>
         </p>
     </div>
+	<div>
+		<p>
+			<i>
+			Esta norma estabelece que na nossa cidade de Posadas, é proibido o uso e a comercialização de elementos pirotécnicos de alto impacto sonoro, os quais causam grande desconforto a pessoas com autismo, síndrome de Down, animais de estimação, entre outros.
+			</i>
+		</p>
+	</div>
     <div class="row text-center">
         <div class="col-sm-12"> 
             <p>
@@ -104,6 +123,11 @@ class TuristaController extends AbstractController
                     You can download the Norm II – Nº 81 from the link below:
                 </i>
             </p>
+	    <p>
+		<i>
+		Você pode baixar o regulamento II - Nº 81 no seguinte link:
+		</i>
+	   </p>
             <a href="/texto-sin-consolidar/1108">
                 PIROTECNIA CERO / NO PYROTECHNIC ALLOWED
             </a>
@@ -116,7 +140,7 @@ class TuristaController extends AbstractController
             $contenido = '
             <div class="row text-center">
                 <div class="col-sm-12">
-                    <h2 class="m-b-3">ORDENANZA DE RUIDOS MOLESTOS / ANNOYING SOUNDS</h2>
+                    <h2 class="m-b-3">ORDENANZA DE RUIDOS MOLESTOS / ANNOYING SOUNDS / NORMA DE RUÍDOS INDESEJADOS</h2>
                     <img src="/build/images/ruidos.jpg" alt="ruidos" width="400" style="margin-bottom: 30px;">
                 </div>
             </div>
@@ -132,6 +156,13 @@ class TuristaController extends AbstractController
                     </i>
                 </p>
             </div>
+	    <div>
+		<p>
+		 <i>
+		  Esta norma estabelece todas as disposições pertinentes em relação aos níveis permitidos de som na cidade, com base nas atividades realizadas e no tipo de zona em que se encontram. É uma ordenança fundamental em nossa cidade que todos devem conhecer, principalmente aqueles que utilizam acomodações e/ou hostels em áreas residenciais.
+		</i>
+		</p>
+	   <div>
             <div class="row text-center">
                 <div class="col-sm-12"> 
                     <p>
@@ -142,8 +173,13 @@ class TuristaController extends AbstractController
                             You can download the Norm VI – Nº 14 from the link below:
                         </i>
                     </p>
+		    <p>
+			<i>
+			Você pode baixar o regulamento VI - Nº 14 no seguinte link:
+			</i>
+		   </p>
                     <a href="/uploads/textos_definitivos_normas/ORDENANZA%20VI%20-%20Nº%2014%20.pdf">
-                        ORDENANZA RUIDOS MOLESTOS / ANNONING SOUNDS ISSUE
+                        ORDENANZA RUIDOS MOLESTOS / ANNONING SOUNDS ISSUE / NORMA DE RUÍDOS INDESEJADOS
                     </a>
                 </div>
             </div>
@@ -153,7 +189,7 @@ class TuristaController extends AbstractController
             $contenido = '
             <div class="row text-center">
                 <div class="col-sm-12">
-                    <h2 class="m-b-3">SISTEMA DE ESTACIONAMIENTO MEDIDO / PARKING SYSTEM</h2>
+                    <h2 class="m-b-3">SISTEMA DE ESTACIONAMIENTO MEDIDO / PARKING SYSTEM / SISTEMA DE ESTACIONAMENTO MEDIDO  </h2>
                     <img src="/build/images/transito.webp" alt="transito" width="400" style="margin-bottom: 30px;">
                 </div>
             </div>
@@ -171,18 +207,30 @@ class TuristaController extends AbstractController
                     </i>
                 </p>
             </div>
+	<div>
+		<p>
+		  <i>
+			Sistema Municipal de Estacionamento Ordenado. Normas Gerais. Estrutura Viária. Estacionamento medido. Franquias especiais. Espaços Reservados. Módulos de estacionamento exclusivos para pessoas com deficiência. Proibições e sanções. Autoridade de Aplicação. Nesta norma, você obterá informações sobre o sistema de trânsito municipal e seus benefícios para a ordem civil. Além disso, aprenderá sobre o uso do aplicativo para carregar créditos para o uso de vagas de estacionamento para o seu veículo.
+		  </i>
+		</p>
+	</div>
             <div class="row text-center">
                 <div class="col-sm-12"> 
                     <p>
-                        Puede descargar la Ordenanza XVI – Nº 47 desde el siguiente link:
+                        Puede descargar la Ordenanza XVI – Nº 106 desde el siguiente link:
                     </p>
                     <p> 
                         <i>
-                            You can download the Norm XVI – Nº 47 from the link below:
+                            You can download the Norm XVI – Nº 106  from the link below:
                         </i>
                     </p>
-                    <a href="/uploads/textos_definitivos_normas/ORDENANZA%20XVI%20-%20Nº%2047%20(2).pdf">
-                        SISTEMA DE ESTACIONAMIENTO / PARKING SYSTEM
+		    <p>
+			<i>
+			Você pode baixar o regulamento XVI - Nº 106 no seguinte link:
+			</i>
+		   </p>
+                    <a href="/ver_ordenanza/1449">
+                        SISTEMA DE ESTACIONAMIENTO / PARKING SYSTEM / SISTEMA DE ESTACIONAMENTO MEDIDO 
                     </a>
                     <br>
                     <a href="https://play.google.com/store/apps/details?id=ar.edu.unlp.semmobile.posadas&hl=es_419&gl=US&pli=1">
@@ -200,7 +248,7 @@ class TuristaController extends AbstractController
             $contenido = '
             <div class="row text-center">
                 <div class="col-sm-12">
-                    <h2 class="m-b-3">MARCO REGULATORIO DE CONVIVENCIA CIUDADANA / COEXISTENCE RULES</h2>
+                    <h2 class="m-b-3">MARCO REGULATORIO DE CONVIVENCIA CIUDADANA / COEXISTENCE RULES / MARCO REGULATÓRIO DE CONVIVÊNCIA CIDADÃ  </h2>
                     <img src="/build/images/convivencia.jpg" alt="transito" width="400" style="margin-bottom: 30px;">
                 </div>
             </div>
@@ -217,6 +265,14 @@ class TuristaController extends AbstractController
                     </i>
                 </p>
             </div>
+		<div>
+			<p>
+			<i>
+			Adota o Marco Regulatório de Normas de Convivência Cidadã e Via Pública. Esta norma garante métodos adequados para prevenir incidentes na via pública e evitar problemas entre vizinhos relacionados a questões de respeito, limpeza e ordem geral.
+			</i>
+			</p>
+		</div>
+
             <div class="row text-center">
                 <div class="col-sm-12"> 
                     <p>
@@ -227,8 +283,13 @@ class TuristaController extends AbstractController
                             You can download the Norm XI – Nº 56 from the link below:
                         </i>
                     </p>
-                    <a href="/uploads/textos_definitivos_normas/IX-56.pdf">
-                        MARCO REGULATORIO DE CONVIVENCIA / COEXISTENCE RULES
+		   <p>
+			<i>
+			Você pode baixar o regulamento XI - Nº 56  no seguinte link:
+			</i>
+		  </p>
+                    <a href="/uploads/textos_definitivos_normas/XI - Nº 56 (1).pdf">
+                        MARCO REGULATORIO DE CONVIVENCIA / COEXISTENCE RULES / MARCO REGULATÓRIO DE CONVIVÊNCIA CIDADÃ 
                     </a>
                 </div>
             </div>
@@ -238,7 +299,7 @@ class TuristaController extends AbstractController
             $contenido = '
             <div class="row text-center">
                 <div class="col-sm-12">
-                    <h2 class="m-b-3">CUIDADO RESPONSABLE DE MASCOTAS / PET CARES AND OWNERS RESPONSABILITY</h2>
+                    <h2 class="m-b-3">CUIDADO RESPONSABLE DE MASCOTAS / PET CARES AND OWNERS RESPONSABILITY / CUIDADO RESPONSÁVEL DE ANIMAIS DE ESTIMAÇÃO</h2>
                     <img src="/build/images/imusa.jpg" alt="masCOTGA" width="400" style="margin-bottom: 30px;">
                 </div>
             </div>
@@ -254,6 +315,13 @@ class TuristaController extends AbstractController
                     </i>
                 </p>
             </div>
+	   <div>
+		<p>
+		  <i>
+Adota o Marco Regulatório de Normas de Convivência Cidadã e Via Pública. Esta norma garante métodos adequados para prevenir incidentes na via pública e evitar problemas entre vizinhos relacionados a questões de respeito, limpeza e ordem geral.
+		  </i>
+		<p>
+	 </div>
             <div class="row text-center">
                 <div class="col-sm-12"> 
                     <p>
@@ -264,8 +332,13 @@ class TuristaController extends AbstractController
                             You can download the Norm X – Nº 17 from the link below:
                         </i>
                     </p>
+		    <p>
+			<i>
+			Você pode baixar o regulamento X - Nº 17 no seguinte link:
+			</i>
+		   </p>
                     <a href="/uploads/textos_definitivos_normas/Ord.%20X%20-%20N%C2%BA%2017.doc">
-                    CUIDADOS RESPONSABLES MASCOTAS / PET CARES
+                    CUIDADOS RESPONSABLES MASCOTAS / PET CARES / CUIDADO RESPONSÁVEL DE ANIMAIS DE ESTIMAÇÃO
                     </a>
                 </div>
             </div>
@@ -276,7 +349,7 @@ class TuristaController extends AbstractController
             $contenido = '
             <div class="row text-center">
                 <div class="col-sm-12">
-                    <h2 class="m-b-3">ALCOHOL CERO / ALCOHOL ZERO TOLERANCE</h2>
+                    <h2 class="m-b-3">ALCOHOL CERO / ALCOHOL ZERO TOLERANCE / ÁLCOOL ZERO</h2>
                     <img src="/build/images/alcohol.jpg" alt="alcohol" width="400" style="margin-bottom: 30px;">
                 </div>
             </div>
@@ -292,18 +365,30 @@ class TuristaController extends AbstractController
                     </i>
                 </p>
             </div>
+	   <div>
+		<p>
+		<i>
+			No ano de 2016, nossa cidade estabeleceu a tolerância zero de álcool no sangue para todas as pessoas que dirigem um veículo. Desta forma, evitaram-se muitos acidentes e conscientizou-se sobre os perigos do consumo de bebidas alcoólicas.
+		</i>
+		</p>
+	  </div>
             <div class="row text-center">
                 <div class="col-sm-12"> 
                     <p>
-                        Puede descargar la Ordenanza X – Nº 58 desde el siguiente link:
+                        Puede descargar la Ordenanza XVI – Nº 58 desde el siguiente link:
                     </p>
                     <p> 
                         <i>
-                            You can download the Norm X – Nº 58 from the link below:
+                            You can download the Norm XVI – Nº 58 from the link below:
                         </i>
                     </p>
+		    <p>
+			<i>
+			Você pode baixar o regulamento XVI - Nº 58 no seguinte link:
+			</i>
+		   </p>
                     <a href="/uploads/textos_definitivos_normas/ORDENANZA%20XVI%20-%20Nº%2058%20(1).pdf">
-                    ALCOHOL CERO / ALCOHOL ZERO TOLERANCE                    </a>
+                    ALCOHOL CERO / ALCOHOL ZERO TOLERANCE / ÁLCOOL ZERO</a>
                 </div>
             </div>
 
