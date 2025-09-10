@@ -79,7 +79,7 @@ class TuristaController extends AbstractController
 			Você pode baixar o regulamento II - Nº 42  no seguinte link:
 			</i>
 		   </p>
-                    <a href="/uploads/textos_definitivos_normas/II%20-%20Nº%2042%20(1).pdf">
+                    <a href="/ver_ordenanza/90">
                         CÓDIGO DE NOCTURNIDAD / NIGHT CODE / CÓDIGO DE NOCTURNIDADE
                     </a>
                 </div>
@@ -128,7 +128,7 @@ class TuristaController extends AbstractController
 		Você pode baixar o regulamento II - Nº 81 no seguinte link:
 		</i>
 	   </p>
-            <a href="/texto-sin-consolidar/1108">
+            <a href="/ver_ordenanza/1108">
                 PIROTECNIA CERO / NO PYROTECHNIC ALLOWED
             </a>
         </div>
@@ -178,7 +178,7 @@ class TuristaController extends AbstractController
 			Você pode baixar o regulamento VI - Nº 14 no seguinte link:
 			</i>
 		   </p>
-                    <a href="/uploads/textos_definitivos_normas/ORDENANZA%20VI%20-%20Nº%2014%20.pdf">
+                    <a href="/ver_ordenanza/314">
                         ORDENANZA RUIDOS MOLESTOS / ANNONING SOUNDS ISSUE / NORMA DE RUÍDOS INDESEJADOS
                     </a>
                 </div>
@@ -288,7 +288,7 @@ class TuristaController extends AbstractController
 			Você pode baixar o regulamento XI - Nº 56  no seguinte link:
 			</i>
 		  </p>
-                    <a href="/uploads/textos_definitivos_normas/XI - Nº 56 (1).pdf">
+                    <a href="/ver_ordenanza/467">
                         MARCO REGULATORIO DE CONVIVENCIA / COEXISTENCE RULES / MARCO REGULATÓRIO DE CONVIVÊNCIA CIDADÃ 
                     </a>
                 </div>
@@ -337,7 +337,7 @@ Adota o Marco Regulatório de Normas de Convivência Cidadã e Via Pública. Est
 			Você pode baixar o regulamento X - Nº 17 no seguinte link:
 			</i>
 		   </p>
-                    <a href="/uploads/textos_definitivos_normas/Ord.%20X%20-%20N%C2%BA%2017.doc">
+                    <a href="/ver_ordenanza/1291">
                     CUIDADOS RESPONSABLES MASCOTAS / PET CARES / CUIDADO RESPONSÁVEL DE ANIMAIS DE ESTIMAÇÃO
                     </a>
                 </div>
@@ -387,7 +387,7 @@ Adota o Marco Regulatório de Normas de Convivência Cidadã e Via Pública. Est
 			Você pode baixar o regulamento XVI - Nº 58 no seguinte link:
 			</i>
 		   </p>
-                    <a href="/uploads/textos_definitivos_normas/ORDENANZA%20XVI%20-%20Nº%2058%20(1).pdf">
+                    <a href="/ver_ordenanza/693">
                     ALCOHOL CERO / ALCOHOL ZERO TOLERANCE / ÁLCOOL ZERO</a>
                 </div>
             </div>

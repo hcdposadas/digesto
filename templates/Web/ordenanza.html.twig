@@ -154,6 +154,11 @@
                         </div>
                     </div>
                     <div class="well text-center">Texto</div>
+                                                                        {% if consolidaciones|filter(x => x.titulo == 'Mantenimiento' and x.visible == true)|length %}
+                                    <div class="alert alert-danger" role="alert">
+                                        <strong>Atención!</strong> Esta sección se encuentra en mantenimiento.
+                                    </div>
+                                {% else %}
                     {% if norma.textoDefinitivoConsolidadoPublicado is not null and
                         norma.textoDefinitivoConsolidadoPublicado.textoDefinitivo |length > 0 %}
                         <div class="row">
@@ -233,6 +238,7 @@
                             </div>
                         </div>
                     {% endif %}
+			{% endif %}
                 </div>
             </div>
         </section>
