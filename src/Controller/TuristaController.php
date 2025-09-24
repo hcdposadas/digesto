@@ -394,6 +394,53 @@ Adota o Marco Regulatório de Normas de Convivência Cidadã e Via Pública. Est
 
             ';
             $video = '';
+			 } elseif ($id == '8') {
+                        $contenido = '
+            <div class="row text-center">
+                <div class="col-sm-12">
+                    <h2 class="m-b-3">HABILITACION PARA EL PERNOCTE DE CASAS RODANTES / AUTHORIZATION FOR OVERNIGHT STAYS FOR MOTORHOMES / AUTORIZAÇÃO PARA PERNOITE DE MOTORHOMES</h2>
+                    <img src="/build/images/motorhome.jpg" alt="motorhome" width="400" style="margin-bottom: 30px;">
+                </div>
+            </div>
+            <div>
+                <p>
+Establece que el único lugar público habilitado para pasar la noche con motorhomes, casas rodantes y vehículos similares en la ciudad es el Camping Municipal Costa Sur, se establece las tarifas para la ocupación y pernocte según categoría y multas por incumplimiento e irregularidades. </p>
+            </div>
+            <div>
+                <p>
+                    <i>
+Establishes that the only public place authorized for overnight stays with motorhomes, mobile homes, and similar vehicles in the city is the Costa Sur Municipal Campground. Occupancy and overnight stay rates are set according to category, and fines are imposed for noncompliance and irregularities.</i>
+                </p>
+            </div>
+                        <div>
+                <p>
+                    <i> 
+Estabelece que o único local público autorizado para pernoite de motorhomes, casas móveis e veículos similares na cidade é o Camping Municipal Costa Sur. As taxas de ocupação e pernoite são definidas de acordo com a categoria, e multas são aplicadas em caso de descumprimento e irregularidades.
+                    </i>
+                </p>
+            </div>
+            <div class="row text-center">
+                <div class="col-sm-12"> 
+                    <p>Puede descargar la Ordenanza XVIII – Nº 303 desde el siguiente link:</p>
+                    <p> 
+                        <i>
+                            You can download the Norm XVIII – Nº 303 from the link below:
+                        </i>
+                    </p>
+                    <p> 
+                        <i>
+                            Você pode baixar o regulamento XVIII - Nº 303 no seguinte link:
+                        </i>
+                    </p>
+                    <a href="/ver_ordenanza/1546">
+                    HABILITACION PARA EL PERNOCTE DE CASAS RODANTES / AUTHORIZATION FOR OVERNIGHT STAYS FOR MOTORHOMES / AUTORIZAÇÃO PARA PERNOITE DE MOTORHOMES
+                    </a>
+                </div>
+            </div>
+
+            ';
+
+
         }
 
         return $this->render('turista/show.html.twig', [
