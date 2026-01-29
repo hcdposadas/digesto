@@ -399,7 +399,7 @@ Adota o Marco Regulatório de Normas de Convivência Cidadã e Via Pública. Est
             <div class="row text-center">
                 <div class="col-sm-12">
                     <h2 class="m-b-3">HABILITACION PARA EL PERNOCTE DE CASAS RODANTES / AUTHORIZATION FOR OVERNIGHT STAYS FOR MOTORHOMES / AUTORIZAÇÃO PARA PERNOITE DE MOTORHOMES</h2>
-                    <img src="/build/images/motorhome.jpg" alt="motorhome" width="400" style="margin-bottom: 30px;">
+                    <img src="/build/images/motorhome.jpg" alt="motorhome" width="500" style="margin-bottom: 30px;">
                 </div>
             </div>
             <div>
