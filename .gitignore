@@ -109,3 +109,9 @@ Icon
 !/public/uploads/recursos_web/.gitkeep
 /public/uploads/consolidaciones/*
 !/public/uploads/consolidaciones/.gitkeep
+/public/uploads/proyectos_normas/*
+!/public/uploads/proyectos_normas/.gitkeep
+/public/uploads/dictamenes_normas/*
+!/public/uploads/dictamenes_normas/.gitkeep
+/public/uploads/sanciones_normas/*
+!/public/uploads/sanciones_normas/.gitkeep

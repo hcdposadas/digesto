@@ -88,6 +88,24 @@ class Norma extends BaseClass
      */
     private $archivoNorma;
     /**
+     * @Vich\UploadableField(mapping="proyectos_normas", fileNameProperty="nombreArchivoProyecto")
+     * @var File
+     * @Groups({"norma"})
+     */
+    private $archivoProyecto;
+    /**
+     * @Vich\UploadableField(mapping="dictamenes_normas", fileNameProperty="nombreArchivoDictamen")
+     * @var File
+     * @Groups({"norma"})
+     */
+    private $archivoDictamen;
+    /**
+     * @Vich\UploadableField(mapping="sanciones_normas", fileNameProperty="nombreArchivoSancion")
+     * @var File
+     * @Groups({"norma"})
+     */
+    private $archivoSancion;
+    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Groups({"norma"})
      */
@@ -196,6 +214,24 @@ class Norma extends BaseClass
      * @Groups({"norma"})
      */
     private $nombreArchivo;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"norma"})
+     */
+    private $nombreArchivoProyecto;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"norma"})
+     */
+    private $nombreArchivoDictamen;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"norma"})
+     */
+    private $nombreArchivoSancion;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -400,6 +436,57 @@ class Norma extends BaseClass
         // otherwise the event listeners won't be called and the file is lost
         if ($file) {
             // if 'updatedAt' is not defined in your entity, use another property
+            $this->fechaActualizacion = new \DateTime('now');
+        }
+    }
+
+    public function getArchivoProyecto()
+    {
+        return $this->archivoProyecto;
+    }
+
+    public function setArchivoProyecto(File $file = null)
+    {
+        $this->archivoProyecto = $file;
+
+        // VERY IMPORTANT:
+        // It is required that at least one field changes if you are using Doctrine,
+        // otherwise the event listeners won't be called and the file is lost
+        if ($file) {
+            $this->fechaActualizacion = new \DateTime('now');
+        }
+    }
+
+    public function getArchivoDictamen()
+    {
+        return $this->archivoDictamen;
+    }
+
+    public function setArchivoDictamen(File $file = null)
+    {
+        $this->archivoDictamen = $file;
+
+        // VERY IMPORTANT:
+        // It is required that at least one field changes if you are using Doctrine,
+        // otherwise the event listeners won't be called and the file is lost
+        if ($file) {
+            $this->fechaActualizacion = new \DateTime('now');
+        }
+    }
+
+    public function getArchivoSancion()
+    {
+        return $this->archivoSancion;
+    }
+
+    public function setArchivoSancion(File $file = null)
+    {
+        $this->archivoSancion = $file;
+
+        // VERY IMPORTANT:
+        // It is required that at least one field changes if you are using Doctrine,
+        // otherwise the event listeners won't be called and the file is lost
+        if ($file) {
             $this->fechaActualizacion = new \DateTime('now');
         }
     }
@@ -770,6 +857,42 @@ class Norma extends BaseClass
     public function setNombreArchivo(?string $nombreArchivo): self
     {
         $this->nombreArchivo = $nombreArchivo;
+
+        return $this;
+    }
+
+    public function getNombreArchivoProyecto(): ?string
+    {
+        return $this->nombreArchivoProyecto;
+    }
+
+    public function setNombreArchivoProyecto(?string $nombreArchivoProyecto): self
+    {
+        $this->nombreArchivoProyecto = $nombreArchivoProyecto;
+
+        return $this;
+    }
+
+    public function getNombreArchivoDictamen(): ?string
+    {
+        return $this->nombreArchivoDictamen;
+    }
+
+    public function setNombreArchivoDictamen(?string $nombreArchivoDictamen): self
+    {
+        $this->nombreArchivoDictamen = $nombreArchivoDictamen;
+
+        return $this;
+    }
+
+    public function getNombreArchivoSancion(): ?string
+    {
+        return $this->nombreArchivoSancion;
+    }
+
+    public function setNombreArchivoSancion(?string $nombreArchivoSancion): self
+    {
+        $this->nombreArchivoSancion = $nombreArchivoSancion;
 
         return $this;
     }

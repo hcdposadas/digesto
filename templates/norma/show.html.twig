@@ -41,6 +41,36 @@
                            <td>{{ norma.observacion }}</td>
                        </tr>
                        <tr>
+                           <th>Proyecto</th>
+                           <td>
+                               {% if norma.nombreArchivoProyecto %}
+                                   <a target="_blank" href="{{ asset('uploads/proyectos_normas/' ~ norma.nombreArchivoProyecto) }}">
+                                       Descargar <i class="fa fa-download"></i>
+                                   </a>
+                               {% endif %}
+                           </td>
+                       </tr>
+                       <tr>
+                           <th>Dictamen</th>
+                           <td>
+                               {% if norma.nombreArchivoDictamen %}
+                                   <a target="_blank" href="{{ asset('uploads/dictamenes_normas/' ~ norma.nombreArchivoDictamen) }}">
+                                       Descargar <i class="fa fa-download"></i>
+                                   </a>
+                               {% endif %}
+                           </td>
+                       </tr>
+                       <tr>
+                           <th>Sanción</th>
+                           <td>
+                               {% if norma.nombreArchivoSancion %}
+                                   <a target="_blank" href="{{ asset('uploads/sanciones_normas/' ~ norma.nombreArchivoSancion) }}">
+                                       Descargar <i class="fa fa-download"></i>
+                                   </a>
+                               {% endif %}
+                           </td>
+                       </tr>
+                       <tr>
                            <th>Decreto Promulgatorio</th>
                            <td>{{ norma.decretoPromulgatorio }}</td>
                        </tr>

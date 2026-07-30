@@ -238,6 +238,38 @@
                             </div>
                         </div>
                     {% endif %}
+                    {% if norma.nombreArchivoProyecto or norma.nombreArchivoDictamen or norma.nombreArchivoSancion %}
+                        <div class="row">
+                            <div class="col-md-12">
+                                <ul>
+                                    {% if norma.nombreArchivoProyecto %}
+                                        <li>
+                                            <a target="_blank"
+                                               href="{{ asset('uploads/proyectos_normas/' ~ norma.nombreArchivoProyecto) }}">
+                                                PROYECTO <i class="fa fa-download"></i>
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                    {% if norma.nombreArchivoDictamen %}
+                                        <li>
+                                            <a target="_blank"
+                                               href="{{ asset('uploads/dictamenes_normas/' ~ norma.nombreArchivoDictamen) }}">
+                                                DICTAMEN <i class="fa fa-download"></i>
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                    {% if norma.nombreArchivoSancion %}
+                                        <li>
+                                            <a target="_blank"
+                                               href="{{ asset('uploads/sanciones_normas/' ~ norma.nombreArchivoSancion) }}">
+                                                SANCIÓN <i class="fa fa-download"></i>
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        </div>
+                    {% endif %}
 			{% endif %}
                 </div>
             </div>

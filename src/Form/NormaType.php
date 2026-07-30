@@ -362,6 +362,33 @@ class NormaType extends AbstractType {
 					'label'        => 'Texto'
 				] )
 
+			->add( 'archivoProyecto',
+				VichFileType::class,
+				[
+					'required'     => false,
+					'allow_delete' => true,
+					'label'        => 'Proyecto',
+					'attr'         => [ 'accept' => 'application/pdf' ]
+				] )
+
+			->add( 'archivoDictamen',
+				VichFileType::class,
+				[
+					'required'     => false,
+					'allow_delete' => true,
+					'label'        => 'Dictamen',
+					'attr'         => [ 'accept' => 'application/pdf' ]
+				] )
+
+			->add( 'archivoSancion',
+				VichFileType::class,
+				[
+					'required'     => false,
+					'allow_delete' => true,
+					'label'        => 'Sanción',
+					'attr'         => [ 'accept' => 'application/pdf' ]
+				] )
+
 			->add( 'activo' )
 			->add( 'vigenteNoConsolidada' );
 	}

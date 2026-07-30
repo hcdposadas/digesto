@@ -22,6 +22,9 @@ parameters:
     app.path.articulos_suprimido: /uploads/articulos_suprimido
     app.path.cambios_anexo: /uploads/cambios_anexo
     app.path.cambios_norma: /uploads/cambios_norma
+    app.path.proyectos_normas: /uploads/proyectos_normas
+    app.path.dictamenes_normas: /uploads/dictamenes_normas
+    app.path.sanciones_normas: /uploads/sanciones_normas
 services:
     # default configuration for services in *this* file
     _defaults:
